@@ -41,6 +41,9 @@ body {
     --radius: 0.5rem;
 
     --main-pink: #f63093;
+    --light: #ffffff;
+    --light-gray: #f1f4f6;
+    --medium-gray: #6e7980;
   }
 }
 
@@ -51,4 +54,25 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.dark-btn,
+.dark-btn:hover {
+  background-color: var(--main-pink) !important;
+}
+
+.light-btn,
+.light-btn:hover {
+  background-color: var(--light-gray) !important;
+  color: black;
+}
+
+.sidebar {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 1) 70%,
+    rgba(0, 0, 0, 0.5) 80%,
+    rgba(180, 24, 127, 0.3) 90%,
+    #b2187f
+  );
 }
