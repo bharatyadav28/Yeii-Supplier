@@ -10,9 +10,10 @@ const StorePage = () => {
   const emptyHeading = "No items in store.";
   const emptySubHeading = (
     <p>
-      You don't have any products listed in your store. You can sell products
-      through the app by clicking on
-      <span className="font-semibold">"Add" </span> to create a listing.
+      You don&apos;t have any products listed in your store. You can sell
+      products through the app by clicking on
+      <span className="font-semibold">&quot;Add&quot; </span> to create a
+      listing.
     </p>
   );
 
