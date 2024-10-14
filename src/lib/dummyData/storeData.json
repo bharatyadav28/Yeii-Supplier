@@ -1,0 +1,220 @@
+{
+  "products": [
+    {
+      "_id": 1,
+      "name": "Furniture with tables",
+      "description": "Four tables come along with product",
+      "category": "Furniture",
+      "availability": true,
+      "images": [],
+      "actualPrice": 500,
+      "quantity": 1,
+      "discount": 30,
+      "discountedPrice": 420,
+      "couponEligibility": true
+    },
+    {
+      "_id": 2,
+      "name": "Furniture with tables",
+      "description": "Four tables come along with product",
+      "category": "Furniture",
+      "availability": true,
+      "images": [],
+      "actualPrice": 500,
+      "quantity": 1,
+      "discount": 30,
+      "discountedPrice": 420,
+      "couponEligibility": true
+    },
+    {
+      "_id": 3,
+      "name": "Furniture with tables",
+      "description": "Four tables come along with product",
+      "category": "Furniture",
+      "availability": true,
+      "images": [],
+      "actualPrice": 500,
+      "quantity": 10,
+      "discount": 30,
+      "discountedPrice": 420,
+      "couponEligibility": true
+    },
+    {
+      "_id": 4,
+      "name": "Furniture with tables",
+      "description": "Four tables come along with product",
+      "category": "Furniture",
+      "availability": true,
+      "images": [],
+      "actualPrice": 500,
+      "quantity": 1,
+      "discount": 30,
+      "discountedPrice": 420,
+      "couponEligibility": true
+    },
+    {
+      "_id": 5,
+      "name": "Furniture with tables",
+      "description": "Four tables come along with product",
+      "category": "Furniture",
+      "availability": true,
+      "images": [],
+      "actualPrice": 500,
+      "quantity": 10,
+      "discount": 30,
+      "discountedPrice": 420,
+      "couponEligibility": true
+    },
+    {
+      "_id": 6,
+      "name": "Furniture with tables",
+      "description": "Four tables come along with product",
+      "category": "Furniture",
+      "availability": true,
+      "images": [],
+      "actualPrice": 500,
+      "quantity": 10,
+      "discount": 30,
+      "discountedPrice": 420,
+      "couponEligibility": true
+    },
+    {
+      "_id": 7,
+      "name": "Furniture with tables",
+      "description": "Four tables come along with product",
+      "category": "Furniture",
+      "availability": true,
+      "images": [],
+      "actualPrice": 500,
+      "quantity": 10,
+      "discount": 30,
+      "discountedPrice": 420,
+      "couponEligibility": true
+    },
+    {
+      "_id": 8,
+      "name": "Furniture with tables",
+      "description": "Four tables come along with product",
+      "category": "Furniture",
+      "availability": true,
+      "images": [],
+      "actualPrice": 500,
+      "quantity": 10,
+      "discount": 30,
+      "discountedPrice": 420,
+      "couponEligibility": true
+    },
+    {
+      "_id": 9,
+      "name": "Furniture with tables",
+      "description": "Four tables come along with product",
+      "category": "Furniture",
+      "availability": true,
+      "images": [],
+      "actualPrice": 500,
+      "quantity": 10,
+      "discount": 30,
+      "discountedPrice": 420,
+      "couponEligibility": true
+    }
+  ],
+
+  "services": [
+    {
+      "_id": 1,
+      "name": "Furniture with tables",
+      "description": "Four tables come along with product",
+      "category": "Furniture",
+      "availability": true,
+      "images": [],
+      "availabilityTime": {
+        "start": "09:00 Am",
+        "end": "09:00 Pm"
+      },
+      "actualPrice": 500,
+      "discount": 30,
+      "discountedPrice": 420,
+      "couponEligibility": true
+    },
+    {
+      "_id": 2,
+      "name": "Furniture with tables",
+      "description": "Four tables come along with product",
+      "category": "Furniture",
+      "availability": true,
+      "images": [],
+      "availabilityTime": {
+        "start": "09:00 Am",
+        "end": "09:00 Pm"
+      },
+      "actualPrice": 500,
+      "discount": 30,
+      "discountedPrice": 420,
+      "couponEligibility": true
+    },
+    {
+      "_id": 3,
+      "name": "Furniture with tables",
+      "description": "Four tables come along with product",
+      "category": "Furniture",
+      "availability": true,
+      "images": [],
+      "availabilityTime": {
+        "start": "09:00 Am",
+        "end": "09:00 Pm"
+      },
+      "actualPrice": 500,
+      "discount": 30,
+      "discountedPrice": 420,
+      "couponEligibility": true
+    },
+    {
+      "_id": 4,
+      "name": "Furniture with tables",
+      "description": "Four tables come along with product",
+      "category": "Furniture",
+      "availability": true,
+      "images": [],
+      "availabilityTime": {
+        "start": "09:00 Am",
+        "end": "09:00 Pm"
+      },
+      "actualPrice": 500,
+      "discount": 30,
+      "discountedPrice": 420,
+      "couponEligibility": true
+    },
+    {
+      "_id": 5,
+      "name": "Furniture with tables",
+      "description": "Four tables come along with product",
+      "category": "Furniture",
+      "availability": true,
+      "images": [],
+      "availabilityTime": {
+        "start": "09:00 Am",
+        "end": "09:00 Pm"
+      },
+      "actualPrice": 500,
+      "discount": 30,
+      "discountedPrice": 420,
+      "couponEligibility": true
+    },
+    {
+      "_id": 6,
+      "name": "Furniture with tables",
+      "description": "Four tables come along with product",
+      "category": "Furniture",
+      "availability": true,
+      "images": [],
+      "availabilityTime": {
+        "start": "09:00 Am",
+        "end": "09:00 Pm"
+      },
+      "actualPrice": 500,
+      "discount": 30,
+      "discountedPrice": 420,
+      "couponEligibility": true
+    }
+  ]
+}

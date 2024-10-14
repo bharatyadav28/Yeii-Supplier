@@ -4,9 +4,7 @@ import { useState } from "react";
 import { CustomButton, LightButton, DarkButton } from "../common/CustomButtons";
 import SearchInput from "../common/SearchInput";
 
-const HeadMenu = () => {
-  const [itemsType, setItemsType] = useState("products");
-
+const HeadMenu = ({ itemsType, handleTypeChange }) => {
   const handleSearchInput = (value) => {
     console.log("Value changed:", value);
   };
@@ -16,7 +14,7 @@ const HeadMenu = () => {
         <CustomButton
           onClick={() => {
             console.log("Button 1Clicked");
-            setItemsType("products");
+            handleTypeChange("products");
           }}
           className={`${itemsType === "products" ? "dark-btn" : "light-btn"}`}
         >
@@ -26,7 +24,7 @@ const HeadMenu = () => {
         <CustomButton
           onClick={() => {
             console.log("Button2 Clicked");
-            setItemsType("services");
+            handleTypeChange("services");
           }}
           className={`${itemsType === "services" ? "dark-btn" : "light-btn"}`}
         >
