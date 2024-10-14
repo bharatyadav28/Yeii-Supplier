@@ -44,6 +44,7 @@ body {
     --light: #ffffff;
     --light-gray: #f1f4f6;
     --medium-gray: #6e7980;
+    --main-gray: #6e7481;
   }
 }
 
@@ -75,4 +76,17 @@ body {
     rgba(180, 24, 127, 0.3) 90%,
     #b2187f
   );
+}
+
+.react-tel-input {
+  .form-control {
+    border: none !important;
+  }
+  .arrow {
+    display: none;
+  }
+  .flag-dropdown {
+    border: none !important;
+    background-color: inherit !important;
+  }
 }
