@@ -1,22 +1,8 @@
-"use client";
-
-import { PasswordInput, TextInput } from "@/components/common/customInput";
-import { EmailIcon } from "@/lib/icons";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { DarkButton } from "@/components/common/CustomButtons";
+import LoginForm from "@/components/auth/LoginForm";
 
 const LoginPage = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log({ email, password });
-  };
-
   return (
     <div className="relative bg-[url('/login.jpg')]  bg-cover bg-center  h-screen w-full ">
       <div className="absolute bg-black/60   h-screen w-full flex justify-center items-center">
@@ -33,42 +19,7 @@ const LoginPage = () => {
               </p>
 
               {/* Form */}
-              <form onSubmit={handleSubmit}>
-                {/* Email */}
-                <TextInput
-                  customIcon={<EmailIcon />}
-                  type="email"
-                  label="Email id"
-                  placeholder="Enter Email"
-                  required={true}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-
-                {/* Password */}
-                <PasswordInput
-                  label="Enter Password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={password}
-                  required={true}
-                />
-
-                {/* Forgot password */}
-                <div className="flex justify-end items-end mb-6 text-xs">
-                  <Link
-                    href="/forgot_password"
-                    className="text-yellow-400 hover:underline"
-                  >
-                    Forgot password
-                  </Link>
-                </div>
-
-                {/* Login Button */}
-                <DarkButton className="w-full text-lg p-7 rounded-[15px]">
-                  Login
-                </DarkButton>
-              </form>
-
+              <LoginForm />
               {/* Footer */}
               <p className="text-center text-gray-400 mt-4 text-xs">
                 Don’t have an account?{" "}

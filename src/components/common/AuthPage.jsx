@@ -5,13 +5,13 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-const AuthPage = ({ children, route, heading }) => {
+const AuthPage = ({ children, route, heading, showHeader }) => {
   const router = useRouter();
 
   return (
     <div className="w-full h-screen bg-[url('/bg-auth.png')] bg-cover bg-center">
       <div className="w-full h-full px-10 py-5 flex flex-col">
-        <div className="flex justify-between items-center">
+        {showHeader && <div className="flex justify-between items-center">
           <div className="flex items-center gap-4">
             <BackwardButton onClick={() => router.push(route)} />
             {heading && (
@@ -21,8 +21,8 @@ const AuthPage = ({ children, route, heading }) => {
             )}
           </div>
           <Image src="/logo2.png" width={60} height={60} />
-        </div>
-        <div className="relative flex justify-center items-center h-full">
+        </div>}
+        <div className="relative flex flex-col justify-center items-center h-full gap-5">
           {children}
         </div>
       </div>

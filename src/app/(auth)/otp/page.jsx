@@ -1,11 +1,11 @@
+import EmailCard from "@/components/auth/EmailCard";
+import OtpFrom from "@/components/auth/OtpForm";
 import AuthHeading from "@/components/common/AuthHeading";
 import AuthPage from "@/components/common/AuthPage";
-import EmailCard from "./EmailCard";
-import OtpFrom from "./OtpForm";
 
 const EnterOTP = () => {
   return (
-    <AuthPage route="/forgot_password">
+    <AuthPage route="/forgot_password" showHeader={true}>
       <div>
         <AuthHeading heading="Enter OTP">
           <p className="text-center text-xs text-white">
