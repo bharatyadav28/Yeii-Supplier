@@ -94,12 +94,3 @@ export const UserIcon = () => (
     />
   </svg>
 );
-
-export const BackwardButton = (props) => {
-  const { onClick } = props;
-  return (
-    <button onClick={onClick} className="bg-white rounded-full p-3">
-      <ChevronLeft color="black" background="white" />
-    </button>
-  );
-};

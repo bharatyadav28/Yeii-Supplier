@@ -1,3 +1,4 @@
+"use client";
 import { Eye, EyeClosed } from "lucide-react";
 import { LockIcon } from "../../lib/icons";
 import { useState } from "react";
@@ -13,18 +14,20 @@ import { Checkbox } from "../ui/checkbox";
 
 export const TextInput = (props) => {
   const { customIcon, label, onChange, value, className } = props;
+  let classes = `w-full border-none outline-none text-lg ${
+    !customIcon && "pl-4"
+  } ${className}`;
+
   return (
-    <div
-      className={`flex items-center bg-white rounded-[15px] py-2 mb-2  ${className}`}
-    >
-      <span className="px-5">{customIcon}</span>
-      <div className="w-full pr-5">
+    <div className="flex items-center bg-white rounded-[15px] py-2 mb-2 ">
+      {customIcon && <span className="px-5">{customIcon}</span>}
+      <div className={`w-full pr-5`}>
         <label className="text-[var(--main-gray)] text-xs">{label}</label>
         <input
           onChange={onChange}
           value={value}
-          className="w-full border-none outline-none text-md font-bold"
           {...props}
+          className={classes}
         />
       </div>
     </div>
@@ -33,14 +36,14 @@ export const TextInput = (props) => {
 
 export const TextArea = (props) => {
   const { customIcon, label, className } = props;
+
+  let classes = `resize-none ${!customIcon && "pl-4"} ${className}`;
   return (
-    <div
-      className={`flex items-center bg-white rounded-[15px]  mb-2 ${className}`}
-    >
-      <span className="px-5 py-4 self-start">{customIcon}</span>
+    <div className="flex items-center bg-white rounded-[15px] py-2 mb-2 ">
+      {customIcon && <span className="px-5 py-4 self-start">{customIcon}</span>}
       <div className="w-full pr-5">
         <label className="text-[var(--main-gray)] text-xs">{label}</label>
-        <Textarea className="resize-none" {...props} />
+        <Textarea {...props} className={classes} />
       </div>
     </div>
   );

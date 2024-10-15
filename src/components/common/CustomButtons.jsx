@@ -1,5 +1,6 @@
 "use client";
 
+import { ChevronLeft as BackIcon } from "lucide-react";
 import { Button } from "../ui/button";
 
 export const CustomButton = ({ children, className, onClick }) => {
@@ -38,5 +39,18 @@ export const LightButton = ({ children, className, onClick }) => {
     <CustomButton className={classes} onClick={onClick}>
       {children}
     </CustomButton>
+  );
+};
+
+export const BackwardButton = (props) => {
+  const { onClick, className } = props;
+  let classes = "m-0 p-3  bg-[var(--light)] text-black rounded-full";
+  if (className) {
+    classes += " " + className;
+  }
+  return (
+    <button onClick={onClick} className={classes}>
+      <BackIcon size={15} color="black" background="white" />
+    </button>
   );
 };
