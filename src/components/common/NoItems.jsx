@@ -1,7 +1,7 @@
 import React from "react";
 
 // UI when when page has no items
-function NoItems({ icon, heading, subHeading }) {
+function NoItems({ icon, heading, subHeading, children }) {
   return (
     <div className="flex flex-col justify-center items-center h-[calc(100%-5rem)]">
       <div>{icon}</div>
@@ -9,6 +9,7 @@ function NoItems({ icon, heading, subHeading }) {
       <div className="max-w-[20rem] text-center text-[var(--medium-gray)] text-[0.8rem]">
         {subHeading}
       </div>
+      {children}
     </div>
   );
 }

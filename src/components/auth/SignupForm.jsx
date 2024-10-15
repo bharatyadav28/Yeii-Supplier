@@ -123,7 +123,7 @@ const SignupForm = () => {
       />
 
       {/* checkbox for privacy policy */}
-      <div className="flex items-center justify-center self-center gap-3 text-sm pb-5 pt-3">
+      <div className="flex items-center justify-center self-center gap-3 text-xs pb-4 pt-2">
         <CustomCheckBox onChange={(e) => console.log(e)} />
         <p className="w-[55%]">
           By Signing up, you agree to the{" "}

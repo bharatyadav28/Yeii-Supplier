@@ -119,7 +119,7 @@ export const CustomCheckBox = ({ className, onChange }) => {
   return (
     <Checkbox
       onCheckedChange={onChange}
-      className={`h-7 w-7 data-[state=checked]:bg-[var(--main-pink)] border-[var(--main-pink)] ${className}`}
+      className={`h-6 w-6 data-[state=checked]:bg-[var(--main-pink)] border-[var(--main-pink)] ${className}`}
     />
   );
 };

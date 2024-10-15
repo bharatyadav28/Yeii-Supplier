@@ -5,8 +5,8 @@ import SignupForm from "@/components/auth/SignupForm";
 const SignupPage = () => {
   return (
     <AuthPage route={"/login"} showHeader={true}>
-      <div className="absolute top-0">
-        <AuthHeading className="!mb-4" heading="Create account" />
+      <div className="absolute -top-5 ">
+        <AuthHeading heading="Create account" />
       </div>
       <SignupForm />
     </AuthPage>
