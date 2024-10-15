@@ -1,7 +1,8 @@
 import { ChevronLeft } from "lucide-react";
 
-export const EmailIcon = () => (
+export const EmailIcon = ({ className }) => (
   <svg
+    className={className}
     width="18"
     height="15"
     viewBox="0 0 18 15"

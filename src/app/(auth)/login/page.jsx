@@ -2,11 +2,10 @@
 
 import { PasswordInput, TextInput } from "@/components/common/customInput";
 import { EmailIcon } from "@/lib/icons";
-import { Button } from "@/components/ui/button";
-import { Eye, EyeClosed, LockIcon, Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { DarkButton } from "@/components/common/CustomButtons";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -65,7 +64,9 @@ const LoginPage = () => {
                 </div>
 
                 {/* Login Button */}
-                <Button>Login</Button>
+                <DarkButton className="w-full text-lg p-7 rounded-[15px]">
+                  Login
+                </DarkButton>
               </form>
 
               {/* Footer */}

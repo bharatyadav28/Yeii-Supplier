@@ -12,16 +12,18 @@ import {
 import { Checkbox } from "../ui/checkbox";
 
 export const TextInput = (props) => {
-  const { customIcon, label, onChange, value } = props;
+  const { customIcon, label, onChange, value, className } = props;
   return (
-    <div className="flex items-center bg-white rounded-[15px] py-2 mb-2 ">
+    <div
+      className={`flex items-center bg-white rounded-[15px] py-2 mb-2  ${className}`}
+    >
       <span className="px-5">{customIcon}</span>
       <div className="w-full pr-5">
         <label className="text-[var(--main-gray)] text-xs">{label}</label>
         <input
           onChange={onChange}
           value={value}
-          className="w-full border-none outline-none text-lg"
+          className="w-full border-none outline-none text-md font-bold"
           {...props}
         />
       </div>
@@ -30,9 +32,11 @@ export const TextInput = (props) => {
 };
 
 export const TextArea = (props) => {
-  const { customIcon, label } = props;
+  const { customIcon, label, className } = props;
   return (
-    <div className="flex items-center bg-white rounded-[15px] py-2 mb-2 ">
+    <div
+      className={`flex items-center bg-white rounded-[15px]  mb-2 ${className}`}
+    >
       <span className="px-5 py-4 self-start">{customIcon}</span>
       <div className="w-full pr-5">
         <label className="text-[var(--main-gray)] text-xs">{label}</label>
@@ -43,15 +47,22 @@ export const TextArea = (props) => {
 };
 
 export const SelectInput = (props) => {
-  const { customIcon, label, onChange, value } = props;
+  const { customIcon, label, onChange, value, className } = props;
 
   return (
-    <div className="flex items-center bg-white rounded-[15px] py-2 mb-2 ">
+    <div
+      className={`flex items-center bg-white rounded-[15px] mb-2 ${className}`}
+    >
       <span className="px-5 py-4 self-start">{customIcon}</span>
       <div className="w-full pr-5">
         <label className="text-[var(--main-gray)] text-xs">{label}</label>
 
-        <Select onValueChange={onChange} defaultValue={value} {...props}>
+        <Select
+          className="p-0"
+          onValueChange={onChange}
+          defaultValue={value}
+          {...props}
+        >
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Select One" />
           </SelectTrigger>
@@ -67,10 +78,12 @@ export const SelectInput = (props) => {
 };
 
 export const PasswordInput = (props) => {
-  const { onChange, value, label } = props;
+  const { onChange, value, label, className } = props;
   const [showPassword, setShowPassword] = useState("");
   return (
-    <div className="flex items-center bg-white rounded-[15px] py-2 mb-3">
+    <div
+      className={`flex items-center bg-white rounded-[15px] py-1 mb-3 ${className}`}
+    >
       <span className="px-5">
         <LockIcon color="gray" />
       </span>
@@ -99,6 +112,11 @@ export const PasswordInput = (props) => {
   );
 };
 
-export const CustomCheckBox = () => {
-  return <Checkbox />;
+export const CustomCheckBox = ({ className, onChange }) => {
+  return (
+    <Checkbox
+      onCheckedChange={onChange}
+      className={`h-7 w-7 data-[state=checked]:bg-[var(--main-pink)] border-[var(--main-pink)] ${className}`}
+    />
+  );
 };

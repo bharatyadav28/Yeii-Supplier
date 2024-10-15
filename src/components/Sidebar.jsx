@@ -65,7 +65,7 @@ const Sidebar = ({ className }) => {
 
   return (
     <div
-      className={`bg-gradient-to-b from-[#1E2A30] to-[#0E1C26] fixed left-0 z-10 inset-y-0 max-h-screen flex flex-col py-[2rem] ${className} `}
+      className={`bg-[url('/sidebar.png')] bg-cover bg-center fixed left-0 z-10 inset-y-0 max-h-screen flex flex-col py-[2rem] ${className} `}
     >
       <div className="flex justify-center px-4 ">{sidebarIcon}</div>
 
