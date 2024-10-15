@@ -1,6 +1,6 @@
 "use client";
 
-import { BackwardButton } from "@/lib/icons";
+import { BackwardButton } from "@/components/common/CustomButtons";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";

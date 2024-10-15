@@ -8,7 +8,6 @@ import {
   TextInput,
 } from "@/components/common/customInput";
 import { BusinessIcon, EmailIcon, UserIcon } from "@/lib/icons";
-import { MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, MapPin } from "lucide-react";
 import Image from "next/image";
@@ -19,7 +18,6 @@ import AuthPage from "@/components/common/AuthPage";
 import { DarkButton } from "@/components/common/CustomButtons";
 import AuthHeading from "@/components/common/AuthHeading";
 import "react-phone-input-2/lib/style.css";
-import { BackwardButton } from "@/components/common/CustomButtons";
 
 const SignupPage = () => {
   const [name, setName] = useState("");
