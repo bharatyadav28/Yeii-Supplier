@@ -119,27 +119,26 @@ const Calendar = () => {
   };
 
   const MiniCalender = () => {
-    const [currentDate, setCurrentDate] = useState(new Date());
-
     const daysArray = Array.from({ length: 7 }, (_, index) =>
-      addDays(subDays(currentDate, currentDate.getDay()), index)
+      addDays(subDays(selectedDate, selectedDate.getDay()), index)
     );
     return (
-      <div className="grid grid-cols-7 gap-2 text-center">
+      <div className="grid grid-cols-7 gap-2 text-center mb-1">
         {daysArray.map((date, index) => (
           <div
             key={index}
-            className={`p-2 py-3 rounded-lg ${
-              format(date, "dd") === format(currentDate, "dd")
+            className={`p-2 py-3 rounded-lg cursor-pointer ${
+              format(date, "dd") === format(selectedDate, "dd")
                 ? "bg-white text-pink-600"
                 : "text-white"
             }`}
-            onClick={() => setCurrentDate(date)}
+            onClick={() => setSelectedDate(date)}
           >
             <div className="font-bold text-[17px]">{format(date, "dd")}</div>
             <div
               className={`text-xs ${
-                format(date, "dd") === format(currentDate, "dd") && "text-black"
+                format(date, "dd") === format(selectedDate, "dd") &&
+                "text-black"
               }`}
             >
               {format(date, "E")}
@@ -152,11 +151,7 @@ const Calendar = () => {
 
   return (
     <div className="flex flex-col gap-2">
-      <div
-        className={`w-full mx-auto ${
-          !expandCalender && "h-[120px] overflow-hidden"
-        }`}
-      >
+      <div className={`w-full mx-auto `}>
         {renderHeader()}
         {expandCalender ? (
           <>

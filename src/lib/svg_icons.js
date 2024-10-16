@@ -5,7 +5,7 @@ export const sidebarIcon = (
     height="75"
     viewBox="0 0 108 75"
     fill="none"
-    className="bg-black "
+    // className="bg-black "
   >
     <path
       d="M88.7691 25.7578L79.2305 26.4823L81.3233 61.7794L91.345 61.1757L88.7691 25.7578Z"
