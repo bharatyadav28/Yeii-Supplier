@@ -92,3 +92,56 @@ body {
     background-color: inherit !important;
   }
 }
+
+.store-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.store-form fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.store-form fieldset label {
+  font-size: 0.8rem;
+  color: #00131fcc;
+}
+
+.store-form fieldset label .req-star {
+  color: red;
+}
+
+.store-form textarea::placeholder,
+.store-form input::placeholder {
+  color: var(--medium-gray) !important;
+  font-size: 0.8rem;
+}
+
+.store-form textarea,
+.store-form input {
+  color: #00131f;
+  font-size: 0.8rem;
+}
+
+.store-form .num-details .t-icon {
+  color: var(--medium-gray) !important;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.store-form .num-details .t-icon::after {
+  content: "|";
+  color: rgba(0, 0, 0, 0.1);
+  margin-left: 0.5rem;
+  margin-right: 0.3rem;
+}
+
+.store-form .required::after {
+  content: " *";
+  color: red; /* Or any color you'd like */
+}
+
+/* .store-form textarea */

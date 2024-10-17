@@ -11,18 +11,23 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Checkbox } from "../ui/checkbox";
+import { Button } from "../ui/button";
 
 export const TextInput = (props) => {
-  const { customIcon, label, onChange, value, className } = props;
+  const { customIcon, label, onChange, value, className, iconClasses } = props;
   let classes = `w-full border-none outline-none text-lg ${
-    !customIcon && "pl-4"
+    !customIcon && "ml-4"
   } ${className}`;
 
   return (
-    <div className="flex items-center bg-white rounded-[15px] py-2 mb-2 ">
-      {customIcon && <span className="px-5">{customIcon}</span>}
+    <div className="flex items-center bg-white rounded-[0.9rem] py-2 mb-2 ">
+      {customIcon && (
+        <span className={`px-5 ${iconClasses}`}>{customIcon}</span>
+      )}
       <div className={`w-full pr-5`}>
-        <label className="text-[var(--main-gray)] text-xs">{label}</label>
+        {label && (
+          <label className="text-[var(--main-gray)] text-xs">{label}</label>
+        )}
         <input
           onChange={onChange}
           value={value}
@@ -37,12 +42,14 @@ export const TextInput = (props) => {
 export const TextArea = (props) => {
   const { customIcon, label, className } = props;
 
-  let classes = `resize-none ${!customIcon && "pl-4"} ${className}`;
+  let classes = `resize-none ${!customIcon && "ml-4"} ${className}`;
   return (
     <div className="flex items-center bg-white rounded-[15px] py-2 mb-2 ">
       {customIcon && <span className="px-5 py-4 self-start">{customIcon}</span>}
       <div className="w-full pr-5">
-        <label className="text-[var(--main-gray)] text-xs">{label}</label>
+        {label && (
+          <label className="text-[var(--main-gray)] text-xs">{label}</label>
+        )}
         <Textarea {...props} className={classes} />
       </div>
     </div>
@@ -50,15 +57,16 @@ export const TextArea = (props) => {
 };
 
 export const SelectInput = (props) => {
-  const { customIcon, label, onChange, value, className } = props;
+  const { customIcon, label, onChange, value, className, placeholder, menu } =
+    props;
 
   return (
-    <div
-      className={`flex items-center bg-white rounded-[15px] mb-2 ${className}`}
-    >
-      <span className="px-5 py-4 self-start">{customIcon}</span>
-      <div className="w-full pr-5">
-        <label className="text-[var(--main-gray)] text-xs">{label}</label>
+    <div className={`flex items-center bg-white rounded-[15px] mb-2 `}>
+      {customIcon && <span className="px-5 py-4 self-start">{customIcon}</span>}
+      <div className="w-full pr-2">
+        {label && (
+          <label className="text-[var(--main-gray)] text-xs">{label}</label>
+        )}
 
         <Select
           className="p-0"
@@ -66,13 +74,13 @@ export const SelectInput = (props) => {
           defaultValue={value}
           {...props}
         >
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Select One" />
+          <SelectTrigger className={className + " rounded-[15px] pl-5 !w-100"}>
+            <SelectValue placeholder={placeholder || "Select One"} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="light">Light</SelectItem>
-            <SelectItem value="dark">Dark</SelectItem>
-            <SelectItem value="system">System</SelectItem>
+            {menu?.map((item) => {
+              return <SelectItem value={item}>{item} </SelectItem>;
+            })}
           </SelectContent>
         </Select>
       </div>
@@ -115,11 +123,46 @@ export const PasswordInput = (props) => {
   );
 };
 
-export const CustomCheckBox = ({ className, onChange }) => {
+export const CustomCheckBox = ({ className, onChange, value }) => {
   return (
     <Checkbox
       onCheckedChange={onChange}
-      className={`h-6 w-6 data-[state=checked]:bg-[var(--main-pink)] border-[var(--main-pink)] ${className}`}
+      checked={value || false}
+      className={`h-7 w-7 data-[state=checked]:bg-[var(--main-pink)] border-[var(--main-pink)] ${className}`}
     />
+  );
+};
+
+export const CounterInput = (props) => {
+  const { onChange, value, className } = props;
+  const [inputValue, setInputValue] = useState(value || 0);
+
+  const btnClasses =
+    "bg-[#E5E5E5] hover:bg-[#E5E5E5] text-black p-3 text-sm h-3 rounded-full my-0";
+
+  return (
+    <div className="flex  mb-2 h-full bg-[var(--light)] justify-center items-center px-5  text-[0.8rem] rounded-xl">
+      <Button
+        className={btnClasses}
+        type="button"
+        onClick={() => setInputValue((prev) => Number(prev) - 1)}
+      >
+        -
+      </Button>
+      <input
+        type="text"
+        onChange={onChange}
+        value={inputValue}
+        {...props}
+        className="w-full text-center"
+      />
+      <Button
+        className={btnClasses}
+        type="button"
+        onClick={() => setInputValue((prev) => Number(prev) + 1)}
+      >
+        +
+      </Button>
+    </div>
   );
 };

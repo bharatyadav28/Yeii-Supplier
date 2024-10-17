@@ -4,6 +4,7 @@ import { Switch } from "../ui/switch";
 
 import { Dot } from "lucide-react";
 import StoreDialog from "./StoreDialog";
+import ViewItem from "./ViewItem";
 
 function ListItem({ item, isService }) {
   const [openDialog, setOpenDialog] = useState(false);
@@ -79,10 +80,12 @@ function ListItem({ item, isService }) {
         </div>
       </div>
 
-      <StoreDialog
+      <ViewItem
         openDialog={openDialog}
         handleOpenDialog={handleOpenDialog}
         item={item}
+        title={`Edit ${isService ? "Service" : "Product"}`}
+        formType={isService ? "Service" : "Product"}
       />
     </>
   );
