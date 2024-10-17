@@ -6,13 +6,15 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 
-import { BackwardButton } from "./CustomButtons";
+import { BackwardButton, CrossButton } from "./CustomButtons";
+
 function CustomDialog({
   open,
   handleOpen,
   className,
   title,
   children,
+  anableCross,
   titleRightContent,
 }) {
   let classes =
@@ -27,9 +29,15 @@ function CustomDialog({
       <DialogContent className={classes}>
         <div className="flex flex-col">
           <div className="relative flex justify-center">
-            <div className="absolute left-0 top-0 ">
-              <BackwardButton onClick={handleOpen} />
-            </div>
+            {anableCross ? (
+              <div className="absolute right-0 top-0 ">
+                <CrossButton onClick={handleOpen} />
+              </div>
+            ) : (
+              <div className="absolute left-0 top-0 ">
+                <BackwardButton onClick={handleOpen} />
+              </div>
+            )}
             <div className=" mt-2 font-semibold "> {title}</div>
             <div className="absolute right-0 top-2 ">{titleRightContent}</div>
           </div>

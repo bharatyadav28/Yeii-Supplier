@@ -17,8 +17,12 @@ const HomeMain = () => {
   const { orders } = orderData;
 
   return (
-    <div className="w-full h-full flex items-center gap-5">
-      <MainContent contentTitle={title} count={orders.length} className="pb-0">
+    <div className="relative flex gap-6  items-stretch overflow-y-auto flex-grow h-full ">
+      <MainContent
+        contentTitle={title}
+        count={orders.length}
+        className="pb-0 mt-0 overflow-y-hidden"
+      >
         {orders.length === 0 ? (
           <NoItems
             icon={noItemsIcon}

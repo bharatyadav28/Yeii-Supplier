@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronLeft as BackIcon } from "lucide-react";
+import { ChevronLeft as BackIcon, X } from "lucide-react";
 import { Button } from "../ui/button";
 
 export const CustomButton = ({ children, className, onClick, isSubmit }) => {
@@ -56,5 +56,19 @@ export const BackwardButton = (props) => {
     <button onClick={onClick} className={classes}>
       <BackIcon size={15} color="black" background="white" />
     </button>
+  );
+};
+
+export const CrossButton = (props) => {
+  const { onClick, className } = props;
+
+  let classes = "rounded-full w-10 h-10 p-1 ";
+  if (className) {
+    classes += " " + className;
+  }
+  return (
+    <LightButton onClick={onClick} className={classes}>
+      <X />
+    </LightButton>
   );
 };
