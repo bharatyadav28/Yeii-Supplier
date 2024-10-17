@@ -84,7 +84,7 @@ function ListItem({ item, isService }) {
         openDialog={openDialog}
         handleOpenDialog={handleOpenDialog}
         item={item}
-        title={`Edit ${isService ? "Service" : "Product"}`}
+        title={` ${isService ? "Service" : "Product"} details`}
         formType={isService ? "Service" : "Product"}
       />
     </>

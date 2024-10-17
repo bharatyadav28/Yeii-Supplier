@@ -105,7 +105,8 @@ body {
   gap: 0.2rem;
 }
 
-.store-form fieldset label {
+.store-form fieldset label,
+.store-form .avail {
   font-size: 0.8rem;
   color: #00131fcc;
 }

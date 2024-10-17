@@ -1,42 +1,85 @@
-import React from "react";
+import React, { useState } from "react";
+import { FilePenLine as EditIcon, Trash as DeleteIcon } from "lucide-react";
 
 import CustomDialog from "../common/CustomDialog";
-import { DarkButton, LightButton } from "../common/CustomButtons";
-import { SelectInput, TextArea, TextInput } from "../common/customInput";
+import { IconButton, TextArea, TextInput } from "../common/customInput";
 import DefaultItemImage from "../common/DefaultItemImage";
 import { CustomCheckBox } from "../common/customInput";
 import { CounterInput } from "../common/customInput";
+import { Switch } from "../ui/switch";
+import StoreDialog from "./StoreDialog";
+import DeleteDialog from "../common/DeleteDialog";
+import TimePicker from "../common/TimePicker";
 
 function ViewItem({ openDialog, handleOpenDialog, item, title, formType }) {
   const isServiceType = formType === "Service";
 
+  const [editDialog, setEditDialog] = useState(false);
+  const [deleteDialog, setDeleteDialog] = useState(false);
+
+  const handleEditDialog = () => {
+    setEditDialog((prev) => !prev);
+  };
+  const handleDeleteDialog = () => {
+    setDeleteDialog((prev) => !prev);
+  };
+
   const actualPriceField = (
     <fieldset>
-      <label htmlFor="actualPrice" className="text-[#00131FCC] required">
+      <label htmlFor="actualPrice" className="text-[#00131FCC] ">
         Actual Price
       </label>
-      <TextInput
-        name="actualPrice"
-        id="actualPrice"
-        customIcon="MS$"
-        className="!text-[0.8rem] "
-        iconClasses="t-icon pl-3 !pr-0"
-        defaultValue={item?.actualPrice}
-      />
+      <div className=" relative">
+        <TextInput
+          name="actualPrice"
+          id="actualPrice"
+          customIcon="MS$"
+          className="!text-[0.8rem] "
+          iconClasses="t-icon pl-3 !pr-0"
+          defaultValue={item?.actualPrice}
+          disabled
+        />
+        {formType === "Service" && (
+          <div className="bg-[#13070B0F] text-xs text-[#303F49] rounded-xl absolute top-1 right-2 p-2">
+            {item.priceValidity}
+          </div>
+        )}
+      </div>
     </fieldset>
   );
 
-  const startTimeField = <div className="bg-blue-500"></div>;
-  const endTimeField = <div className="bg-green-500"></div>;
+  const startTimeField = (
+    <TimePicker
+      title="Start with"
+      onTimeChange={(val) => {
+        console.log("Time changed", val);
+      }}
+      initialTime={item?.availabilityTime?.start}
+      className="!justify-start ml-[0.6rem]"
+      isViewOnly={true}
+    />
+  );
+  const endTimeField = (
+    <TimePicker
+      title="End with"
+      onTimeChange={(val) => {
+        console.log("Time changed", val);
+      }}
+      initialTime={item?.availabilityTime?.end}
+      className="!justify-start ml-[0.6rem]"
+      isViewOnly={true}
+    />
+  );
   const quantityField = (
     <fieldset>
-      <label htmlFor="quantity" className="text-[#00131FCC] required">
+      <label htmlFor="quantity" className="text-[#00131FCC] ">
         Quantity
       </label>
       <CounterInput
         name="quantity"
         id="quantity"
         defaultValue={item?.quantity}
+        disabled
       />
     </fieldset>
   );
@@ -44,7 +87,7 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType }) {
   const remainingNumFields = (
     <>
       <fieldset>
-        <label htmlFor="discount" className="text-[#00131FCC] required">
+        <label htmlFor="discount" className="text-[#00131FCC] ">
           Discount
         </label>
         <TextInput
@@ -54,10 +97,11 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType }) {
           iconClasses="t-icon  !pr-0 pl-3"
           placeholder="Enter price"
           defaultValue={item?.discount}
+          disabled
         />
       </fieldset>
       <fieldset>
-        <label htmlFor="discountedPrice" className="text-[#00131FCC] required">
+        <label htmlFor="discountedPrice" className="text-[#00131FCC] ">
           Discounted price
         </label>
         <TextInput
@@ -66,127 +110,182 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType }) {
           customIcon="MS$"
           iconClasses="t-icon  pl-3 !pr-0"
           defaultValue={item?.discountedPrice}
+          disabled
         />
       </fieldset>
     </>
   );
 
+  const itemOptions = (
+    <div className="flex gap-3">
+      <IconButton
+        className="bg-[var(--light-gray)]"
+        onClick={() => {
+          handleOpenDialog();
+          handleEditDialog();
+        }}
+      >
+        <EditIcon size={20} />
+      </IconButton>
+      <IconButton
+        className="bg-[var(--light-gray)]"
+        onClick={() => {
+          handleOpenDialog();
+          handleDeleteDialog();
+        }}
+      >
+        <DeleteIcon size={20} />
+      </IconButton>
+    </div>
+  );
+
   return (
-    <CustomDialog
-      open={openDialog}
-      handleOpen={handleOpenDialog}
-      title={title}
-      className="w-[40rem] h-max max-h-[calc(100vh-4rem)]"
-    >
-      <div className="store-form mt-6">
-        <div className="grid grid-cols-2 gap-4 ">
-          <fieldset>
-            <label htmlFor="available" className="required">
-              Availability
-            </label>
-            <TextInput
-              name="available"
-              id="available"
-              defaultValue={item?.availability ? "Available" : "Not Available"}
-            />
-          </fieldset>
+    <>
+      <CustomDialog
+        open={openDialog}
+        handleOpen={handleOpenDialog}
+        title={title}
+        className="w-[40rem] h-max max-h-[calc(100vh-4rem)]"
+        titleRightContent={itemOptions}
+      >
+        <div className="store-form view-only mt-6">
+          <div className="grid grid-cols-2 gap-4 ">
+            <fieldset>
+              <label htmlFor="available">Availability</label>
+              <div className="relative">
+                <TextInput
+                  name="available"
+                  id="available"
+                  defaultValue={
+                    item?.availability ? "Available" : "Not Available"
+                  }
+                  disabled
+                />
+                <span className="absolute  right-3 top-1/2  transform -translate-y-1/2 pb-1 ">
+                  <Switch
+                    className="data-[state=checked]:bg-[var(--main-pink)] h-[1.65rem]  disabled:opacity-100"
+                    disabled
+                  />
+                </span>
+              </div>
+            </fieldset>
 
-          <fieldset>
-            <label htmlFor="couponEligibility" className="text-[#00131FCC]">
-              Coupon Eligibility
-            </label>
-            <div className="flex gap-2 items-center text-[0.8rem] bg-[var(--light)] py-[0.73rem] px-3 rounded-[0.9rem] text-[var(--medium-gray)]">
-              <CustomCheckBox
-                className="border-[#E6E9EB] h-5 w-5"
-                onChange={(val) => {
-                  console.log(val);
-                }}
-                value={item?.couponEligibility}
+            <fieldset>
+              <label htmlFor="couponEligibility" className="text-[#00131FCC]">
+                Coupon Eligibility
+              </label>
+              <div className="flex gap-2 items-center text-[0.8rem] bg-[var(--light)] py-[0.73rem] px-3 rounded-[0.9rem] text-[var(--medium-gray)]">
+                <CustomCheckBox
+                  className="border-[#E6E9EB] h-5 w-5"
+                  onChange={(val) => {
+                    console.log(val);
+                  }}
+                  value={item?.couponEligibility}
+                  disabled
+                />
+                <p>Is this {formType} eligible for coupons</p>
+              </div>
+            </fieldset>
+
+            {isServiceType && (
+              <>
+                <div className="flex flex-col gap-1">
+                  <div className="avail  ">Availaibilty time </div>
+                  {startTimeField}
+                </div>
+                <div className="flex flex-col gap-1">
+                  <div className="avail invisible">Availaibilty time</div>
+                  {endTimeField}
+                </div>
+              </>
+            )}
+
+            <fieldset>
+              <label htmlFor="name">{formType} name</label>
+              <TextInput
+                name="name"
+                id="name"
+                placeholder={`Enter ${formType.toLowerCase()} name`}
+                // value={isEdit ? item.name : ""}
+                defaultValue={item?.name}
+                disabled
               />
-              <p>Is this {formType} eligible for coupons</p>
-            </div>
-          </fieldset>
+            </fieldset>
 
-          {isServiceType && (
-            <>
-              {startTimeField} {endTimeField}
-            </>
-          )}
+            <fieldset>
+              <label htmlFor="cateogry">{formType} cateogry</label>
+              <TextInput
+                name="cateogry"
+                id="cateogry"
+                defaultValue={item?.category}
+                disabled
+              />
+            </fieldset>
+          </div>
 
-          <fieldset>
-            <label htmlFor="name" className="required">
-              {formType} name
-            </label>
-            <TextInput
-              name="name"
-              id="name"
-              required={true}
-              placeholder={`Enter ${formType.toLowerCase()} name`}
-              // value={isEdit ? item.name : ""}
-              defaultValue={item?.name}
-            />
-          </fieldset>
+          <div className=" store-form">
+            <fieldset>
+              <label htmlFor="description">{formType} description </label>
+              <TextArea
+                name="description"
+                id="description"
+                className="min-h-[3rem] "
+                placeholder="Enter  description"
+                defaultValue={item?.description}
+                disabled
+              />
+            </fieldset>
 
-          <fieldset>
-            <label htmlFor="cateogry" className="required">
-              {formType} cateogry
-            </label>
-            <TextInput
-              name="cateogry"
-              id="cateogry"
-              defaultValue={item?.category}
-            />
-          </fieldset>
+            <fieldset>
+              <label htmlFor="iamges">{formType} Image</label>
+              <div className=" bg-white grid rounded-[0.9rem]">
+                <div className="h-[6rem] m-4 w-100 h-100  border border-[var(--main-pink)] border-dashed rounded-[0.9rem]">
+                  <DefaultItemImage />
+                </div>
+              </div>
+            </fieldset>
+
+            {!isServiceType && (
+              <>
+                <div className="grid grid-cols-4 gap-4 num-details mt-1">
+                  {actualPriceField}
+                  {quantityField}
+                  {remainingNumFields}
+                </div>
+                {/* {couponEligibilityField} */}
+              </>
+            )}
+
+            {isServiceType && (
+              <div className="grid grid-cols-2 gap-4 num-details mt-1">
+                <div>{actualPriceField}</div>
+                <div className="grid grid-cols-2 gap-2 num-details">
+                  {remainingNumFields}
+                </div>
+                {/* {couponEligibilityField} */}
+              </div>
+            )}
+          </div>
         </div>
+      </CustomDialog>
 
-        <div className=" store-form">
-          <fieldset>
-            <label htmlFor="description" className="required">
-              {formType} description{" "}
-            </label>
-            <TextArea
-              name="description"
-              id="description"
-              className="min-h-[3rem] "
-              placeholder="Enter  description"
-              defaultValue={item?.description}
-            />
-          </fieldset>
+      <StoreDialog
+        openDialog={editDialog}
+        handleOpenDialog={handleEditDialog}
+        item={item}
+        title={title}
+        formType={formType}
+      />
 
-          <fieldset>
-            <label htmlFor="iamges" className="required">
-              {formType} Image
-            </label>
-            <div className=" bg-white grid rounded-[0.9rem]">
-              <div className="h-[6rem] m-4 w-100 h-100  border border-[var(--main-pink)] border-dashed rounded-[0.9rem]">
-                <DefaultItemImage />
-              </div>
-            </div>
-          </fieldset>
-
-          {!isServiceType && (
-            <>
-              <div className="grid grid-cols-4 gap-4 num-details mt-1">
-                {actualPriceField}
-                {quantityField}
-                {remainingNumFields}
-              </div>
-              {/* {couponEligibilityField} */}
-            </>
-          )}
-
-          {isServiceType && (
-            <div className="grid grid-cols-2 gap-4 num-details mt-1">
-              <div>{actualPriceField}</div>
-              <div className="grid grid-cols-2 gap-2 num-details">
-                {remainingNumFields}
-              </div>
-              {/* {couponEligibilityField} */}
-            </div>
-          )}
-        </div>
-      </div>
-    </CustomDialog>
+      <DeleteDialog
+        openDialog={deleteDialog}
+        handleOpenDialog={handleDeleteDialog}
+        title={`Delete ${formType}`}
+        description={`Are you sure you want to delete this ${formType}?`}
+        onCancel={handleDeleteDialog}
+        onConfirm={handleDeleteDialog}
+      />
+    </>
   );
 }
 

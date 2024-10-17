@@ -79,7 +79,11 @@ export const SelectInput = (props) => {
           </SelectTrigger>
           <SelectContent>
             {menu?.map((item) => {
-              return <SelectItem value={item}>{item} </SelectItem>;
+              return (
+                <SelectItem key={item} value={item}>
+                  {item}{" "}
+                </SelectItem>
+              );
             })}
           </SelectContent>
         </Select>
@@ -133,22 +137,34 @@ export const CustomCheckBox = ({ className, onChange, value }) => {
   );
 };
 
+export const IconButton = ({ onClick, className, children, ...props }) => {
+  let classes =
+    " bg-[var(--light)] hover:bg-[var(--light)]  text-black p-0 text-sm  rounded-full my-0 max-h-max";
+  if (className) {
+    classes += " " + className;
+  }
+
+  return (
+    <Button className={classes} type="button" onClick={onClick}>
+      {children}
+    </Button>
+  );
+};
+
 export const CounterInput = (props) => {
   const { onChange, value, className } = props;
   const [inputValue, setInputValue] = useState(value || 0);
 
-  const btnClasses =
-    "bg-[#E5E5E5] hover:bg-[#E5E5E5] text-black p-3 text-sm h-3 rounded-full my-0";
+  let classes = "!bg-[#E5E5E5] !hover:bg-[#E5E5E5] p-3 h-3";
 
   return (
     <div className="flex  mb-2 h-full bg-[var(--light)] justify-center items-center px-5  text-[0.8rem] rounded-xl">
-      <Button
-        className={btnClasses}
-        type="button"
+      <IconButton
+        className={classes}
         onClick={() => setInputValue((prev) => Number(prev) - 1)}
       >
         -
-      </Button>
+      </IconButton>
       <input
         type="text"
         onChange={onChange}
@@ -156,13 +172,12 @@ export const CounterInput = (props) => {
         {...props}
         className="w-full text-center"
       />
-      <Button
-        className={btnClasses}
-        type="button"
+      <IconButton
+        className={classes}
         onClick={() => setInputValue((prev) => Number(prev) + 1)}
       >
         +
-      </Button>
+      </IconButton>
     </div>
   );
 };

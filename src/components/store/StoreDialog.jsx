@@ -6,6 +6,7 @@ import { SelectInput, TextArea, TextInput } from "../common/customInput";
 import DefaultItemImage from "../common/DefaultItemImage";
 import { CustomCheckBox } from "../common/customInput";
 import { CounterInput } from "../common/customInput";
+import TimePicker from "../common/TimePicker";
 
 function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
   const isServiceType = formType === "Service";
@@ -30,20 +31,44 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
       <label htmlFor="actualPrice" className="text-[#00131FCC] required">
         Actual Price
       </label>
-      <TextInput
-        name="actualPrice"
-        id="actualPrice"
-        customIcon="MS$"
-        className="!text-[0.8rem] "
-        iconClasses="t-icon pl-3 !pr-0"
-        placeholder="Enter price"
-        defaultValue={item?.actualPrice}
-      />
+      <div className="relative">
+        <TextInput
+          name="actualPrice"
+          id="actualPrice"
+          customIcon="MS$"
+          className="!text-[0.8rem] "
+          iconClasses="t-icon pl-3 !pr-0 my-0"
+          placeholder="Enter price"
+          defaultValue={item?.actualPrice}
+        />
+        <SelectInput
+          className="!text-[0.8rem] bg-[#13070B0F] absolute right-3  w-max top-[0.4rem] h-[2rem] !py-0"
+          placeholder={`Time`}
+          menu={["Per Hour", "Per Day"]}
+          value={item?.category}
+        />
+      </div>
     </fieldset>
   );
 
-  const startTimeField = <div className="bg-blue-500"></div>;
-  const endTimeField = <div className="bg-green-500"></div>;
+  const startTimeField = (
+    <TimePicker
+      title="Start with"
+      onTimeChange={(val) => {
+        console.log("Time changed", val);
+      }}
+      initialTime={item?.availabilityTime?.start}
+    />
+  );
+  const endTimeField = (
+    <TimePicker
+      title="End with"
+      onTimeChange={(val) => {
+        console.log("Time changed", val);
+      }}
+      initialTime={item?.availabilityTime?.end}
+    />
+  );
   const quantityField = (
     <fieldset>
       <label htmlFor="quantity" className="text-[#00131FCC] required">
@@ -112,7 +137,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
       open={openDialog}
       handleOpen={handleOpenDialog}
       title={title}
-      className="w-[40rem] h-[calc(100vh-4rem)]"
+      className="w-[40rem] h-[calc(100vh-3.5rem)]"
     >
       <form onSubmit={handleSubmit} className="mt-6 store-form">
         <fieldset>
@@ -196,10 +221,13 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
 
         {isServiceType && (
           <>
-            <div className="grid grid-cols-2 gap-4 num-details mt-1">
-              <div className="grid grid-cols-2 gap-2 num-details">
-                {startTimeField}
-                {endTimeField}
+            <div className="grid grid-cols-2 gap-4 num-details mt-2">
+              <div className="flex flex-col gap-1 avail">
+                <div className="required">Availability time</div>
+                <div className="grid grid-cols-2 gap-2 num-details">
+                  {startTimeField}
+                  {endTimeField}
+                </div>
               </div>
               {actualPriceField}
             </div>
