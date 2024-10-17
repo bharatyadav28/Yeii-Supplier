@@ -5,14 +5,17 @@ import { EmailIcon } from "@/lib/icons";
 import { useState } from "react";
 import { DarkButton } from "@/components/common/CustomButtons";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log({ email, password });
+    router.push("/");
   };
 
   return (
@@ -47,7 +50,7 @@ const LoginForm = () => {
       </div>
 
       {/* Login Button */}
-      <DarkButton className="w-full text-lg p-7 rounded-[15px]">
+      <DarkButton isSubmit={true} className="w-full text-lg p-7 rounded-[15px]">
         Login
       </DarkButton>
     </form>

@@ -147,6 +147,7 @@ body {
 
 /* .store-form textarea */
 ::-webkit-scrollbar {
+  display: none;
   width: 10px; /* for vertical scrollbars */
   height: 12px; /* for horizontal scrollbars */
 }

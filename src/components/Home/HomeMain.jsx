@@ -36,7 +36,7 @@ const HomeMain = () => {
           <OrdersList orders={orders} />
         )}
       </MainContent>
-      <OrdersCallender />
+      <OrdersCallender orders={orders} />
     </div>
   );
 };
