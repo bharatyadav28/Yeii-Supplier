@@ -79,7 +79,11 @@ export const SelectInput = (props) => {
           </SelectTrigger>
           <SelectContent>
             {menu?.map((item) => {
-              return <SelectItem value={item}>{item} </SelectItem>;
+              return (
+                <SelectItem key={item} value={item}>
+                  {item}{" "}
+                </SelectItem>
+              );
             })}
           </SelectContent>
         </Select>
