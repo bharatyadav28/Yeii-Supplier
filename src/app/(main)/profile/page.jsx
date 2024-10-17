@@ -1,8 +1,13 @@
+import DashboardPage from "@/components/common/DashboardPage";
+import PageHeading from "@/components/common/PageHeading";
+import LanguageSwitcher from "@/components/profile/LanguageSwitcher";
+
 const StorePage = () => {
   return (
-    <div>
-      <h1>This is Profile Page</h1>
-    </div>
+    <DashboardPage>
+      <PageHeading pageName="Profile" />
+      <LanguageSwitcher />
+    </DashboardPage>
   );
 };
 
