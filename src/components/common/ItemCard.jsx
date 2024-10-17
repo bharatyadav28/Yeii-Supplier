@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const ItemCard = ({ item, isAccepted }) => {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center  gap-2 ">
       <div
         className={`w-[28px] h-[28px] rounded-full overflow-hidden ${
           isAccepted && "w-[20px] h-[20px]"

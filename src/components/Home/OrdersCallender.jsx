@@ -4,7 +4,7 @@ import AcceptedOrderList from "./AcceptedOrderList";
 
 const OrdersCallender = ({ orders }) => {
   return (
-    <Card className="w-[500px] h-full flex flex-col bg-[url('/callenderBg.png')] bg-cover bg-center mt-4 rounded-xl">
+    <Card className="min-w-[380px] self-stretch h-full pb-0 flex flex-col bg-[url('/callenderBg.png')] bg-cover bg-center rounded-xl">
       <Calendar />
       <AcceptedOrderList orders={orders} />
     </Card>

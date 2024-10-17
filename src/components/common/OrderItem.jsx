@@ -1,11 +1,14 @@
 import Image from "next/image";
-import { DarkButton, LightButton } from "./CustomButtons";
+import { CrossButton, DarkButton, LightButton } from "./CustomButtons";
 import { Check, ChevronRight, X } from "lucide-react";
 import ItemCard from "./ItemCard";
 
-const OrderItem = ({ order, isAccepted }) => {
+const OrderItem = ({ order, isAccepted, onClick }) => {
   return (
-    <div className="bg-[var(--light)]  flex flex-col gap-4 w-full min-w-[12rem]  p-4 rounded-2xl  cursor-pointer">
+    <div
+      onClick={() => onClick(order)}
+      className="bg-[var(--light)]  flex flex-col gap-3 w-full min-w-[12rem]  p-4 rounded-2xl  cursor-pointer"
+    >
       {/* header */}
       <div className="flex justify-between">
         <div className="flex items-center gap-2">
@@ -89,7 +92,31 @@ const OrderItem = ({ order, isAccepted }) => {
           </div>
         </div>
       )}
+
+      {/* bottom dashed line */}
       {isAccepted && <div className="border-[1px] border-dashed"></div>}
+
+      {/* footer */}
+      {isAccepted && (
+        <div className="flex justify-between items-center">
+          <div>
+            <div className="text-[10px] text-[var(--main-gray)] ">Date</div>
+            <div className="text-xs font-semibold">{order.placedOn}</div>
+          </div>
+          <div className="text-center">
+            <div className="text-[10px] text-[var(--main-gray)] ">Category</div>
+            <div className="text-xs font-semibold">
+              {order.items[0].category}
+            </div>
+          </div>
+          <div className="text-center">
+            <div className="text-xs text-[var(--main-gray)] ">Total</div>
+            <div className="text-[var(--lightblue)] font-semibold">
+              ${order.totalAmount}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
