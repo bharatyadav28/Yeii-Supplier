@@ -41,12 +41,14 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
           placeholder="Enter price"
           defaultValue={item?.actualPrice}
         />
-        <SelectInput
-          className="!text-[0.8rem] bg-[#13070B0F] absolute right-3  w-max top-[0.4rem] h-[2rem] !py-0"
-          placeholder={`Time`}
-          menu={["Per Hour", "Per Day"]}
-          value={item?.category}
-        />
+        {formType === "Service" && (
+          <SelectInput
+            className="!text-[0.8rem] bg-[#13070B0F] absolute right-3  w-max top-[0.4rem] h-[2rem] !py-0"
+            placeholder={`Time`}
+            menu={["Per Hour", "Per Day"]}
+            value={item?.category}
+          />
+        )}
       </div>
     </fieldset>
   );
@@ -137,7 +139,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
       open={openDialog}
       handleOpen={handleOpenDialog}
       title={title}
-      className="w-[40rem] h-[calc(100vh-3.5rem)]"
+      className="w-[40rem] h-[calc(100vh-3.3rem)]"
     >
       <form onSubmit={handleSubmit} className="mt-6 store-form">
         <fieldset>
