@@ -9,7 +9,7 @@ import {
 import { BackwardButton } from "./CustomButtons";
 function CustomDialog({ open, handleOpen, className, title, children }) {
   let classes =
-    "max-w-full w-[10rem] min-h-[10rem] !bg-[var(--light-gray)] !rounded-3xl overflow-y-scroll py-4";
+    "max-w-full w-[10rem] min-h-[10rem] !bg-[var(--light-gray)] !rounded-3xl overflow-y-auto py-4";
   if (className) {
     classes += " " + className;
   }

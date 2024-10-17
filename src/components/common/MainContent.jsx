@@ -3,9 +3,11 @@ import React from "react";
 import Card from "./Card";
 
 // Pages main content Wrapper
-function MainContent({ children, contentTitle, count }) {
+function MainContent({ children, contentTitle, count, className }) {
   return (
-    <Card className="bg-[var(--light-gray)] !w-full  mt-4 overflow-y-auto flex-grow h-full">
+    <Card
+      className={`bg-[var(--light-gray)] !w-full  mt-4 overflow-y-auto flex-grow h-full ${className}`}
+    >
       {contentTitle && (
         <div className="font-medium">
           <span className="mr-2">{contentTitle} </span>
