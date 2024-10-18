@@ -6,11 +6,11 @@ import Card from "./Card";
 function MainContent({ children, contentTitle, count, className }) {
   return (
     <Card
-      className={`bg-[var(--light-gray)] !w-full  mt-4 overflow-y-auto flex-grow h-full ${className}`}
+      className={`bg-[var(--light-gray)] !w-full  mt-4 overflow-y-auto flex-grow h-full !rounded-2xl ${className}`}
     >
       {contentTitle && (
         <div className="font-medium">
-          <span className="mr-2">{contentTitle} </span>
+          <span className="mr-2 font-semibold">{contentTitle} </span>
           <span className="text-[#4D5A62CC] text-md">{count}</span>
         </div>
       )}

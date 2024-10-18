@@ -1,8 +1,15 @@
+import PageHeading from "@/components/common/PageHeading";
+import DashboardPage from "@/components/common/DashboardPage";
+import OrdersList from "@/components/orders/OrdersList";
+import orderData from "@/lib/dummyData/orderPageData.json";
+
 const StorePage = () => {
+  const orders = orderData.orders;
   return (
-    <div>
-      <h1>This is Orders Page</h1>
-    </div>
+    <DashboardPage>
+      <PageHeading pageName="Orders" />
+      <OrdersList data={orders} />
+    </DashboardPage>
   );
 };
 

@@ -1,8 +1,13 @@
 import Image from "next/image";
 
-const ItemCard = ({ item, isAccepted }) => {
+const ItemCard = ({ item, isAccepted, isOrdersPage, index }) => {
+  const isFirst = index % 2 === 0;
   return (
-    <div className="flex items-center  gap-2 ">
+    <div
+      className={`flex items-center  ${
+        isFirst ? "justify-start" : "justify-end"
+      }   gap-2  w-full `}
+    >
       <div
         className={`w-[28px] h-[28px] rounded-full overflow-hidden ${
           isAccepted && "w-[20px] h-[20px]"
@@ -14,7 +19,15 @@ const ItemCard = ({ item, isAccepted }) => {
           height={100}
         />
       </div>
-      <div className={`font-bold ${isAccepted ? "text-[10px]" : "text-xs "}`}>
+      <div
+        className={`font-bold ${
+          isAccepted
+            ? "text-[10px]"
+            : isOrdersPage
+            ? "text-[0.72rem] font-semibold"
+            : "text-xs "
+        }`}
+      >
         {item.name} x {item.quantity}
       </div>
     </div>

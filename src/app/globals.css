@@ -41,12 +41,15 @@ body {
     --radius: 0.5rem;
 
     --main-pink: #f63093;
+    --light-pink: #f6309314;
     --light: #ffffff;
     --light-gray: #f1f4f6;
     --medium-gray: #6e7980;
     --main-gray: #6e7481;
     --lightblue: #10b6ff;
     --main-green: #00d215;
+    --main-orange: #e69800;
+    --main-yellow: #ffdc15;
   }
 }
 

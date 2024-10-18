@@ -51,17 +51,30 @@ const OrderItem = ({ order, isAccepted, onClick }) => {
       {/* main */}
       {isAccepted ? (
         <div className="grid grid-cols-2 gap-2 text-right">
-          {order.items.map((item) => (
-            <ItemCard key={item._id} item={item} isAccepted={isAccepted} />
+          {order.items.map((item, index) => (
+            <ItemCard
+              key={item._id}
+              item={item}
+              isAccepted={isAccepted}
+              index={index}
+            />
           ))}
         </div>
       ) : (
         <div className="flex justify-between">
           {/* left */}
           <div className="flex flex-col gap-2">
-            <ItemCard key={order.items[0]._id} item={order.items[0]} />
+            <ItemCard
+              key={order.items[0]._id}
+              item={order.items[0]}
+              index={0}
+            />
             {order.items[1] && (
-              <ItemCard key={order.items[1]._id} item={order.items[1]} />
+              <ItemCard
+                key={order.items[1]._id}
+                item={order.items[1]}
+                index={0}
+              />
             )}
             {!isAccepted && order.items.length - 2 ? (
               <div className="flex text-[10px] items-center text-[var(--main-gray)] mb-1">
