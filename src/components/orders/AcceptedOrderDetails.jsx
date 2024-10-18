@@ -40,7 +40,7 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
                     />
                   </div>
                   <div className="flex flex-col gap-1 mt-3 ">
-                    <div className="text-[1.1rem] text-[#13070B] font-medium">
+                    <div className="text-[1rem] text-[#13070B] font-medium">
                       {item.name}
                     </div>
                     <div className="text-[#4E4548]">Qty : {item.quantity}</div>
