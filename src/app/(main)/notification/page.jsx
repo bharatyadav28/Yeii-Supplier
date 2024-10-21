@@ -1,9 +1,14 @@
-const StorePage = () => {
+import DashboardPage from "@/components/common/DashboardPage";
+import PageHeading from "@/components/common/PageHeading";
+import NotifictionMain from "@/components/notification/NotifictionMain";
+
+const NotificationPage = () => {
   return (
-    <div>
-      <h1>This is Notification Page</h1>
-    </div>
+    <DashboardPage>
+      <PageHeading pageName="Notification" />
+      <NotifictionMain />
+    </DashboardPage>
   );
 };
 
-export default StorePage;
+export default NotificationPage;

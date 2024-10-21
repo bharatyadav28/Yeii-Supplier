@@ -1,0 +1,94 @@
+{
+  "notifications": [
+    {
+      "id": 1,
+      "type": "New Order Alert",
+      "message": "You've received a new order! Order #7890 is awaiting your confirmation. Please review the details and confirm the order to proceed.",
+      "time": "10:10 AM",
+      "date": "2024-10-21",
+      "category": "order",
+      "status": "new"
+    },
+    {
+      "id": 2,
+      "type": "Order Confirmation Needed",
+      "message": "Reminder: Order #7891 is pending your confirmation. Please confirm the order to ensure timely processing.",
+      "time": "09:30 AM",
+      "date": "2024-10-21",
+      "category": "order",
+      "status": "pending"
+    },
+    {
+      "id": 3,
+      "type": "Stock Running Low",
+      "message": "Stock for item #12345 is running low. Please restock to avoid order delays.",
+      "time": "08:45 AM",
+      "date": "2024-10-21",
+      "category": "inventory",
+      "status": "warning"
+    },
+    {
+      "id": 4,
+      "type": "Order Shipped",
+      "message": "Order #7888 has been shipped and is on its way to the customer.",
+      "time": "03:00 PM",
+      "date": "2024-10-20",
+      "category": "order",
+      "status": "shipped"
+    },
+    {
+      "id": 5,
+      "type": "Payment Received",
+      "message": "Payment for Order #7887 has been successfully received.",
+      "time": "12:15 PM",
+      "date": "2024-10-19",
+      "category": "payment",
+      "status": "completed"
+    },
+    {
+      "id": 6,
+      "type": "Order Delivered",
+      "message": "Order #7886 has been delivered to the customer.",
+      "time": "11:45 AM",
+      "date": "2024-10-18",
+      "category": "order",
+      "status": "delivered"
+    },
+    {
+      "id": 7,
+      "type": "New Review Received",
+      "message": "A new review has been posted for your product #12345.",
+      "time": "02:30 PM",
+      "date": "2024-10-17",
+      "category": "review",
+      "status": "new"
+    },
+    {
+      "id": 8,
+      "type": "Order Confirmation Needed",
+      "message": "Reminder: Order #7885 is pending your confirmation. Please confirm the order to ensure timely processing.",
+      "time": "10:30 AM",
+      "date": "2024-10-16",
+      "category": "order",
+      "status": "pending"
+    },
+    {
+      "id": 9,
+      "type": "Payment Failed",
+      "message": "Payment for Order #7884 has failed. Please contact the customer to resolve the issue.",
+      "time": "09:00 AM",
+      "date": "2024-10-15",
+      "category": "payment",
+      "status": "failed"
+    },
+    {
+      "id": 10,
+      "type": "Product Back in Stock",
+      "message": "Item #12345 is back in stock and available for order.",
+      "time": "01:45 PM",
+      "date": "2024-10-14",
+      "category": "inventory",
+      "status": "restocked"
+    }
+  ]
+}
