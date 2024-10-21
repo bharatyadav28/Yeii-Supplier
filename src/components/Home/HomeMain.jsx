@@ -21,7 +21,7 @@ const HomeMain = () => {
       <MainContent
         contentTitle={title}
         count={orders.length}
-        className="pb-0 mt-0 overflow-y-hidden"
+        className="pb-0 !mt-0 overflow-y-hidden"
       >
         {orders.length === 0 ? (
           <NoItems

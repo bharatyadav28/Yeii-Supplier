@@ -87,7 +87,7 @@ export const CrossButton = (props) => {
   }
   return (
     <LightButton onClick={onClick} className={classes}>
-      <X size={15} />
+      <X size={20} />
     </LightButton>
   );
 };

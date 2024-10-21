@@ -1,12 +1,12 @@
 import Image from "next/image";
 
-const ItemCard = ({ item, isAccepted, isOrdersPage, index }) => {
+const ItemCard = ({ item, isAccepted, isOrdersPage, index, className }) => {
   const isFirst = index % 2 === 0;
   return (
     <div
       className={`flex items-center  ${
         isFirst ? "justify-start" : "justify-end"
-      }   gap-2  w-full `}
+      }   gap-2  w-full ${className}`}
     >
       <div
         className={`w-[28px] h-[28px] rounded-full overflow-hidden ${

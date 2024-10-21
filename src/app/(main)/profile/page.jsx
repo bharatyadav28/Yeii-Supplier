@@ -1,14 +1,14 @@
 import DashboardPage from "@/components/common/DashboardPage";
 import PageHeading from "@/components/common/PageHeading";
-import LanguageSwitcher from "@/components/profile/LanguageSwitcher";
+import Profile from "@/components/profile/Profile";
 
-const StorePage = () => {
+const ProfilePage = () => {
   return (
     <DashboardPage>
       <PageHeading pageName="Profile" />
-      <LanguageSwitcher />
+      <Profile />
     </DashboardPage>
   );
 };
 
-export default StorePage;
+export default ProfilePage;
