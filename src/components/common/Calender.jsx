@@ -18,11 +18,13 @@ import {
   ChevronRight,
   ChevronUp,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [expandCalender, setExpandCalender] = useState(false);
+  const t = useTranslations("Calender");
 
   function isWeekend(date) {
     const newDate = new Date(date);
@@ -30,10 +32,11 @@ const Calendar = () => {
     return day === 0 || day === 6; // 0 is Sunday, 6 is Saturday
   }
 
+  const headerDate = format(currentMonth, "MMMM yyyy").split(" ");
   const renderHeader = () => {
     return (
       <div className="flex justify-between items-center mb-5">
-        <div className="text-lg font-semibold text-white">Calendar</div>
+        <div className="text-lg font-semibold text-white">{t("title")}</div>
         <div className="flex  gap-2">
           <button
             onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}
@@ -42,7 +45,7 @@ const Calendar = () => {
             <ChevronLeft size={14} />
           </button>
           <span className="text-[17px] font-semibold text-white">
-            {format(currentMonth, "MMMM yyyy")}
+            {`${t(headerDate[0])} ${headerDate[1]}`}
           </span>
           <button
             onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}
@@ -67,7 +70,7 @@ const Calendar = () => {
             i === 0 || i === 6 ? "#303F49" : "white"
           }`}
         >
-          {format(addDays(startOfWeek(new Date()), i), dateFormat)}
+          {t(format(addDays(startOfWeek(new Date()), i), dateFormat))}
         </div>
       );
     }
@@ -141,7 +144,7 @@ const Calendar = () => {
                 "text-black"
               }`}
             >
-              {format(date, "E")}
+              {t(format(date, "E"))}
             </div>
           </div>
         ))}

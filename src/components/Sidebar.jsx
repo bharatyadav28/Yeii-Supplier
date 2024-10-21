@@ -1,6 +1,4 @@
 "use client";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import {
   HomeIcon,
   StoreIcon,
@@ -10,10 +8,14 @@ import {
 } from "lucide-react";
 
 import { sidebarIcon } from "@/lib/svg_icons";
+import { Link, usePathname } from "@/navigation";
+import { useTranslations } from "next-intl";
 
 // Single sidebar link
 const SidebarLink = ({ title, href, Icon }) => {
   const pathname = usePathname();
+  const t = useTranslations();
+  // console.log("Sidebar", { pathname });
   const isActive = pathname === href;
 
   let classes =
@@ -27,7 +29,7 @@ const SidebarLink = ({ title, href, Icon }) => {
     <Link href={href}>
       <div className={classes}>
         <Icon size={15} />
-        <div>{title}</div>
+        <div>{t(title)}</div>
       </div>
     </Link>
   );
@@ -37,27 +39,27 @@ const SidebarLink = ({ title, href, Icon }) => {
 const Sidebar = ({ className }) => {
   const menuLinks = [
     {
-      title: "Home",
+      title: "home",
       href: "/",
       icon: HomeIcon,
     },
     {
-      title: "Store",
+      title: "store",
       href: "/store",
       icon: StoreIcon,
     },
     {
-      title: "Orders",
+      title: "orders",
       href: "/orders",
       icon: OrderIcon,
     },
     {
-      title: "Notification",
+      title: "notification",
       href: "/notification",
       icon: NotificationIcon,
     },
     {
-      title: "Profile",
+      title: "profile",
       href: "/profile",
       icon: ProfileIcon,
     },

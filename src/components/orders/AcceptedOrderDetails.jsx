@@ -151,6 +151,7 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
               <div className="flex gap-2">
                 <div className="rounded-full w-[65px] h-[65px] overflow-hidden">
                   <Image
+                    alt="image"
                     src={order.customerDetails.profileImage}
                     width={100}
                     height={100}

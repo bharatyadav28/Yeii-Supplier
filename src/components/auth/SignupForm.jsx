@@ -9,12 +9,12 @@ import {
 } from "@/components/common/customInput";
 import { BusinessIcon, EmailIcon, UserIcon } from "@/lib/icons";
 import { MapPin } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import PhoneInput from "react-phone-input-2";
 import { DarkButton } from "@/components/common/CustomButtons";
 import { useState } from "react";
 import "react-phone-input-2/lib/style.css";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 
 const SignupForm = () => {
   const [name, setName] = useState("");

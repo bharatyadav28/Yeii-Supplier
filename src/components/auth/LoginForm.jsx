@@ -4,8 +4,8 @@ import { PasswordInput, TextInput } from "@/components/common/customInput";
 import { EmailIcon } from "@/lib/icons";
 import { useState } from "react";
 import { DarkButton } from "@/components/common/CustomButtons";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { Link } from "@/navigation";
+import { useRouter } from "@/navigation";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");

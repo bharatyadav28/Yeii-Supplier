@@ -3,7 +3,7 @@
 import { DarkButton } from "@/components/common/CustomButtons";
 import { TextInput } from "@/components/common/customInput";
 import { EmailIcon } from "@/lib/icons";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import { useState } from "react";
 
 const ForgotPasswordForm = () => {

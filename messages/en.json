@@ -1,0 +1,107 @@
+{
+  "loginHeading": "Welcome back",
+  "loginSubHeading": "Login to your account",
+  "email": "Enter Email id",
+  "emailPlaceholder": "Enter email",
+  "password": "Enter password",
+  "confirmPassword": "Confirm new password",
+  "fullName": "Full name",
+  "fullNamePlaceholder": "Enter Full name",
+  "phoneNumber": "Phone number",
+  "address": "Address",
+  "addressPlaceholder": "Enter Address",
+  "bussinessLabel": "Are you operating as a ?",
+  "bussinessPlaceholder": "Select One",
+
+  "login": "Login",
+  "createAccount": "Create account",
+
+  "dontHaveAccount": "Don’t have an account?",
+  "forgotPassword": "Forgot password",
+
+  "terms_of_service": "terms of service",
+  "privacy_policy": "privacy policy",
+
+  "terms1": "By Signing up, you agree to the",
+  "and": "and",
+  "terms2": ", including cookie use",
+
+  "reset_password": "Reset password",
+
+  "home": "Home",
+  "store": "Store",
+  "orders": "Orders",
+  "notification": "Notification",
+  "profile": "Profile",
+  "dashboard": "dashboard",
+
+  "Calender": {
+    "title": "Calender",
+    "Mon": "Mon",
+    "Tue": "Tue",
+    "Wed": "Wed",
+    "Thu": "Thu",
+    "Fri": "Fri",
+    "Sat": "Sat",
+    "Sun": "Sun",
+    "January": "January",
+    "February": "February",
+    "March": "March",
+    "April": "April",
+    "May": "May",
+    "June": "June",
+    "July": "July",
+    "August": "August",
+    "September": "September",
+    "October": "October",
+    "November": "November",
+    "December": "December"
+  },
+
+  "more_product": "more products",
+  "date": "Date",
+  "total": "Total",
+  "order_id": "Order id",
+  "category": "Category",
+  "delivery_status": "Delivery Status",
+
+  "Homepage": {
+    "orderRequest": "Order Request",
+    "availability": "Availability"
+  },
+  "Store": {
+    "title": "Store"
+  },
+  "Notification": {},
+  "Profile": {
+    "title": "Prifile"
+  },
+
+  "OrderDetails": {
+    "title": "Order details",
+    "items": "Items",
+    "date": "Date",
+    "accept": "Accept",
+    "decline": "Decline",
+    "order_id": "Order id",
+    "placed_on": "Placed on",
+    "delivery_status": "Delivery Status",
+    "qyt": "Qyt",
+    "order_summary": "Order Summary",
+    "discount": "Discount",
+    "total_items": "Total Items",
+    "coupon_applied": "Coupon applied",
+    "total_cost": "Total Cost",
+    "payment_status": "Payment status",
+    "paid": "Paid",
+    "generate_invoice": "Generate invoice",
+    "order_accepted": "Order Accepted",
+    "out_for_delivery": "Out for delivery",
+    "delivered": "Delivered",
+    "update_order_status": "Update Order status",
+    "client_location": "Client location details",
+    "location": "Location",
+    "customer_details": "Customer details",
+    "shipping": "Shipping Address"
+  }
+}
