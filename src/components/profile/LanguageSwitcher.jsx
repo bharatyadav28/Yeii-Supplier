@@ -10,7 +10,7 @@ const LanguageSwitcher = () => {
   const router = useRouter();
   const params = useParams();
   const [lang, setLang] = useState(params.locale);
-  console.log({ pathname, params });
+  // console.log({ pathname, params });
   const changeLanguage = (lang) => {
     router.push(`../${lang}/${pathname}`);
   };
@@ -18,7 +18,7 @@ const LanguageSwitcher = () => {
   const t = useTranslations("Homepage");
   return (
     <>
-      <div className="m-4">{t("title")}</div>
+      {/* <div className="m-4">{t("title")}</div> */}
       <div className="flex gap-4">
         <button
           className={`rounded-2xl px-4 py-2 ${

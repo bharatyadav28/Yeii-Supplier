@@ -1,9 +1,11 @@
 import DashboardPage from "@/components/common/DashboardPage";
 import PageHeading from "@/components/common/PageHeading";
 import HomeMain from "@/components/Home/HomeMain";
-import { Button } from "@/components/ui/button";
+import { unstable_setRequestLocale } from "next-intl/server";
 
-export default function Home() {
+export default function Home({ params: { locale } }) {
+  console.log("home", { locale });
+  unstable_setRequestLocale(locale);
   return (
     <DashboardPage>
       <PageHeading pageName="home" avalability={true} />
