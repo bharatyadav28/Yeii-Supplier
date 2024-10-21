@@ -1,4 +1,5 @@
-// "use server";
+"use client";
+
 import DashboardPage from "@/components/common/DashboardPage";
 import PageHeading from "@/components/common/PageHeading";
 import LanguageSwitcher from "@/components/profile/LanguageSwitcher";

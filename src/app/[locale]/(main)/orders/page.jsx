@@ -1,3 +1,5 @@
+"use client";
+
 import PageHeading from "@/components/common/PageHeading";
 import DashboardPage from "@/components/common/DashboardPage";
 import OrdersList from "@/components/orders/OrdersList";

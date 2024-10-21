@@ -1,3 +1,5 @@
+"use client";
+
 import { unstable_setRequestLocale } from "next-intl/server";
 
 const StorePage = ({ params: { locale } }) => {

@@ -20,7 +20,7 @@ export default async function RootLayout({ children, params: { locale } }) {
   const messages = await getMessages();
   return (
     <NextIntlClientProvider messages={messages}>
-      <html lang="en">
+      <html lang={locale}>
         <body className={`${roboto.className}  antialiased`}>{children}</body>
       </html>
     </NextIntlClientProvider>
