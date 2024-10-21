@@ -46,6 +46,25 @@ export const LightButton = ({ children, className, onClick, isSubmit }) => {
   );
 };
 
+export const TransparentButton = ({
+  children,
+  className,
+  onClick,
+  isSubmit,
+}) => {
+  let classes =
+    "bg-[#fff] hover:bg-[#fff] hover:opacity-90 border border-[#ddd] text-black";
+  if (className) {
+    classes = classes + " " + className;
+  }
+
+  return (
+    <CustomButton className={classes} onClick={onClick} isSubmit={isSubmit}>
+      {children}
+    </CustomButton>
+  );
+};
+
 export const BackwardButton = (props) => {
   const { onClick, className } = props;
   let classes = "m-0 p-3  bg-[var(--light)] text-black rounded-full";
@@ -62,13 +81,13 @@ export const BackwardButton = (props) => {
 export const CrossButton = (props) => {
   const { onClick, className } = props;
 
-  let classes = "rounded-full w-10 h-10 p-1 ";
+  let classes = "rounded-full w-8 h-8 p-0 ";
   if (className) {
     classes += " " + className;
   }
   return (
     <LightButton onClick={onClick} className={classes}>
-      <X />
+      <X size={15} />
     </LightButton>
   );
 };

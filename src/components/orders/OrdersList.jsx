@@ -1,14 +1,43 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import { ChevronDown, ListFilter } from "lucide-react";
 
 import MainContent from "../common/MainContent";
 import NoItems from "../common/NoItems";
 import { noOrdersIcon } from "@/lib/svg_icons";
 import SearchInput from "../common/SearchInput";
-import { SelectInput } from "../common/customInput";
-import OrderItem from "../common/OrderItem";
 import OrdersListItem from "./OrdersListItem";
+import { TransparentButton } from "../common/CustomButtons";
+import ListModal from "./ListModal";
+import { getLast12Months } from "@/lib/functions";
+
+const MenuButton = ({ label, Icon, list, isCheckBox = false }) => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleMenuOpen = () => {
+    setMenuOpen((prev) => !prev);
+  };
+  return (
+    <div className="relative">
+      <TransparentButton
+        className="text-[0.8rem] flex items-center  w-max  !py-4 !border-0  rounded-full"
+        onClick={handleMenuOpen}
+      >
+        <div> {label}</div>
+        <Icon className="ml-2" size={16} />
+      </TransparentButton>
+      {menuOpen && (
+        <ListModal
+          handleOpen={handleMenuOpen}
+          list={list}
+          label={label}
+          isCheckBox={isCheckBox}
+        />
+      )}
+    </div>
+  );
+};
 
 function OrdersList({ data }) {
   const emptyHeading = "You have no orders at this moment";
@@ -19,16 +48,28 @@ function OrdersList({ data }) {
   const isEmpty = data.length === 0;
   return (
     <MainContent contentTitle="My Orders" count={data?.length || 0}>
-      <div className="flex gap-2 mt-4">
+      <div className="flex gap-4 mt-4 items-center">
         <SearchInput
-          className="bg-[var(--light)] rounded-full py-4"
+          className="bg-[var(--light)] rounded-full py-4 border-none"
           onChange={() => {}}
         />
-        <SelectInput
-          className="!text-[0.8rem]  right-3   h-[2rem] !py-0"
-          placeholder={`Sort by`}
-          menu={["Order Accepted sddsdsd s", "Per Day"]}
-          //   value={item?.category}
+
+        <MenuButton
+          label="Filter"
+          Icon={ListFilter}
+          isCheckBox={true}
+          list={getLast12Months()}
+        />
+        <MenuButton
+          label="Sort by"
+          Icon={ChevronDown}
+          list={[
+            "Order  accepted",
+            "Order shipped",
+            "Cancelled",
+            "Out for delivery",
+            "Delivered",
+          ]}
         />
       </div>
       {isEmpty ? (

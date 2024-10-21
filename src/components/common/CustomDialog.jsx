@@ -31,7 +31,7 @@ function CustomDialog({
           <div className="relative flex justify-center">
             {anableCross ? (
               <div className="absolute right-0 top-0 ">
-                <CrossButton onClick={handleOpen} />
+                <CrossButton onClick={handleOpen} size={10} />
               </div>
             ) : (
               <div className="absolute left-0 top-0 ">
