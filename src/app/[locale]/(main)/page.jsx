@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 export default function Home() {
   return (
     <DashboardPage>
-      <PageHeading pageName="Home" avalability={true} />
+      <PageHeading pageName="home" avalability={true} />
       <HomeMain />
     </DashboardPage>
   );

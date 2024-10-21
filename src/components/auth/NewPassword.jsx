@@ -2,7 +2,7 @@
 
 import { DarkButton } from "@/components/common/CustomButtons";
 import { PasswordInput } from "@/components/common/customInput";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import { useState } from "react";
 
 const NewPassword = () => {

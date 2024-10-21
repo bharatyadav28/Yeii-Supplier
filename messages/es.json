@@ -1,0 +1,108 @@
+{
+  "loginHeading": "Bienvenido de nuevo",
+  "loginSubHeading": "Inicia sesión en tu cuenta",
+  "email": "Introduce el correo electrónico",
+  "emailPlaceholder": "Introduce el correo electrónico",
+  "password": "Introduce la contraseña",
+  "confirmPassword": "Confirma la nueva contraseña",
+  "fullName": "Nombre completo",
+  "fullNamePlaceholder": "Introduce el nombre completo",
+  "phoneNumber": "Número de teléfono",
+  "address": "Dirección",
+  "addressPlaceholder": "Introduce la dirección",
+  "bussinessLabel": "¿Estás operando como?",
+  "bussinessPlaceholder": "Selecciona uno",
+
+  "login": "Iniciar sesión",
+  "createAccount": "Crear cuenta",
+
+  "dontHaveAccount": "¿No tienes una cuenta?",
+  "forgotPassword": "Olvidé mi contraseña",
+
+  "terms_of_service": "términos de servicio",
+  "privacy_policy": "política de privacidad",
+
+  "terms1": "Al registrarte, aceptas los",
+  "and": "y",
+  "terms2": ", incluyendo el uso de cookies",
+
+  "reset_password": "Restablecer contraseña",
+
+  "home": "Inicio",
+  "store": "Tienda",
+  "orders": "Pedidos",
+  "notification": "Notificación",
+  "profile": "Perfil",
+  "dashboard": "Tablero",
+
+  "Calender": {
+    "title": "Calendario",
+    "Mon": "Lun",
+    "Tue": "Mar",
+    "Wed": "Mié",
+    "Thu": "Jue",
+    "Fri": "Vie",
+    "Sat": "Sáb",
+    "Sun": "Dom",
+    "January": "Enero",
+    "February": "Febrero",
+    "March": "Marzo",
+    "April": "Abril",
+    "May": "Mayo",
+    "June": "Junio",
+    "July": "Julio",
+    "August": "Agosto",
+    "September": "Septiembre",
+    "October": "Octubre",
+    "November": "Noviembre",
+    "December": "Diciembre"
+  },
+
+  "more_product": "más productos",
+  "date": "Fecha",
+  "total": "Total",
+  "order_id": "ID del pedido",
+  "category": "Categoría",
+  "delivery_status": "Estado de entrega",
+
+  "Homepage": {
+    "orderRequest": "Solicitud de pedido",
+    "availability": "Disponibilidad"
+  },
+  "Login": {},
+  "Store": {
+    "title": "Tienda"
+  },
+  "Notification": {},
+  "Profile": {
+    "title": "Perfil"
+  },
+
+  "OrderDetails": {
+    "title": "Detalles del pedido",
+    "items": "Artículos",
+    "date": "Fecha",
+    "accept": "Aceptar",
+    "decline": "Rechazar",
+    "order_id": "ID del pedido",
+    "placed_on": "Realizado el",
+    "delivery_status": "Estado de entrega",
+    "qyt": "Cant.",
+    "order_summary": "Resumen del pedido",
+    "discount": "Descuento",
+    "total_items": "Total de artículos",
+    "coupon_applied": "Cupón aplicado",
+    "total_cost": "Costo total",
+    "payment_status": "Estado del pago",
+    "paid": "Pagado",
+    "generate_invoice": "Generar factura",
+    "order_accepted": "Pedido aceptado",
+    "out_for_delivery": "En camino para la entrega",
+    "delivered": "Entregado",
+    "update_order_status": "Actualizar estado del pedido",
+    "client_location": "Detalles de la ubicación del cliente",
+    "location": "Ubicación",
+    "customer_details": "Detalles del cliente",
+    "shipping": "Dirección de envío"
+  }
+}

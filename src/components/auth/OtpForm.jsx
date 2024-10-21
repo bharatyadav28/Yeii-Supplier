@@ -1,7 +1,7 @@
 "use client";
 
 import { DarkButton } from "@/components/common/CustomButtons";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import { useEffect, useState } from "react";
 
 const OtpFrom = () => {

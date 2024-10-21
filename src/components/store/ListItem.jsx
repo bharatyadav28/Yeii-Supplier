@@ -21,6 +21,7 @@ function ListItem({ item, isService }) {
       >
         <div className="flex-grow-1 basis-5/12 relative ">
           <Image
+            alt="image"
             src={item.images[0] || "/Furniture.jpeg"}
             alt={item.name}
             layout="fill"

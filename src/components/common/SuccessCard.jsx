@@ -2,7 +2,7 @@
 
 import { Check } from "lucide-react";
 import { DarkButton } from "./CustomButtons";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 
 const SuccessCard = ({ heading, subHeading, route }) => {
   const router = useRouter();

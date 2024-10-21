@@ -6,22 +6,22 @@ import NoItems from "../common/NoItems";
 import OrdersCallender from "./OrdersCallender";
 import orderData from "@/lib/dummyData/orderData.json";
 import { DarkButton } from "../common/CustomButtons";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import OrdersList from "./OrdersList";
 
 const HomeMain = () => {
-  const title = "Order Request";
+  const title = "Homepage.orderRequest";
 
   const router = useRouter();
 
   const { orders } = orderData;
 
   return (
-    <div className="relative flex gap-6  items-stretch overflow-y-auto flex-grow h-full ">
+    <div className="relative flex gap-6  items-stretch overflow-y-auto flex-grow h-full mt-2">
       <MainContent
         contentTitle={title}
         count={orders.length}
-        className="pb-0 mt-0 overflow-y-hidden"
+        className="pb-0 !mt-0 overflow-y-hidden"
       >
         {orders.length === 0 ? (
           <NoItems

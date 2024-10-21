@@ -32,6 +32,7 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
                 <div className="flex gap-4" key={item.id}>
                   <div className="w-[8rem] h-[7rem] overflow-hidden relative rounded-lg">
                     <Image
+                      alt="image"
                       src={order.item?.images[0] || "/Furniture.jpeg"}
                       alt={item.name}
                       sizes="100"
@@ -151,6 +152,7 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
               <div className="flex gap-2">
                 <div className="rounded-full w-[65px] h-[65px] overflow-hidden">
                   <Image
+                    alt="image"
                     src={order.customerDetails.profileImage}
                     width={100}
                     height={100}
