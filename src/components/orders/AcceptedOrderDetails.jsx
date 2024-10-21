@@ -32,7 +32,6 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
                 <div className="flex gap-4" key={item.id}>
                   <div className="w-[8rem] h-[7rem] overflow-hidden relative rounded-lg">
                     <Image
-                      alt="image"
                       src={order.item?.images[0] || "/Furniture.jpeg"}
                       alt={item.name}
                       sizes="100"
