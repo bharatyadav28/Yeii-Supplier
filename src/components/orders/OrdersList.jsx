@@ -79,16 +79,30 @@ function OrdersList({ data }) {
           subHeading={emptySubHeading}
         />
       ) : (
-        <div className=" grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4 ">
-          {data?.map((order) => (
-            <OrdersListItem
-              key={order._id}
-              order={order}
-              onClick={() => {}}
-              isOrderPage={true}
-            />
-          ))}
-        </div>
+        <>
+          <div className="flex items-center w-full text-center">
+            {/* Left line: Dark on the right, fades to the left */}
+            <div className="flex-grow h-px bg-gradient-to-l from-gray-400 to-transparent"></div>
+
+            {/* Text */}
+            <span className="px-4 text-[var(--main-pink)] my-4 text-sm">
+              {"Today"}
+            </span>
+
+            {/* Right line: Dark on the left, fades to the right */}
+            <div className="flex-grow h-px bg-gradient-to-r from-gray-400 to-transparent"></div>
+          </div>
+          <div className=" grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4  mt-2 ">
+            {data?.map((order) => (
+              <OrdersListItem
+                key={order._id}
+                order={order}
+                onClick={() => {}}
+                isOrderPage={true}
+              />
+            ))}
+          </div>
+        </>
       )}
     </MainContent>
   );
