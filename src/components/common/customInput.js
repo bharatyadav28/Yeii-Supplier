@@ -14,13 +14,21 @@ import { Checkbox } from "../ui/checkbox";
 import { Button } from "../ui/button";
 
 export const TextInput = (props) => {
-  const { customIcon, label, onChange, value, className, iconClasses } = props;
+  const {
+    customIcon,
+    label,
+    onChange,
+    value,
+    className,
+    iconClasses,
+    readonly,
+  } = props;
   let classes = `w-full border-none outline-none text-lg ${
     !customIcon && "ml-4"
   } ${className}`;
 
   return (
-    <div className="flex items-center bg-white rounded-[0.9rem] py-2 mb-2 ">
+    <div className="flex items-center bg-white rounded-[0.9rem] py-1 mb-2 ">
       {customIcon && (
         <span className={`px-5 ${iconClasses}`}>{customIcon}</span>
       )}
@@ -33,6 +41,7 @@ export const TextInput = (props) => {
           value={value}
           {...props}
           className={classes}
+          readOnly={readonly}
         />
       </div>
     </div>
@@ -74,7 +83,7 @@ export const SelectInput = (props) => {
           defaultValue={value}
           {...props}
         >
-          <SelectTrigger className={className + " rounded-[15px] pl-5 !w-100"}>
+          <SelectTrigger className={className + " rounded-[15px] pl-0 !w-full"}>
             <SelectValue placeholder={placeholder || "Select One"} />
           </SelectTrigger>
           <SelectContent>

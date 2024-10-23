@@ -15,7 +15,7 @@ import { sidebarIcon } from "@/lib/svg_icons";
 const SidebarLink = ({ title, href, Icon }) => {
   const pathname = usePathname();
   const isActive = href === "/" ? pathname === href : pathname.includes(href);
-  console.log({ pathname });
+  // console.log({ pathname });
   let classes =
     "flex px-6 py-3 rounded-2xl items-center text-[var(--light)] font-medium  gap-3 ";
 

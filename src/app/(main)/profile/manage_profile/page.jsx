@@ -1,4 +1,5 @@
 import AuthPage from "@/components/common/AuthPage";
+import MainComp from "@/components/manage_profile/MainComp";
 import React from "react";
 
 const page = () => {
@@ -7,7 +8,9 @@ const page = () => {
       showHeader={true}
       heading="Manage business profile"
       route="/profile"
-    ></AuthPage>
+    >
+      <MainComp />
+    </AuthPage>
   );
 };
 

@@ -144,7 +144,7 @@ const SignupForm = () => {
         </p>
       </div>
       {/* Create account button */}
-      <DarkButton className="w-full text-lg p-7 rounded-[15px]">
+      <DarkButton isSubmit={true} className="w-full text-lg p-7 rounded-[15px]">
         Create account
       </DarkButton>
     </form>
