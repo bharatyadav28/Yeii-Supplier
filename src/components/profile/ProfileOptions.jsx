@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import {
   couponIcon,
   logoutIcon,
@@ -8,34 +9,18 @@ import {
   termsIcon,
   transactionIcon,
 } from "@/lib/svg_icons";
-import { ChevronRight } from "lucide-react";
-import { usePathname, useRouter } from "next/navigation";
+import { ChevronRight, LogOut } from "lucide-react";
 
-const OptionCard = ({ option }) => {
-  const router = useRouter();
-  const pathname = usePathname();
-
-  const handleClick = () => {
-    router.push(`${pathname}${option.route}`);
-  };
-
-  return (
-    <button
-      onClick={handleClick}
-      className="flex py-[0.6rem] justify-between items-center border-b-[1px]"
-    >
-      <div className="flex justify-center items-center gap-4">
-        <div className="w-[42px] h-[42px] bg-[var(--light-pink)] rounded-full flex justify-center items-center ">
-          {option.icon}
-        </div>
-        <div className="text-sm font-semibold">{option.title}</div>
-      </div>
-      <ChevronRight className="text-[var(--main-gray)]" />
-    </button>
-  );
-};
+import DeleteDialog from "../common/DeleteDialog";
+import OptionCard from "./OptionCard";
 
 const ProfileOptions = () => {
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+
+  const handleDeleteDialog = () => {
+    setOpenDeleteDialog((prev) => !prev);
+  };
+
   const options = [
     {
       id: 1,
@@ -75,20 +60,35 @@ const ProfileOptions = () => {
     },
   ];
   return (
-    <div className="flex-grow flex flex-col gap-3 px-5 mt-4  overflow-y-auto ">
-      {options.map((option) => (
-        <OptionCard key={option.id} option={option} />
-      ))}
-      <button className="flex pt-[0.8rem] justify-between items-center ">
-        <div className="flex justify-center items-center gap-4">
-          <div className="w-[42px] h-[42px] bg-black/10 rounded-full flex justify-center items-center ">
-            {logoutIcon}
+    <>
+      <div className="flex-grow flex flex-col gap-3 px-5 mt-4  overflow-y-auto ">
+        {options.map((option) => (
+          <OptionCard key={option.id} option={option} />
+        ))}
+        <button
+          onClick={handleDeleteDialog}
+          className="flex pt-[0.8rem] justify-between items-center "
+        >
+          <div className="flex justify-center items-center gap-4">
+            <div className="w-[42px] h-[42px] bg-black/10 rounded-full flex justify-center items-center ">
+              {logoutIcon}
+            </div>
+            <div className="text-sm font-semibold">Logout</div>
           </div>
-          <div className="text-sm font-semibold">Logout</div>
-        </div>
-        <ChevronRight className="text-[var(--main-gray)]" />
-      </button>
-    </div>
+          <ChevronRight size={20} color="var(--main-gray)" />
+        </button>
+      </div>
+
+      <DeleteDialog
+        openDialog={openDeleteDialog}
+        handleOpenDialog={handleDeleteDialog}
+        title="Log out"
+        description="Are you sure you want to logout ?"
+        onCancel={handleDeleteDialog}
+        onConfirm={handleDeleteDialog}
+        Icon={LogOut}
+      />
+    </>
   );
 };
 
