@@ -61,7 +61,7 @@ const AvailabilityPage = () => {
 
             <div className=" border-t-[1px] border-dashed  border-[#F1F1F1] pt-4  flex flex-col gap-3 ">
               {weeksDays.map((day) => (
-                <div className="flex justify-between items-center ">
+                <div key={day} className="flex justify-between items-center ">
                   <div className="text-[#303F49] text-[0.8rem] w-[5rem]">
                     {day}
                   </div>
