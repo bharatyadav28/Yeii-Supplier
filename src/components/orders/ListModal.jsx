@@ -14,7 +14,7 @@ function ListModal({ label, list, onClick, handleOpen, isCheckBox = false }) {
       ></div>
 
       <div
-        className={`flex flex-col absolute  !z-[1000] h-max max-h-[calc(100vh-10rem)] overflow-y-auto w-max bg-white text-black top-0 rounded-3xl py-4 ${
+        className={`flex flex-col absolute  !z-[1000] h-max max-h-[calc(100vh-10rem)] overflow-y-auto w-max bg-white text-black top-8 rounded-3xl py-4 ${
           !isCheckBox ? "px-5" : "px-2"
         } `}
       >
@@ -51,14 +51,14 @@ function ListModal({ label, list, onClick, handleOpen, isCheckBox = false }) {
               className="flex items-center gap-2 border-b  border-black/10 pb-2 mb-3"
             >
               <CustomCheckBox className="border border-[#E6E9EB] h-5 w-5" />
-              <div className="text-[var(--main-gray)] text-sm min-w-[8rem] p">
+              <div className="text-[var(--main-gray)] text-xs min-w-[8rem] p">
                 {item}
               </div>
             </div>
           ))}
 
         {isCheckBox && (
-          <DarkButton className="rounded-full mt-2 mx-2">Confirm</DarkButton>
+          <DarkButton className="rounded-2xl mt-2 mx-2">Confirm</DarkButton>
         )}
       </div>
     </>
