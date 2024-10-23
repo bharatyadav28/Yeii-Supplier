@@ -12,6 +12,7 @@ const NewPassword = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("heloooooo");
     router.push("/success/password_changed");
   };
   return (
@@ -27,7 +28,10 @@ const NewPassword = () => {
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
       />
-      <DarkButton className="w-full text-lg p-7 rounded-2xl mt-5">
+      <DarkButton
+        isSubmit={true}
+        className="w-full text-lg p-7 rounded-2xl mt-5"
+      >
         Reset password
       </DarkButton>
     </form>

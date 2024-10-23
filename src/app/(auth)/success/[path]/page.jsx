@@ -15,7 +15,7 @@ const SuccessPage = ({ params }) => {
             </h1>
           }
           subHeading={<p>Your password has been changed successfully.</p>}
-          route="/login"
+          route="/"
         />
       ) : path === "account_created" ? (
         <SuccessCard

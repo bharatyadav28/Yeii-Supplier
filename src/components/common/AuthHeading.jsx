@@ -1,7 +1,11 @@
-const AuthHeading = ({ children, heading, className }) => {
+const AuthHeading = ({ children, heading, className, isReset }) => {
   return (
     <div className={`mb-10 ${className}`}>
-      <h1 className="text-3xl font-bold text-center text-white mb-4">
+      <h1
+        className={`text-3xl font-bold text-center  mb-4 i${
+          isReset ? "text-[#00131F]" : "text-white"
+        }`}
+      >
         {heading}
       </h1>
       {children}
