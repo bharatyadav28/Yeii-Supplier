@@ -1,0 +1,148 @@
+{
+  "coupons": [
+    {
+      "id": 1,
+      "name": "Save 50",
+      "code": "50off",
+      "discount": 50,
+      "description": "50% discount on this coupon",
+      "expiry_date": "30/08/2024"
+    },
+    {
+      "id": 2,
+      "name": "Save 50",
+      "code": "50off",
+      "discount": 50,
+      "description": "50% discount on this coupon",
+      "expiry_date": "30/08/2024"
+    },
+    {
+      "id": 3,
+      "name": "Save 50",
+      "code": "50off",
+      "discount": 50,
+      "description": "50% discount on this coupon",
+      "expiry_date": "30/08/2024"
+    },
+    {
+      "id": 4,
+      "name": "Save 50",
+      "code": "50off",
+      "discount": 50,
+      "description": "50% discount on this coupon",
+      "expiry_date": "30/08/2024"
+    },
+    {
+      "id": 5,
+      "name": "Save 50",
+      "code": "50off",
+      "discount": 50,
+      "description": "50% discount on this coupon",
+      "expiry_date": "30/08/2024"
+    },
+    {
+      "id": 6,
+      "name": "Save 50",
+      "code": "50off",
+      "discount": 50,
+      "description": "50% discount on this coupon",
+      "expiry_date": "30/08/2024"
+    },
+    {
+      "id": 7,
+      "name": "Save 50",
+      "code": "50off",
+      "discount": 50,
+      "description": "50% discount on this coupon",
+      "expiry_date": "30/08/2024"
+    },
+    {
+      "id": 8,
+      "name": "Save 50",
+      "code": "50off",
+      "discount": 50,
+      "description": "50% discount on this coupon",
+      "expiry_date": "30/08/2024"
+    },
+    {
+      "id": 9,
+      "name": "Save 50",
+      "code": "50off",
+      "discount": 50,
+      "description": "50% discount on this coupon",
+      "expiry_date": "30/08/2024"
+    },
+    {
+      "id": 10,
+      "name": "Save 50",
+      "code": "50off",
+      "discount": 50,
+      "description": "50% discount on this coupon",
+      "expiry_date": "30/08/2024"
+    },
+    {
+      "id": 11,
+      "name": "Save 50",
+      "code": "50off",
+      "discount": 50,
+      "description": "50% discount on this coupon",
+      "expiry_date": "30/08/2024"
+    },
+    {
+      "id": 12,
+      "name": "Save 50",
+      "code": "50off",
+      "discount": 50,
+      "description": "50% discount on this coupon",
+      "expiry_date": "30/08/2024"
+    },
+    {
+      "id": 13,
+      "name": "Save 50",
+      "code": "50off",
+      "discount": 50,
+      "description": "50% discount on this coupon",
+      "expiry_date": "30/08/2024"
+    },
+    {
+      "id": 14,
+      "name": "Save 50",
+      "code": "50off",
+      "discount": 50,
+      "description": "50% discount on this coupon",
+      "expiry_date": "30/08/2024"
+    },
+    {
+      "id": 15,
+      "name": "Save 50",
+      "code": "50off",
+      "discount": 50,
+      "description": "50% discount on this coupon",
+      "expiry_date": "30/08/2024"
+    },
+    {
+      "id": 16,
+      "name": "Save 50",
+      "code": "50off",
+      "discount": 50,
+      "description": "50% discount on this coupon",
+      "expiry_date": "30/08/2024"
+    },
+    {
+      "id": 17,
+      "name": "Save 50",
+      "code": "50off",
+      "discount": 50,
+      "description": "50% discount on this coupon",
+      "expiry_date": "30/08/2024"
+    },
+    {
+      "id": 18,
+      "name": "Save 50",
+      "code": "50off",
+      "discount": 50,
+      "description": "50% discount on this coupon",
+      "expiry_date": "30/08/2024"
+    }
+  ]
+}

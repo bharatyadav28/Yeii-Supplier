@@ -1,38 +1,16 @@
 "use client";
 
 import { ListFilter } from "lucide-react";
-import { useState } from "react";
-import { TransparentButton } from "../common/CustomButtons";
 import { getLast12Months } from "@/lib/functions";
-import ListModal from "../orders/ListModal";
+import { transactions } from "@/lib/dummyData/transactionData.json";
+import TransactionList from "./TransactionList";
+import MenuButton from "../common/MenuButton";
 
 const MainComp = () => {
-  const MenuButton = ({ label, Icon, list, isCheckBox = false }) => {
-    const [menuOpen, setMenuOpen] = useState(false);
+  const data = [];
 
-    const handleMenuOpen = () => {
-      setMenuOpen((prev) => !prev);
-    };
-    return (
-      <div className="relative">
-        <TransparentButton
-          className="text-[0.8rem] flex items-center  w-max  !py-4 !border-0  rounded-full"
-          onClick={handleMenuOpen}
-        >
-          <div> {label}</div>
-          <Icon className="ml-2" size={16} />
-        </TransparentButton>
-        {menuOpen && (
-          <ListModal
-            handleOpen={handleMenuOpen}
-            list={list}
-            label={label}
-            isCheckBox={isCheckBox}
-          />
-        )}
-      </div>
-    );
-  };
+  const today = transactions.filter((item) => item.date === "Today");
+  const yesturday = transactions.filter((item) => item.date === "Yesturday");
 
   return (
     <>
@@ -44,6 +22,10 @@ const MainComp = () => {
           isCheckBox={true}
           list={getLast12Months()}
         />
+      </div>
+      <div className="h-[calc(100%-40px)] overflow-y-auto">
+        <TransactionList heading="Today" data={today} />
+        <TransactionList heading="Yesturday" data={yesturday} />
       </div>
     </>
   );

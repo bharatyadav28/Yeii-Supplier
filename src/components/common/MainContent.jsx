@@ -11,7 +11,7 @@ function MainContent({ children, contentTitle, count, className }) {
       {contentTitle && (
         <div className="font-medium">
           <span className="mr-2 font-semibold">{contentTitle} </span>
-          <span className="text-[#4D5A62CC] text-md">{count}</span>
+          {count && <span className="text-[#4D5A62CC] text-md">{count}</span>}
         </div>
       )}
       {children}
