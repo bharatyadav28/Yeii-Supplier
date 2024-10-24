@@ -43,7 +43,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
         />
         {formType === "Service" && (
           <SelectInput
-            className="!text-[0.8rem] bg-[#13070B0F] absolute right-3  w-max top-[0.4rem] h-[2rem] !py-0"
+            className="!text-[0.8rem] bg-[#13070B0F] absolute right-3  !w-max top-[0.4rem] h-[2rem]  pl-4 !py-2 "
             placeholder={`Time`}
             menu={["Per Hour", "Per Day"]}
             value={item?.category}
@@ -139,7 +139,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
       open={openDialog}
       handleOpen={handleOpenDialog}
       title={title}
-      className="w-[40rem] h-[calc(100vh-3.3rem)]"
+      className="w-[40rem] h-max max-h-[calc(100vh-3.3rem)]"
     >
       <form onSubmit={handleSubmit} className="mt-6 store-form">
         <fieldset>
@@ -169,7 +169,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
           />
         </fieldset>
 
-        <div className="grid grid-cols-2 gap-2 ">
+        <div className="grid grid-cols-2 gap-4 ">
           <fieldset>
             <label htmlFor="cateogry" className="required">
               {formType} cateogry
@@ -177,7 +177,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
             <SelectInput
               name="cateogry"
               id="cateogry"
-              className="!text-[0.8rem] text-[#00131fcc] "
+              className="!text-[0.8rem] text-[#00131fcc] pl-5 "
               placeholder={`Select ${formType} category`}
               menu={["Furniture", "Electronics", "Grocery"]}
               value={item?.category}
@@ -191,7 +191,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
             <SelectInput
               name="available"
               id="available"
-              className="!text-[0.8rem] text-[#00131fcc]]"
+              className="!text-[0.8rem] text-[#00131fcc]] pl-5"
               placeholder="Select availability"
               menu={["Yes", "No"]}
               value={item?.availability === true ? "Yes" : "No"}

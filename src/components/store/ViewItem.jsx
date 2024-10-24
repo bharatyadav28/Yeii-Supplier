@@ -55,7 +55,7 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType }) {
         console.log("Time changed", val);
       }}
       initialTime={item?.availabilityTime?.start}
-      className="!justify-start ml-[0.6rem]"
+      className="!justify-start px-4"
       isViewOnly={true}
     />
   );
@@ -66,7 +66,7 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType }) {
         console.log("Time changed", val);
       }}
       initialTime={item?.availabilityTime?.end}
-      className="!justify-start ml-[0.6rem]"
+      className="!justify-start px-4"
       isViewOnly={true}
     />
   );

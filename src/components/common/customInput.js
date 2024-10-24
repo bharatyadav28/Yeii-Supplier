@@ -28,7 +28,7 @@ export const TextInput = (props) => {
   } ${className}`;
 
   return (
-    <div className="flex items-center bg-white rounded-[0.9rem] py-1 mb-2 ">
+    <div className="flex items-center bg-white rounded-[0.9rem] py-2 mb-2 ">
       {customIcon && (
         <span className={`px-5 ${iconClasses}`}>{customIcon}</span>
       )}
@@ -83,7 +83,7 @@ export const SelectInput = (props) => {
           defaultValue={value}
           {...props}
         >
-          <SelectTrigger className={className + " rounded-[15px] pl-0 !w-full"}>
+          <SelectTrigger className={"rounded-[15px] pl-0 !w-full " + className}>
             <SelectValue placeholder={placeholder || "Select One"} />
           </SelectTrigger>
           <SelectContent>

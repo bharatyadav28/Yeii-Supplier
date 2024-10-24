@@ -69,12 +69,12 @@ const TimePicker = ({
   return (
     <div className="relative min-w-[5rem] " ref={dropdownRef}>
       <button
-        className={`w-full px-0 py-[0.24rem] text-left bg-white rounded-[0.9rem] shadow-sm focus:outline-none focus:ring-0 ${className}`}
+        className={`w-full py-[0.24rem] px-3  flex justify-start  bg-white rounded-[0.9rem] shadow-sm focus:outline-none focus:ring-0 ${className}`}
         onClick={() => setIsOpen(!isOpen)}
         type="button"
         disabled={isViewOnly || false}
       >
-        <div className={`flex items-center justify-center gap-3 px-1 $`}>
+        <div className={`flex items-center justify-center gap-3  `}>
           <div>
             <Clock size={21} />
           </div>
@@ -82,7 +82,7 @@ const TimePicker = ({
             <div className="text-[var(--medium-gray)] text-[0.7rem]">
               {title || "Start with"}
             </div>
-            <div className="text-[#4D5A62] font-medium text-[0.8rem]">
+            <div className="text-[#4D5A62] font-semibold text-[0.8rem]">
               {" "}
               {selectedTime.hours}:{selectedTime.minutes} {selectedTime.period}
             </div>
