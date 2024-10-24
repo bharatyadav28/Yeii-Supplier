@@ -25,7 +25,9 @@ const ForgotPasswordForm = () => {
         onChange={(e) => setEmail(e.target.value)}
         required={true}
       />
-      <DarkButton className="w-full p-7 text-lg mt-4">Sent OTP</DarkButton>
+      <DarkButton isSubmit={true} className="w-full p-7 text-lg mt-4">
+        Sent OTP
+      </DarkButton>
     </form>
   );
 };

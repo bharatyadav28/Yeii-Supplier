@@ -16,8 +16,14 @@ function ListModal({
 }) {
   let handleDelete, handleEdit;
   if (isCoupon) {
-    handleDelete = couponEvents.handleDelete;
-    handleEdit = couponEvents.handleEdit;
+    handleDelete = () => {
+      handleOpen();
+      couponEvents.handleDelete();
+    };
+    handleEdit = () => {
+      handleOpen();
+      couponEvents.handleEdit();
+    };
   }
   return (
     <>
