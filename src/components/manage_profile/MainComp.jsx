@@ -73,6 +73,7 @@ const MainComp = () => {
         />
 
         <SelectInput
+          className="!pl-0"
           customIcon={<BusinessIcon />}
           value={operatingAs}
           required={true}
