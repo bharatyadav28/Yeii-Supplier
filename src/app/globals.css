@@ -173,3 +173,14 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background-color: #555;
 }
+
+.app-name {
+  background: linear-gradient(96deg, #f63093 2.51%, #2c3e95 29.16%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.policy li::marker {
+  color: #000000;
+}
