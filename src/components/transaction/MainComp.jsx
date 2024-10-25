@@ -2,12 +2,12 @@
 
 import { ListFilter } from "lucide-react";
 import { getLast12Months } from "@/lib/functions";
-import { transactions } from "@/lib/dummyData/transactionData.json";
+import transactionData from "@/lib/dummyData/transactionData.json";
 import TransactionList from "./TransactionList";
 import MenuButton from "../common/MenuButton";
 
 const MainComp = () => {
-  const data = [];
+  const { transactions } = transactionData;
 
   const today = transactions.filter((item) => item.date === "Today");
   const yesturday = transactions.filter((item) => item.date === "Yesturday");

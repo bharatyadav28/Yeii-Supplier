@@ -11,10 +11,11 @@ const ResetPasswordPage = () => {
       isReset={true}
     >
       <AuthHeading
+        isReset={true}
         heading="Set up new password"
         className="mb-3 text-[#00131F]"
       >
-        <p className="text-center text-xs text-[#00131F]">
+        <p className="text-center text-xs text-[#6E7980]">
           Set your New Password So you can access your data
         </p>
       </AuthHeading>
