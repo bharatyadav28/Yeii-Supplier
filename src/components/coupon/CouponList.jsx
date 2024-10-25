@@ -1,7 +1,8 @@
-import { coupons } from "@/lib/dummyData/couponData.json";
+import couponsData from "@/lib/dummyData/couponData.json";
 import { EllipsisVertical } from "lucide-react";
 import MenuButton from "../common/MenuButton";
 const CouponList = ({ handleDelete, handleEdit, handleClick }) => {
+  const { coupons } = couponsData;
   return (
     <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-3 mt-2 pt-1 pb-3 overflow-y-auto">
       {coupons.map((coupon) => (
