@@ -10,10 +10,10 @@ const TermsAndConditionsPage = () => {
       <MainContent className="mt-8 policy !bg-[#fff] ">
         <Policy title="Welcome to">
           <p>
-            These Terms of Use govern your use of the "Brincos Dieras" mobile
-            application provided by us. By accessing or using the App, you agree
-            to comply with and be bound by these terms. If you do not agree with
-            these terms, please do not use the App
+            These Terms of Use govern your use of the &quot;Brincos Dieras&quot;
+            mobile application provided by us. By accessing or using the App,
+            you agree to comply with and be bound by these terms. If you do not
+            agree with these terms, please do not use the App
           </p>
 
           <div className="flex flex-col gap-2">
@@ -57,7 +57,8 @@ const TermsAndConditionsPage = () => {
                 abusive, or inappropriate content.
               </li>
               <li>
-                Attempt to gain unauthorized access to other users' accounts
+                Attempt to gain unauthorized access to other users&quot;
+                accounts
               </li>
             </ul>
           </div>

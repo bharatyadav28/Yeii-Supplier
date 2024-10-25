@@ -15,14 +15,14 @@ const SettlementPolicyPage = () => {
             your personal information.{" "}
           </p>
           <p>
-            By continuing to use the "Brincos Dieras" App, you acknowledge that
-            you have read, understood, and agreed to these Terms of Use. If you
-            have any questions or concerns, please contact us at [Your Contact
-            Information].
+            By continuing to use the &quot;Brincos Dieras&quot; App, you
+            acknowledge that you have read, understood, and agreed to these
+            Terms of Use. If you have any questions or concerns, please contact
+            us at [Your Contact Information].
           </p>
           <p>
-            Thank you for choosing "Brincos Dieras" to showcase your business
-            ideas!
+            Thank you for choosing &quot;Brincos Dieras&quot; to showcase your
+            business ideas!
           </p>
         </Policy>
       </MainContent>
