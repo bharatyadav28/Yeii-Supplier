@@ -21,6 +21,7 @@ function OrdersListItem({ order }) {
           <div className="flex items-center gap-2">
             <div className="rounded-full w-[35px] h-[35px] overflow-hidden">
               <Image
+                alt={order.customerDetails.name}
                 src={order.customerDetails.profileImage}
                 width={100}
                 height={100}

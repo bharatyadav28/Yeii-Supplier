@@ -14,6 +14,7 @@ const ItemCard = ({ item, isAccepted, isOrdersPage, index, className }) => {
         }`}
       >
         <Image
+          alt="image"
           src={item.images[0] || "/restro.jpeg"}
           width={100}
           height={100}

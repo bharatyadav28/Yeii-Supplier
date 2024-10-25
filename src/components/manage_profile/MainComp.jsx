@@ -12,22 +12,24 @@ import { MapPin } from "lucide-react";
 import { editIcon } from "@/lib/svg_icons";
 
 const MainComp = () => {
-  const [name, setName] = useState(user.name);
-  const [email, setEmail] = useState(user.email);
-  const [operatingAs, setOperatingAs] = useState(user.operating_as);
-  const [phoneNumber, setPhoneNumber] = useState(user.phone_number);
-  const [address, setAddress] = useState(user.address);
-  const [showEditBtn, setShowEditBtn] = useState(true);
+  const [formData, setFormData] = useState({
+    name: user.name,
+    phoneNumber: user.phoneNumber,
+    email: user.email,
+    operating_as: user.operating_as,
+    address: user.address,
+  });
+  const [isEdit, setIsEdit] = useState(true);
 
   const menu = ["Business", "Company", "Organization"];
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ name, email, operatingAs, phoneNumber, address });
+    console.log({ formData });
   };
 
   const handleClick = () => {
-    setShowEditBtn((prev) => !prev);
+    setIsEdit((prev) => !prev);
   };
   return (
     <div className="w-[400px] flex flex-col gap-4">
@@ -56,9 +58,10 @@ const MainComp = () => {
           type="text"
           label="Full name"
           placeholder="Enter Full name"
-          value={name}
+          value={formData.name}
           required={true}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          disabled={isEdit}
         />
 
         <TextInput
@@ -67,19 +70,20 @@ const MainComp = () => {
           label="Email id"
           placeholder="Enter Email"
           required={true}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          readonly={true}
+          value={formData.email}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          disabled={true}
         />
 
         <SelectInput
           className="!pl-0"
           customIcon={<BusinessIcon />}
-          value={operatingAs}
+          value={formData.operating_as}
           required={true}
           menu={menu}
           label="Are you operating as a ?"
-          onChange={(e) => setOperatingAs(e)}
+          onChange={(e) => setFormData({ ...formData, operating_as: e })}
+          disabled={isEdit}
         />
 
         <div className="flex items-center bg-white rounded-[15px] mb-2 py-1 ">
@@ -88,9 +92,12 @@ const MainComp = () => {
               Phone number
             </label>
             <PhoneInput
+              disabled={isEdit}
               country={"us"} // Default country
-              value={phoneNumber}
-              onChange={(phone) => setPhoneNumber(phone)}
+              value={formData.phoneNumber}
+              onChange={(phone) =>
+                setFormData({ ...formData, phoneNumber: phone })
+              }
               inputProps={{
                 name: "phoneNumber",
                 required: true,
@@ -105,12 +112,15 @@ const MainComp = () => {
           customIcon={<MapPin color="gray" />}
           label="Address"
           placeholder="Enter Address"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
+          value={formData.address}
+          onChange={(e) =>
+            setFormData({ ...formData, address: e.target.value })
+          }
           width="500px"
+          disabled={isEdit}
           required={true}
         />
-        {showEditBtn ? (
+        {isEdit ? (
           <DarkButton
             onClick={handleClick}
             className="w-full mt-3 py-7 text-base"

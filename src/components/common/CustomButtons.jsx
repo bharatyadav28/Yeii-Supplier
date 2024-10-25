@@ -3,7 +3,13 @@
 import { ChevronLeft as BackIcon, X } from "lucide-react";
 import { Button } from "../ui/button";
 
-export const CustomButton = ({ children, className, onClick, isSubmit }) => {
+export const CustomButton = ({
+  children,
+  className,
+  onClick,
+  isSubmit,
+  ...props
+}) => {
   let classes = " w-[10rem] rounded-xl py-6  hover:opacity-90 transition-all";
   if (className) {
     classes = classes + " " + className;
@@ -11,6 +17,7 @@ export const CustomButton = ({ children, className, onClick, isSubmit }) => {
 
   return (
     <Button
+      {...props}
       className={classes}
       onClick={onClick}
       type={isSubmit ? "submit" : "button"}
@@ -20,27 +27,49 @@ export const CustomButton = ({ children, className, onClick, isSubmit }) => {
   );
 };
 
-export const DarkButton = ({ children, className, onClick, isSubmit }) => {
+export const DarkButton = ({
+  children,
+  className,
+  onClick,
+  isSubmit,
+  ...props
+}) => {
   let classes = "dark-btn";
   if (className) {
     classes = classes + " " + className;
   }
 
   return (
-    <CustomButton className={classes} onClick={onClick} isSubmit={isSubmit}>
+    <CustomButton
+      {...props}
+      className={classes}
+      onClick={onClick}
+      isSubmit={isSubmit}
+    >
       {children}
     </CustomButton>
   );
 };
 
-export const LightButton = ({ children, className, onClick, isSubmit }) => {
+export const LightButton = ({
+  children,
+  className,
+  onClick,
+  isSubmit,
+  ...props
+}) => {
   let classes = "light-btn";
   if (className) {
     classes = classes + " " + className;
   }
 
   return (
-    <CustomButton className={classes} onClick={onClick} isSubmit={isSubmit}>
+    <CustomButton
+      {...props}
+      className={classes}
+      onClick={onClick}
+      isSubmit={isSubmit}
+    >
       {children}
     </CustomButton>
   );
@@ -51,6 +80,7 @@ export const TransparentButton = ({
   className,
   onClick,
   isSubmit,
+  ...props
 }) => {
   let classes =
     "bg-[#fff] hover:bg-[#fff] hover:opacity-90 border border-[#ddd] text-black";
@@ -59,7 +89,12 @@ export const TransparentButton = ({
   }
 
   return (
-    <CustomButton className={classes} onClick={onClick} isSubmit={isSubmit}>
+    <CustomButton
+      {...props}
+      className={classes}
+      onClick={onClick}
+      isSubmit={isSubmit}
+    >
       {children}
     </CustomButton>
   );
@@ -72,7 +107,7 @@ export const BackwardButton = (props) => {
     classes += " " + className;
   }
   return (
-    <button onClick={onClick} className={classes}>
+    <button {...props} onClick={onClick} className={classes}>
       <BackIcon size={15} color="black" background="white" />
     </button>
   );
@@ -86,7 +121,7 @@ export const CrossButton = (props) => {
     classes += " " + className;
   }
   return (
-    <LightButton onClick={onClick} className={classes}>
+    <LightButton {...props} onClick={onClick} className={classes}>
       <X size={20} />
     </LightButton>
   );

@@ -1,7 +1,7 @@
 "use client";
 import { Eye, EyeClosed } from "lucide-react";
 import { LockIcon } from "../../lib/icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Textarea } from "../ui/textarea";
 import {
   Select,
@@ -21,14 +21,16 @@ export const TextInput = (props) => {
     value,
     className,
     iconClasses,
-    readonly,
+    divClass,
   } = props;
-  let classes = `w-full border-none outline-none text-lg ${
+  let classes = `w-full border-none outline-none text-lg disabled:cursor-not-allowed ${
     !customIcon && "ml-4"
   } ${className}`;
 
   return (
-    <div className="flex items-center bg-white rounded-[0.9rem] py-2 mb-2 ">
+    <div
+      className={`flex items-center bg-white rounded-[0.9rem] py-2 mb-2 ${divClass}`}
+    >
       {customIcon && (
         <span className={`px-5 ${iconClasses}`}>{customIcon}</span>
       )}
@@ -41,7 +43,6 @@ export const TextInput = (props) => {
           value={value}
           {...props}
           className={classes}
-          readOnly={readonly}
         />
       </div>
     </div>
@@ -51,7 +52,9 @@ export const TextInput = (props) => {
 export const TextArea = (props) => {
   const { customIcon, label, className } = props;
 
-  let classes = `resize-none ${!customIcon && "ml-4"} ${className}`;
+  let classes = `resize-none disabled:cursor-not-allowed ${
+    !customIcon && "ml-4"
+  } ${className}`;
   return (
     <div className="flex items-center bg-white rounded-[15px] py-2 mb-2 ">
       {customIcon && <span className="px-5 py-4 self-start">{customIcon}</span>}
@@ -83,7 +86,12 @@ export const SelectInput = (props) => {
           defaultValue={value}
           {...props}
         >
-          <SelectTrigger className={"rounded-[15px] pl-0 !w-full " + className}>
+          <SelectTrigger
+            className={
+              "rounded-[15px] pl-0 !w-full disabled:cursor-not-allowed " +
+              className
+            }
+          >
             <SelectValue placeholder={placeholder || "Select One"} />
           </SelectTrigger>
           <SelectContent>
@@ -141,7 +149,7 @@ export const CustomCheckBox = ({ className, onChange, value }) => {
     <Checkbox
       onCheckedChange={onChange}
       checked={value}
-      className={`h-7 w-7 data-[state=checked]:bg-[var(--main-pink)] border-[var(--main-pink)] ${className}`}
+      className={`h-7 w-7 data-[state=checked]:bg-[var(--main-pink)] border-[var(--main-pink)] disabled:cursor-not-allowed ${className}`}
     />
   );
 };
@@ -154,7 +162,7 @@ export const IconButton = ({ onClick, className, children, ...props }) => {
   }
 
   return (
-    <Button className={classes} type="button" onClick={onClick}>
+    <Button {...props} className={classes} type="button" onClick={onClick}>
       {children}
     </Button>
   );
@@ -164,26 +172,35 @@ export const CounterInput = (props) => {
   const { onChange, value, className } = props;
   const [inputValue, setInputValue] = useState(value || 0);
 
+  useEffect(() => {
+    onChange(inputValue);
+  }, [inputValue]);
   let classes = "!bg-[#E5E5E5] !hover:bg-[#E5E5E5] p-3 h-3";
 
   return (
-    <div className="flex  mb-2 h-full bg-[var(--light)] justify-center items-center px-5  text-[0.8rem] rounded-xl">
+    <div
+      className={
+        "flex  mb-2 h-full bg-[var(--light)] justify-center items-center px-5  text-[0.8rem] rounded-xl " +
+        className
+      }
+    >
       <IconButton
         className={classes}
         onClick={() => setInputValue((prev) => Number(prev) - 1)}
+        disabled={props.disabled}
       >
         -
       </IconButton>
       <input
-        type="text"
-        onChange={onChange}
-        value={inputValue}
         {...props}
-        className="w-full text-center"
+        type="text"
+        value={inputValue}
+        className="w-full text-center disabled:cursor-not-allowed"
       />
       <IconButton
         className={classes}
         onClick={() => setInputValue((prev) => Number(prev) + 1)}
+        disabled={props.disabled}
       >
         +
       </IconButton>

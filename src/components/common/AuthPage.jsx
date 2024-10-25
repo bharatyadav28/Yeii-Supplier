@@ -23,7 +23,9 @@ const AuthPage = ({ children, route, heading, showHeader }) => {
                 </h1>
               )}
             </div>
-            {showLogo && <Image src="/logo2.png" width={60} height={60} />}
+            {showLogo && (
+              <Image alt="logo" src="/logo2.png" width={60} height={60} />
+            )}
           </div>
         )}
         <div className="relative flex flex-col justify-center items-center h-full gap-5">
