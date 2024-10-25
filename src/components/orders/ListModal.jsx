@@ -33,9 +33,9 @@ function ListModal({
       ></div>
 
       <div
-        className={`flex flex-col absolute  !z-[1000] h-max max-h-[calc(100vh-10rem)] overflow-y-auto w-max bg-white text-black top-8 rounded-3xl py-4 ${
-          !isCheckBox ? "px-5" : "px-2"
-        } `}
+        className={`flex flex-col absolute  !z-[1000] h-max max-h-[calc(100vh-10rem)] overflow-y-auto w-max bg-white text-black ${
+          isCoupon ? "top-8" : "top-0"
+        } rounded-3xl py-4 ${!isCheckBox ? "px-5" : "px-2"} `}
       >
         {isCoupon ? (
           <>
@@ -98,7 +98,12 @@ function ListModal({
               ))}
 
             {isCheckBox && (
-              <DarkButton className="rounded-2xl mt-2 mx-2">Confirm</DarkButton>
+              <DarkButton
+                className="rounded-2xl mt-2 mx-2"
+                onClick={handleOpen}
+              >
+                Confirm
+              </DarkButton>
             )}
           </>
         )}
