@@ -82,10 +82,13 @@
   "homepage": {
     "heading": "Inicio",
     "order_request": "Solicitud de pedido",
+    "order_id": "ID del pedido",
     "availability": "Disponibilidad",
     "no_item_heading": "No hay solicitudes de pedidos",
     "no_item_subHeading": "No tienes nuevos pedidos. ¡Mantente atento!",
-    "go_to_store": "Ir a la tienda"
+    "go_to_store": "Ir a la tienda",
+    "no_orders_heading": "No tienes pedidos en este momento",
+    "no_orders_subHeading": "Construye tu tienda en línea con brincos dieras y recibe pedidos."
   },
 
   "calender": {
@@ -112,7 +115,7 @@
   },
 
   "orderDetails": {
-    "title": "Detalles del pedido",
+    "order_details": "Detalles del pedido",
     "items": "Artículos",
     "date": "Fecha",
     "accept": "Aceptar",
@@ -129,9 +132,6 @@
     "payment_status": "Estado del pago",
     "paid": "Pagado",
     "generate_invoice": "Generar factura",
-    "order_accepted": "Pedido aceptado",
-    "out_for_delivery": "En camino",
-    "delivered": "Entregado",
     "update_order_status": "Actualizar estado del pedido",
     "client_location": "Detalles de la ubicación del cliente",
     "location": "Ubicación",
@@ -139,44 +139,81 @@
     "shipping": "Dirección de envío",
     "total": "Total",
     "more_product": "más productos",
-    "category": "Categoría"
+    "category": "Categoría",
+    "order_placed": "Pedido realizado",
+    "order_accepted": "Pedido aceptado",
+    "order_dispatched": "Pedido despachado",
+    "order_shipped": "Pedido enviado",
+    "out_for_delivery": "En camino",
+    "delivered": "Entregado",
+    "order_status_heading": "Por favor, selecciona un estado de pedido para mostrar al usuario final.",
+    "rewind_status": "Revertir estado",
+    "confirm": "Confirmar",
+    "order_status": "Estado del pedido"
   },
+
+  "notificationPage": {
+    "heading": "Notificación",
+    "today": "Hoy",
+    "yesterday": "Ayer",
+    "no_noti_heading": "¡Mantente actualizado!",
+    "no_noti_subHeading": "Aún no hay notificaciones. Tan pronto como suceda algo importante, lo verás aquí."
+  },
+
   "storePage": {
     "heading": "Tienda",
-    "products": "Productos",
-    "services": "Servicios",
-    "add": "Agregar",
-    "my": "Mi",
-    "types": {
+    "upper": {
+      "products": "Productos",
+      "services": "Servicios",
+      "product": "Producto",
+      "service": "Servicio"
+    },
+    "lower": {
       "products": "productos",
-      "services": "servicios"
+      "services": "servicios",
+      "product": "producto",
+      "service": "servicio"
     },
-    "listTitle": "{my} lista de {type}",
-    "availableQuantity": "Cantidad Disponible",
-    "availableTime": "Disponibilidad",
-
-    "formTypes": {
-      "products": "Producto",
-      "services": "Servicio"
-    },
-    "addFormTitle": "Agregar {type}",
-    "itemName": "Nombre de {type}",
-    "itemNamePlaceholder": "Ingrese el nombre de {type}",
-    "itemDescription": "Descripción de ",
-    "itemDescriptionPlaceholder": "Ingrese la descripción de ",
-    "itemCateogry": "Categoría de {type}",
-    "itemCateogryPlaceholder": "Seleccione la categoría de {type}",
-    "availability": "Disponibilidad",
-    "itemImage": "Imagen de {type}",
-    "actualPrice": "Precio Real",
+    "add": "Agregar",
+    "productListTitle": "Mi lista de productos",
+    "serviceListTitle": "Mi lista de servicios",
+    "availableQuantity": "Cantidad disponible",
+    "availableTime": "Tiempo disponible",
+    "actualPrice": "Precio actual",
     "quantity": "Cantidad",
     "discount": "Descuento",
-    "discountedPrice": "Precio con Descuento",
-    "pricePlaceholder": "Escribir preci",
-    "couponEligibility": "Elegibilidad para Cupones",
-    "couponEligibilityText": "¿Es este {type} elegible para cupones?",
-    "availabilityTime": "Tiempo disponible",
-    "startWith": "Iniciar con",
-    "endWith": "Finalizar"
+    "discountedPrice": "Precio con descuento",
+    "pricePlaceholder": "Ingrese el precio",
+    "couponEligibility": "Elegibilidad para cupones",
+    "availabilityTime": "Tiempo de disponibilidad",
+    "startWith": "Comienza con",
+    "endWith": "Termina con",
+    "name": "Nombre",
+    "description": "Descripción",
+    "category": "Categoría",
+    "availability": "Disponibilidad",
+    "select_availability": "Seleccionar disponibilidad",
+    "image": "Imagen",
+    "upload_image": "Subir imagen",
+    "desc_placeholder": "Ingrese la descripción",
+    "yes": "Sí",
+    "no": "No",
+    "time": "Tiempo",
+    "per_hour": "Por hora",
+    "per_day": "Por día",
+    "products": {
+      "name_placeholder": "Ingrese el nombre del producto",
+      "coupon_text": "¿Este producto es elegible para cupones?",
+      "cate_placeholder": "Seleccione la categoría del producto"
+    },
+    "services": {
+      "name_placeholder": "Ingrese el nombre del servicio",
+      "coupon_text": "¿Este servicio es elegible para cupones?",
+      "cate_placeholder": "Seleccione la categoría del servicio"
+    },
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "close": "Cerrar",
+    "save": "Guardar"
   }
 }

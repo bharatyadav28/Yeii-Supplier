@@ -18,6 +18,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
 
   const t = useTranslations("storePage");
 
+  const itemName = formType === "products" ? "product" : "service";
   const handleSubmit = (event) => {
     console.log("Submitted");
     event.preventDefault(); // Prevent the page from reloading
@@ -48,11 +49,11 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
           placeholder={t("pricePlaceholder")}
           defaultValue={item?.actualPrice}
         />
-        {formType === "Service" && (
+        {formType === "services" && (
           <SelectInput
             className="!text-[0.8rem] bg-[#13070B0F] absolute right-3  !w-max top-[0.4rem] h-[2rem]  pl-4 !py-2 "
-            placeholder={`Time`}
-            menu={["Per Hour", "Per Day"]}
+            placeholder={t(`time`)}
+            menu={[t("per_hour"), t("per_day")]}
             value={item?.category}
           />
         )}
@@ -62,7 +63,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
 
   const startTimeField = (
     <TimePicker
-      title="Start with"
+      title={t("startWith")}
       onTimeChange={(val) => {
         console.log("Time changed", val);
       }}
@@ -71,7 +72,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
   );
   const endTimeField = (
     <TimePicker
-      title="End with"
+      title={t("endWith")}
       onTimeChange={(val) => {
         console.log("Time changed", val);
       }}
@@ -136,9 +137,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
           }}
           value={item?.couponEligibility}
         />
-        <p>
-          {t("couponEligibilityText", { type: t(`formTypes.${formType}`) })}
-        </p>
+        <p>{t(`${formType}.coupon_text`)}</p>
       </div>
     </fieldset>
   );
@@ -153,15 +152,13 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
       <form onSubmit={handleSubmit} className="mt-6 store-form">
         <fieldset>
           <label htmlFor="name" className="required">
-            {t("itemName", { type: t(`formTypes.${formType}`) })}
+            {t(`upper.${itemName}`) + " " + t("name")}
           </label>
           <TextInput
             name="name"
             id="name"
             required={true}
-            placeholder={t("itemNamePlaceholder", {
-              type: t(`formTypes.${formType}`),
-            })}
+            placeholder={t(`${formType}.name_placeholder`)}
             // value={isEdit ? item.name : ""}
             defaultValue={item?.name}
           />
@@ -169,13 +166,13 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
 
         <fieldset>
           <label htmlFor="description" className="required">
-            {t("itemDescription", { type: t(`formTypes.${formType}`) })}
+            {t(`upper.${itemName}`) + " " + t("description")}
           </label>
           <TextArea
             name="description"
             id="description"
             className="min-h-[3rem] "
-            placeholder={t("itemDescriptionPlaceholder")}
+            placeholder={t("desc_placeholder")}
             defaultValue={item?.description}
           />
         </fieldset>
@@ -183,15 +180,13 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
         <div className="grid grid-cols-2 gap-4 ">
           <fieldset>
             <label htmlFor="cateogry" className="required">
-              {t("itemCateogry", { type: t(`formTypes.${formType}`) })}
+              {t(`upper.${itemName}`) + " " + t("category")}
             </label>
             <SelectInput
               name="cateogry"
               id="cateogry"
               className="!text-[0.8rem] text-[#00131fcc] pl-5 "
-              placeholder={t("itemCateogryPlaceholder", {
-                type: t(`formTypes.${formType}`),
-              })}
+              placeholder={t(`${formType}.coupon_text`)}
               menu={["Furniture", "Electronics", "Grocery"]}
               value={item?.category}
             />
@@ -205,16 +200,16 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
               name="available"
               id="available"
               className="!text-[0.8rem] text-[#00131fcc]] pl-5"
-              placeholder="Select availability"
-              menu={["Yes", "No"]}
-              value={item?.availability === true ? "Yes" : "No"}
+              placeholder={t("select_availability")}
+              menu={[t("yes"), t("no")]}
+              value={item?.availability === true ? t("yes") : t("no")}
             />
           </fieldset>
         </div>
 
         <fieldset>
           <label htmlFor="iamges" className="required">
-            {t("itemImage", { type: t(`formTypes.${formType}`) })}
+            {t(`upper.${itemName}`) + " " + t("image")}
           </label>
           <div className=" bg-white grid rounded-[0.9rem]">
             <div className="h-[6rem] m-4 w-100 h-100  border border-[var(--main-pink)] border-dashed rounded-[0.9rem]">
@@ -261,14 +256,14 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
 ]"
             onClick={handleOpenDialog}
           >
-            Close
+            {t("close")}
           </LightButton>
           <DarkButton
             isSubmit={true}
             className="w-100"
             onClick={handleOpenDialog}
           >
-            Save
+            {t("save")}
           </DarkButton>
         </div>
       </form>

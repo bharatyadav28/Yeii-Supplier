@@ -4,8 +4,11 @@ import { useState } from "react";
 import { CustomButton, LightButton, DarkButton } from "../common/CustomButtons";
 import SearchInput from "../common/SearchInput";
 import StoreDialog from "./StoreDialog";
+import { useTranslations } from "next-intl";
 
-const HeadMenu = ({ itemsType, handleTypeChange, t }) => {
+const HeadMenu = ({ itemsType, handleTypeChange }) => {
+  const t = useTranslations("storePage");
+
   const [openDialog, setOpenDialog] = useState(false);
 
   const handleOpenDialog = () => {
@@ -29,7 +32,7 @@ const HeadMenu = ({ itemsType, handleTypeChange, t }) => {
           }}
           className={`${itemsType === "products" ? "dark-btn" : "light-btn"}`}
         >
-          {t("products")}
+          {t("upper.products")}
         </CustomButton>
 
         <CustomButton
@@ -39,7 +42,7 @@ const HeadMenu = ({ itemsType, handleTypeChange, t }) => {
           }}
           className={`${itemsType === "services" ? "dark-btn" : "light-btn"}`}
         >
-          {t("services")}
+          {t("upper.services")}
         </CustomButton>
       </div>
 
@@ -56,9 +59,8 @@ const HeadMenu = ({ itemsType, handleTypeChange, t }) => {
       <StoreDialog
         openDialog={openDialog}
         handleOpenDialog={handleOpenDialog}
-        title={t("addFormTitle", { type: t(`formTypes.${formType}`) })}
+        title={t("add") + " " + t(`upper.${itemsType}`)}
         formType={formType}
-        t={t}
       />
     </div>
   );
