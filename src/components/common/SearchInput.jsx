@@ -1,8 +1,11 @@
 import React from "react";
+import { useTranslations } from "next-intl";
+
 import { Input } from "../ui/input";
 import { Search } from "lucide-react";
 
 function SearchInput({ className, onChange }) {
+  const t = useTranslations();
   const handleInputChange = (event) => {
     const value = event.target.value?.trim();
     if (value) {
@@ -22,7 +25,7 @@ function SearchInput({ className, onChange }) {
       </span>
       <Input
         type="search"
-        placeholder="Search..."
+        placeholder={t("search")}
         onChange={handleInputChange}
         className={classes}
       />

@@ -1,5 +1,7 @@
 {
   "dashboard": "tablero",
+  "search": "Buscar",
+  "addImage": "Añadir Foto",
 
   "sidebar": {
     "home": "Inicio",
@@ -138,5 +140,43 @@
     "total": "Total",
     "more_product": "más productos",
     "category": "Categoría"
+  },
+  "storePage": {
+    "heading": "Tienda",
+    "products": "Productos",
+    "services": "Servicios",
+    "add": "Agregar",
+    "my": "Mi",
+    "types": {
+      "products": "productos",
+      "services": "servicios"
+    },
+    "listTitle": "{my} lista de {type}",
+    "availableQuantity": "Cantidad Disponible",
+    "availableTime": "Disponibilidad",
+
+    "formTypes": {
+      "products": "Producto",
+      "services": "Servicio"
+    },
+    "addFormTitle": "Agregar {type}",
+    "itemName": "Nombre de {type}",
+    "itemNamePlaceholder": "Ingrese el nombre de {type}",
+    "itemDescription": "Descripción de ",
+    "itemDescriptionPlaceholder": "Ingrese la descripción de ",
+    "itemCateogry": "Categoría de {type}",
+    "itemCateogryPlaceholder": "Seleccione la categoría de {type}",
+    "availability": "Disponibilidad",
+    "itemImage": "Imagen de {type}",
+    "actualPrice": "Precio Real",
+    "quantity": "Cantidad",
+    "discount": "Descuento",
+    "discountedPrice": "Precio con Descuento",
+    "pricePlaceholder": "Escribir preci",
+    "couponEligibility": "Elegibilidad para Cupones",
+    "couponEligibilityText": "¿Es este {type} elegible para cupones?",
+    "availabilityTime": "Tiempo disponible",
+    "startWith": "Iniciar con",
+    "endWith": "Finalizar"
   }
 }

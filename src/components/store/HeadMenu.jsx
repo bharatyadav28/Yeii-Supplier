@@ -5,7 +5,7 @@ import { CustomButton, LightButton, DarkButton } from "../common/CustomButtons";
 import SearchInput from "../common/SearchInput";
 import StoreDialog from "./StoreDialog";
 
-const HeadMenu = ({ itemsType, handleTypeChange }) => {
+const HeadMenu = ({ itemsType, handleTypeChange, t }) => {
   const [openDialog, setOpenDialog] = useState(false);
 
   const handleOpenDialog = () => {
@@ -15,7 +15,9 @@ const HeadMenu = ({ itemsType, handleTypeChange }) => {
   const handleSearchInput = (value) => {
     console.log("Value changed:", value);
   };
-  const formType = itemsType === "products" ? "Product" : "Service";
+  // const formType = itemsType === "products" ? "Product" : "Service";
+  const formType = itemsType;
+  console.log("aasas", formType);
 
   return (
     <div className="flex justify-between">
@@ -27,7 +29,7 @@ const HeadMenu = ({ itemsType, handleTypeChange }) => {
           }}
           className={`${itemsType === "products" ? "dark-btn" : "light-btn"}`}
         >
-          Products
+          {t("products")}
         </CustomButton>
 
         <CustomButton
@@ -37,7 +39,7 @@ const HeadMenu = ({ itemsType, handleTypeChange }) => {
           }}
           className={`${itemsType === "services" ? "dark-btn" : "light-btn"}`}
         >
-          Services
+          {t("services")}
         </CustomButton>
       </div>
 
@@ -48,14 +50,15 @@ const HeadMenu = ({ itemsType, handleTypeChange }) => {
             setOpenDialog(true);
           }}
         >
-          + Add
+          + {t("add")}
         </DarkButton>
       </div>
       <StoreDialog
         openDialog={openDialog}
         handleOpenDialog={handleOpenDialog}
-        title={"Add" + " " + formType}
+        title={t("addFormTitle", { type: t(`formTypes.${formType}`) })}
         formType={formType}
+        t={t}
       />
     </div>
   );

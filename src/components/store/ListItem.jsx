@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { Switch } from "../ui/switch";
+import { useTranslations } from "next-intl";
 
 import { Dot } from "lucide-react";
 import StoreDialog from "./StoreDialog";
 import ViewItem from "./ViewItem";
 
-function ListItem({ item, isService }) {
+function ListItem({ item, isService, t }) {
   const [openDialog, setOpenDialog] = useState(false);
 
   const handleOpenDialog = () => {
@@ -40,7 +41,7 @@ function ListItem({ item, isService }) {
           {!isService && (
             <div className="flex items-center gap-1">
               <div className="text-sm text-nowrap text-[var(--medium-gray)]">
-                Available Quantity
+                {t("availableQuantity")}
               </div>
               <div className="text-[var(--lightblue)] ">
                 <Dot className="!w-[1rem] font-bold" />
@@ -54,7 +55,7 @@ function ListItem({ item, isService }) {
           {isService && (
             <div className="flex gap-1 items-center mt-1">
               <div className="text-sm text-nowrap text-[var(--medium-gray)]">
-                Available time
+                {t("availableTime")}
               </div>
               <div className="text-[var(--lightblue)] ">
                 <Dot className="!w-[1rem] font-bold" />

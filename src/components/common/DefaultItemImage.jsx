@@ -1,11 +1,14 @@
 import React from "react";
 import { Plus, Image as GalleryImage } from "lucide-react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 import { CustomButton } from "./CustomButtons";
 import { Input } from "../ui/input";
 
 function DefaultItemImage() {
+  const t = useTranslations();
+
   const addMoreImageBtn = (
     <>
       <Input type="file" className="hidden image-upload" />
@@ -16,7 +19,7 @@ function DefaultItemImage() {
       >
         <div className="flex flex-col items-center justify-center gap-2">
           <Plus size={24} />
-          <div className="text-[0.8rem] ">Add Image</div>
+          <div className="text-[0.75rem] ">{t("addImage")}</div>
         </div>
       </CustomButton>
     </>

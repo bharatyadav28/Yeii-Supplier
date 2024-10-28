@@ -1,4 +1,6 @@
+"use client ";
 import React from "react";
+import { useTranslations } from "next-intl";
 
 import CustomDialog from "../common/CustomDialog";
 import { DarkButton, LightButton } from "../common/CustomButtons";
@@ -9,8 +11,13 @@ import { CounterInput } from "../common/customInput";
 import TimePicker from "../common/TimePicker";
 
 function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
-  const isServiceType = formType === "Service";
+  const isServiceType = formType === "services";
   const isEdit = title.toLowerCase().includes("edit");
+
+  console.log("formType:", formType);
+
+  const t = useTranslations("storePage");
+
   const handleSubmit = (event) => {
     console.log("Submitted");
     event.preventDefault(); // Prevent the page from reloading
@@ -29,7 +36,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
   const actualPriceField = (
     <fieldset>
       <label htmlFor="actualPrice" className="text-[#00131FCC] required">
-        Actual Price
+        {t("actualPrice")}
       </label>
       <div className="relative">
         <TextInput
@@ -38,7 +45,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
           customIcon="MS$"
           className="!text-[0.8rem] "
           iconClasses="t-icon pl-3 !pr-0 my-0"
-          placeholder="Enter price"
+          placeholder={t("pricePlaceholder")}
           defaultValue={item?.actualPrice}
         />
         {formType === "Service" && (
@@ -74,7 +81,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
   const quantityField = (
     <fieldset>
       <label htmlFor="quantity" className="text-[#00131FCC] required">
-        Quantity
+        {t("quantity")}
       </label>
       <CounterInput
         name="quantity"
@@ -89,27 +96,27 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
     <>
       <fieldset>
         <label htmlFor="discount" className="text-[#00131FCC] required">
-          Discount
+          {t("discount")}
         </label>
         <TextInput
           name="discount"
           id="discount"
           customIcon="%"
           iconClasses="t-icon  !pr-0 pl-3"
-          placeholder="Enter price"
+          placeholder={t("pricePlaceholder")}
           defaultValue={item?.discount}
         />
       </fieldset>
       <fieldset>
         <label htmlFor="discountedPrice" className="text-[#00131FCC] required">
-          Discounted price
+          {t("discountedPrice")}
         </label>
         <TextInput
           name="discountedPrice"
           id="discountedPrice"
           customIcon="MS$"
           iconClasses="t-icon  pl-3 !pr-0"
-          placeholder="Enter price"
+          placeholder={t("pricePlaceholder")}
           defaultValue={item?.discountedPrice}
         />
       </fieldset>
@@ -119,7 +126,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
   const couponEligibilityField = (
     <fieldset>
       <label htmlFor="couponEligibility" className="text-[#00131FCC]">
-        Coupon Eligibility
+        {t("couponEligibility")}
       </label>
       <div className="flex gap-2 items-center text-[0.8rem] bg-[var(--light)] py-[0.73rem] px-3 rounded-[0.9rem] text-[var(--medium-gray)]">
         <CustomCheckBox
@@ -129,7 +136,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
           }}
           value={item?.couponEligibility}
         />
-        <p>Is this {formType} eligible for coupons</p>
+        <p>{t("couponEligibility", { type: t(`formTypes.${formType}`) })}</p>
       </div>
     </fieldset>
   );
@@ -144,13 +151,15 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
       <form onSubmit={handleSubmit} className="mt-6 store-form">
         <fieldset>
           <label htmlFor="name" className="required">
-            {formType} name
+            {t("itemName", { type: t(`formTypes.${formType}`) })}
           </label>
           <TextInput
             name="name"
             id="name"
             required={true}
-            placeholder={`Enter ${formType.toLowerCase()} name`}
+            placeholder={t("itemNamePlaceholder", {
+              type: t(`formTypes.${formType}`),
+            })}
             // value={isEdit ? item.name : ""}
             defaultValue={item?.name}
           />
@@ -158,13 +167,13 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
 
         <fieldset>
           <label htmlFor="description" className="required">
-            {formType} description{" "}
+            {t("itemDescription", { type: t(`formTypes.${formType}`) })}
           </label>
           <TextArea
             name="description"
             id="description"
             className="min-h-[3rem] "
-            placeholder="Enter  description"
+            placeholder={t("itemDescriptionPlaceholder")}
             defaultValue={item?.description}
           />
         </fieldset>
@@ -172,13 +181,15 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
         <div className="grid grid-cols-2 gap-4 ">
           <fieldset>
             <label htmlFor="cateogry" className="required">
-              {formType} cateogry
+              {t("itemCateogry", { type: t(`formTypes.${formType}`) })}
             </label>
             <SelectInput
               name="cateogry"
               id="cateogry"
               className="!text-[0.8rem] text-[#00131fcc] pl-5 "
-              placeholder={`Select ${formType} category`}
+              placeholder={t("itemCateogryPlaceholder", {
+                type: t(`formTypes.${formType}`),
+              })}
               menu={["Furniture", "Electronics", "Grocery"]}
               value={item?.category}
             />
@@ -186,7 +197,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
 
           <fieldset>
             <label htmlFor="available" className="required">
-              Availability
+              {t("availability")}
             </label>
             <SelectInput
               name="available"
@@ -201,7 +212,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
 
         <fieldset>
           <label htmlFor="iamges" className="required">
-            {formType} Image
+            {t("itemImage", { type: t(`formTypes.${formType}`) })}
           </label>
           <div className=" bg-white grid rounded-[0.9rem]">
             <div className="h-[6rem] m-4 w-100 h-100  border border-[var(--main-pink)] border-dashed rounded-[0.9rem]">
@@ -225,7 +236,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
           <>
             <div className="grid grid-cols-2 gap-4 num-details mt-2">
               <div className="flex flex-col gap-1 avail">
-                <div className="required">Availability time</div>
+                <div className="required">{t("availabilityTime")}</div>
                 <div className="grid grid-cols-2 gap-2 num-details">
                   {startTimeField}
                   {endTimeField}

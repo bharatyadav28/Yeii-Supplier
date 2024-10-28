@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 
 import HeadMenu from "@/components/store/HeadMenu";
 import MainContent from "@/components/common/MainContent";
@@ -8,6 +9,8 @@ import ListItem from "@/components/store/ListItem";
 import { noItemsIcon } from "@/lib/svg_icons";
 
 function List({ products, services }) {
+  const t = useTranslations("storePage");
+
   const [itemsType, setItemsType] = useState("products");
 
   const handleItemsType = (value) => setItemsType(value);
@@ -25,9 +28,16 @@ function List({ products, services }) {
   const listData = itemsType === "products" ? products : services;
   return (
     <>
-      <HeadMenu itemsType={itemsType} handleTypeChange={handleItemsType} />
+      <HeadMenu
+        itemsType={itemsType}
+        handleTypeChange={handleItemsType}
+        t={t}
+      />
       <MainContent
-        contentTitle={`My ${itemsType} list`}
+        contentTitle={t("listTitle", {
+          my: t("my"),
+          type: t(`types.${itemsType}`),
+        })}
         count={listData.length}
       >
         {listData?.length === 0 ? (
@@ -43,6 +53,7 @@ function List({ products, services }) {
                 key={product._id}
                 item={product}
                 isService={itemsType === "services"}
+                t={t}
               />
             ))}
           </div>

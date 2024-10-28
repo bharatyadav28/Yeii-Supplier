@@ -1,5 +1,7 @@
 {
   "dashboard": "dashboard",
+  "search": "Search",
+  "addImage": "Add Image",
 
   "sidebar": {
     "home": "Home",
@@ -138,5 +140,44 @@
     "total": "Total",
     "more_product": "more products",
     "category": "Category"
+  },
+
+  "storePage": {
+    "heading": "Store",
+    "products": "Products",
+    "services": "Services",
+    "add": "Add",
+    "my": "My",
+    "types": {
+      "products": "products",
+      "services": "services"
+    },
+    "listTitle": "{my} {type} list",
+    "availableQuantity": "Available Quantity",
+    "availableTime": "Available Time",
+
+    "formTypes": {
+      "products": "Product",
+      "services": "Service"
+    },
+    "addFormTitle": "Add {type}",
+    "itemName": "{type} name",
+    "itemNamePlaceholder": "Enter {type} name",
+    "itemDescription": "{type} description",
+    "itemDescriptionPlaceholder": "Enter description",
+    "itemCateogry": "{type} category",
+    "itemCateogryPlaceholder": "Select {type} category",
+    "availability": "Availability",
+    "itemImage": "{type} image",
+    "actualPrice": "Actual Price",
+    "quantity": "Quantity",
+    "discount": "Discount",
+    "discountedPrice": "Discounted Price",
+    "pricePlaceholder": "Enter price",
+    "couponEligibility": "Coupon Eligibility",
+    "couponEligibilityText": "Is this {type} eligible for coupons",
+    "availabilityTime": "Availability time",
+    "startWith": "Start with",
+    "endWith": "End with"
   }
 }
