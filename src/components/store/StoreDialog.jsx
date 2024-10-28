@@ -136,7 +136,9 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
           }}
           value={item?.couponEligibility}
         />
-        <p>{t("couponEligibility", { type: t(`formTypes.${formType}`) })}</p>
+        <p>
+          {t("couponEligibilityText", { type: t(`formTypes.${formType}`) })}
+        </p>
       </div>
     </fieldset>
   );
