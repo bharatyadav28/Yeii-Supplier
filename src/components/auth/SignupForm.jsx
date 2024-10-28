@@ -44,6 +44,7 @@ const SignupForm = () => {
     <form onSubmit={handleSubmit}>
       {/* Full Name */}
       <TextInput
+        className="text-sm"
         customIcon={<UserIcon color="gray" />}
         type="text"
         label="Full name"
@@ -55,6 +56,7 @@ const SignupForm = () => {
 
       {/* Email */}
       <TextInput
+        className="text-sm"
         customIcon={<EmailIcon />}
         type="email"
         label="Email id"
@@ -65,7 +67,7 @@ const SignupForm = () => {
       />
 
       {/* Phone number */}
-      <div className="flex items-center bg-white rounded-[15px] mb-2 ">
+      <div className="flex items-center bg-white rounded-[15px] mb-2 py-1">
         {/* <span className="px-5"><Flag color="gray" /></span> */}
         <div className="pl-5">
           <label className="text-[var(--main-gray)] text-xs">
@@ -87,6 +89,7 @@ const SignupForm = () => {
 
       {/* Address */}
       <TextArea
+        className="text-sm"
         customIcon={<MapPin color="gray" />}
         label="Address"
         placeholder="Enter Address"
@@ -108,7 +111,7 @@ const SignupForm = () => {
 
       {/* Password */}
       <PasswordInput
-        label="Enter Password"
+        label="New Password"
         onChange={(e) => setPassword(e.target.value)}
         value={password}
         required={true}
@@ -144,7 +147,10 @@ const SignupForm = () => {
         </p>
       </div>
       {/* Create account button */}
-      <DarkButton isSubmit={true} className="w-full text-lg p-7 rounded-[15px]">
+      <DarkButton
+        isSubmit={true}
+        className="w-full text-base p-7 rounded-[15px]"
+      >
         Create account
       </DarkButton>
     </form>

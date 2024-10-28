@@ -17,6 +17,7 @@ const ForgotPasswordForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <TextInput
+        className="text-sm"
         customIcon={<EmailIcon />}
         type="email"
         label="Email id"

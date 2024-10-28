@@ -8,6 +8,7 @@ import orderData from "@/lib/dummyData/orderData.json";
 import { DarkButton } from "../common/CustomButtons";
 import { useRouter } from "next/navigation";
 import OrdersList from "./OrdersList";
+import { useTranslations } from "next-intl";
 
 const HomeMain = () => {
   const title = "Order Request";
@@ -16,10 +17,12 @@ const HomeMain = () => {
 
   const { orders } = orderData;
 
+  const t = useTranslations("homepage");
+
   return (
     <div className="relative flex gap-6  items-stretch overflow-y-auto flex-grow h-full ">
       <MainContent
-        contentTitle={title}
+        contentTitle={t("welcome")}
         count={orders.length}
         className="pb-0 !mt-0 overflow-y-hidden"
       >

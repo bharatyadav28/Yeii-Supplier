@@ -22,6 +22,7 @@ const LoginForm = () => {
     <form onSubmit={handleSubmit}>
       {/* Email */}
       <TextInput
+        className="text-sm"
         customIcon={<EmailIcon />}
         type="email"
         label="Email id"
@@ -50,7 +51,10 @@ const LoginForm = () => {
       </div>
 
       {/* Login Button */}
-      <DarkButton isSubmit={true} className="w-full text-lg p-7 rounded-[15px]">
+      <DarkButton
+        isSubmit={true}
+        className="w-full text-base p-7 rounded-[15px]"
+      >
         Login
       </DarkButton>
     </form>

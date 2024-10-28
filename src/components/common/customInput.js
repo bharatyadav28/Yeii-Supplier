@@ -36,7 +36,7 @@ export const TextInput = (props) => {
       )}
       <div className={`w-full pr-5`}>
         {label && (
-          <label className="text-[var(--main-gray)] text-xs">{label}</label>
+          <label className="text-[var(--main-gray)] text-[10px]">{label}</label>
         )}
         <input
           onChange={onChange}
@@ -60,7 +60,7 @@ export const TextArea = (props) => {
       {customIcon && <span className="px-5 py-4 self-start">{customIcon}</span>}
       <div className="w-full pr-5">
         {label && (
-          <label className="text-[var(--main-gray)] text-xs">{label}</label>
+          <label className="text-[var(--main-gray)] text-[10px]">{label}</label>
         )}
         <Textarea {...props} className={classes} />
       </div>
@@ -77,7 +77,7 @@ export const SelectInput = (props) => {
       {customIcon && <span className="px-5 py-4 self-start">{customIcon}</span>}
       <div className="w-full pr-2">
         {label && (
-          <label className="text-[var(--main-gray)] text-xs">{label}</label>
+          <label className="text-[var(--main-gray)] text-[10px]">{label}</label>
         )}
 
         <Select
@@ -88,7 +88,7 @@ export const SelectInput = (props) => {
         >
           <SelectTrigger
             className={
-              "rounded-[15px] pl-0 !w-full disabled:cursor-not-allowed " +
+              "rounded-[15px] pl-0 !w-full disabled:cursor-not-allowed text-sm " +
               className
             }
           >
@@ -114,20 +114,20 @@ export const PasswordInput = (props) => {
   const [showPassword, setShowPassword] = useState("");
   return (
     <div
-      className={`flex items-center bg-white rounded-[15px] py-1 mb-3 ${className}`}
+      className={`flex items-center bg-white rounded-[15px] py-2 mb-3 ${className}`}
     >
       <span className="px-5">
         <LockIcon color="gray" />
       </span>
       <div className="w-full">
-        <label className="text-[var(--main-gray)] text-xs">{label}</label>
+        <label className="text-[var(--main-gray)] text-[10px]">{label}</label>
         <input
           type={showPassword ? "text" : "password"}
           placeholder="*********"
           onChange={onChange}
           value={value}
           {...props}
-          className="w-full border-none outline-none text-lg"
+          className="w-full border-none outline-none text-sm"
         />
       </div>
       <span className="px-5">

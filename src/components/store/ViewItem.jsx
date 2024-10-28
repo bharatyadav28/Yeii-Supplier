@@ -76,6 +76,7 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType }) {
         Quantity
       </label>
       <CounterInput
+        onChange={() => console.log("nothing")}
         name="quantity"
         id="quantity"
         defaultValue={item?.quantity}
