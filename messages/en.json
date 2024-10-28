@@ -1,6 +1,142 @@
 {
   "dashboard": "dashboard",
+
+  "sidebar": {
+    "home": "Home",
+    "store": "Store",
+    "orders": "Orders",
+    "notification": "Notification",
+    "profile": "Profile"
+  },
+
+  "loginPage": {
+    "heading": "Welcome back",
+    "subHeading": "Login to your account",
+    "email": "Enter Email id",
+    "emailPlaceholder": "Enter email",
+    "password": "Enter password",
+    "confirmPassword": "Confirm new password",
+    "login": "Login",
+    "createAccount": "Create account",
+    "dontHaveAccount": "Don’t have an account?",
+    "forgotPassword": "Forgot password"
+  },
+
+  "signupPage": {
+    "heading": "Create account",
+    "fullName": "Full name",
+    "fullNamePlaceholder": "Enter Full name",
+    "phoneNumber": "Phone number",
+    "address": "Address",
+    "addressPlaceholder": "Enter Address",
+    "bussinessLabel": "Are you operating as a ?",
+    "bussinessPlaceholder": "Select One",
+    "password": "New password",
+    "confirmPassword": "Confirm new password",
+    "terms_of_service": "terms of service",
+    "privacy_policy": "privacy policy",
+    "terms1": "By Signing up, you agree to the",
+    "and": "and",
+    "terms2": ", including cookie use"
+  },
+
+  "forgotPassword": {
+    "heading": "Verify email id",
+    "subHeading": "Please enter the email address linked with your account to Receive OTP to change password.",
+    "reset_password": "Reset password",
+    "email": "Enter Email id",
+    "emailPlaceholder": "Enter email",
+    "sent_otp": "Sent OTP"
+  },
+
+  "otpPage": {
+    "heading": "Enter OTP",
+    "subHeading": "Please enter the email address linked with your account to Receive OTP to change password.",
+    "change": "Change",
+    "confirm": "Confirm",
+    "resend": "Resend OTP"
+  },
+
+  "resetPage": {
+    "heading": "Set up new password",
+    "subHeading": "Set your New Password So you can access your data",
+    "password": "New password",
+    "confirmPassword": "Confirm new password",
+    "reset_password": "Reset password"
+  },
+
+  "passwordChanged": {
+    "heading": "Password Changed successfully",
+    "subHeading": "Your password has been changed successfully.",
+    "continue": "continue"
+  },
+
+  "accountCreated": {
+    "heading": "Account Created successfully",
+    "subHeading": "Your Account has been created sucessfully",
+    "continue": "continue"
+  },
+
   "homepage": {
-    "welcome": "Welcome to my page"
+    "heading": "Home",
+    "order_request": "Order Request",
+    "availability": "Availability",
+    "no_item_heading": "No order requests",
+    "no_item_subHeading": "You dont have any new orders. Stay Tuned !",
+    "go_to_store": "Go to store"
+  },
+
+  "calender": {
+    "title": "Calender",
+    "Mon": "Mon",
+    "Tue": "Tue",
+    "Wed": "Wed",
+    "Thu": "Thu",
+    "Fri": "Fri",
+    "Sat": "Sat",
+    "Sun": "Sun",
+    "January": "January",
+    "February": "February",
+    "March": "March",
+    "April": "April",
+    "May": "May",
+    "June": "June",
+    "July": "July",
+    "August": "August",
+    "September": "September",
+    "October": "October",
+    "November": "November",
+    "December": "December"
+  },
+
+  "orderDetails": {
+    "title": "Order details",
+    "items": "Items",
+    "date": "Date",
+    "accept": "Accept",
+    "decline": "Decline",
+    "order_id": "Order id",
+    "placed_on": "Placed on",
+    "delivery_status": "Delivery Status",
+    "qyt": "Qyt",
+    "order_summary": "Order Summary",
+    "discount": "Discount",
+    "total_items": "Total Items",
+    "coupon_applied": "Coupon applied",
+    "total_cost": "Total Cost",
+    "payment_status": "Payment status",
+    "paid": "Paid",
+    "generate_invoice": "Generate invoice",
+    "order_accepted": "Order Accepted",
+    "out_for_delivery": "Out for delivery",
+    "delivered": "Delivered",
+    "update_order_status": "Update Order status",
+    "client_location": "Client location details",
+    "location": "Location",
+    "customer_details": "Customer details",
+    "shipping": "Shipping Address",
+    "total": "Total",
+    "more_product": "more products",
+    "category": "Category"
   }
 }

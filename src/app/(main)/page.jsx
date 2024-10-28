@@ -8,7 +8,7 @@ export default function Home() {
   const t = useTranslations("homepage");
   return (
     <DashboardPage>
-      <PageHeading pageName={t("welcome")} avalability={true} />
+      <PageHeading pageName={t("heading")} avalability={true} />
       <HomeMain />
     </DashboardPage>
   );

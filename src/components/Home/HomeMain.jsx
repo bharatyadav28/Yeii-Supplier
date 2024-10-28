@@ -11,32 +11,29 @@ import OrdersList from "./OrdersList";
 import { useTranslations } from "next-intl";
 
 const HomeMain = () => {
-  const title = "Order Request";
-
   const router = useRouter();
+  const t = useTranslations("homepage");
 
   const { orders } = orderData;
-
-  const t = useTranslations("homepage");
 
   return (
     <div className="relative flex gap-6  items-stretch overflow-y-auto flex-grow h-full ">
       <MainContent
-        contentTitle={t("welcome")}
+        contentTitle={t("order_request")}
         count={orders.length}
         className="pb-0 !mt-0 overflow-y-hidden"
       >
         {orders.length === 0 ? (
           <NoItems
             icon={noItemsIcon}
-            heading="No order requests"
-            subHeading="You dont have any new orders. Stay Tuned !"
+            heading={t("no_item_heading")}
+            subHeading={t("no_item_subHeading")}
           >
             <DarkButton
               onClick={() => router.push("/store")}
               className="w-2/5 mt-4 text-md"
             >
-              Go To Store
+              {t("go_to_store")}
             </DarkButton>
           </NoItems>
         ) : (
