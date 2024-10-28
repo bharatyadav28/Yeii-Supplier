@@ -82,10 +82,13 @@
   "homepage": {
     "heading": "Home",
     "order_request": "Order Request",
+    "order_id": "Order id",
     "availability": "Availability",
     "no_item_heading": "No order requests",
     "no_item_subHeading": "You dont have any new orders. Stay Tuned !",
-    "go_to_store": "Go to store"
+    "go_to_store": "Go to store",
+    "no_orders_heading": "You have no orders at this moment",
+    "no_orders_subHeading": "build your online store with brincos dieras and get orders."
   },
 
   "calender": {
@@ -112,7 +115,7 @@
   },
 
   "orderDetails": {
-    "title": "Order details",
+    "order_details": "Order details",
     "items": "Items",
     "date": "Date",
     "accept": "Accept",
@@ -129,9 +132,6 @@
     "payment_status": "Payment status",
     "paid": "Paid",
     "generate_invoice": "Generate invoice",
-    "order_accepted": "Order Accepted",
-    "out_for_delivery": "Out for delivery",
-    "delivered": "Delivered",
     "update_order_status": "Update Order status",
     "client_location": "Client location details",
     "location": "Location",
@@ -139,45 +139,82 @@
     "shipping": "Shipping Address",
     "total": "Total",
     "more_product": "more products",
-    "category": "Category"
+    "category": "Category",
+    "order_placed": "Order placed",
+    "order_accepted": "Order Accepted",
+    "order_dispatched": "Order dispatched",
+    "order_shipped": "Order shipped",
+    "out_for_delivery": "Out for delivery",
+    "delivered": "Delivered",
+    "order_status_heading": " Please select an order status to display for end user.",
+    "rewind_status": "Rewind Status",
+    "confirm": "Confirm",
+    "order_status": "Order Status"
+  },
+
+  "notificationPage": {
+    "heading": "Notification",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "no_noti_heading": "Stay Updated!",
+    "no_noti_subHeading": "No notifications yet. As soon as something important happens, you'll see it her"
   },
 
   "storePage": {
     "heading": "Store",
-    "products": "Products",
-    "services": "Services",
-    "add": "Add",
-    "my": "My",
-    "types": {
-      "products": "products",
-      "services": "services"
+    "upper": {
+      "products": "Products",
+      "services": "Services",
+      "product": "Product",
+      "service": "Service"
     },
-    "listTitle": "{my} {type} list",
+    "lower": {
+      "products": "products",
+      "services": "services",
+      "product": "product",
+      "service": "service"
+    },
+    "add": "Add",
+    "productListTitle": "My product list",
+    "serviceListTitle": "My service list",
     "availableQuantity": "Available Quantity",
     "availableTime": "Available Time",
-
-    "formTypes": {
-      "products": "Product",
-      "services": "Service"
-    },
-    "addFormTitle": "Add {type}",
-    "itemName": "{type} name",
-    "itemNamePlaceholder": "Enter {type} name",
-    "itemDescription": "{type} description",
-    "itemDescriptionPlaceholder": "Enter description",
-    "itemCateogry": "{type} category",
-    "itemCateogryPlaceholder": "Select {type} category",
-    "availability": "Availability",
-    "itemImage": "{type} image",
     "actualPrice": "Actual Price",
     "quantity": "Quantity",
     "discount": "Discount",
     "discountedPrice": "Discounted Price",
     "pricePlaceholder": "Enter price",
     "couponEligibility": "Coupon Eligibility",
-    "couponEligibilityText": "Is this {type} eligible for coupons",
     "availabilityTime": "Availability time",
     "startWith": "Start with",
-    "endWith": "End with"
+    "endWith": "End with",
+    "name": "name",
+    "description": "Description",
+    "category": "Category",
+    "availability": "Availability",
+    "select_availability": "Select availability",
+    "image": "Image",
+    "upload_image": "Upload image",
+    "desc_placeholder": "Enter description",
+    "yes": "Yes",
+    "no": "No",
+    "time": "Time",
+    "per_hour": "Per hour",
+    "per_day": "Per day",
+    "products": {
+      "name_placeholder": "Enter product name",
+      "coupon_text": "Is this product eligible for coupons",
+      "cate_placeholder": "Select Product Category"
+    },
+    "services": {
+      "name_placeholder": "Enter product name",
+      "coupon_text": "Is this product eligible for coupons",
+      "cate_placeholder": "Select Service Category"
+    },
+
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "close": "Close",
+    "save": "Save"
   }
 }

@@ -10,9 +10,11 @@ import {
   TransparentButton,
 } from "../common/CustomButtons";
 import { CustomCheckBox } from "../common/customInput";
+import { useTranslations } from "next-intl";
 
 function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
   const [orderStatus, setOrderStatus] = useState(false);
+  const t = useTranslations("orderDetails");
 
   const handeOrderStatus = () => {
     setOrderStatus((prev) => !prev);
@@ -21,27 +23,27 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
   const orderStatusOptions = [
     {
       id: 1,
-      label: "Order placed",
+      label: t("order_placed"),
     },
     {
       id: 2,
-      label: "Order accepted",
+      label: t("order_accepted"),
     },
     {
       id: 3,
-      label: "Order dispatched",
+      label: t("order_dispatched"),
     },
     {
       id: 4,
-      label: "Order shipped",
+      label: t("order_shipped"),
     },
     {
       id: 5,
-      label: "Out for delivery",
+      label: t("out_for_delivery"),
     },
     {
       id: 6,
-      label: "Delivered",
+      label: t("delivered"),
     },
   ];
   return (
@@ -49,25 +51,29 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
       <CustomDialog
         open={openDialog}
         handleOpen={handleOpenDialog}
-        title={"Order Details"}
+        title={t("order_details")}
         className="w-[48rem] h-max !overflow-x-hidden"
       >
         {order && (
           <>
             <div className="flex gap-4 mt-8 text-sm">
               <div className="flex gap-1">
-                <div className="text-[#303F49] font-semibold">Order id</div>
+                <div className="text-[#303F49] font-semibold">
+                  {t("order_id")}
+                </div>
                 <div className="text-[#4D5A62CC]">- 123456</div>
               </div>
               <div className="flex gap-1">
-                <div className="text-[#303F49] font-semibold">Placed on</div>
+                <div className="text-[#303F49] font-semibold">
+                  {t("placed_on")}
+                </div>
                 <div className="text-[#4D5A62CC]">- 9.00 am, 14 Aug 2024</div>
               </div>
             </div>
             <div className="grid grid-cols-[54%,44%] gap-4 mt-4">
               <div className="flex flex-col gap-6">
                 <div className="flex flex-col gap-2">
-                  <div className="font-medium text-[1.1rem]">Items</div>
+                  <div className="font-medium text-[1.1rem]">{t("items")}</div>
                   <div className="flex flex-col gap-4 rounded-xl h-[16rem] overflow-auto bg-[var(--light)] p-2">
                     {order?.items?.map((item) => (
                       <div className="flex gap-4" key={item.id}>
@@ -85,7 +91,7 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
                             {item.name}
                           </div>
                           <div className="text-[#4E4548]">
-                            Qty : {item.quantity}
+                            {t("qyt")} : {item.quantity}
                           </div>
                           <div className="text-[var(--lightblue)] font-medium mt-1">
                             ${item.price}
@@ -98,23 +104,25 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
 
                 <div className="flex flex-col gap-2">
                   <div className="font-medium text-[1.1rem]">
-                    Orders Summary
+                    {t("order_summary")}
                   </div>
                   <div className="flex flex-col gap-4 rounded-xl  bg-[var(--light)] p-4 py-5">
                     <div className="flex justify-between text-[#4E4548]">
-                      <div className=" text-[0.9rem]">Discount</div>
+                      <div className=" text-[0.9rem]">{t("discount")}</div>
                       <div className="font-medium">%{order.discount}</div>
                     </div>
                     <div className="flex justify-between text-[#4E4548]">
-                      <div className=" text-[0.9rem]">Total Items</div>
+                      <div className=" text-[0.9rem]">{t("total_items")}</div>
                       <div className="font-medium">{order.items.length}</div>
                     </div>
                     <div className="flex justify-between text-[#4E4548]">
-                      <div className=" text-[0.9rem]">Coupon applied</div>
+                      <div className=" text-[0.9rem]">
+                        {t("coupon_applied")}
+                      </div>
                       <div className="font-medium">{order.couponApplied}</div>
                     </div>
                     <div className="flex justify-between text-[#4E4548]">
-                      <div className=" text-[0.9rem]">Total Cost</div>
+                      <div className=" text-[0.9rem]">{t("total_cost")}</div>
                       <div className="font-medium">
                         ${order.totalAmount}
                         <span className="line-through ml-2 text-[#7D7779]">
@@ -126,10 +134,12 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
                     <div>
                       <div className="border-[1px] border-dashed mb-2" />
                       <div className="flex justify-between text-[#4E4548]">
-                        <div className="font-semibold">Payment status</div>
+                        <div className="font-semibold">
+                          {t("payment_status")}
+                        </div>
                         <div className="text-[var(--main-green)] flex  gap-1 items-center">
                           <Check size={18} />
-                          Paid
+                          {t("paid")}
                         </div>
                       </div>
                       <div className="border-[1px] border-dashed mt-2" />
@@ -137,7 +147,7 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
 
                     <div className="flex gap-2 justify-center items-center text-[var(--main-pink)]">
                       <NotepadText size={20} />
-                      <div>Generate invoice</div>
+                      <div>{t("generate_invoice")}</div>
                       <div className="ml-4">
                         <ChevronRight size={20} color="#B0B0B0" />
                       </div>
@@ -149,7 +159,7 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
               <div className=" flex flex-col gap-6">
                 <div className=" flex flex-col gap-2">
                   <div className="font-medium text-[1.1rem]">
-                    Delivery Status
+                    {t("delivery_status")}
                   </div>
                   <div className="flex  rounded-xl h-max  bg-[var(--light)] p-6">
                     <div className="w-full ">
@@ -166,15 +176,15 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
                         </div>
                       </div>
                       <div className="flex justify-between text-[0.7rem] mt-5">
-                        <div>Order accepted</div>
-                        <div className="mr-5">Out for delivery</div>
-                        <div>Delivered</div>
+                        <div>{t("order_accepted")}</div>
+                        <div className="mr-5">{t("out_for_delivery")}</div>
+                        <div>{t("delivered")}</div>
                       </div>
                       <CustomButton
                         className="flex gap-2 justify-center items-center text-[var(--main-pink)] bg-[var(--light-pink)] hover:bg-[var(--light-pink)] hover:opacity-90 py-2 mt-8 rounded-xl font-semibold text-sm w-full"
                         onClick={handeOrderStatus}
                       >
-                        <div>Update Order status</div>
+                        <div>{t("update_order_status")}</div>
                         <div>
                           <ChevronRight size={20} />
                         </div>
@@ -185,11 +195,11 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
 
                 <div className="flex flex-col gap-2">
                   <div className="font-medium text-[1.1rem] ">
-                    Client location details
+                    {t("client_location")}
                   </div>
                   <div className="flex flex-col rounded-xl h-max  bg-[var(--light)] pt-4 pb-8 px-4 gap-1">
                     <div className="text-[#303F49] text-[0.88rem]">
-                      Location
+                      {t("location")}
                     </div>
                     <div className="text-[var(--main-gray)] text-[0.8rem] gap-2 max-w-[10rem]">
                       {order.customerDetails.address}
@@ -199,7 +209,7 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
 
                 <div className="flex flex-col gap-2">
                   <div className="font-medium text-[1.1rem] ">
-                    Customer details
+                    {t("customer_details")}
                   </div>
                   <div className="flex flex-col rounded-xl h-max  bg-[var(--light)] pt-4 pb-6 px-4">
                     <div className="flex gap-2">
@@ -227,7 +237,7 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
                     <div className="border-[1px] border-dashed my-3" />
                     <div className=" mt-1 flex flex-col gap-1">
                       <div className="text-[#00131F] text-medium">
-                        Shipping Address
+                        {t("shipping")}
                       </div>
                       <div className="text-[#4D5A62] text-sm">
                         {order.deliveryAddress}
@@ -244,13 +254,13 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
       <CustomDialog
         open={orderStatus}
         handleOpen={handeOrderStatus}
-        title={"Order Status"}
+        title={t("order_status")}
         className="w-[25rem] h-max !bg-[#fff]  "
         anableCross={true}
       >
         <div className="flex flex-col  ">
           <div className=" mt-2 text-[0.8rem] text-[#6E7980] self-center">
-            Please select an order status to display for end user.
+            {t("order_status_heading")}
           </div>
 
           <div className="flex flex-col mt-6">
@@ -272,10 +282,10 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
 
           <div className="grid grid-cols-2 mt-8">
             <TransparentButton className=" text-[#5F5F5F] font-semibold">
-              Rewind Status
+              {t("rewind_status")}
             </TransparentButton>
             <DarkButton className="font-semibold" onClick={handeOrderStatus}>
-              Confirm
+              {t("confirm")}
             </DarkButton>
           </div>
         </div>

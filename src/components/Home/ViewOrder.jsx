@@ -2,13 +2,15 @@ import Image from "next/image";
 import CustomDialog from "../common/CustomDialog";
 import { DarkButton, LightButton } from "../common/CustomButtons";
 import ItemCard from "../common/ItemCard";
+import { useTranslations } from "next-intl";
 
 const ViewOrder = ({ open, handleOpen, order }) => {
+  const t = useTranslations("orderDetails");
   return (
     <CustomDialog
       open={open}
       handleOpen={handleOpen}
-      title={"Order Details"}
+      title={t("order_details")}
       anableCross={true}
       className="w-[40vw] h-max"
     >
@@ -36,7 +38,7 @@ const ViewOrder = ({ open, handleOpen, order }) => {
             </div>
           </div>
           <div className="border-b-2 py-3">
-            <div>Items</div>
+            <div>{t("items")}</div>
             <div className="flex flex-wrap">
               {order.items.map((item, index) => (
                 <ItemCard
@@ -50,11 +52,15 @@ const ViewOrder = ({ open, handleOpen, order }) => {
           </div>
           <div className="flex justify-between border-b-2 py-3">
             <div>
-              <div className="text-[10px] text-[var(--main-gray)] ">Date</div>
+              <div className="text-[10px] text-[var(--main-gray)] ">
+                {t("date")}
+              </div>
               <div className="text-xs font-semibold">{order.placedOn}</div>
             </div>
             <div className="text-right">
-              <div className="text-xs text-[var(--main-gray)] ">Total</div>
+              <div className="text-xs text-[var(--main-gray)] ">
+                {t("total")}
+              </div>
               <div className="text-sm font-bold text-[var(--lightblue)]">
                 ${order.totalAmount}
               </div>
@@ -62,9 +68,11 @@ const ViewOrder = ({ open, handleOpen, order }) => {
           </div>
           <div className="flex gap-2 pt-4">
             <LightButton className="flex-grow border-2 text-base">
-              Decline
+              {t("decline")}
             </LightButton>
-            <DarkButton className="flex-grow text-base">Accept</DarkButton>
+            <DarkButton className="flex-grow text-base">
+              {t("accept")}
+            </DarkButton>
           </div>
         </div>
       )}

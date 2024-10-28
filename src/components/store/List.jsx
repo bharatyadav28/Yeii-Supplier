@@ -28,16 +28,13 @@ function List({ products, services }) {
   const listData = itemsType === "products" ? products : services;
   return (
     <>
-      <HeadMenu
-        itemsType={itemsType}
-        handleTypeChange={handleItemsType}
-        t={t}
-      />
+      <HeadMenu itemsType={itemsType} handleTypeChange={handleItemsType} />
       <MainContent
-        contentTitle={t("listTitle", {
-          my: t("my"),
-          type: t(`types.${itemsType}`),
-        })}
+        contentTitle={
+          itemsType === "products"
+            ? t("productListTitle")
+            : t("serviceListTitle")
+        }
         count={listData.length}
       >
         {listData?.length === 0 ? (

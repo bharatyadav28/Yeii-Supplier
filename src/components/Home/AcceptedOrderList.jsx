@@ -2,10 +2,12 @@ import { useState } from "react";
 import NoItems from "../common/NoItems";
 import OrderItem from "../common/OrderItem";
 import AcceptedOrderDetails from "../orders/AcceptedOrderDetails";
+import { useTranslations } from "next-intl";
 
 const AcceptedOrderList = ({ orders }) => {
   const [openDialog, setOpenDialog] = useState(false);
   const [order, setOrder] = useState(null);
+  const t = useTranslations("homepage");
 
   const handleOpen = () => {
     setOpenDialog((prev) => !prev);
@@ -15,10 +17,9 @@ const AcceptedOrderList = ({ orders }) => {
     handleOpen();
   };
   const noItemHeading = (
-    <h1 className="text-center">You have no orders at this moment</h1>
+    <h1 className="text-center">{t("no_orders_heading")}</h1>
   );
-  const noItemSubHeading =
-    "build your online store with brincos dieras and get orders.";
+  const noItemSubHeading = t("no_orders_subHeading");
 
   return orders.length === 0 ? (
     <div className="flex-grow flex justify-center items-center gap-2">
@@ -30,7 +31,7 @@ const AcceptedOrderList = ({ orders }) => {
         {orders.map((order) => (
           <div key={order._id}>
             <div className="text-[10px] text-[var(--main-gray)] my-1">
-              Order id - {order.orderId}
+              {t("order_id")} - {order.orderId}
             </div>
             <OrderItem onClick={handleClick} order={order} isAccepted={true} />
           </div>
