@@ -54,6 +54,7 @@ const MainComp = () => {
       </div>
       <form onSubmit={handleSubmit}>
         <TextInput
+          className="text-sm"
           customIcon={<UserIcon color="gray" />}
           type="text"
           label="Full name"
@@ -65,6 +66,7 @@ const MainComp = () => {
         />
 
         <TextInput
+          className="text-sm"
           customIcon={<EmailIcon />}
           type="email"
           label="Email id"
@@ -109,6 +111,7 @@ const MainComp = () => {
         </div>
 
         <TextArea
+          className="text-sm"
           customIcon={<MapPin color="gray" />}
           label="Address"
           placeholder="Enter Address"
