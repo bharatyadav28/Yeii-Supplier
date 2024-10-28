@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 
 import { sidebarIcon } from "@/lib/svg_icons";
+import { useTranslations } from "next-intl";
 
 // Single sidebar link
 const SidebarLink = ({ title, href, Icon }) => {
@@ -35,29 +36,30 @@ const SidebarLink = ({ title, href, Icon }) => {
 
 // Sidebar component
 const Sidebar = ({ className }) => {
+  const t = useTranslations("sidebar");
   const menuLinks = [
     {
-      title: "Home",
+      title: t("home"),
       href: "/",
       icon: HomeIcon,
     },
     {
-      title: "Store",
+      title: t("store"),
       href: "/store",
       icon: StoreIcon,
     },
     {
-      title: "Orders",
+      title: t("orders"),
       href: "/orders",
       icon: OrderIcon,
     },
     {
-      title: "Notification",
+      title: t("notification"),
       href: "/notification",
       icon: NotificationIcon,
     },
     {
-      title: "Profile",
+      title: t("profile"),
       href: "/profile",
       icon: ProfileIcon,
     },

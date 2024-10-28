@@ -1,6 +1,142 @@
 {
-  "dashboard": "dashboarda !",
+  "dashboard": "tablero",
+
+  "sidebar": {
+    "home": "Inicio",
+    "store": "Tienda",
+    "orders": "Pedidos",
+    "notification": "Notificación",
+    "profile": "Perfil"
+  },
+
+  "loginPage": {
+    "heading": "Bienvenido de nuevo",
+    "subHeading": "Inicia sesión en tu cuenta",
+    "email": "Introduce el correo electrónico",
+    "emailPlaceholder": "Introduce el correo electrónico",
+    "password": "Introduce la contraseña",
+    "confirmPassword": "Confirma la nueva contraseña",
+    "login": "Iniciar sesión",
+    "createAccount": "Crear cuenta",
+    "dontHaveAccount": "¿No tienes una cuenta?",
+    "forgotPassword": "Olvidé mi contraseña"
+  },
+
+  "signupPage": {
+    "heading": "Crear cuenta",
+    "fullName": "Nombre completo",
+    "fullNamePlaceholder": "Introduce tu nombre completo",
+    "phoneNumber": "Número de teléfono",
+    "address": "Dirección",
+    "addressPlaceholder": "Introduce la dirección",
+    "bussinessLabel": "¿Operas como?",
+    "bussinessPlaceholder": "Selecciona uno",
+    "password": "Nueva contraseña",
+    "confirmPassword": "Confirma la nueva contraseña",
+    "terms_of_service": "términos de servicio",
+    "privacy_policy": "política de privacidad",
+    "terms1": "Al registrarte, aceptas los",
+    "and": "y",
+    "terms2": ", incluido el uso de cookies"
+  },
+
+  "forgotPassword": {
+    "heading": "Verificar correo electrónico",
+    "subHeading": "Introduce el correo electrónico asociado a tu cuenta para recibir un OTP y cambiar la contraseña.",
+    "reset_password": "Restablecer contraseña",
+    "email": "Introduce el correo electrónico",
+    "emailPlaceholder": "Introduce el correo electrónico",
+    "sent_otp": "OTP enviado"
+  },
+
+  "otpPage": {
+    "heading": "Introduce el OTP",
+    "subHeading": "Introduce el correo electrónico asociado a tu cuenta para recibir un OTP y cambiar la contraseña.",
+    "change": "Cambiar",
+    "confirm": "Confirmar",
+    "resend": "Reenviar OTP"
+  },
+
+  "resetPage": {
+    "heading": "Configurar nueva contraseña",
+    "subHeading": "Configura tu nueva contraseña para acceder a tus datos",
+    "password": "Nueva contraseña",
+    "confirmPassword": "Confirma la nueva contraseña",
+    "reset_password": "Restablecer contraseña"
+  },
+
+  "passwordChanged": {
+    "heading": "Contraseña cambiada con éxito",
+    "subHeading": "Tu contraseña se ha cambiado con éxito.",
+    "continue": "Continuar"
+  },
+
+  "accountCreated": {
+    "heading": "Cuenta creada con éxito",
+    "subHeading": "Tu cuenta ha sido creada con éxito.",
+    "continue": "Continuar"
+  },
+
   "homepage": {
-    "welcome": "lo estoy intentendo!"
+    "heading": "Inicio",
+    "order_request": "Solicitud de pedido",
+    "availability": "Disponibilidad",
+    "no_item_heading": "No hay solicitudes de pedidos",
+    "no_item_subHeading": "No tienes nuevos pedidos. ¡Mantente atento!",
+    "go_to_store": "Ir a la tienda"
+  },
+
+  "calender": {
+    "title": "Calendario",
+    "Mon": "Lun",
+    "Tue": "Mar",
+    "Wed": "Mié",
+    "Thu": "Jue",
+    "Fri": "Vie",
+    "Sat": "Sáb",
+    "Sun": "Dom",
+    "January": "Enero",
+    "February": "Febrero",
+    "March": "Marzo",
+    "April": "Abril",
+    "May": "Mayo",
+    "June": "Junio",
+    "July": "Julio",
+    "August": "Agosto",
+    "September": "Septiembre",
+    "October": "Octubre",
+    "November": "Noviembre",
+    "December": "Diciembre"
+  },
+
+  "orderDetails": {
+    "title": "Detalles del pedido",
+    "items": "Artículos",
+    "date": "Fecha",
+    "accept": "Aceptar",
+    "decline": "Rechazar",
+    "order_id": "ID del pedido",
+    "placed_on": "Realizado el",
+    "delivery_status": "Estado de la entrega",
+    "qyt": "Cantidad",
+    "order_summary": "Resumen del pedido",
+    "discount": "Descuento",
+    "total_items": "Total de artículos",
+    "coupon_applied": "Cupón aplicado",
+    "total_cost": "Costo total",
+    "payment_status": "Estado del pago",
+    "paid": "Pagado",
+    "generate_invoice": "Generar factura",
+    "order_accepted": "Pedido aceptado",
+    "out_for_delivery": "En camino",
+    "delivered": "Entregado",
+    "update_order_status": "Actualizar estado del pedido",
+    "client_location": "Detalles de la ubicación del cliente",
+    "location": "Ubicación",
+    "customer_details": "Detalles del cliente",
+    "shipping": "Dirección de envío",
+    "total": "Total",
+    "more_product": "más productos",
+    "category": "Categoría"
   }
 }
