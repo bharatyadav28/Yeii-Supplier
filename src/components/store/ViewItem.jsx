@@ -11,8 +11,9 @@ import StoreDialog from "./StoreDialog";
 import DeleteDialog from "../common/DeleteDialog";
 import TimePicker from "../common/TimePicker";
 
-function ViewItem({ openDialog, handleOpenDialog, item, title, formType }) {
-  const isServiceType = formType === "Service";
+function ViewItem({ openDialog, handleOpenDialog, item, title, formType, t }) {
+  const isServiceType = formType === "services";
+  const itemName = formType === "products" ? "product" : "service";
 
   const [editDialog, setEditDialog] = useState(false);
   const [deleteDialog, setDeleteDialog] = useState(false);
@@ -27,7 +28,7 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType }) {
   const actualPriceField = (
     <fieldset>
       <label htmlFor="actualPrice" className="text-[#00131FCC] ">
-        Actual Price
+        {t("actualPrice")}
       </label>
       <div className=" relative">
         <TextInput
@@ -73,7 +74,7 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType }) {
   const quantityField = (
     <fieldset>
       <label htmlFor="quantity" className="text-[#00131FCC] ">
-        Quantity
+        {t("quantity")}
       </label>
       <CounterInput
         onChange={() => console.log("nothing")}
@@ -89,7 +90,7 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType }) {
     <>
       <fieldset>
         <label htmlFor="discount" className="text-[#00131FCC] ">
-          Discount
+          {t("discount")}
         </label>
         <TextInput
           name="discount"
@@ -103,7 +104,7 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType }) {
       </fieldset>
       <fieldset>
         <label htmlFor="discountedPrice" className="text-[#00131FCC] ">
-          Discounted price
+          {t("discountedPrice")}
         </label>
         <TextInput
           name="discountedPrice"
@@ -152,7 +153,7 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType }) {
         <div className="store-form view-only mt-6">
           <div className="grid grid-cols-2 gap-4 ">
             <fieldset>
-              <label htmlFor="available">Availability</label>
+              <label htmlFor="available">{t("availability")}</label>
               <div className="relative">
                 <TextInput
                   name="available"
@@ -173,7 +174,7 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType }) {
 
             <fieldset>
               <label htmlFor="couponEligibility" className="text-[#00131FCC]">
-                Coupon Eligibility
+                {t("couponEligibility")}
               </label>
               <div className="flex gap-2 items-center text-[0.8rem] bg-[var(--light)] py-[0.73rem] px-3 rounded-[0.9rem] text-[var(--medium-gray)]">
                 <CustomCheckBox
@@ -184,7 +185,7 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType }) {
                   value={item?.couponEligibility}
                   disabled
                 />
-                <p>Is this {formType} eligible for coupons</p>
+                <p>{t(`${formType}.coupon_text`)}</p>
               </div>
             </fieldset>
 
@@ -202,7 +203,10 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType }) {
             )}
 
             <fieldset>
-              <label htmlFor="name">{formType} name</label>
+              <label htmlFor="name">
+                {" "}
+                {t(`upper.${itemName}`) + " " + t("image")}
+              </label>
               <TextInput
                 name="name"
                 id="name"
@@ -214,7 +218,10 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType }) {
             </fieldset>
 
             <fieldset>
-              <label htmlFor="cateogry">{formType} cateogry</label>
+              <label htmlFor="cateogry">
+                {" "}
+                {t(`upper.${itemName}`) + " " + t("category")}
+              </label>
               <TextInput
                 name="cateogry"
                 id="cateogry"
@@ -226,7 +233,10 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType }) {
 
           <div className=" store-form">
             <fieldset>
-              <label htmlFor="description">{formType} description </label>
+              <label htmlFor="description">
+                {" "}
+                {t(`upper.${itemName}`) + " " + t("description")}
+              </label>
               <TextArea
                 name="description"
                 id="description"
@@ -238,7 +248,10 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType }) {
             </fieldset>
 
             <fieldset>
-              <label htmlFor="iamges">{formType} Image</label>
+              <label htmlFor="iamges">
+                {" "}
+                {t(`upper.${itemName}`) + " " + t("image")}
+              </label>
               <div className=" bg-white grid rounded-[0.9rem]">
                 <div className="h-[6rem] m-4 w-100 h-100  border border-[var(--main-pink)] border-dashed rounded-[0.9rem]">
                   <DefaultItemImage />
@@ -274,7 +287,7 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType }) {
         openDialog={editDialog}
         handleOpenDialog={handleEditDialog}
         item={item}
-        title={title}
+        title={"Edit" + " " + title}
         formType={formType}
       />
 
