@@ -12,6 +12,7 @@ function DeleteDialog({
   onCancel,
   onConfirm,
   Icon,
+  t,
 }) {
   return (
     <CustomDialog
@@ -37,10 +38,10 @@ function DeleteDialog({
               className="border !border-[rgba(0, 0, 0, 0.10)] py-6 "
               onClick={onCancel}
             >
-              Cancel
+              {t("cancel")}
             </LightButton>
             <CustomButton className="py-6" onClick={onConfirm}>
-              Confirm
+              {t("confirm")}
             </CustomButton>
           </div>
         </div>

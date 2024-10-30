@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import { useTranslations } from "use-intl";
+
 import {
   couponIcon,
   logoutIcon,
@@ -15,6 +17,7 @@ import DeleteDialog from "../common/DeleteDialog";
 import OptionCard from "./OptionCard";
 
 const ProfileOptions = () => {
+  const t = useTranslations("profilePage");
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
   const handleDeleteDialog = () => {
@@ -25,37 +28,37 @@ const ProfileOptions = () => {
     {
       id: 1,
       icon: profileIcon,
-      title: "Manage Business Profile",
+      title: t("manageBusinessProfile"),
       route: "/manage_profile",
     },
     {
       id: 2,
       icon: transactionIcon,
-      title: "My Transaction",
+      title: t("myTransaction"),
       route: "/transaction",
     },
     {
       id: 3,
       icon: couponIcon,
-      title: "My coupon",
+      title: t("myCoupon"),
       route: "/coupon",
     },
     {
       id: 4,
       icon: settingIcon,
-      title: "Settings",
+      title: t("settings"),
       route: "/settings",
     },
     {
       id: 5,
       icon: policyIcon,
-      title: "Settlement Policy",
+      title: t("settlementPolicy"),
       route: "/settlement",
     },
     {
       id: 6,
       icon: termsIcon,
-      title: "Terms and Conditions",
+      title: t("termsAndConditions"),
       route: "/terms_and_conditions",
     },
   ];
@@ -73,7 +76,7 @@ const ProfileOptions = () => {
             <div className="w-[42px] h-[42px] bg-black/10 rounded-full flex justify-center items-center ">
               {logoutIcon}
             </div>
-            <div className="text-sm font-semibold">Logout</div>
+            <div className="text-sm font-semibold">{t("logout")}</div>
           </div>
           <ChevronRight size={20} color="var(--main-gray)" />
         </button>
@@ -82,11 +85,12 @@ const ProfileOptions = () => {
       <DeleteDialog
         openDialog={openDeleteDialog}
         handleOpenDialog={handleDeleteDialog}
-        title="Log out"
-        description="Are you sure you want to logout ?"
+        title={t("logout")}
+        description={t("logoutDescription")}
         onCancel={handleDeleteDialog}
         onConfirm={handleDeleteDialog}
         Icon={LogOut}
+        t={t}
       />
     </>
   );

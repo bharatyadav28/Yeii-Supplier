@@ -13,6 +13,7 @@ function ListModal({
   isCheckBox = false,
   isCoupon,
   couponEvents,
+  t,
 }) {
   let handleDelete, handleEdit;
   if (isCoupon) {
@@ -45,7 +46,7 @@ function ListModal({
                 "text-[#4D5A62] border-0 border-b rounded-none border-black/10 flex justify-start !pl-0  "
               }
             >
-              Edit
+              {t("edit")}
             </TransparentButton>
             <TransparentButton
               onClick={handleDelete}
@@ -53,7 +54,7 @@ function ListModal({
                 "text-[#4D5A62] border-0 rounded-none flex justify-start !pl-0  "
               }
             >
-              Delete
+              {t("delete")}
             </TransparentButton>
           </>
         ) : (
@@ -102,7 +103,7 @@ function ListModal({
                 className="rounded-2xl mt-2 mx-2"
                 onClick={handleOpen}
               >
-                Confirm
+                {t("confirm")}
               </DarkButton>
             )}
           </>

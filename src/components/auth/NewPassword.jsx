@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "next-intl";
 
 import { DarkButton } from "@/components/common/CustomButtons";
 import { PasswordInput } from "@/components/common/customInput";
@@ -10,6 +11,8 @@ const NewPassword = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const router = useRouter();
 
+  const t = useTranslations("resetPage");
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("heloooooo");
@@ -18,13 +21,13 @@ const NewPassword = () => {
   return (
     <form onSubmit={handleSubmit}>
       <PasswordInput
-        label="New password"
+        label={t("password")}
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         required={true}
       />
       <PasswordInput
-        label="Confirm new password"
+        label={t("confirmPassword")}
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
       />
@@ -32,7 +35,7 @@ const NewPassword = () => {
         isSubmit={true}
         className="w-full text-lg p-7 rounded-2xl mt-5"
       >
-        Reset password
+        {t("reset_password")}
       </DarkButton>
     </form>
   );

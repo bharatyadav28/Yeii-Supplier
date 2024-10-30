@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { ChevronRight } from "lucide-react";
+import { useTranslations } from "next-intl";
+
 import { Switch } from "../ui/switch";
 import DeleteDialog from "../common/DeleteDialog";
 
@@ -10,8 +12,9 @@ function OptionCard({ option, isSettings, extraInfo, isDelete }) {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+  const t = useTranslations("profilePage");
 
-  const isNotificationOption = option.title === "Notifications";
+  const isNotificationOption = option.title === t("notifications");
 
   const handleDeleteDialog = () => {
     setOpenDeleteDialog((prev) => !prev);
@@ -19,7 +22,7 @@ function OptionCard({ option, isSettings, extraInfo, isDelete }) {
 
   const handleClick = () => {
     switch (option.title) {
-      case "Delete account":
+      case t("delete_account"):
         handleDeleteDialog();
         break;
       default:
@@ -87,10 +90,11 @@ function OptionCard({ option, isSettings, extraInfo, isDelete }) {
       <DeleteDialog
         openDialog={openDeleteDialog}
         handleOpenDialog={handleDeleteDialog}
-        title="Delete account"
-        description="Are you sure you want to Delete your account?"
+        title={t("delete_account")}
+        description={t("delete_account_desc")}
         onCancel={handleDeleteDialog}
         onConfirm={handleDeleteDialog}
+        t={t}
       />
     </>
   );

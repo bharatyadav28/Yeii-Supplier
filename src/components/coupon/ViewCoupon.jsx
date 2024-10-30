@@ -15,6 +15,7 @@ const ViewCoupon = (props) => {
     handleFormData,
     submitHandler,
     Id,
+    t,
   } = props;
   const [counterValue, setCounterValue] = useState(0);
 
@@ -42,11 +43,12 @@ const ViewCoupon = (props) => {
       <div className="mt-3">
         <div>
           <div className="my-2 text-sm">
-            Coupon name <span className="text-red-500">*</span>
+            {t("coupon_name")}
+            <span className="text-red-500">*</span>
           </div>
           <TextInput
             className="py-2 text-sm disabled:cursor-not-allowed"
-            placeholder="Enter Coupon name"
+            placeholder={t("coupon_name_placeholder")}
             required={true}
             value={formData.name}
             onChange={(e) =>
@@ -57,11 +59,11 @@ const ViewCoupon = (props) => {
         </div>
         <div>
           <div className="my-2 text-sm">
-            Coupon Description <span className="text-red-500">*</span>
+            {t("Coupon_description")} <span className="text-red-500">*</span>
           </div>
           <TextArea
             className="py-3 text-sm disabled:cursor-not-allowed"
-            placeholder="Enter description"
+            placeholder={t("coupon_description_placeholder")}
             required={true}
             value={formData.description}
             onChange={(e) =>
@@ -72,13 +74,13 @@ const ViewCoupon = (props) => {
         </div>
         <div className="grid grid-cols-2 gap-2">
           <div>
-            <div className="my-2 text-sm">Discount</div>
+            <div className="my-2 text-sm">{t("discount")}</div>
             <TextInput
               divClass="py-3"
               className="text-sm !border-solid !border-l-2 pl-3 disabled:cursor-not-allowed"
               customIcon={<Percent size={15} />}
               iconClasses="!px-3"
-              placeholder="Enter Price"
+              placeholder={t("discount_placeholder")}
               required={true}
               value={formData.discount}
               onChange={(e) =>
@@ -88,13 +90,13 @@ const ViewCoupon = (props) => {
             />
           </div>
           <div>
-            <div className="my-2 text-sm">Discounted price</div>
+            <div className="my-2 text-sm">{t("discounted_price")}</div>
             <TextInput
               divClass="py-3"
               className="text-sm !border-solid !border-l-2 pl-3 disabled:cursor-not-allowed"
               customIcon={<span className="text-sm font-bold">MX$</span>}
               iconClasses="!px-3"
-              placeholder="Enter Price"
+              placeholder={t("discounted_price_placeholder")}
               required={true}
               value={formData.discounted_price}
               onChange={(e) =>
@@ -109,7 +111,7 @@ const ViewCoupon = (props) => {
         </div>
         <div className="grid grid-cols-2 gap-2">
           <div>
-            <div className="my-2 text-sm">Exipy Date</div>
+            <div className="my-2 text-sm">{t("expiry_date")}</div>
             <DatePicker
               className="rounded-xl border-none !py-6 w-full disabled:cursor-not-allowed"
               title="Select expiry date"
@@ -122,7 +124,7 @@ const ViewCoupon = (props) => {
           </div>
           <div>
             <div className="my-2 text-sm">
-              Usage Limits for Users <span className="text-red-500">*</span>
+              {t("usage_limit")} <span className="text-red-500">*</span>
             </div>
             <CounterInput
               onChange={(limit) =>
@@ -139,13 +141,13 @@ const ViewCoupon = (props) => {
             onClick={handleOpen}
             className="w-full border-[1px] hover:!bg-black/10 duration-300"
           >
-            Cancel
+            {t("cancel")}
           </LightButton>
           <DarkButton
             onClick={submitHandler}
             className={`w-full ${dialogStates.isView && "cursor-not-allowed"}`}
           >
-            {dialogStates.isEdit ? "Save Changes" : "Generate coupon"}
+            {dialogStates.isEdit ? t("save_changes") : t("generate_coupon")}
           </DarkButton>
         </div>
       </div>

@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
+
 import MainContent from "../common/MainContent";
 import CouponList from "./CouponList";
 import CustomHeader from "./CustomHeader";
@@ -12,6 +14,8 @@ const MainComp = () => {
   const [openDelete, setOpenDelete] = useState(false);
   const [Id, setId] = useState(null);
   const [title, setTitle] = useState("");
+
+  const t = useTranslations("profilePage");
 
   const [dialogStates, setDialogStates] = useState({
     isView: false,
@@ -72,7 +76,7 @@ const MainComp = () => {
       expiry_date: "",
       usage_limit: "",
     });
-    setTitle("Create new coupon");
+    setTitle("create_new_coupon");
   };
 
   const handleClick = (coupon) => {
@@ -91,7 +95,7 @@ const MainComp = () => {
       expiry_date: coupon.expiry_date,
       usage_limit: coupon.usage_limit,
     });
-    setTitle("Coupon details");
+    setTitle("coupon_details");
   };
 
   const handleEdit = (coupon) => {
@@ -111,7 +115,7 @@ const MainComp = () => {
         expiry_date: coupon.expiry_date,
         usage_limit: coupon.usage_limit,
       });
-    setTitle("Edit Coupon details");
+    setTitle("edit_coupon");
   };
 
   const handleDelete = (id) => {
@@ -125,24 +129,26 @@ const MainComp = () => {
   return (
     <>
       <CustomHeader
-        heading="My coupons"
+        heading={t("myCoupon")}
         route="/profile"
         handleCreate={handleCreate}
+        t={t}
       />
       <MainContent
-        contentTitle="Coupons"
+        contentTitle={t("coupons")}
         className="!overflow-hidden flex flex-col pb-0"
       >
         <CouponList
           handleDelete={handleDelete}
           handleEdit={handleEdit}
           handleClick={handleClick}
+          t={t}
         />
       </MainContent>
       <ViewCoupon
         open={open}
         handleOpen={handleOpen}
-        title={title}
+        title={t(title)}
         dialogStates={dialogStates}
         editHandler={handleEdit}
         deleteHandler={handleDelete}
@@ -150,14 +156,16 @@ const MainComp = () => {
         handleFormData={handleFormData}
         submitHandler={submitHandler}
         Id={Id}
+        t={t}
       />
       <DeleteDialog
         openDialog={openDelete}
         handleOpenDialog={handleOpenDelete}
-        title="Delete Coupon ?"
-        description="Are you sure you want to delete your coupon?"
+        title={t("delete_coupon")}
+        description={t("delete_coupon_description")}
         onCancel={handleOpenDelete}
         onConfirm={deleteCoupon}
+        t={t}
         // Icon={}
       />
     </>

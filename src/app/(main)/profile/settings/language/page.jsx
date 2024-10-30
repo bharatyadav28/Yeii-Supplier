@@ -1,5 +1,6 @@
 "use client";
 import { Check } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import AuthPage from "@/components/common/AuthPage";
 import { Button } from "@/components/ui/button";
@@ -8,6 +9,8 @@ import { useEffect, useState } from "react";
 import { getLanguage } from "@/app/actions/getLanguage";
 
 const LanguagePage = () => {
+  const t = useTranslations("profilePage");
+
   const [lang, setLang] = useState("en");
   const btnClasses =
     "w-full  rounded-xl flex justify-between bg-[#fff] text-[#323B41] font-semibold !py-8 hover:bg-slate-100 transition ";
@@ -32,7 +35,11 @@ const LanguagePage = () => {
 
   console.log(lang);
   return (
-    <AuthPage showHeader={true} heading="Language" route="/profile/settings">
+    <AuthPage
+      showHeader={true}
+      heading={t("language")}
+      route="/profile/settings"
+    >
       <div className="flex flex-col mt-6 bg-[var(--light)] mb-auto w-full rounded-xl bg-[#fff]">
         <Button onClick={() => onClick("en")} className={btnClasses}>
           <div>English</div>

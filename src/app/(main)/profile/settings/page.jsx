@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslations } from "next-intl";
 
 import AuthPage from "@/components/common/AuthPage";
 import {
@@ -11,36 +12,38 @@ import {
 import OptionCard from "@/components/profile/OptionCard";
 
 const SettingsPage = () => {
+  const t = useTranslations("profilePage");
+
   const settingsMenu = [
     {
       id: "1",
       icon: notificationIcon,
-      title: "Notifications",
+      title: t("notifications"),
       route: "#",
     },
     {
       id: "2",
       icon: businessAvailabilityIcon,
-      title: "Business Availability",
+      title: t("business_availability"),
       route: "/availability",
     },
     {
       id: "3",
       icon: languageIcon,
-      title: "Language",
+      title: t("language"),
       route: "/language",
     },
     {
       id: "4",
       icon: resetPasswordIcon,
-      title: "Reset password",
+      title: t("reset_Password"),
       route: "/reset-password",
     },
 
     {
       id: "5",
       icon: deleteAccountIcon,
-      title: "Delete account",
+      title: t("delete_account"),
       route: "#",
     },
   ];
@@ -48,11 +51,11 @@ const SettingsPage = () => {
   const getExtraInfo = (option) => {
     let info = "";
     switch (option.title) {
-      case "Business Availability":
-        info = "Custom days";
+      case t("business_availability"):
+        info = t("custom_days");
         break;
 
-      case "Language":
+      case t("language"):
         info = "English";
         break;
       default:
@@ -61,7 +64,7 @@ const SettingsPage = () => {
     return info;
   };
   return (
-    <AuthPage showHeader={true} heading="Settings" route="/profile">
+    <AuthPage showHeader={true} heading={t("settings")} route="/profile">
       <div className="flex flex-col gap-3 px-5 mt-10 overflow-y-auto bg-[#fff] w-full !h-max  mb-auto rounded-xl">
         {settingsMenu.map((option) => (
           <OptionCard

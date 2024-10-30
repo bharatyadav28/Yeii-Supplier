@@ -1,23 +1,25 @@
+import { useTranslations } from "next-intl";
+
 import NewPassword from "@/components/auth/NewPassword";
 import AuthPage from "@/components/common/AuthPage";
 import AuthHeading from "@/components/common/AuthHeading";
 
 const ResetPasswordPage = () => {
+  const t = useTranslations("resetPage");
+
   return (
     <AuthPage
       route="/profile/settings"
-      heading={"Reset password"}
+      heading={t("reset_password")}
       showHeader={true}
       isReset={true}
     >
       <AuthHeading
         isReset={true}
-        heading="Set up new password"
+        heading={t("heading")}
         className="mb-3 text-[#00131F]"
       >
-        <p className="text-center text-xs text-[#6E7980]">
-          Set your New Password So you can access your data
-        </p>
+        <p className="text-center text-xs text-[#6E7980]">{t("subHeading")}</p>
       </AuthHeading>
       <NewPassword />
     </AuthPage>

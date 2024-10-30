@@ -1,6 +1,6 @@
 "use client ";
 import React from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 import CustomDialog from "../common/CustomDialog";
 import { DarkButton, LightButton } from "../common/CustomButtons";
@@ -12,9 +12,10 @@ import TimePicker from "../common/TimePicker";
 
 function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
   const isServiceType = formType === "services";
+  const locale = useLocale();
   const isEdit = title.toLowerCase().includes("edit");
 
-  console.log("formType:", formType);
+  // console.log("formType:", formType);
 
   const t = useTranslations("storePage");
 
@@ -45,9 +46,10 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
           id="actualPrice"
           customIcon="MS$"
           className="!text-[0.8rem] "
-          iconClasses="t-icon pl-3 !pr-0 my-0"
+          iconClasses={`t-icon ${locale === "en" ? "pl-3" : "pl-2"} !pr-0 my-0`}
           placeholder={t("pricePlaceholder")}
           defaultValue={item?.actualPrice}
+          containerClass="pr-1"
         />
         {formType === "services" && (
           <SelectInput
@@ -68,6 +70,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
         console.log("Time changed", val);
       }}
       initialTime={item?.availabilityTime?.start}
+      containerClasses={locale === "es" ? "!gap-2" : ""}
     />
   );
   const endTimeField = (
@@ -77,6 +80,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
         console.log("Time changed", val);
       }}
       initialTime={item?.availabilityTime?.end}
+      containerClasses={locale === "es" ? "!gap-2" : ""}
     />
   );
   const quantityField = (
@@ -103,9 +107,12 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
           name="discount"
           id="discount"
           customIcon="%"
-          iconClasses="t-icon  !pr-0 pl-3"
+          iconClasses={`t-icon ${
+            locale === "en" ? "pl-3" : "pl-[0.7rem]"
+          } !pr-0 my-0`}
           placeholder={t("pricePlaceholder")}
           defaultValue={item?.discount}
+          containerClass="!pr-2"
         />
       </fieldset>
       <fieldset>
@@ -116,9 +123,10 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
           name="discountedPrice"
           id="discountedPrice"
           customIcon="MS$"
-          iconClasses="t-icon  pl-3 !pr-0"
+          iconClasses={`t-icon ${locale === "en" ? "pl-3" : "pl-2"} !pr-0 my-0`}
           placeholder={t("pricePlaceholder")}
           defaultValue={item?.discountedPrice}
+          containerClass="pr-1"
         />
       </fieldset>
     </>

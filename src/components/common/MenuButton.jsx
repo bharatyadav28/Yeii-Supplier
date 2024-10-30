@@ -13,6 +13,7 @@ const MenuButton = ({
   iconSize,
   isCoupon,
   couponEvents,
+  t,
 }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -36,6 +37,7 @@ const MenuButton = ({
           isCheckBox={isCheckBox}
           isCoupon={isCoupon}
           couponEvents={couponEvents}
+          t={t}
         />
       )}
     </div>

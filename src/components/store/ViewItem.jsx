@@ -51,7 +51,7 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType, t }) {
 
   const startTimeField = (
     <TimePicker
-      title="Start with"
+      title={t("startWith")}
       onTimeChange={(val) => {
         console.log("Time changed", val);
       }}
@@ -62,7 +62,7 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType, t }) {
   );
   const endTimeField = (
     <TimePicker
-      title="End with"
+      title={t("endWith")}
       onTimeChange={(val) => {
         console.log("Time changed", val);
       }}
@@ -176,7 +176,7 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType, t }) {
               <label htmlFor="couponEligibility" className="text-[#00131FCC]">
                 {t("couponEligibility")}
               </label>
-              <div className="flex gap-2 items-center text-[0.8rem] bg-[var(--light)] py-[0.73rem] px-3 rounded-[0.9rem] text-[var(--medium-gray)]">
+              <div className="flex gap-2 items-center text-[0.8rem] bg-[var(--light)] py-[0.73rem] pl-3 pr-2 rounded-[0.9rem] text-[var(--medium-gray)]">
                 <CustomCheckBox
                   className="border-[#E6E9EB] h-5 w-5"
                   onChange={(val) => {
@@ -287,17 +287,18 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType, t }) {
         openDialog={editDialog}
         handleOpenDialog={handleEditDialog}
         item={item}
-        title={"Edit" + " " + title}
+        title={t(`edit${formType}Details`)}
         formType={formType}
       />
 
       <DeleteDialog
         openDialog={deleteDialog}
         handleOpenDialog={handleDeleteDialog}
-        title={`Delete ${formType}`}
-        description={`Are you sure you want to delete this ${formType}?`}
+        title={t(`${formType}Delete.title`)}
+        description={t(`${formType}Delete.description`)}
         onCancel={handleDeleteDialog}
         onConfirm={handleDeleteDialog}
+        t={t}
       />
     </>
   );

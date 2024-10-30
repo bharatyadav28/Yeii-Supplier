@@ -7,6 +7,7 @@ const TimePicker = ({
   className,
   title,
   isViewOnly,
+  containerClasses,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedTime, setSelectedTime] = useState({
@@ -74,7 +75,9 @@ const TimePicker = ({
         type="button"
         disabled={isViewOnly || false}
       >
-        <div className={`flex items-center justify-center gap-3  `}>
+        <div
+          className={`flex items-center justify-center gap-3 ${containerClasses}  `}
+        >
           <div>
             <Clock size={21} />
           </div>

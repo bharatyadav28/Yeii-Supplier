@@ -114,6 +114,10 @@ body {
   color: #00131fcc;
 }
 
+.store-form label {
+  font-weight: 500;
+}
+
 .store-form fieldset label .req-star {
   color: red;
 }

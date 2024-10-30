@@ -1,7 +1,7 @@
 import couponsData from "@/lib/dummyData/couponData.json";
 import { EllipsisVertical } from "lucide-react";
 import MenuButton from "../common/MenuButton";
-const CouponList = ({ handleDelete, handleEdit, handleClick }) => {
+const CouponList = ({ handleDelete, handleEdit, handleClick, t }) => {
   const { coupons } = couponsData;
   return (
     <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-3 mt-2 pt-1 pb-3 overflow-y-auto">
@@ -18,6 +18,7 @@ const CouponList = ({ handleDelete, handleEdit, handleClick }) => {
                 handleDelete: () => handleDelete(coupon.id),
                 handleEdit: () => handleEdit(coupon),
               }}
+              t={t}
             />
           </div>
           <div
@@ -33,9 +34,11 @@ const CouponList = ({ handleDelete, handleEdit, handleClick }) => {
                 <span className="text-black font-semibold">
                   {coupon.discount}%
                 </span>{" "}
-                discount on this coupon
+                {t("desc")}
               </div>
-              <div>Expiry on {coupon.expiry_date}</div>
+              <div>
+                {t("expiry_on")} {coupon.expiry_date}
+              </div>
             </div>
           </div>
         </div>

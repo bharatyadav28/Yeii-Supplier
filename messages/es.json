@@ -2,6 +2,8 @@
   "dashboard": "tablero",
   "search": "Buscar",
   "addImage": "Añadir Foto",
+  "filter": "Filtro",
+  "continue": "Continuar",
 
   "sidebar": {
     "home": "Inicio",
@@ -39,7 +41,10 @@
     "privacy_policy": "política de privacidad",
     "terms1": "Al registrarte, aceptas los",
     "and": "y",
-    "terms2": ", incluido el uso de cookies"
+    "terms2": ", incluido el uso de cookies",
+    "edit": "Editar",
+    "save_changes": "Guardar cambios",
+    "cancel": "Cancelar"
   },
 
   "forgotPassword": {
@@ -68,7 +73,8 @@
   },
 
   "passwordChanged": {
-    "heading": "Contraseña cambiada con éxito",
+    "headingFirst": "Contraseña cambiada ",
+    "headingLast": " exitosamente",
     "subHeading": "Tu contraseña se ha cambiado con éxito.",
     "continue": "Continuar"
   },
@@ -114,6 +120,22 @@
     "December": "Diciembre"
   },
 
+  "filterMonth": {
+    "Jan": "Ene",
+    "Feb": "Feb",
+    "Mar": "Mar",
+    "Apr": "Abr",
+    "May": "May",
+    "Jun": "Jun",
+    "Jul": "Jul",
+    "Aug": "Ago",
+    "Sep": "Sep",
+    "Oct": "Oct",
+    "Nov": "Nov",
+    "Dec": "Dic",
+    "confirm": "Confirmar"
+  },
+
   "orderDetails": {
     "order_details": "Detalles del pedido",
     "items": "Artículos",
@@ -146,10 +168,17 @@
     "order_shipped": "Pedido enviado",
     "out_for_delivery": "En camino",
     "delivered": "Entregado",
+    "cancelled": "Cancelado",
     "order_status_heading": "Por favor, selecciona un estado de pedido para mostrar al usuario final.",
     "rewind_status": "Revertir estado",
     "confirm": "Confirmar",
-    "order_status": "Estado del pedido"
+    "order_status": "Estado del pedido",
+
+    "Orders": "Pedidos",
+    "MyOrders": "Mis Pedidos",
+    "today": "Hoy",
+    "sortBy": "Ordenar por",
+    "filter": "Filtro"
   },
 
   "notificationPage": {
@@ -175,6 +204,8 @@
       "service": "servicio"
     },
     "add": "Agregar",
+    "edit": "Editar",
+    "details": "detalles",
     "productListTitle": "Mi lista de productos",
     "serviceListTitle": "Mi lista de servicios",
     "availableQuantity": "Cantidad disponible",
@@ -183,10 +214,10 @@
     "quantity": "Cantidad",
     "discount": "Descuento",
     "discountedPrice": "Precio con descuento",
-    "pricePlaceholder": "Ingrese el precio",
+    "pricePlaceholder": "Ingrese precio",
     "couponEligibility": "Elegibilidad para cupones",
     "availabilityTime": "Tiempo de disponibilidad",
-    "startWith": "Comienza con",
+    "startWith": "Empieza con",
     "endWith": "Termina con",
     "name": "Nombre",
     "description": "Descripción",
@@ -203,7 +234,7 @@
     "per_day": "Por día",
     "products": {
       "name_placeholder": "Ingrese el nombre del producto",
-      "coupon_text": "¿Este producto es elegible para cupones?",
+      "coupon_text": "¿Este producto admite cupones?",
       "cate_placeholder": "Seleccione la categoría del producto"
     },
     "services": {
@@ -214,6 +245,115 @@
     "cancel": "Cancelar",
     "confirm": "Confirmar",
     "close": "Cerrar",
-    "save": "Guardar"
+    "save": "Guardar",
+
+    "productsDetails": "Detalles del producto",
+    "servicesDetails": "Detalles del servicio",
+    "editproductsDetails": "Editar producto",
+    "editservicesDetails": "Editar servicio",
+
+    "productsDelete": {
+      "title": "Eliminar producto",
+      "description": "¿Estás seguro de que deseas eliminar este producto?"
+    },
+    "servicesDelete": {
+      "title": "Eliminar servicio",
+      "description": "¿Estás seguro de que deseas eliminar este servicio?"
+    },
+    "emptyHeading": "No items in store.",
+    "emptyDescription": "No tienes productos listados en tu tienda. Puedes vender productos a través de la aplicación haciendo clic en 'Agregar' para crear un anuncio."
+  },
+
+  "profilePage": {
+    "profile": "Perfil",
+
+    "manageBusinessProfile": "Gestionar perfil de negocio",
+
+    "myTransaction": "Mi transacción",
+    "transaction": "Transacción",
+    "today": "Hoy",
+    "yesterday": "Ayer",
+
+    "myCoupon": "Mi cupón",
+    "create_new_coupon": "Crear nuevo cupón",
+    "coupons": "Cupones",
+    "save": "Guardar",
+    "desc": "descuento en este cupón",
+    "expiry_on": "Caducidad",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "coupon_details": "Detalles del cupón",
+    "edit_coupon": "Editar detalles del cupón",
+    "coupon_name": "Nombre del cupón",
+    "coupon_name_placeholder": "Ingresa el nombre del cupón",
+    "Coupon_description": "Descripción del cupón",
+    "coupon_description_placeholder": "Ingresa la descripción",
+    "discount": "Descuento",
+    "discount_placeholder": "Ingresa el precio",
+    "discounted_price": "Precio con descuento",
+    "discounted_price_placeholder": "Ingresa el precio",
+    "expiry_date": "Fecha de caducidad",
+    "usage_limit": "Límites de uso para los usuarios",
+    "generate_coupon": "Generar cupón",
+    "save_changes": "Guardar cambios",
+    "delete_coupon": "Eliminar cupón?",
+    "delete_coupon_description": "¿Estás seguro de que deseas eliminar tu cupón?",
+
+    "settings": "Configuración",
+    "notifications": "Notificaciones",
+
+    "business_availability": "Disponibilidad del negocio",
+    "bus_avail_desc": "Elige la disponibilidad del negocio que se mostrará a los clientes",
+    "availability": "Disponibilidad",
+    "available": "Disponible",
+    "unavailable": "No disponible",
+    "all_day": "Todo el día",
+    "custom_days": "Días personalizados",
+    "select_date_time": "Selecciona los días y horas que prefieras",
+    "opening": "Apertura",
+    "closing": "Cierre",
+    "open": "Abrir",
+    "close": "Cerrar",
+
+    "language": "Idioma",
+    "reset_Password": "Restablecer contraseña",
+
+    "delete_account": "Eliminar cuenta",
+    "delete_account_desc": "¿Estás seguro de que deseas eliminar tu cuenta?",
+
+    "settlementPolicy": "Política de liquidación",
+    "p1": "El uso de la aplicación también está regido por nuestra Política de Privacidad [Enlace a la Política de Privacidad], que detalla cómo recopilamos, usamos y divulgamos tu información personal.",
+    "p2": "Al continuar utilizando la aplicación 'Brincos Dieras', reconoces que has leído, entendido y aceptado estos Términos de Uso. Si tienes alguna pregunta o inquietud, contáctanos en [Tu Información de Contacto].",
+    "p3": "¡Gracias por elegir 'Brincos Dieras' para mostrar tus ideas de negocio!",
+
+    "termsAndConditions": "Términos y condiciones",
+    "privacyPolicy": "Política de privacidad",
+    "welcomeTo": "Bienvenido a",
+    "t1": "Estos Términos de Uso rigen tu uso de la aplicación móvil `Brincos Dieras` proporcionada por nosotros. Al acceder o usar la aplicación, aceptas cumplir y estar sujeto a estos términos. Si no estás de acuerdo con estos términos, por favor no uses la aplicación.",
+    "h1": "Aceptación de los Términos",
+    "t2": "Al usar la aplicación, reconoces que has leído, entendido y aceptado estar sujeto a estos Términos de Uso. Estos términos pueden ser actualizados o modificados, y es tu responsabilidad revisarlos periódicamente.",
+    "h2": "Cuentas de Usuario",
+    "h2u1": "Para utilizar ciertas funciones de la aplicación, puede que se te pida crear una cuenta de usuario. Eres responsable de mantener la confidencialidad de la información de tu cuenta y contraseña.",
+    "h2u2": "Aceptas proporcionar información precisa y completa al crear tu cuenta.",
+    "h3": "Conducta del Usuario",
+    "h3u1": "Al usar la aplicación, aceptas no:",
+    "h3u2": "Violar ninguna ley o regulación aplicable.",
+    "h3u3": "Infringir los derechos de otros. Publicar o compartir contenido dañino, abusivo o inapropiado.",
+    "h3u4": "Intentar acceder sin autorización a las cuentas de otros usuarios.",
+
+    "logout": "Cerrar sesión",
+    "logoutDescription": "¿Estás seguro de que deseas cerrar sesión?",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+
+    "Monday": "Lunes",
+    "Tuesday": "Martes",
+    "Wednesday": "Miércoles",
+    "Thursday": "Jueves",
+    "Friday": "Viernes",
+    "Saturday": "Sábado",
+    "Sunday": "Domingo",
+
+    "filter": "Filtro"
   }
 }

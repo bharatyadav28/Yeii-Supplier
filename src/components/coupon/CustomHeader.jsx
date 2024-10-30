@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
 import { BackwardButton, DarkButton } from "../common/CustomButtons";
 
-const CustomHeader = ({ heading, route, handleCreate }) => {
+const CustomHeader = ({ heading, route, handleCreate, t }) => {
   const router = useRouter();
   return (
     <div className="flex justify-between items-center w-full">
@@ -14,7 +14,7 @@ const CustomHeader = ({ heading, route, handleCreate }) => {
         )}
       </div>
       <DarkButton onClick={handleCreate} className="w-52">
-        + Create new coupon
+        + {t("create_new_coupon")}
       </DarkButton>
     </div>
   );

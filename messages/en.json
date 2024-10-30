@@ -2,6 +2,8 @@
   "dashboard": "dashboard",
   "search": "Search",
   "addImage": "Add Image",
+  "filter": "Filter",
+  "continue": "Continue",
 
   "sidebar": {
     "home": "Home",
@@ -39,7 +41,10 @@
     "privacy_policy": "privacy policy",
     "terms1": "By Signing up, you agree to the",
     "and": "and",
-    "terms2": ", including cookie use"
+    "terms2": ", including cookie use",
+    "edit": "Edit",
+    "save_changes": "Save changes",
+    "cancel": "Cancel"
   },
 
   "forgotPassword": {
@@ -68,7 +73,8 @@
   },
 
   "passwordChanged": {
-    "heading": "Password Changed successfully",
+    "headingFirst": "Password Changed",
+    "headingLast": "successfully",
     "subHeading": "Your password has been changed successfully.",
     "continue": "continue"
   },
@@ -114,6 +120,22 @@
     "December": "December"
   },
 
+  "filterMonth": {
+    "Jan": "Jan",
+    "Feb": "Feb",
+    "Mar": "Mar",
+    "Apr": "Apr",
+    "May": "May",
+    "Jun": "Jun",
+    "Jul": "Jul",
+    "Aug": "Aug",
+    "Sep": "Sep",
+    "Oct": "Oct",
+    "Nov": "Nov",
+    "Dec": "Dec",
+    "confirm": "Confirm"
+  },
+
   "orderDetails": {
     "order_details": "Order details",
     "items": "Items",
@@ -146,10 +168,17 @@
     "order_shipped": "Order shipped",
     "out_for_delivery": "Out for delivery",
     "delivered": "Delivered",
+    "cancelled": "Cancelled",
     "order_status_heading": " Please select an order status to display for end user.",
     "rewind_status": "Rewind Status",
     "confirm": "Confirm",
-    "order_status": "Order Status"
+    "order_status": "Order Status",
+
+    "Orders": "Orders",
+    "MyOrders": "MyOrders",
+    "today": "Today",
+    "sortBy": "Sort By",
+    "filter": "Filter"
   },
 
   "notificationPage": {
@@ -175,6 +204,8 @@
       "service": "service"
     },
     "add": "Add",
+    "edit": "Edit",
+    "details": "details",
     "productListTitle": "My product list",
     "serviceListTitle": "My service list",
     "availableQuantity": "Available Quantity",
@@ -215,6 +246,116 @@
     "cancel": "Cancel",
     "confirm": "Confirm",
     "close": "Close",
-    "save": "Save"
+    "save": "Save",
+
+    "productsDetails": "Product Details",
+    "servicesDetails": "Service Details",
+    "editproductsDetails": "Edit product ",
+    "editservicesDetails": "Edit service ",
+
+    "productsDelete": {
+      "title": "Delete product",
+      "description": "Are you sure you want to delete this product?"
+    },
+    "servicesDelete": {
+      "title": "Delete service",
+      "description": "Are you sure you want to delete this service?"
+    },
+
+    "emptyHeading": "No items in store.",
+    "emptyDescription": "You don't have any products listed in your store. You can sell products through the app by clicking on 'Add' to create a listing. "
+  },
+
+  "profilePage": {
+    "profile": "Profile",
+
+    "manageBusinessProfile": "Manage business profile",
+
+    "myTransaction": "My Transaction",
+    "transaction": "Transaction",
+    "today": "Today",
+    "yesterday": "Yesterday",
+
+    "myCoupon": "My coupon",
+    "create_new_coupon": "Create new coupon",
+    "coupons": "Coupons",
+    "save": "Save",
+    "desc": "discount on this coupon",
+    "expiry_on": "Expiry on",
+    "edit": "Edit",
+    "delete": "Delete",
+    "coupon_details": "Coupon details",
+    "edit_coupon": "Edit Coupon details",
+    "coupon_name": "Coupon name",
+    "coupon_name_placeholder": "Enter coupon name",
+    "Coupon_description": "Coupon Description",
+    "coupon_description_placeholder": "Enter description",
+    "discount": "Discount",
+    "discount_placeholder": "Enter price",
+    "discounted_price": "Discounted price",
+    "discounted_price_placeholder": "Enter price",
+    "expiry_date": "Expiry date",
+    "usage_limit": "Usage Limits for Users",
+    "generate_coupon": "Generate coupon",
+    "save_changes": "Save changes",
+    "delete_coupon": "Delete coupon ?",
+    "delete_coupon_description": "Are you sure you want to delete your coupon?",
+
+    "settings": "Settings",
+    "notifications": "Notifications",
+
+    "business_availability": "Business Availability",
+    "bus_avail_desc": "Choose the Business availability that will Shown to the customers",
+    "availability": "Availability",
+    "available": "Available",
+    "unavailable": "Unavailable",
+    "all_day": "All Day",
+    "custom_days": "Custom days",
+    "select_date_time": "Select days and time as you prefer",
+    "opening": "Opening",
+    "closing": "Closing",
+    "open": "Open",
+    "close": "Close",
+
+    "language": "Language",
+    "reset_Password": "Reset Password",
+
+    "delete_account": "Delete account",
+    "delete_account_desc": "Are you sure you want to Delete your account?",
+
+    "settlementPolicy": "Settlement Policy",
+    "p1": "Your use of the App is also governed by our Privacy Policy [Link to Privacy Policy], which outlines how we collect, use, and disclose your personal information.",
+    "p2": "By continuing to use the 'Brincos Dieras' App, you acknowledge that you have read, understood, and agreed to these Terms of Use. If you have any questions or concerns, please contact us at [Your Contact Information].",
+    "p3": "Thank you for choosing 'Brincos Dieras' to showcase your business ideas!",
+
+    "termsAndConditions": "Terms and conditions",
+    "privacyPolicy": "Privacy policy",
+    "welcomeTo": "Welcome to",
+    "t1": "These Terms of Use govern your use of the `Brincos Dieras`mobile application provided by us. By accessing or using the App, you agree to comply with and be bound by these terms. If you do not agree with these terms, please do not use the App",
+    "h1": "Acceptance of Terms",
+    "t2": "By using the App, you acknowledge that you have read, understood, and agree to be bound by these Terms of Use. These terms may be updated or modified, and it is your responsibility to review them periodically",
+    "h2": "User Accounts",
+    "h2u1": "To use certain features of the App, you may be required to create a user account. You are responsible for maintaining the confidentiality of your account information and password.",
+    "h2u2": "You agree to provide accurate and complete information when creating your account",
+    "h3": "User Conduct",
+    "h3u1": "When using the App, you agree not to:",
+    "h3u2": "Violate any applicable laws or regulations.",
+    "h3u3": "Infringe upon the rights of others. Post or share any harmful, abusive, or inappropriate content.",
+    "h3u4": "Attempt to gain unauthorized access to other users accounts",
+
+    "logout": "Logout",
+    "logoutDescription": "Are you sure you want to logout?",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+
+    "Monday": "Monday",
+    "Tuesday": "Tuesday",
+    "Wednesday": "Wednesday",
+    "Thursday": "Thursday",
+    "Friday": "Friday",
+    "Saturday": "Saturday",
+    "Sunday": "Sunday",
+
+    "filter": "Filter"
   }
 }

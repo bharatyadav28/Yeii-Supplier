@@ -4,7 +4,7 @@ import Image from "next/image";
 import ItemCard from "../common/ItemCard";
 import AcceptedOrderDetails from "./AcceptedOrderDetails";
 
-function OrdersListItem({ order }) {
+function OrdersListItem({ order, t }) {
   const [openDialog, setOpenDialog] = useState(false);
 
   const handleOpenDialog = () => {
@@ -39,10 +39,11 @@ function OrdersListItem({ order }) {
 
           <div className="flex flex-col items-end">
             <div className="text-[0.7rem] text-[var(--medium-gray)]">
-              Order Status{" "}
+              {t("order_status")}
             </div>
             <div className="text-[0.875rem] whitespace-nowrap text-[var(--main-orange)]">
-              {order.orderStatus}
+              {/* {order.orderStatus} */}
+              {t("order_accepted")}
             </div>
           </div>
         </div>
@@ -65,12 +66,14 @@ function OrdersListItem({ order }) {
 
         <div className="flex justify-between items-center">
           <div>
-            <div className="text-[10px] text-[var(--main-gray)] ">Order id</div>
+            <div className="text-[10px] text-[var(--main-gray)] ">
+              {t("order_id")}
+            </div>
             <div className="text-[0.9rem] font-semibold">{order.orderId}</div>
           </div>
 
           <div className="text-center">
-            <div className="text-xs text-[var(--main-gray)] ">Total</div>
+            <div className="text-xs text-[var(--main-gray)] ">{t("total")}</div>
             <div className="text-[var(--lightblue)] font-semibold">
               ${order.totalAmount}
             </div>

@@ -1,14 +1,16 @@
 "use client";
 
-import Image from "next/image";
-import { user } from "@/lib/dummyData/userData.json";
-import { SelectInput, TextArea, TextInput } from "../common/customInput";
 import { useState } from "react";
-import { BusinessIcon, EmailIcon, UserIcon } from "@/lib/icons";
+import Image from "next/image";
+import { MapPin } from "lucide-react";
+import { useTranslations } from "next-intl";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+
+import { user } from "@/lib/dummyData/userData.json";
+import { SelectInput, TextArea, TextInput } from "../common/customInput";
+import { BusinessIcon, EmailIcon, UserIcon } from "@/lib/icons";
 import { DarkButton, LightButton } from "../common/CustomButtons";
-import { MapPin } from "lucide-react";
 import { editIcon } from "@/lib/svg_icons";
 
 const MainComp = () => {
@@ -20,6 +22,8 @@ const MainComp = () => {
     address: user.address,
   });
   const [isEdit, setIsEdit] = useState(true);
+
+  const t = useTranslations("signupPage");
 
   const menu = ["Business", "Company", "Organization"];
 
@@ -57,8 +61,8 @@ const MainComp = () => {
           className="text-sm"
           customIcon={<UserIcon color="gray" />}
           type="text"
-          label="Full name"
-          placeholder="Enter Full name"
+          label={t("fullName")}
+          placeholder={t("fullNamePlaceholder")}
           value={formData.name}
           required={true}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -83,7 +87,7 @@ const MainComp = () => {
           value={formData.operating_as}
           required={true}
           menu={menu}
-          label="Are you operating as a ?"
+          label={t("bussinessLabel")}
           onChange={(e) => setFormData({ ...formData, operating_as: e })}
           disabled={isEdit}
         />
@@ -91,7 +95,7 @@ const MainComp = () => {
         <div className="flex items-center bg-white rounded-[15px] mb-2 py-1 ">
           <div className="pl-5">
             <label className="text-[var(--main-gray)] text-xs">
-              Phone number
+              {t("phoneNumber")}
             </label>
             <PhoneInput
               disabled={isEdit}
@@ -113,8 +117,8 @@ const MainComp = () => {
         <TextArea
           className="text-sm"
           customIcon={<MapPin color="gray" />}
-          label="Address"
-          placeholder="Enter Address"
+          label={t("address")}
+          placeholder={t("addressPlaceholder")}
           value={formData.address}
           onChange={(e) =>
             setFormData({ ...formData, address: e.target.value })
@@ -128,18 +132,18 @@ const MainComp = () => {
             onClick={handleClick}
             className="w-full mt-3 py-7 text-base"
           >
-            Edit
+            {t("edit")}
           </DarkButton>
         ) : (
           <>
             <DarkButton isSubmit={true} className="w-full mt-3 py-7 text-base">
-              Save changes
+              {t("save_changes")}
             </DarkButton>
             <LightButton
               onClick={handleClick}
               className="w-full mt-2 py-7 text-base"
             >
-              Cancel
+              {t("cancel")}
             </LightButton>
           </>
         )}

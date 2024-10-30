@@ -1,29 +1,24 @@
 import React from "react";
+import { useTranslations } from "next-intl";
 
 import AuthPage from "@/components/common/AuthPage";
 import MainContent from "@/components/common/MainContent";
 import Policy from "@/components/common/Policy";
 
 const SettlementPolicyPage = () => {
+  const t = useTranslations("profilePage");
+
   return (
-    <AuthPage showHeader={true} heading="Settlement Policy" route="/profile/">
+    <AuthPage
+      showHeader={true}
+      heading={t("settlementPolicy")}
+      route="/profile/"
+    >
       <MainContent className="mt-8 !bg-[#fff]">
-        <Policy title="Settlement Policy">
-          <p>
-            Your use of the App is also governed by our Privacy Policy [Link to
-            Privacy Policy], which outlines how we collect, use, and disclose
-            your personal information.{" "}
-          </p>
-          <p>
-            By continuing to use the &quot;Brincos Dieras&quot; App, you
-            acknowledge that you have read, understood, and agreed to these
-            Terms of Use. If you have any questions or concerns, please contact
-            us at [Your Contact Information].
-          </p>
-          <p>
-            Thank you for choosing &quot;Brincos Dieras&quot; to showcase your
-            business ideas!
-          </p>
+        <Policy title={t("settlementPolicy")}>
+          <p>{t("p1")}</p>
+          <p>{t("p2")}</p>
+          <p>{t("p3")}</p>
         </Policy>
       </MainContent>
     </AuthPage>

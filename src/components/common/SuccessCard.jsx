@@ -1,11 +1,14 @@
 "use client";
 
 import { Check } from "lucide-react";
-import { DarkButton } from "./CustomButtons";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+
+import { DarkButton } from "./CustomButtons";
 
 const SuccessCard = ({ heading, subHeading, route }) => {
   const router = useRouter();
+  const t = useTranslations();
 
   return (
     <div className="relative">
@@ -17,7 +20,7 @@ const SuccessCard = ({ heading, subHeading, route }) => {
         <div className="text-center font-bold text-xl">{heading}</div>
         <div className="text-center text-xs">{subHeading}</div>
         <DarkButton onClick={() => router.push(route)} className="w-full m-0">
-          Continue
+          {t("continue")}
         </DarkButton>
       </div>
     </div>

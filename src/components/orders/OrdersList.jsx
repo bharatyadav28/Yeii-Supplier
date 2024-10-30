@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { ChevronDown, ListFilter } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import MainContent from "../common/MainContent";
 import NoItems from "../common/NoItems";
@@ -12,7 +13,7 @@ import { TransparentButton } from "../common/CustomButtons";
 import ListModal from "./ListModal";
 import { getLast12Months } from "@/lib/functions";
 
-const MenuButton = ({ label, Icon, list, isCheckBox = false }) => {
+const MenuButton = ({ label, Icon, list, isCheckBox = false, t }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleMenuOpen = () => {
@@ -33,6 +34,7 @@ const MenuButton = ({ label, Icon, list, isCheckBox = false }) => {
           list={list}
           label={label}
           isCheckBox={isCheckBox}
+          t={t}
         />
       )}
     </div>
@@ -40,6 +42,8 @@ const MenuButton = ({ label, Icon, list, isCheckBox = false }) => {
 };
 
 function OrdersList({ data }) {
+  const t = useTranslations("orderDetails");
+
   const emptyHeading = "You have no orders at this moment";
   const emptySubHeading = (
     <p>Build your online store with Brincos dieras and get orders.</p>
@@ -47,29 +51,31 @@ function OrdersList({ data }) {
 
   const isEmpty = data.length === 0;
   return (
-    <MainContent contentTitle="My Orders" count={data?.length || 0}>
-      <div className="flex gap-4 mt-4 items-center">
+    <MainContent contentTitle={t("MyOrders")} count={data?.length || 0}>
+      <div className="flex gap-4 mt-4 items-center ">
         <SearchInput
           className="bg-[var(--light)] rounded-full py-4 border-none"
           onChange={() => {}}
         />
 
         <MenuButton
-          label="Filter"
+          label={t("filter")}
           Icon={ListFilter}
           isCheckBox={true}
           list={getLast12Months()}
+          t={t}
         />
         <MenuButton
-          label="Sort by"
+          label={t("sortBy")}
           Icon={ChevronDown}
           list={[
-            "Order  accepted",
-            "Order shipped",
-            "Cancelled",
-            "Out for delivery",
-            "Delivered",
+            t("order_accepted"),
+            t("order_shipped"),
+            t("cancelled"),
+            t("out_for_delivery"),
+            t("delivered"),
           ]}
+          t={t}
         />
       </div>
       {isEmpty ? (
@@ -86,7 +92,7 @@ function OrdersList({ data }) {
 
             {/* Text */}
             <span className="px-4 text-[var(--main-pink)] my-4 text-sm">
-              {"Today"}
+              {t("today")}
             </span>
 
             {/* Right line: Dark on the left, fades to the right */}
@@ -99,6 +105,7 @@ function OrdersList({ data }) {
                 order={order}
                 onClick={() => {}}
                 isOrderPage={true}
+                t={t}
               />
             ))}
           </div>

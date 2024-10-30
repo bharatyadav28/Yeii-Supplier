@@ -23,7 +23,7 @@ const HeadMenu = ({ itemsType, handleTypeChange }) => {
   console.log("aasas", formType);
 
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between flex-wrap gap-4">
       <div className="flex gap-2">
         <CustomButton
           onClick={() => {
@@ -47,7 +47,10 @@ const HeadMenu = ({ itemsType, handleTypeChange }) => {
       </div>
 
       <div className="flex gap-2">
-        <SearchInput onChange={handleSearchInput} />
+        <SearchInput
+          onChange={handleSearchInput}
+          // className="xl:w-[18rem] w-[12rem]"
+        />
         <DarkButton
           onClick={() => {
             setOpenDialog(true);

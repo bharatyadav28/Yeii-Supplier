@@ -15,17 +15,11 @@ function List({ products, services }) {
 
   const handleItemsType = (value) => setItemsType(value);
 
-  const emptyHeading = "No items in store.";
-  const emptySubHeading = (
-    <p>
-      You don&apos;t have any products listed in your store. You can sell
-      products through the app by clicking on
-      <span className="font-semibold">&quot;Add&quot; </span> to create a
-      listing.
-    </p>
-  );
+  const emptyHeading = t("emptyHeading");
+  const emptySubHeading = <p>{t("emptyDescription")}</p>;
 
   const listData = itemsType === "products" ? products : services;
+  // const listData = [];
   return (
     <>
       <HeadMenu itemsType={itemsType} handleTypeChange={handleItemsType} />
@@ -44,7 +38,7 @@ function List({ products, services }) {
             subHeading={emptySubHeading}
           />
         ) : (
-          <div className=" grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4 ">
+          <div className=" grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4  ">
             {listData?.map((product) => (
               <ListItem
                 key={product._id}

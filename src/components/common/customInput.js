@@ -22,6 +22,7 @@ export const TextInput = (props) => {
     className,
     iconClasses,
     divClass,
+    containerClass,
   } = props;
   let classes = `w-full border-none outline-none text-lg disabled:cursor-not-allowed ${
     !customIcon && "ml-4"
@@ -34,7 +35,7 @@ export const TextInput = (props) => {
       {customIcon && (
         <span className={`px-5 ${iconClasses}`}>{customIcon}</span>
       )}
-      <div className={`w-full pr-5`}>
+      <div className={`w-full pr-5 ${containerClass}`}>
         {label && (
           <label className="text-[var(--main-gray)] text-[10px]">{label}</label>
         )}
