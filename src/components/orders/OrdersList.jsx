@@ -11,14 +11,15 @@ import SearchInput from "../common/SearchInput";
 import OrdersListItem from "./OrdersListItem";
 import { TransparentButton } from "../common/CustomButtons";
 import ListModal from "./ListModal";
-import { getLast12Months } from "@/lib/functions";
+import { useGetLast12Months } from "@/lib/functions";
 
 const MenuButton = ({ label, Icon, list, isCheckBox = false, t }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleMenuOpen = () => {
-    setMenuOpen((prev) => !prev);
-  };
+  /******  9c1ab03d-ffb3-42f2-ab43-1b0cc8fdfd19  *******/ const handleMenuOpen =
+    () => {
+      setMenuOpen((prev) => !prev);
+    };
   return (
     <div className="relative">
       <TransparentButton
@@ -43,6 +44,7 @@ const MenuButton = ({ label, Icon, list, isCheckBox = false, t }) => {
 
 function OrdersList({ data }) {
   const t = useTranslations("orderDetails");
+  const { months } = useGetLast12Months();
 
   const emptyHeading = "You have no orders at this moment";
   const emptySubHeading = (
@@ -62,7 +64,7 @@ function OrdersList({ data }) {
           label={t("filter")}
           Icon={ListFilter}
           isCheckBox={true}
-          list={getLast12Months()}
+          list={months}
           t={t}
         />
         <MenuButton

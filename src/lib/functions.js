@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 
-export function getLast12Months() {
+export function useGetLast12Months() {
   const t = useTranslations("filterMonth");
   const months = [];
   const currentDate = new Date();
@@ -23,5 +23,5 @@ export function getLast12Months() {
     currentDate.setMonth(monthIndex - 1);
   }
 
-  return months; // Reverse the array to show from oldest to newest
+  return { months }; // Reverse the array to show from oldest to newest
 }

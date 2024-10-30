@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import AuthPage from "@/components/common/AuthPage";
 import MainComp from "@/components/manage_profile/MainComp";
 
-const page = () => {
+const ManageProfile = () => {
   const t = useTranslations("profilePage");
   return (
     <AuthPage
@@ -17,4 +17,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default ManageProfile;

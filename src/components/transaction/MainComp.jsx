@@ -3,7 +3,7 @@
 import { ListFilter } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { getLast12Months } from "@/lib/functions";
+import { useGetLast12Months } from "@/lib/functions";
 import transactionData from "@/lib/dummyData/transactionData.json";
 import TransactionList from "./TransactionList";
 import MenuButton from "../common/MenuButton";
@@ -12,6 +12,7 @@ const MainComp = () => {
   const { transactions } = transactionData;
 
   const t = useTranslations("profilePage");
+  const { months } = useGetLast12Months();
 
   const today = transactions.filter((item) => item.date === "Today");
   const yesturday = transactions.filter((item) => item.date === "Yesturday");
@@ -24,7 +25,7 @@ const MainComp = () => {
           label={t("filter")}
           Icon={ListFilter}
           isCheckBox={true}
-          list={getLast12Months()}
+          list={months}
           t={t}
         />
       </div>

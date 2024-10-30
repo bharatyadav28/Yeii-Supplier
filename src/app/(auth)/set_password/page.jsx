@@ -4,7 +4,7 @@ import NewPassword from "@/components/auth/NewPassword";
 import AuthHeading from "@/components/common/AuthHeading";
 import AuthPage from "@/components/common/AuthPage";
 
-const page = () => {
+const SetPasswordPage = () => {
   const t = useTranslations("resetPage");
 
   return (
@@ -17,4 +17,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SetPasswordPage;

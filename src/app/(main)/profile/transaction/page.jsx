@@ -5,7 +5,7 @@ import AuthPage from "@/components/common/AuthPage";
 import MainContent from "@/components/common/MainContent";
 import MainComp from "@/components/transaction/MainComp";
 
-const page = () => {
+const TransactionPage = () => {
   const t = useTranslations("profilePage");
 
   return (
@@ -17,4 +17,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default TransactionPage;
