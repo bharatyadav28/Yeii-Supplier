@@ -15,6 +15,7 @@ import { DarkButton } from "@/components/common/CustomButtons";
 import { useState } from "react";
 import "react-phone-input-2/lib/style.css";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const SignupForm = () => {
   const [name, setName] = useState("");
@@ -25,6 +26,7 @@ const SignupForm = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const router = useRouter();
+  const t = useTranslations("signupPage");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,11 +46,12 @@ const SignupForm = () => {
     <form onSubmit={handleSubmit}>
       {/* Full Name */}
       <TextInput
+        divClass="!py-1"
         className="text-sm"
         customIcon={<UserIcon color="gray" />}
         type="text"
-        label="Full name"
-        placeholder="Enter Full name"
+        label={t("fullName")}
+        placeholder={t("fullNamePlaceholder")}
         value={name}
         required={true}
         onChange={(e) => setName(e.target.value)}
@@ -56,22 +59,23 @@ const SignupForm = () => {
 
       {/* Email */}
       <TextInput
+        divClass="!py-1"
         className="text-sm"
         customIcon={<EmailIcon />}
         type="email"
-        label="Email id"
-        placeholder="Enter Email"
+        label={t("email")}
+        placeholder={t("emailPlaceholder")}
         required={true}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
 
       {/* Phone number */}
-      <div className="flex items-center bg-white rounded-[15px] mb-2 py-1">
+      <div className="flex items-center bg-white rounded-[15px] mb-2 py-0">
         {/* <span className="px-5"><Flag color="gray" /></span> */}
         <div className="pl-5">
-          <label className="text-[var(--main-gray)] text-xs">
-            Phone number
+          <label className="text-[var(--main-gray)] text-[10px]">
+            {t("phoneNumber")}
           </label>
           <PhoneInput
             country={"us"} // Default country
@@ -89,10 +93,11 @@ const SignupForm = () => {
 
       {/* Address */}
       <TextArea
+        divClass="!py-0"
         className="text-sm"
         customIcon={<MapPin color="gray" />}
-        label="Address"
-        placeholder="Enter Address"
+        label={t("address")}
+        placeholder={t("addressPlaceholder")}
         value={address}
         onChange={(e) => setAddress(e.target.value)}
         width="500px"
@@ -101,17 +106,18 @@ const SignupForm = () => {
 
       {/* selection of business */}
       <SelectInput
-        className="p-0"
+        className="p-0 text-xs h-8"
         customIcon={<BusinessIcon />}
         value={option}
-        required={true}
-        label="Are you operating as a ?"
+        // required={true}
+        label={t("bussinessLabel")}
         onChange={(e) => setOption(e)}
       />
 
       {/* Password */}
       <PasswordInput
-        label="New Password"
+        className="!py-1"
+        label={t("password")}
         onChange={(e) => setPassword(e.target.value)}
         value={password}
         required={true}
@@ -119,7 +125,8 @@ const SignupForm = () => {
 
       {/* Confirm password */}
       <PasswordInput
-        label="Confirm new password"
+        className="!py-1"
+        label={t("confirmPassword")}
         onChange={(e) => setConfirmPassword(e.target.value)}
         value={confirmPassword}
         required={true}
@@ -129,21 +136,21 @@ const SignupForm = () => {
       <div className="flex items-center justify-center self-center gap-3 text-xs pb-4 pt-2">
         <CustomCheckBox onChange={(e) => console.log(e)} />
         <p className="w-[55%]">
-          By Signing up, you agree to the{" "}
+          {t("terms1")}{" "}
           <Link
             href="/terms_of_service"
             className="text-[var(--main-pink)] hover:underline"
           >
-            terms of service
+            {t("terms_of_service")}
           </Link>{" "}
-          and{" "}
+          {t("and")}{" "}
           <Link
             href="/privacy_policy"
             className="text-[var(--main-pink)] hover:underline"
           >
-            privacy policy
+            {t("privacy_policy")}
           </Link>
-          , including cookie use
+          {t("terms2")}
         </p>
       </div>
       {/* Create account button */}
@@ -151,7 +158,7 @@ const SignupForm = () => {
         isSubmit={true}
         className="w-full text-base p-7 rounded-[15px]"
       >
-        Create account
+        {t("heading")}
       </DarkButton>
     </form>
   );

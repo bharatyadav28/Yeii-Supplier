@@ -24,6 +24,7 @@ function List({ products, services }) {
     <>
       <HeadMenu itemsType={itemsType} handleTypeChange={handleItemsType} />
       <MainContent
+        className="!overflow-hidden flex flex-col"
         contentTitle={
           itemsType === "products"
             ? t("productListTitle")
@@ -38,7 +39,7 @@ function List({ products, services }) {
             subHeading={emptySubHeading}
           />
         ) : (
-          <div className=" grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4  ">
+          <div className="!overflow-y-auto grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-1 pt-3 rounded-xl ">
             {listData?.map((product) => (
               <ListItem
                 key={product._id}

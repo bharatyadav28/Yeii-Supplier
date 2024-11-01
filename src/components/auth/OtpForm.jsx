@@ -1,6 +1,7 @@
 "use client";
 
 import { DarkButton } from "@/components/common/CustomButtons";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -8,6 +9,7 @@ const OtpFrom = () => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [timeLeft, setTimeLeft] = useState(119);
   const router = useRouter();
+  const t = useTranslations("otpPage");
 
   const handleChange = (e, index) => {
     const value = e.target.value;
@@ -70,7 +72,7 @@ const OtpFrom = () => {
         ))}
       </div>
       <DarkButton onClick={handleSubmit} className="w-full ">
-        Confirm
+        {t("confirm")}
       </DarkButton>
       <div className="text-center">
         <p>{formatTime(timeLeft)}</p>
@@ -79,7 +81,7 @@ const OtpFrom = () => {
           className="text-[var(--main-pink)] mt-2 disabled:opacity-50"
           disabled={timeLeft > 0}
         >
-          Resend OTP
+          {t("resend")}
         </button>
       </div>
     </div>

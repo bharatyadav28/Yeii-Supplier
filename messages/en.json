@@ -30,6 +30,8 @@
     "heading": "Create account",
     "fullName": "Full name",
     "fullNamePlaceholder": "Enter Full name",
+    "email": "Enter Email id",
+    "emailPlaceholder": "Enter email",
     "phoneNumber": "Phone number",
     "address": "Address",
     "addressPlaceholder": "Enter Address",

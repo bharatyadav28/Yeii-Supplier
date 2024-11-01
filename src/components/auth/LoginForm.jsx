@@ -6,11 +6,13 @@ import { useState } from "react";
 import { DarkButton } from "@/components/common/CustomButtons";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  const t = useTranslations("loginPage");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,8 +27,8 @@ const LoginForm = () => {
         className="text-sm"
         customIcon={<EmailIcon />}
         type="email"
-        label="Email id"
-        placeholder="Enter Email"
+        label={t("email")}
+        placeholder={t("emailPlaceholder")}
         required={true}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
@@ -34,7 +36,7 @@ const LoginForm = () => {
 
       {/* Password */}
       <PasswordInput
-        label="Enter Password"
+        label={t("password")}
         onChange={(e) => setPassword(e.target.value)}
         value={password}
         required={true}
@@ -46,7 +48,7 @@ const LoginForm = () => {
           href="/forgot_password"
           className="text-yellow-400 hover:underline"
         >
-          Forgot password
+          {t("forgotPassword")}
         </Link>
       </div>
 
@@ -55,7 +57,7 @@ const LoginForm = () => {
         isSubmit={true}
         className="w-full text-base p-7 rounded-[15px]"
       >
-        Login
+        {t("login")}
       </DarkButton>
     </form>
   );

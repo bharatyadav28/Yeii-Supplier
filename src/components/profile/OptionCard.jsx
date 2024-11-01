@@ -1,15 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { Switch } from "../ui/switch";
 import DeleteDialog from "../common/DeleteDialog";
+import { getLanguage } from "@/app/actions/getLanguage";
 
-function OptionCard({ option, isSettings, extraInfo, isDelete }) {
+function OptionCard({ option, isSettings, extraInfo, isDelete, isLanguage }) {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const [lang, setLang] = useState("en");
   const router = useRouter();
   const pathname = usePathname();
   const t = useTranslations("profilePage");
@@ -31,6 +33,19 @@ function OptionCard({ option, isSettings, extraInfo, isDelete }) {
     }
   };
 
+  useEffect(() => {
+    const fetchLanguage = async () => {
+      try {
+        const language = await getLanguage();
+        setLang(language);
+      } catch (error) {
+        console.error("Failed to fetch language:", error);
+      }
+    };
+
+    fetchLanguage();
+  }, []);
+
   return (
     <>
       {!isNotificationOption && (
@@ -50,6 +65,11 @@ function OptionCard({ option, isSettings, extraInfo, isDelete }) {
           <div className=" flex items-center gap-2 text-sm">
             {extraInfo && (
               <div className="text-sm text-[var(--main-gray)]">{extraInfo}</div>
+            )}
+            {isLanguage && (
+              <div className="text-sm text-[var(--main-gray)]">
+                {lang === "en" ? "English" : "Spanish"}
+              </div>
             )}
             {/* {isNotificationOption && (
             <Switch className="data-[state=checked]:bg-[var(--main-pink)]  h-7" />
