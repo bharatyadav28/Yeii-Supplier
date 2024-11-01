@@ -30,6 +30,8 @@
     "heading": "Crear cuenta",
     "fullName": "Nombre completo",
     "fullNamePlaceholder": "Introduce tu nombre completo",
+    "email": "Introduce el correo electrónico",
+    "emailPlaceholder": "Introduce el correo electrónico",
     "phoneNumber": "Número de teléfono",
     "address": "Dirección",
     "addressPlaceholder": "Introduce la dirección",

@@ -7,7 +7,9 @@ import SuccessCard from "@/components/common/SuccessCard";
 const SuccessPage = ({ params }) => {
   const { path } = params;
 
-  const t = useTranslations("passwordChanged");
+  const t = useTranslations(
+    path === "password_changed" ? "passwordChanged" : "accountCreated"
+  );
 
   return (
     <AuthPage>
@@ -24,13 +26,9 @@ const SuccessPage = ({ params }) => {
         />
       ) : path === "account_created" ? (
         <SuccessCard
-          heading={
-            <h1>
-              Account Created <br /> sucessfully
-            </h1>
-          }
-          subHeading={<p>Your Account has been created sucessfully</p>}
-          route="/"
+          heading={<h1 className="max-w-[200px]">{t("heading")}</h1>}
+          subHeading={<p>{t("subHeading")}</p>}
+          route="/login"
         ></SuccessCard>
       ) : (
         <NotFound />

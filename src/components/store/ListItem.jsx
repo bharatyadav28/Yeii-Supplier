@@ -17,7 +17,7 @@ function ListItem({ item, isService, t }) {
   return (
     <>
       <div
-        className="bg-[var(--light)]  flex  w-[calc(33.333%-1rem)] min-w-[22rem]  p-2 rounded-3xl  cursor-pointer"
+        className="bg-[var(--light)]  flex  min-w-[18rem]  p-2 rounded-3xl  cursor-pointer"
         onClick={handleOpenDialog}
       >
         <div className="flex-grow-1 basis-5/12 relative ">

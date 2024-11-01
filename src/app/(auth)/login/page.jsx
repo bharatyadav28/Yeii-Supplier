@@ -1,8 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import LoginForm from "@/components/auth/LoginForm";
+import { useTranslations } from "next-intl";
 
 const LoginPage = () => {
+  const t = useTranslations("loginPage");
+
   return (
     <div className="relative bg-[url('/login.jpg')]  bg-cover bg-center  h-screen w-full ">
       <div className="absolute bg-black/60   h-screen w-full flex justify-center items-center">
@@ -12,22 +15,22 @@ const LoginPage = () => {
             <div className="relative p-8 h-full bg-gradient-to-b from-[#251917] to-[#4D2237] rounded-xl ">
               {/* Header */}
               <h2 className="text-3xl font-bold text-center text-[var(--main-pink)] mb-2">
-                Welcome back
+                {t("heading")}
               </h2>
               <p className="text-center text-gray-300 mb-8 text-xs">
-                Login to your account
+                {t("subHeading")}
               </p>
 
               {/* Form */}
               <LoginForm />
               {/* Footer */}
               <p className="text-center text-gray-400 mt-4 text-xs">
-                Don’t have an account?{" "}
+                {t("dontHaveAccount")}{" "}
                 <Link
                   href="/signup"
                   className="text-yellow-400 hover:underline"
                 >
-                  Create Account
+                  {t("createAccount")}
                 </Link>
               </p>
             </div>

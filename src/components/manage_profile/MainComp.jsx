@@ -73,8 +73,8 @@ const MainComp = () => {
           className="text-sm"
           customIcon={<EmailIcon />}
           type="email"
-          label="Email id"
-          placeholder="Enter Email"
+          label={t("email")}
+          placeholder={t("emailPlaceholder")}
           required={true}
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}

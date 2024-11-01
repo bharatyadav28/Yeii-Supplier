@@ -51,13 +51,15 @@ export const TextInput = (props) => {
 };
 
 export const TextArea = (props) => {
-  const { customIcon, label, className } = props;
+  const { customIcon, label, className, divClass } = props;
 
   let classes = `resize-none disabled:cursor-not-allowed ${
     !customIcon && "ml-4"
   } ${className}`;
   return (
-    <div className="flex items-center bg-white rounded-[15px] py-2 mb-2 ">
+    <div
+      className={`flex items-center bg-white rounded-[15px] py-2 mb-2 ${divClass}`}
+    >
       {customIcon && <span className="px-5 py-4 self-start">{customIcon}</span>}
       <div className="w-full pr-5">
         {label && (

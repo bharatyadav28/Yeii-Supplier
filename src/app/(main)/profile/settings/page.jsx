@@ -55,9 +55,10 @@ const SettingsPage = () => {
         info = t("custom_days");
         break;
 
-      case t("language"):
-        info = "English";
-        break;
+      // case t("language"):
+      //   fetchLanguage();
+      //   info = "English";
+      //   break;
       default:
         info = "";
     }
@@ -72,6 +73,7 @@ const SettingsPage = () => {
             option={option}
             isSettings={true}
             extraInfo={getExtraInfo(option)}
+            isLanguage={option.title === t("language")}
           />
         ))}
       </div>
