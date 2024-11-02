@@ -16,7 +16,9 @@ function OptionCard({ option, isSettings, extraInfo, isDelete }) {
 
   const isNotificationOption = option.title === t("notifications");
 
-  const handleDeleteDialog = () => {
+  const handleDeleteDialog = async (selection = "cancel") => {
+    if (selection === "confirm") {
+    }
     setOpenDeleteDialog((prev) => !prev);
   };
 
@@ -93,7 +95,7 @@ function OptionCard({ option, isSettings, extraInfo, isDelete }) {
         title={t("delete_account")}
         description={t("delete_account_desc")}
         onCancel={handleDeleteDialog}
-        onConfirm={handleDeleteDialog}
+        onConfirm={() => handleDeleteDialog("confirm")}
         t={t}
       />
     </>

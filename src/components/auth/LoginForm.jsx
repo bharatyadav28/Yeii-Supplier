@@ -6,15 +6,24 @@ import { useState } from "react";
 import { DarkButton } from "@/components/common/CustomButtons";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { userLogin } from "@/lib/serverActions";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ email, password });
+    const response = await userLogin({ email, password, type: "supplier" });
+
+    console.log("response:", response);
+
+    if (!response.success) {
+      // alert(response.message);
+      return;
+    }
+
     router.push("/");
   };
 

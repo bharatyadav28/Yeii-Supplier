@@ -15,6 +15,7 @@ import { DarkButton } from "@/components/common/CustomButtons";
 import { useState } from "react";
 import "react-phone-input-2/lib/style.css";
 import { useRouter } from "next/navigation";
+import { createUser } from "@/lib/serverActions";
 
 const SignupForm = () => {
   const [name, setName] = useState("");
@@ -26,8 +27,18 @@ const SignupForm = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const router = useRouter();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const submittedData = {
+      name,
+      email,
+      phoneNumber,
+      address,
+      option,
+      password,
+      confirmPassword,
+      type: "supplier",
+    };
     console.log({
       name,
       email,
@@ -37,9 +48,22 @@ const SignupForm = () => {
       password,
       confirmPassword,
     });
+    try {
+      const response = await createUser(submittedData);
 
-    router.push("/success/account_created");
+      console.log("response", response);
+
+      if (!response.success) {
+        // alert(response.message);
+        return;
+      }
+
+      router.push("/");
+    } catch (error) {
+      console.log("error", error.message);
+    }
   };
+
   return (
     <form onSubmit={handleSubmit}>
       {/* Full Name */}
@@ -104,7 +128,7 @@ const SignupForm = () => {
         className="p-0"
         customIcon={<BusinessIcon />}
         value={option}
-        required={true}
+        // required={true}
         label="Are you operating as a ?"
         onChange={(e) => setOption(e)}
       />
