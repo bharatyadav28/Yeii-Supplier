@@ -12,15 +12,22 @@ import {
   transactionIcon,
 } from "@/lib/svg_icons";
 import { ChevronRight, LogOut } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 import DeleteDialog from "../common/DeleteDialog";
 import OptionCard from "./OptionCard";
+import { userLogout } from "@/lib/serverActions";
 
 const ProfileOptions = () => {
   const t = useTranslations("profilePage");
+  const router = useRouter();
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
-  const handleDeleteDialog = () => {
+  const handleDeleteDialog = async (selection = "cancel") => {
+    if (selection === "confirm") {
+      await userLogout();
+      router.push("/login");
+    }
     setOpenDeleteDialog((prev) => !prev);
   };
 
@@ -88,7 +95,7 @@ const ProfileOptions = () => {
         title={t("logout")}
         description={t("logoutDescription")}
         onCancel={handleDeleteDialog}
-        onConfirm={handleDeleteDialog}
+        onConfirm={() => handleDeleteDialog("confirm")}
         Icon={LogOut}
         t={t}
       />

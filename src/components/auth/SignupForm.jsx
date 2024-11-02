@@ -16,6 +16,7 @@ import { useState } from "react";
 import "react-phone-input-2/lib/style.css";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { createUser } from "@/lib/serverActions";
 
 const SignupForm = () => {
   const [name, setName] = useState("");
@@ -28,8 +29,18 @@ const SignupForm = () => {
   const router = useRouter();
   const t = useTranslations("signupPage");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const submittedData = {
+      name,
+      email,
+      phoneNumber,
+      address,
+      option,
+      password,
+      confirmPassword,
+      type: "supplier",
+    };
     console.log({
       name,
       email,
@@ -39,9 +50,22 @@ const SignupForm = () => {
       password,
       confirmPassword,
     });
+    try {
+      const response = await createUser(submittedData);
 
-    router.push("/success/account_created");
+      console.log("response", response);
+
+      if (!response.success) {
+        // alert(response.message);
+        return;
+      }
+
+      router.push("/");
+    } catch (error) {
+      console.log("error", error.message);
+    }
   };
+
   return (
     <form onSubmit={handleSubmit}>
       {/* Full Name */}
@@ -110,7 +134,11 @@ const SignupForm = () => {
         customIcon={<BusinessIcon />}
         value={option}
         // required={true}
+<<<<<<< HEAD
         label={t("bussinessLabel")}
+=======
+        label="Are you operating as a ?"
+>>>>>>> feat/api-integration
         onChange={(e) => setOption(e)}
       />
 

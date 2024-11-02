@@ -7,6 +7,7 @@ import { DarkButton } from "@/components/common/CustomButtons";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { userLogin } from "@/lib/serverActions";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -14,9 +15,17 @@ const LoginForm = () => {
   const router = useRouter();
   const t = useTranslations("loginPage");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ email, password });
+    const response = await userLogin({ email, password, type: "supplier" });
+
+    console.log("response:", response);
+
+    if (!response.success) {
+      // alert(response.message);
+      return;
+    }
+
     router.push("/");
   };
 
