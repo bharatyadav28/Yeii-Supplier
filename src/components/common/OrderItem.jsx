@@ -3,9 +3,11 @@ import { CrossButton, DarkButton, LightButton } from "./CustomButtons";
 import { Check, ChevronRight, X } from "lucide-react";
 import ItemCard from "./ItemCard";
 import { useTranslations } from "next-intl";
+import { trimData } from "@/lib/functions";
 
 const OrderItem = ({ order, isAccepted, onClick }) => {
   const t = useTranslations("orderDetails");
+
   return (
     <div
       onClick={() => onClick(order)}
@@ -25,7 +27,7 @@ const OrderItem = ({ order, isAccepted, onClick }) => {
           <div>
             <h1 className="font-bold text-sm">{order.customerDetails.name}</h1>
             <p className="text-[10px] text-[var(--main-gray)] ">
-              {order.customerDetails.address}
+              {trimData(order.customerDetails.address, 7)}
             </p>
           </div>
         </div>
@@ -125,9 +127,7 @@ const OrderItem = ({ order, isAccepted, onClick }) => {
             <div className="text-[10px] text-[var(--main-gray)] ">
               {t("category")}
             </div>
-            <div className="text-xs font-semibold">
-              {order.items[0].category}
-            </div>
+            <div className="text-xs font-semibold">{order.Category}</div>
           </div>
           <div className="text-center">
             <div className="text-xs text-[var(--main-gray)] ">{t("total")}</div>
