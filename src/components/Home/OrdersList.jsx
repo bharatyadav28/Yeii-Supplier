@@ -18,7 +18,7 @@ const OrdersList = ({ orders }) => {
     <>
       <div
         id="orders-list"
-        className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-2 overflow-y-auto h-full pb-12"
+        className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-2 overflow-y-auto h-full pb-12 rounded-t-xl"
       >
         {orders.map((order) => (
           <OrderItem key={order._id} order={order} onClick={handleClick} />
