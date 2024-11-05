@@ -53,8 +53,12 @@ function OrdersList({ data }) {
 
   const isEmpty = data.length === 0;
   return (
-    <MainContent contentTitle={t("MyOrders")} count={data?.length || 0}>
-      <div className="flex gap-4 mt-4 items-center ">
+    <MainContent
+      className="!overflow-hidden flex flex-col pb-0"
+      contentTitle={t("MyOrders")}
+      count={data?.length || 0}
+    >
+      <div className="flex gap-4 mt-4 items-center pb-2">
         <SearchInput
           className="bg-[var(--light)] rounded-full py-4 border-none"
           onChange={() => {}}
@@ -87,13 +91,13 @@ function OrdersList({ data }) {
           subHeading={emptySubHeading}
         />
       ) : (
-        <>
+        <div className="overflow-y-auto rounded-t-xl">
           <div className="flex items-center w-full text-center">
             {/* Left line: Dark on the right, fades to the left */}
             <div className="flex-grow h-px bg-gradient-to-l from-gray-400 to-transparent"></div>
 
             {/* Text */}
-            <span className="px-4 text-[var(--main-pink)] my-4 text-sm">
+            <span className="px-4 text-[var(--main-pink)] my-2 text-sm">
               {t("today")}
             </span>
 
@@ -111,7 +115,7 @@ function OrdersList({ data }) {
               />
             ))}
           </div>
-        </>
+        </div>
       )}
     </MainContent>
   );

@@ -4,7 +4,7 @@ import { noItemsIcon } from "@/lib/svg_icons";
 import MainContent from "../common/MainContent";
 import NoItems from "../common/NoItems";
 import OrdersCallender from "./OrdersCallender";
-import orderData from "@/lib/dummyData/orderData.json";
+import orderData from "@/lib/dummyData/orderPageData.json";
 import { DarkButton } from "../common/CustomButtons";
 import { useRouter } from "next/navigation";
 import OrdersList from "./OrdersList";

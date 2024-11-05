@@ -25,3 +25,7 @@ export function useGetLast12Months() {
 
   return { months }; // Reverse the array to show from oldest to newest
 }
+
+export const trimData = (data, length) => {
+  return data.length > length ? data.slice(0, 27) + "..." : data;
+};

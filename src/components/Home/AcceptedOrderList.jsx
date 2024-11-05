@@ -27,7 +27,7 @@ const AcceptedOrderList = ({ orders }) => {
     </div>
   ) : (
     <>
-      <div className="flex-grow flex flex-col overflow-y-auto h-full pb-4">
+      <div className="flex-grow flex flex-col overflow-y-auto h-full pb-4 rounded-t-xl">
         {orders.map((order) => (
           <div key={order._id}>
             <div className="text-[10px] text-[var(--main-gray)] my-1">
