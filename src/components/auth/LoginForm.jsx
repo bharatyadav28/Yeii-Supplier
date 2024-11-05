@@ -17,14 +17,11 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await userLogin({ email, password, type: "supplier" });
+    // const response = await userLogin({ email, password, type: "supplier" });
 
-    console.log("response:", response);
-
-    if (!response.success) {
-      // alert(response.message);
-      return;
-    }
+    // if (!response.success) {
+    //   return;
+    // }
 
     router.push("/");
   };

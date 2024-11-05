@@ -134,11 +134,7 @@ const SignupForm = () => {
         customIcon={<BusinessIcon />}
         value={option}
         // required={true}
-<<<<<<< HEAD
         label={t("bussinessLabel")}
-=======
-        label="Are you operating as a ?"
->>>>>>> feat/api-integration
         onChange={(e) => setOption(e)}
       />
 

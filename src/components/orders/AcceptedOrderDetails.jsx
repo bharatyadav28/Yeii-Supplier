@@ -52,7 +52,7 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
         open={openDialog}
         handleOpen={handleOpenDialog}
         title={t("order_details")}
-        className="w-[48rem] h-max !overflow-x-hidden"
+        className="w-[48rem] h-max max-h-[calc(100%-2.5rem)] !overflow-x-hidden"
       >
         {order && (
           <>

@@ -14,13 +14,13 @@ const MutationRequest = async ({
   //   }
 
   try {
-    const response = await fetch(path, {
+    const response = await fetch(`https://yeii-api.onrender.com${path}`, {
       method: type,
       headers,
       body: JSON.stringify(body),
     });
+    console.log("response", response);
     const responseData = await response.json();
-    console.log("responseData", responseData);
     if (!response.ok) {
       throw new Error(responseData?.message || responseData?.errors);
     }
@@ -33,7 +33,7 @@ const MutationRequest = async ({
 export const createUser = async (submittedData) => {
   return await MutationRequest({
     type: "POST",
-    path: "https://yeii-api.onrender.com/auth/register",
+    path: "/auth/register",
     body: submittedData,
     isTokenRequired: false,
   });
@@ -42,7 +42,7 @@ export const createUser = async (submittedData) => {
 export const userLogin = async (submittedData) => {
   const response = await MutationRequest({
     type: "POST",
-    path: "https://yeii-api.onrender.com/auth/login",
+    path: "/auth/login",
     body: submittedData,
     isTokenRequired: false,
   });

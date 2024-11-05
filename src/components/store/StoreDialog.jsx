@@ -44,7 +44,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
         <TextInput
           name="actualPrice"
           id="actualPrice"
-          customIcon="MS$"
+          customIcon="MX$"
           className="!text-[0.8rem] "
           iconClasses={`t-icon ${locale === "en" ? "pl-3" : "pl-2"} !pr-0 my-0`}
           placeholder={t("pricePlaceholder")}
@@ -122,7 +122,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
         <TextInput
           name="discountedPrice"
           id="discountedPrice"
-          customIcon="MS$"
+          customIcon="MX$"
           iconClasses={`t-icon ${locale === "en" ? "pl-3" : "pl-2"} !pr-0 my-0`}
           placeholder={t("pricePlaceholder")}
           defaultValue={item?.discountedPrice}
@@ -194,7 +194,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
               name="cateogry"
               id="cateogry"
               className="!text-[0.8rem] text-[#00131fcc] pl-5 "
-              placeholder={t(`${formType}.coupon_text`)}
+              placeholder={t(`${formType}.cate_placeholder`)}
               menu={["Furniture", "Electronics", "Grocery"]}
               value={item?.category}
             />

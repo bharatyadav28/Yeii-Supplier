@@ -19,6 +19,18 @@ const nextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        // All requests starting with /api will be redirected
+        source: "/api/:path*",
+        // Replace with your external API URL
+        destination: "https://yeii-api.onrender.com/:path*",
+      },
+    ];
+  },
 };
+
+// https://yeii-api.onrender.com
 
 export default withNextIntl(nextConfig);

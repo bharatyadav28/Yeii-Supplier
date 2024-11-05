@@ -34,7 +34,7 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType, t }) {
         <TextInput
           name="actualPrice"
           id="actualPrice"
-          customIcon="MS$"
+          customIcon="MX$"
           className="!text-[0.8rem] "
           iconClasses="t-icon pl-3 !pr-0"
           defaultValue={item?.actualPrice}
@@ -109,7 +109,7 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType, t }) {
         <TextInput
           name="discountedPrice"
           id="discountedPrice"
-          customIcon="MS$"
+          customIcon="MX$"
           iconClasses="t-icon  pl-3 !pr-0"
           defaultValue={item?.discountedPrice}
           disabled

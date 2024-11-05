@@ -66,14 +66,17 @@ function ListItem({ item, isService, t }) {
             </div>
           )}
 
-          <div className="flex items-center justify-between w-full mt-3 ">
+          <div
+            className="flex items-center justify-between w-full mt-3 "
+            onClick={(event) => event.stopPropagation()}
+          >
             <div className="text-lg font-semibold">
               {" "}
               ${item.discountedPrice}
             </div>
             <div>
               <Switch
-                checked={item.availability}
+                // checked={item.availability}
                 className="data-[state=checked]:bg-[var(--main-pink)] "
               />
             </div>
