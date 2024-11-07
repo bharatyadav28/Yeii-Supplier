@@ -13,7 +13,7 @@ import { BusinessIcon, EmailIcon, UserIcon } from "@/lib/icons";
 import { DarkButton, LightButton } from "../common/CustomButtons";
 import { editIcon } from "@/lib/svg_icons";
 
-const MainComp = () => {
+const MainComp = ({ isEdit, setIsEdit }) => {
   const [formData, setFormData] = useState({
     name: user.name,
     phoneNumber: user.phoneNumber,
@@ -21,7 +21,6 @@ const MainComp = () => {
     operating_as: user.operating_as,
     address: user.address,
   });
-  const [isEdit, setIsEdit] = useState(true);
 
   const t = useTranslations("signupPage");
 
@@ -33,10 +32,10 @@ const MainComp = () => {
   };
 
   const handleClick = () => {
-    setIsEdit((prev) => !prev);
+    setIsEdit();
   };
   return (
-    <div className="w-[400px] flex flex-col gap-4">
+    <div className=" w-[400px] flex flex-col gap-4">
       <div className="self-center flex flex-col items-center">
         <div className="relative w-[120px] h-[120px] rounded-full border-4 mb-2">
           <Image
@@ -130,18 +129,18 @@ const MainComp = () => {
         {isEdit ? (
           <DarkButton
             onClick={handleClick}
-            className="w-full mt-3 py-7 text-base"
+            className="w-full mt-3 py-6 text-base"
           >
             {t("edit")}
           </DarkButton>
         ) : (
           <>
-            <DarkButton isSubmit={true} className="w-full mt-3 py-7 text-base">
+            <DarkButton isSubmit={true} className="w-full mt-3 py-6 text-base">
               {t("save_changes")}
             </DarkButton>
             <LightButton
               onClick={handleClick}
-              className="w-full mt-2 py-7 text-base"
+              className="w-full mt-2 py-6 text-base"
             >
               {t("cancel")}
             </LightButton>

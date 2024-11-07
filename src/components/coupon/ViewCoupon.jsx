@@ -1,4 +1,4 @@
-import { Edit, Percent, Trash } from "lucide-react";
+import { Clock, Edit, Percent, Trash } from "lucide-react";
 import CustomDialog from "../common/CustomDialog";
 import { CounterInput, TextArea, TextInput } from "../common/customInput";
 import { useState } from "react";
@@ -112,15 +112,41 @@ const ViewCoupon = (props) => {
         <div className="grid grid-cols-2 gap-2">
           <div>
             <div className="my-2 text-sm">{t("expiry_date")}</div>
-            <DatePicker
-              className="rounded-xl border-none !py-6 w-full disabled:cursor-not-allowed"
-              title="Select expiry date"
-              value={formData.expiry_date}
-              onChange={(date) =>
-                handleFormData({ ...formData, expiry_date: date })
-              }
-              disabled={dialogStates.isView}
-            />
+            <div className="flex items-center justify-between pr-3 rounded-xl bg-white w-full ">
+              <TextInput
+                divClass="mb-0 py-3"
+                className="text-sm"
+                placeholder="Select expiry date"
+                value={formData.expiry_date}
+                onChange={(e) =>
+                  handleFormData({ ...formData, expiry_date: e.target.value })
+                }
+                disabled={dialogStates.isView}
+              />
+              <DatePicker
+                // className="rounded-xl border-none !py-6 w-full disabled:cursor-not-allowed"
+                // title="Select expiry date"
+                value={formData.expiry_date}
+                onChange={(date) =>
+                  handleFormData({ ...formData, expiry_date: date })
+                }
+                disabled={dialogStates.isView}
+              >
+                <button
+                  // {...props}
+                  // variant={"outline"}
+                  // className={cn(
+                  //   "w-[240px] justify-start text-left font-normal disabled:!cursor-not-allowed " +
+                  //     className,
+                  //   !date && "text-muted-foreground"
+                  // )}
+                  disabled={dialogStates.isView}
+                >
+                  {/* {date ? format(date, "dd/MM/yyyy") : <span>{title}</span>} */}
+                  <Clock color="gray" size={18} />
+                </button>
+              </DatePicker>
+            </div>
           </div>
           <div>
             <div className="my-2 text-sm">
