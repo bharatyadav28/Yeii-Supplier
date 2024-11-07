@@ -4,7 +4,7 @@ import MenuButton from "../common/MenuButton";
 const CouponList = ({ handleDelete, handleEdit, handleClick, t }) => {
   const { coupons } = couponsData;
   return (
-    <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-3 mt-2 pt-1 pb-3 overflow-y-auto">
+    <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-3 mt-2 pt-1 pb-3 overflow-y-auto rounded-t-lg">
       {coupons.map((coupon) => (
         <div key={coupon.id} className="p-3 bg-white rounded-2xl ">
           <div className="flex justify-between items-center">

@@ -34,9 +34,9 @@ function ListModal({
       ></div>
 
       <div
-        className={`flex flex-col absolute  !z-[1000] h-max max-h-[calc(100vh-10rem)] overflow-y-auto w-max bg-white text-black ${
-          isCoupon ? "top-8" : "top-0"
-        } rounded-3xl py-4 ${!isCheckBox ? "px-5" : "px-2"} `}
+        className={`flex flex-col absolute  !z-[1000] h-max max-h-[calc(100vh-10rem)] overflow-y-auto w-max bg-white text-black rounded-3xl py-4 ${
+          !isCheckBox ? "px-5" : "px-2"
+        } ${isCoupon ? "top-9 right-0 !py-2 !w-[130px]" : "top-0"}`}
       >
         {isCoupon ? (
           <>

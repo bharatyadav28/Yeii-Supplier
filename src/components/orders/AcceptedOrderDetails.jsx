@@ -150,13 +150,13 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
                       <div className="border-[1px] border-dashed mt-2" />
                     </div>
 
-                    <div className="flex gap-2 justify-center items-center text-[var(--main-pink)] text-base">
+                    <button className="flex gap-2 justify-center items-center text-[var(--main-pink)] text-base">
                       <NotepadText size={20} />
                       <div>{t("generate_invoice")}</div>
                       <div className="ml-4">
                         <ChevronRight size={20} color="#B0B0B0" />
                       </div>
-                    </div>
+                    </button>
                   </div>
                 </div>
               </div>

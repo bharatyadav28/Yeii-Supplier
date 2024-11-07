@@ -58,6 +58,7 @@ const MainComp = () => {
       console.log("Details", Id);
       console.log(formData);
     }
+    setOpen(false);
   };
 
   const handleCreate = () => {
@@ -125,6 +126,7 @@ const MainComp = () => {
 
   const deleteCoupon = () => {
     console.log("Delete", Id);
+    setOpenDelete(false);
   };
   return (
     <>
