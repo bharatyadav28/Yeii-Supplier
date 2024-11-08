@@ -114,7 +114,7 @@ const ViewCoupon = (props) => {
             <div className="my-2 text-sm">{t("expiry_date")}</div>
             <div className="flex items-center justify-between pr-3 rounded-xl bg-white w-full ">
               <TextInput
-                divClass="mb-0 py-3"
+                divClass="!mb-0 !py-3"
                 className="text-sm"
                 placeholder="Select expiry date"
                 value={formData.expiry_date}
