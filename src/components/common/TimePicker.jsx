@@ -67,6 +67,21 @@ const TimePicker = ({
     }
   };
 
+  useEffect(() => {
+    if (isOpen && dropdownRef.current) {
+      const dropdownElement =
+        dropdownRef.current.querySelector('[role="dialog"]');
+      if (dropdownElement) {
+        const { bottom } = dropdownRef.current.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const dropdownHeight = dropdownElement.offsetHeight;
+        const shouldOpenUpward = bottom + dropdownHeight > windowHeight;
+        dropdownElement.style.bottom = shouldOpenUpward ? "100%" : "auto";
+        dropdownElement.style.top = shouldOpenUpward ? "auto" : "100%";
+      }
+    }
+  }, [isOpen]);
+
   return (
     <div className="relative min-w-[5rem] " ref={dropdownRef}>
       <button
@@ -97,7 +112,11 @@ const TimePicker = ({
       </button>
 
       {isOpen && (
-        <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg">
+        <div
+          role="dialog"
+          className="absolute z-10 w-full bg-white border border-gray-300 rounded-md shadow-lg"
+          style={{ marginTop: "1px", marginBottom: "1px" }}
+        >
           <div className="grid grid-cols-3 gap-2 p-2">
             <div>
               {/* <h3 className="text-sm font-semibold mb-1">Hours</h3> */}

@@ -291,7 +291,10 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
             <TransparentButton className=" text-[#5F5F5F] font-semibold">
               {t("rewind_status")}
             </TransparentButton>
-            <DarkButton className="font-semibold" onClick={handeOrderStatus}>
+            <DarkButton
+              className="font-semibold w-full"
+              onClick={handeOrderStatus}
+            >
               {t("confirm")}
             </DarkButton>
           </div>
