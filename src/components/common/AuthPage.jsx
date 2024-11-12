@@ -5,7 +5,7 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 
-const AuthPage = ({ children, route, heading, showHeader }) => {
+const AuthPage = ({ children, route, heading, showHeader, className }) => {
   const router = useRouter();
   const pathname = usePathname();
   const showLogo = !pathname.includes("profile");
@@ -28,7 +28,12 @@ const AuthPage = ({ children, route, heading, showHeader }) => {
             )}
           </div>
         )}
-        <div className="relative flex flex-col justify-center items-center h-full gap-5">
+        <div
+          className={
+            "relative flex flex-col justify-center items-center h-full gap-5 " +
+            className
+          }
+        >
           {children}
         </div>
       </div>
