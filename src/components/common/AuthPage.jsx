@@ -12,7 +12,7 @@ const AuthPage = ({ children, route, heading, showHeader, className }) => {
 
   return (
     <div className="w-full flex flex-col !h-screen bg-[url('/bg-auth.png')] bg-cover bg-center">
-      <div className="w-full h-full px-10 py-5 flex flex-col">
+      <div className="w-full h-full px-10 pt-5 flex flex-col">
         {showHeader && (
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-4">
