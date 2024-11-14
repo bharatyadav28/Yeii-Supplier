@@ -14,7 +14,7 @@ const ManageProfile = () => {
       showHeader={true}
       heading={isEdit ? t("manageBusinessProfile") : t("editBusinessProfile")}
       route="/profile"
-      className="overflow-y-auto"
+      className="overflow-hidden pb-0"
     >
       <MainComp isEdit={isEdit} setIsEdit={() => setIsEdit((prev) => !prev)} />
     </AuthPage>
