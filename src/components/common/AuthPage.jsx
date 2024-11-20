@@ -11,7 +11,7 @@ const AuthPage = ({ children, route, heading, showHeader, className }) => {
   const showLogo = !pathname.includes("profile");
 
   return (
-    <div className="w-full flex flex-col !h-screen bg-[url('/bg-auth.png')] bg-cover bg-center">
+    <div className="w-full flex flex-col !h-screen bg-[url('/bg-auth.png')] bg-cover bg-center overflow-y-auto custom-scrollbar">
       <div className="w-full h-full px-10 pt-5 flex flex-col">
         {showHeader && (
           <div className="flex justify-between items-center">

@@ -35,7 +35,7 @@ const MainComp = ({ isEdit, setIsEdit }) => {
     setIsEdit();
   };
   return (
-    <div className=" w-[410px] flex-grow flex flex-col gap-4 !h-full overflow-y-auto px-3 pb-5 custom-scrollbar">
+    <div className=" w-[410px] flex-grow flex flex-col gap-4 !h-full px-3 mb-6 custom-scrollbar">
       <div className="self-center flex flex-col items-center">
         <div className="relative w-[120px] h-[120px] rounded-full border-4 mb-2">
           <Image
