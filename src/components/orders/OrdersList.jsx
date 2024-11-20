@@ -16,10 +16,10 @@ import { useGetLast12Months } from "@/lib/functions";
 const MenuButton = ({ label, Icon, list, isCheckBox = false, t }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  /******  9c1ab03d-ffb3-42f2-ab43-1b0cc8fdfd19  *******/ const handleMenuOpen =
-    () => {
-      setMenuOpen((prev) => !prev);
-    };
+  /******  9c1ab03d-ffb3-42f2-ab43-1b0cc8fdfd19  *******/
+  const handleMenuOpen = () => {
+    setMenuOpen((prev) => !prev);
+  };
   return (
     <div className="relative">
       <TransparentButton
@@ -91,7 +91,7 @@ function OrdersList({ data }) {
           subHeading={emptySubHeading}
         />
       ) : (
-        <div className="overflow-y-auto rounded-t-xl">
+        <div className="overflow-y-auto rounded-t-xl pb-4">
           <div className="flex items-center w-full text-center">
             {/* Left line: Dark on the right, fades to the left */}
             <div className="flex-grow h-px bg-gradient-to-l from-gray-400 to-transparent"></div>

@@ -138,7 +138,7 @@ const MainComp = () => {
       />
       <MainContent
         contentTitle={t("coupons")}
-        className="!overflow-hidden flex flex-col pb-0"
+        className="!overflow-hidden flex flex-col pb-0 !mb-5"
       >
         <CouponList
           handleDelete={handleDelete}
