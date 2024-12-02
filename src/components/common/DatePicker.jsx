@@ -25,7 +25,6 @@ export const DatePicker = ({
   const [date, setDate] = useState(getDate());
   useEffect(() => {
     onChange(format(date, "dd/MM/yyyy"));
-    console.log(date);
   }, [date]);
   return (
     <Popover>

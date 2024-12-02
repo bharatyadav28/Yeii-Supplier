@@ -17,8 +17,6 @@ const TimePicker = ({
   });
   const dropdownRef = useRef(null);
 
-  console.log("tile", title);
-
   useEffect(() => {
     if (initialTime) {
       const [time, period] = initialTime.split(" ");

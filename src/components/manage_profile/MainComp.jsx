@@ -28,7 +28,6 @@ const MainComp = ({ isEdit, setIsEdit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ formData });
   };
 
   const handleClick = () => {

@@ -46,7 +46,9 @@
     "terms2": ", including cookie use",
     "edit": "Edit",
     "save_changes": "Save changes",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "terms_acceptence": "Please accept the terms and conditions",
+    "password_mismatch": "Passwords don't match"
   },
 
   "forgotPassword": {
@@ -71,7 +73,8 @@
     "subHeading": "Set your New Password So you can access your data",
     "password": "New password",
     "confirmPassword": "Confirm new password",
-    "reset_password": "Reset password"
+    "reset_password": "Reset password",
+    "password_mismatch": "Passwords don't match"
   },
 
   "passwordChanged": {

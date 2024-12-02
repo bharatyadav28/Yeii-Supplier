@@ -18,9 +18,8 @@ const EnterOTP = () => {
           </p>
         </AuthHeading>
         <div className="flex flex-col gap-5">
-          <Suspense fallback={<div>Loading...</div>}>
-            <EmailCard />
-          </Suspense>
+          <EmailCard />
+          <OtpFrom />
         </div>
       </div>
     </AuthPage>

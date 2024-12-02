@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
 
 import { DarkButton } from "@/components/common/CustomButtons";
 import { TextInput } from "@/components/common/customInput";
@@ -10,6 +11,7 @@ import { EmailIcon } from "@/lib/icons";
 import LoadingSpinner from "../common/LoadingSpinner";
 import { sendOtp } from "@/lib/serverActions";
 import toast from "react-hot-toast";
+import { addDetails } from "@/lib/store/feature/UnauthUser";
 
 const ForgotPasswordForm = () => {
   const [email, setEmail] = useState("");
@@ -17,9 +19,12 @@ const ForgotPasswordForm = () => {
   const router = useRouter();
   const t = useTranslations("forgotPassword");
 
+  const dispatch = useDispatch();
+
   const handleSubmit = async (e) => {
-    console.log("Submitted");
     e.preventDefault();
+
+    dispatch(addDetails({ email }));
 
     setIsSubmitting(true);
     const response = await sendOtp(email);
@@ -28,11 +33,10 @@ const ForgotPasswordForm = () => {
     if (!response.success) {
       toast.error(response.message || "Something went wrong");
     }
-
     toast.success(response?.data?.message);
-
-    router.push(`/otp?email=${email}`);
+    router.replace(`/otp`);
   };
+
   return (
     <form onSubmit={handleSubmit}>
       <TextInput

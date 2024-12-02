@@ -3,7 +3,6 @@ import NotificationCard from "./NotificationCard";
 
 const NotificationList = ({ notifications }) => {
   const t = useTranslations("notificationPage");
-  console.log(notifications);
   const today = new Date().toISOString().split("T")[0]; // Get today's date in 'YYYY-MM-DD' format
 
   const todayNotifications = notifications.filter(

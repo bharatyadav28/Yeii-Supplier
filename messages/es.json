@@ -46,7 +46,9 @@
     "terms2": ", incluido el uso de cookies",
     "edit": "Editar",
     "save_changes": "Guardar cambios",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "terms_acceptence": "Por favor, acepta los términos y condiciones",
+    "password_mismatch": "Las contraseñas no coinciden"
   },
 
   "forgotPassword": {
@@ -71,7 +73,8 @@
     "subHeading": "Configura tu nueva contraseña para acceder a tus datos",
     "password": "Nueva contraseña",
     "confirmPassword": "Confirma la nueva contraseña",
-    "reset_password": "Restablecer contraseña"
+    "reset_password": "Restablecer contraseña",
+    "password_mismatch": "Las contraseñas no coinciden"
   },
 
   "passwordChanged": {

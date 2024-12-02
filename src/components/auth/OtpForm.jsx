@@ -4,16 +4,18 @@ import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 import { DarkButton } from "@/components/common/CustomButtons";
 import { sendOtp, verifyOtp } from "@/lib/serverActions";
 import LoadingSpinner from "../common/LoadingSpinner";
 
-const OtpFrom = ({ email }) => {
+const OtpFrom = () => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [timeLeft, setTimeLeft] = useState(119);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSendingOtp, setIsSendingOtp] = useState(false);
+  const { email } = useSelector((state) => state.unauthUser);
 
   const router = useRouter();
   const t = useTranslations("otpPage");
@@ -39,8 +41,6 @@ const OtpFrom = ({ email }) => {
     const response = await sendOtp(email);
     setIsSendingOtp(false);
 
-    console.log("Response: ", response);
-
     if (!response.success) {
       toast.error(response.message);
       return;
@@ -65,7 +65,7 @@ const OtpFrom = ({ email }) => {
       return;
     }
 
-    router.push("/set_password");
+    router.replace("/set_password");
   };
 
   const formatTime = (seconds) => {
@@ -83,6 +83,12 @@ const OtpFrom = ({ email }) => {
       return () => clearInterval(timerId); // Clear timer on component unmount
     }
   }, [timeLeft]);
+
+  useEffect(() => {
+    if (!email) {
+      router.replace("/forgot_password");
+    }
+  }, [email]);
 
   return (
     <div className="flex flex-col items-center gap-10 p-6 rounded-3xl shadow-md bg-white">
@@ -107,6 +113,7 @@ const OtpFrom = ({ email }) => {
         className={`w-full group ${
           disabledButton ? "cursor-not-allowed " : ""
         }`}
+        disabled={isSubmitting}
       >
         {isSubmitting ? <LoadingSpinner /> : t("confirm")}
       </DarkButton>

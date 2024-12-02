@@ -1,18 +1,16 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-import { CustomButton } from "@/components/common/CustomButtons";
 import { Mail } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
 
-import OtpFrom from "./OtpForm";
+import { CustomButton } from "@/components/common/CustomButtons";
 
 const EmailCard = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const { email } = useSelector((state) => state.unauthUser);
 
-  const email = searchParams.get("email");
   const t = useTranslations("otpPage");
 
   return (
@@ -29,8 +27,6 @@ const EmailCard = () => {
           {t("change")}
         </CustomButton>
       </div>
-
-      <OtpFrom email={email} />
     </>
   );
 };

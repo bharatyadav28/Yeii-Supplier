@@ -46,31 +46,21 @@ const SignupForm = () => {
       confirmPassword,
       type: "supplier",
     };
-    console.log({
-      name,
-      email,
-      phoneNumber,
-      address,
-      option,
-      password,
-      confirmPassword,
-    });
+
     try {
       if (!acceptedPolicy) {
-        toast.error("Please accept the terms and conditions");
+        toast.error(t("terms_acceptence"));
         return;
       }
 
       if (password !== confirmPassword) {
-        toast.error("Passwords do not match");
+        toast.error(t("password_mismatch"));
         return;
       }
 
       setIsSubmitting(true);
       const response = await createUser(submittedData);
       setIsSubmitting(false);
-
-      console.log("response", response);
 
       if (!response.success) {
         // alert(response.message);

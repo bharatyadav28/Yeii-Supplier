@@ -19,7 +19,7 @@ const MutationRequest = async ({
       headers,
       body: JSON.stringify(body),
     });
-    console.log("response", response);
+
     const responseData = await response.json();
     if (!response.ok) {
       throw new Error(responseData?.message || responseData?.errors);
@@ -49,7 +49,7 @@ export const userLogin = async (submittedData) => {
 
   if (response.success) {
     const token = response.data.token;
-    console.log("token", token);
+
     cookies().set({
       name: "supplier_token",
       value: token,
@@ -62,7 +62,6 @@ export const userLogin = async (submittedData) => {
 };
 
 export const userLogout = async () => {
-  console.log("logout");
   cookies().delete("supplier_token");
 };
 
@@ -79,7 +78,16 @@ export const verifyOtp = async ({ email, OTP }) => {
   return await MutationRequest({
     type: "POST",
     path: "/auth/verify_otp",
-    body: { email, OTP },
+    body: { email, OTP, type: "supplier" },
+    isTokenRequired: false,
+  });
+};
+
+export const resetPassword = async ({ email, password, confirmPassword }) => {
+  return await MutationRequest({
+    type: "POST",
+    path: "/auth/reset_password",
+    body: { email, password, confirmPassword, type: "supplier" },
     isTokenRequired: false,
   });
 };
