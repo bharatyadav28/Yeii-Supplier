@@ -34,16 +34,16 @@ const NewPassword = () => {
 
     setIsSubmitting(true);
     const response = await resetPassword({ email, password, confirmPassword });
-    setIsSubmitting(false);
 
     if (!response.success) {
       toast.error(response.message);
-      return;
+    } else {
+      setSuccess(true);
+      dispatch(clearDetails());
+      router.replace("/success/password_changed");
     }
 
-    setSuccess(true);
-    dispatch(clearDetails());
-    router.replace("/success/password_changed");
+    setIsSubmitting(false);
   };
 
   useEffect(() => {

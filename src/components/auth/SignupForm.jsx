@@ -60,15 +60,16 @@ const SignupForm = () => {
 
       setIsSubmitting(true);
       const response = await createUser(submittedData);
-      setIsSubmitting(false);
 
       if (!response.success) {
         // alert(response.message);
-        return;
+        toast.error(response.message);
+      } else {
+        toast.success(response?.data?.message || "Login to continue");
+        router.push("/");
       }
 
-      toast.success(response?.data?.message || "Login to continue");
-      router.push("/");
+      setIsSubmitting(false);
     } catch (error) {
       console.log("error", error.message);
     }

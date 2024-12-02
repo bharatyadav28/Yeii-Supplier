@@ -58,13 +58,11 @@ const OtpFrom = () => {
 
     setIsSubmitting(true);
     const response = await verifyOtp({ email, OTP: otp.join("") });
-
     if (!response.success) {
       toast.error(response.message);
-      return;
+    } else {
+      router.replace("/set_password");
     }
-
-    router.replace("/set_password");
     setIsSubmitting(false);
   };
 

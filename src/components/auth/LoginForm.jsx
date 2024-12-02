@@ -24,14 +24,14 @@ const LoginForm = () => {
 
     setIsSubmitting(true);
     const response = await userLogin({ email, password, type: "supplier" });
-    setIsSubmitting(false);
 
     if (!response.success) {
       toast.error(response.message || "Something went wrong");
-      return;
+    } else {
+      router.push("/");
     }
 
-    router.push("/");
+    setIsSubmitting(false);
   };
 
   return (

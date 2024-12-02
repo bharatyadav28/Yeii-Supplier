@@ -23,18 +23,17 @@ const ForgotPasswordForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     dispatch(addDetails({ email }));
 
     setIsSubmitting(true);
     const response = await sendOtp(email);
-    setIsSubmitting(false);
-
     if (!response.success) {
       toast.error(response.message || "Something went wrong");
+    } else {
+      toast.success(response?.data?.message);
+      router.replace(`/otp`);
     }
-    toast.success(response?.data?.message);
-    router.replace(`/otp`);
+    setIsSubmitting(false);
   };
 
   return (
