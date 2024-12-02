@@ -1,20 +1,37 @@
 "use client";
 
+import { useState } from "react";
+import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
+
 import { DarkButton } from "@/components/common/CustomButtons";
 import { TextInput } from "@/components/common/customInput";
 import { EmailIcon } from "@/lib/icons";
-import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import LoadingSpinner from "../common/LoadingSpinner";
+import { sendOtp } from "@/lib/serverActions";
+import toast from "react-hot-toast";
 
 const ForgotPasswordForm = () => {
   const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
   const t = useTranslations("forgotPassword");
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
+    console.log("Submitted");
     e.preventDefault();
-    console.log(email);
-    router.push("/otp");
+
+    setIsSubmitting(true);
+    const response = await sendOtp(email);
+    setIsSubmitting(false);
+
+    if (!response.success) {
+      toast.error(response.message || "Something went wrong");
+    }
+
+    toast.success(response?.data?.message);
+
+    router.push(`/otp?email=${email}`);
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -28,8 +45,14 @@ const ForgotPasswordForm = () => {
         onChange={(e) => setEmail(e.target.value)}
         required={true}
       />
-      <DarkButton isSubmit={true} className="w-full p-7 text-lg mt-4">
-        {t("sent_otp")}
+      <DarkButton
+        isSubmit={true}
+        disabled={isSubmitting}
+        className={`w-full p-7 text-lg mt-4 ${
+          isSubmitting ? "cursor-not-allowed" : ""
+        }`}
+      >
+        {!isSubmitting ? t("sent_otp") : <LoadingSpinner />}
       </DarkButton>
     </form>
   );

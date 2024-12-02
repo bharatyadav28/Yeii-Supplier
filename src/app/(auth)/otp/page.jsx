@@ -1,8 +1,10 @@
+import { Suspense } from "react";
+import { useTranslations } from "next-intl";
+
 import EmailCard from "@/components/auth/EmailCard";
 import OtpFrom from "@/components/auth/OtpForm";
 import AuthHeading from "@/components/common/AuthHeading";
 import AuthPage from "@/components/common/AuthPage";
-import { useTranslations } from "next-intl";
 
 const EnterOTP = () => {
   const t = useTranslations("otpPage");
@@ -16,8 +18,9 @@ const EnterOTP = () => {
           </p>
         </AuthHeading>
         <div className="flex flex-col gap-5">
-          <EmailCard />
-          <OtpFrom />
+          <Suspense fallback={<div>Loading...</div>}>
+            <EmailCard />
+          </Suspense>
         </div>
       </div>
     </AuthPage>

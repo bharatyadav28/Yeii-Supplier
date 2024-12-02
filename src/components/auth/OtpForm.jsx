@@ -1,15 +1,23 @@
 "use client";
 
-import { DarkButton } from "@/components/common/CustomButtons";
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
-const OtpFrom = () => {
+import { DarkButton } from "@/components/common/CustomButtons";
+import { sendOtp, verifyOtp } from "@/lib/serverActions";
+import LoadingSpinner from "../common/LoadingSpinner";
+
+const OtpFrom = ({ email }) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [timeLeft, setTimeLeft] = useState(119);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSendingOtp, setIsSendingOtp] = useState(false);
+
   const router = useRouter();
   const t = useTranslations("otpPage");
+  const disabledButton = isSubmitting || otp.join("").length < 4;
 
   const handleChange = (e, index) => {
     const value = e.target.value;
@@ -25,15 +33,38 @@ const OtpFrom = () => {
     }
   };
 
-  const handleResendOtp = () => {
+  const handleResendOtp = async () => {
     // Logic to resend the OTP
-    alert("OTP Resent!");
+    setIsSendingOtp(true);
+    const response = await sendOtp(email);
+    setIsSendingOtp(false);
+
+    console.log("Response: ", response);
+
+    if (!response.success) {
+      toast.error(response.message);
+      return;
+    }
+    toast.success(response?.data?.message);
     setTimeLeft(119);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // Logic for OTP submission
-    alert(`OTP Submitted: ${otp.join("")}`);
+
+    if (disabledButton) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    const response = await verifyOtp({ email, OTP: otp.join("") });
+    setIsSubmitting(false);
+
+    if (!response.success) {
+      toast.error(response.message);
+      return;
+    }
+
     router.push("/set_password");
   };
 
@@ -71,15 +102,21 @@ const OtpFrom = () => {
           />
         ))}
       </div>
-      <DarkButton onClick={handleSubmit} className="w-full ">
-        {t("confirm")}
+      <DarkButton
+        onClick={handleSubmit}
+        className={`w-full group ${
+          disabledButton ? "cursor-not-allowed " : ""
+        }`}
+      >
+        {isSubmitting ? <LoadingSpinner /> : t("confirm")}
       </DarkButton>
+
       <div className="text-center">
-        <p>{formatTime(timeLeft)}</p>
+        <p>{timeLeft > 0 && formatTime(timeLeft)}</p>
         <button
           onClick={handleResendOtp}
           className="text-[var(--main-pink)] mt-2 disabled:opacity-50"
-          disabled={timeLeft > 0}
+          disabled={timeLeft > 0 || isSendingOtp || isSubmitting}
         >
           {t("resend")}
         </button>

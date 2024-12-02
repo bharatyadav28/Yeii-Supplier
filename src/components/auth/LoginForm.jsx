@@ -7,21 +7,29 @@ import { DarkButton } from "@/components/common/CustomButtons";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import toast from "react-hot-toast";
+
+import LoadingSpinner from "../common/LoadingSpinner";
 import { userLogin } from "@/lib/serverActions";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const t = useTranslations("loginPage");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const response = await userLogin({ email, password, type: "supplier" });
 
-    // if (!response.success) {
-    //   return;
-    // }
+    setIsSubmitting(true);
+    const response = await userLogin({ email, password, type: "supplier" });
+    setIsSubmitting(false);
+
+    if (!response.success) {
+      toast.error(response.message || "Something went wrong");
+      return;
+    }
 
     router.push("/");
   };
@@ -61,9 +69,12 @@ const LoginForm = () => {
       {/* Login Button */}
       <DarkButton
         isSubmit={true}
-        className="w-full text-base p-7 rounded-[15px]"
+        disabled={isSubmitting}
+        className={`w-full text-base p-7 rounded-[15px] ${
+          isSubmitting ? "cursor-not-allowed" : ""
+        } `}
       >
-        {t("login")}
+        {!isSubmitting ? t("login") : <LoadingSpinner />}
       </DarkButton>
     </form>
   );

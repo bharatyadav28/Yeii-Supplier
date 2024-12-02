@@ -8,7 +8,7 @@ import {
   TextInput,
 } from "@/components/common/customInput";
 import { BusinessIcon, EmailIcon, UserIcon } from "@/lib/icons";
-import { MapPin } from "lucide-react";
+import { Loader2, MapPin } from "lucide-react";
 import Link from "next/link";
 import PhoneInput from "react-phone-input-2";
 import { DarkButton } from "@/components/common/CustomButtons";
@@ -18,6 +18,9 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { createUser } from "@/lib/serverActions";
 
+import LoadingSpinner from "../common/LoadingSpinner";
+import toast from "react-hot-toast";
+
 const SignupForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -25,7 +28,9 @@ const SignupForm = () => {
   const [address, setAddress] = useState("");
   const [option, setOption] = useState("");
   const [password, setPassword] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [acceptedPolicy, setAcceptedPolicy] = useState(false);
   const router = useRouter();
   const t = useTranslations("signupPage");
 
@@ -51,7 +56,19 @@ const SignupForm = () => {
       confirmPassword,
     });
     try {
+      if (!acceptedPolicy) {
+        toast.error("Please accept the terms and conditions");
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        toast.error("Passwords do not match");
+        return;
+      }
+
+      setIsSubmitting(true);
       const response = await createUser(submittedData);
+      setIsSubmitting(false);
 
       console.log("response", response);
 
@@ -60,6 +77,7 @@ const SignupForm = () => {
         return;
       }
 
+      toast.success(response?.data?.message || "Login to continue");
       router.push("/");
     } catch (error) {
       console.log("error", error.message);
@@ -136,6 +154,8 @@ const SignupForm = () => {
         // required={true}
         label={t("bussinessLabel")}
         onChange={(e) => setOption(e)}
+        menu={["Business", "Company", "Organization"]}
+        // required={true}
       />
 
       {/* Password */}
@@ -158,7 +178,7 @@ const SignupForm = () => {
 
       {/* checkbox for privacy policy */}
       <div className="flex items-center justify-center self-center gap-3 text-xs pb-4 pt-2">
-        <CustomCheckBox onChange={(e) => console.log(e)} />
+        <CustomCheckBox onChange={(e) => setAcceptedPolicy(e)} />
         <p className="w-[55%]">
           {t("terms1")}{" "}
           <Link
@@ -180,9 +200,12 @@ const SignupForm = () => {
       {/* Create account button */}
       <DarkButton
         isSubmit={true}
-        className="w-full text-base p-7 rounded-[15px]"
+        className={`w-full text-base p-7 rounded-[15px] ${
+          isSubmitting ? "cursor-not-allowed" : ""
+        }`}
+        disabled={isSubmitting}
       >
-        {t("heading")}
+        {!isSubmitting ? t("heading") : <LoadingSpinner />}
       </DarkButton>
     </form>
   );

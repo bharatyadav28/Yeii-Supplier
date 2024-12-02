@@ -65,3 +65,21 @@ export const userLogout = async () => {
   console.log("logout");
   cookies().delete("supplier_token");
 };
+
+export const sendOtp = async (email) => {
+  return await MutationRequest({
+    type: "POST",
+    path: "/auth/send_otp",
+    body: { email },
+    isTokenRequired: false,
+  });
+};
+
+export const verifyOtp = async ({ email, OTP }) => {
+  return await MutationRequest({
+    type: "POST",
+    path: "/auth/verify_otp",
+    body: { email, OTP },
+    isTokenRequired: false,
+  });
+};

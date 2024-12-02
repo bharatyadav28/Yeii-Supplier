@@ -78,7 +78,7 @@ export const SelectInput = (props) => {
   return (
     <div className={`flex items-center bg-white rounded-[15px] mb-2 `}>
       {customIcon && <span className="px-5 py-4 self-start">{customIcon}</span>}
-      <div className="w-full pr-2">
+      <div className="w-full pr-2 relative">
         {label && (
           <label className="text-[var(--main-gray)] text-[10px]">{label}</label>
         )}
@@ -107,6 +107,12 @@ export const SelectInput = (props) => {
             })}
           </SelectContent>
         </Select>
+
+        {/* <input
+          type="text"
+          required={true}
+          className="opacity-0 h-0 w-0 absolute"
+        /> */}
       </div>
     </div>
   );
