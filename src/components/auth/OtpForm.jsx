@@ -58,7 +58,6 @@ const OtpFrom = () => {
 
     setIsSubmitting(true);
     const response = await verifyOtp({ email, OTP: otp.join("") });
-    setIsSubmitting(false);
 
     if (!response.success) {
       toast.error(response.message);
@@ -66,6 +65,7 @@ const OtpFrom = () => {
     }
 
     router.replace("/set_password");
+    setIsSubmitting(false);
   };
 
   const formatTime = (seconds) => {
