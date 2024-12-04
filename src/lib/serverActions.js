@@ -1,5 +1,6 @@
 "use server";
 import { cookies } from "next/headers";
+import { revalidatePath } from "next/cache";
 
 const MutationRequest = async ({
   type,
@@ -10,8 +11,10 @@ const MutationRequest = async ({
   let headers = {
     "Content-Type": "application/json",
   };
-  //   if (isTokenRequired) {
-  //   }
+  if (isTokenRequired) {
+    headers.Authorization = `${cookies().get("supplier_token")?.value}`;
+  }
+  // console.log("Headers:", headers);
 
   try {
     const response = await fetch(`https://yeii-api.onrender.com${path}`, {
@@ -19,10 +22,15 @@ const MutationRequest = async ({
       headers,
       body: JSON.stringify(body),
     });
+    console.log("response", response);
 
     const responseData = await response.json();
     if (!response.ok) {
-      throw new Error(responseData?.message || responseData?.errors);
+      throw new Error(
+        responseData?.message ||
+          responseData?.errors ||
+          responseData?.error?.message
+      );
     }
     return { success: true, data: responseData };
   } catch (error) {
@@ -90,4 +98,33 @@ export const resetPassword = async ({ email, password, confirmPassword }) => {
     body: { email, password, confirmPassword, type: "supplier" },
     isTokenRequired: false,
   });
+};
+
+export const uploadImage = async ({ image }) => {
+  console.log("Image:", image);
+  return await MutationRequest({
+    type: "POST",
+    path: "/auth/upload-image",
+    body: { image },
+  });
+};
+
+export const addProduct = async (product) => {
+  return await MutationRequest({
+    type: "POST",
+    path: "/store/product",
+    body: product,
+  });
+};
+
+export const updateProduct = async ({ id, product }) => {
+  const response = await MutationRequest({
+    type: "PUT",
+    path: `/store/product/${id}`,
+    body: product,
+  });
+  if (response.success) {
+    revalidatePath("/store");
+  }
+  return response;
 };

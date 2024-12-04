@@ -1,17 +1,66 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Plus, Image as GalleryImage } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 import { CustomButton } from "./CustomButtons";
 import { Input } from "../ui/input";
+import { CancelIcon } from "@/lib/svg_icons";
+import { IconButton } from "./customInput";
+// import { uploadImage } from "@/lib/serverActions";
 
 function DefaultItemImage() {
   const t = useTranslations();
+  const [image, setImage] = useState("");
+
+  useEffect(() => {
+    console.log(
+      "Image:",
+      image,
+      "token",
+      localStorage.getItem("supplier_token")
+    );
+    const uploadImage = async () => {
+      const formData = new FormData();
+      formData.append("files", image);
+
+      const response = await fetch(
+        `https://yeii-api.onrender.com/upload-image`,
+        {
+          method: "POST",
+          // Don't set Content-Type header - let the browser set it with boundary for FormData
+          headers: {
+            // Authorization: `Bearer ${localStorage.getItem("supplier_token")}`,
+          },
+          body: formData,
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Upload failed");
+      }
+
+      const data = await response.json();
+      console.log("Upload successful:", data);
+    };
+
+    if (image) {
+      uploadImage().then((res) => {
+        console.log("response", res);
+      });
+      console.log("dsdsd");
+    }
+  }, [image]);
 
   const addMoreImageBtn = (
     <>
-      <Input type="file" className="hidden image-upload" />
+      <Input
+        type="file"
+        className="hidden image-upload"
+        name="image"
+        onChange={(e) => setImage(e.target.files[0])}
+      />
 
       <CustomButton
         className="bg-[var(--light-pink)] hover:bg-[#F6309314]  text-[var(--main-pink)] p-0 m-0 w-full  h-full "
@@ -44,6 +93,9 @@ function DefaultItemImage() {
             fill={true}
             className="rounded-lg object-cover"
           />
+          <IconButton className="z-100 absolute top-1 right-1">
+            {CancelIcon}
+          </IconButton>
         </div>
         <div className="h-full w-full">{addMoreImageBtn}</div>
       </div>

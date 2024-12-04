@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 
 import { CustomButton, LightButton, DarkButton } from "../common/CustomButtons";
 import SearchInput from "../common/SearchInput";
@@ -11,16 +12,35 @@ const HeadMenu = ({ itemsType, handleTypeChange }) => {
 
   const [openDialog, setOpenDialog] = useState(false);
 
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const search = searchParams.get("query");
+  const [searchInput, setSearchInput] = useState(search || "");
+
   const handleOpenDialog = () => {
     setOpenDialog((prev) => !prev);
   };
 
   const handleSearchInput = (value) => {
-    console.log("Value changed:", value);
+    console.log("Value:", value);
+    setSearchInput(value);
   };
   // const formType = itemsType === "products" ? "Product" : "Service";
   const formType = itemsType;
-  console.log("aasas", formType);
+  // console.log("aasas", formType);
+
+  useEffect(() => {
+    router.push(`?query=${searchInput}`);
+  }, [searchInput]);
+
+  // useEffect(() => {
+  //   if (search && !searchInput) {
+  //     setSearchInput(search);
+  //   }
+  // }, []);
+
+  // console.log("Search iNput:", searchInput);
 
   return (
     <div className="flex justify-between flex-wrap gap-4">
@@ -49,6 +69,7 @@ const HeadMenu = ({ itemsType, handleTypeChange }) => {
       <div className="flex gap-2">
         <SearchInput
           onChange={handleSearchInput}
+          value={searchInput}
           // className="xl:w-[18rem] w-[12rem]"
         />
         <DarkButton

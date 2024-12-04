@@ -1,6 +1,7 @@
 "use client ";
-import React from "react";
+import React, { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
+import toast from "react-hot-toast";
 
 import CustomDialog from "../common/CustomDialog";
 import { DarkButton, LightButton } from "../common/CustomButtons";
@@ -9,30 +10,64 @@ import DefaultItemImage from "../common/DefaultItemImage";
 import { CustomCheckBox } from "../common/customInput";
 import { CounterInput } from "../common/customInput";
 import TimePicker from "../common/TimePicker";
+import { addProduct, updateProduct } from "@/lib/serverActions";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
+  const t = useTranslations("storePage");
+
+  const [category, setCategory] = useState(item?.category || "");
+  const [availability, setAvailability] = useState(item?.availability || true);
+  const [couponEligibility, setCouponEligibility] = useState(
+    item?.couponEligibility || false
+  );
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const isServiceType = formType === "services";
   const locale = useLocale();
   const isEdit = title.toLowerCase().includes("edit");
 
   // console.log("formType:", formType);
 
-  const t = useTranslations("storePage");
-
   const itemName = formType === "products" ? "product" : "service";
-  const handleSubmit = (event) => {
-    console.log("Submitted");
+  const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent the page from reloading
 
-    // Access form data using event.target
+    setIsSubmitting(true);
     const formElements = event.target.elements;
-    const name = formElements.name.value; // Access input by name
-    console.log(
-      "name",
-      formElements.name.value,
-      formElements.cateogry.value,
-      formElements.discount.value
-    );
+    const productData = {
+      name: formElements.name.value,
+      description: formElements.description.value,
+      category: category,
+      availability: availability,
+      images: [],
+      actualPrice: formElements.actualPrice.value,
+      quantity: formElements.quantity.value,
+      discount: formElements.discount.value,
+      discountedPrice: formElements.discountedPrice.value,
+      couponEligibility: couponEligibility,
+    };
+    console.log("Product Data:", productData);
+
+    console.log("Item: ", item);
+
+    let response = { success: false, message: "Something went wrong" };
+    if (isEdit) {
+      response = await updateProduct({ id: item.id, product: productData });
+    } else {
+      response = await addProduct(productData);
+    }
+
+    if (!response.success) {
+      toast.error(response.message);
+    } else {
+      toast.success(response?.data?.message);
+      setCategory("");
+      setAvailability(true);
+      setCouponEligibility(false);
+      handleOpenDialog();
+    }
+    setIsSubmitting(false);
   };
 
   const actualPriceField = (
@@ -50,6 +85,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
           placeholder={t("pricePlaceholder")}
           defaultValue={item?.actualPrice}
           containerClass="pr-1"
+          required={true}
         />
         {formType === "services" && (
           <SelectInput
@@ -113,6 +149,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
           placeholder={t("pricePlaceholder")}
           defaultValue={item?.discount}
           containerClass="!pr-2"
+          required={true}
         />
       </fieldset>
       <fieldset>
@@ -127,6 +164,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
           placeholder={t("pricePlaceholder")}
           defaultValue={item?.discountedPrice}
           containerClass="pr-1"
+          required={true}
         />
       </fieldset>
     </>
@@ -141,9 +179,9 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
         <CustomCheckBox
           className="border-[#E6E9EB] h-5 w-5"
           onChange={(val) => {
-            console.log(val);
+            setCouponEligibility(val);
           }}
-          value={item?.couponEligibility}
+          value={couponEligibility}
         />
         <p>{t(`${formType}.coupon_text`)}</p>
       </div>
@@ -182,6 +220,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
             className="min-h-[3rem] "
             placeholder={t("desc_placeholder")}
             defaultValue={item?.description}
+            required={true}
           />
         </fieldset>
 
@@ -196,7 +235,8 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
               className="!text-[0.8rem] text-[#00131fcc] pl-5 "
               placeholder={t(`${formType}.cate_placeholder`)}
               menu={["Furniture", "Electronics", "Grocery"]}
-              value={item?.category}
+              value={category}
+              onChange={(value) => setCategory(value)}
             />
           </fieldset>
 
@@ -210,7 +250,10 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
               className="!text-[0.8rem] text-[#00131fcc]] pl-5"
               placeholder={t("select_availability")}
               menu={[t("yes"), t("no")]}
-              value={item?.availability === true ? t("yes") : t("no")}
+              value={availability ? t("yes") : t("no")}
+              onChange={(value) =>
+                setAvailability((value) => value === t("yes"))
+              }
             />
           </fieldset>
         </div>
@@ -268,10 +311,11 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
           </LightButton>
           <DarkButton
             isSubmit={true}
-            className="w-100"
-            onClick={handleOpenDialog}
+            className={`w-100 ${isSubmitting ? "cursor-not-allowed" : ""}`}
+            disabled={isSubmitting}
+            // className={"w-100"+isSubmitting?"cursor-not-allowed":""}
           >
-            {t("save")}
+            {isSubmitting ? <LoadingSpinner /> : t("save")}
           </DarkButton>
         </div>
       </form>

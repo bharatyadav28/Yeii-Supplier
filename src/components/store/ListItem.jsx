@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { Dot } from "lucide-react";
 import StoreDialog from "./StoreDialog";
 import ViewItem from "./ViewItem";
+import { updateProduct } from "@/lib/serverActions";
 
 function ListItem({ item, isService, t }) {
   const [openDialog, setOpenDialog] = useState(false);
@@ -76,7 +77,13 @@ function ListItem({ item, isService, t }) {
             </div>
             <div>
               <Switch
-                // checked={item.availability}
+                checked={item.availability}
+                onClick={() => {
+                  updateProduct({
+                    id: item.id,
+                    product: { availability: !item.availability },
+                  });
+                }}
                 className="data-[state=checked]:bg-[var(--main-pink)] "
               />
             </div>

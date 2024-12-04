@@ -1828,3 +1828,49 @@ export const copyIcon = (
     />
   </svg>
 );
+
+export const CancelIcon = (
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 18 18"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g filter="url(#filter0_b_1259_69302)">
+      <rect width="18" height="18" rx="9" fill="black" fill-opacity="0.25" />
+      <path
+        d="M6 12.1824L9.09119 9.09119L12.1824 12.1824M12.1824 6L9.0906 9.09119L6 6"
+        stroke="white"
+        stroke-width="0.884375"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </g>
+    <defs>
+      <filter
+        id="filter0_b_1259_69302"
+        x="-28.575"
+        y="-28.575"
+        width="75.15"
+        height="75.15"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feGaussianBlur in="BackgroundImageFix" stdDeviation="14.2875" />
+        <feComposite
+          in2="SourceAlpha"
+          operator="in"
+          result="effect1_backgroundBlur_1259_69302"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_backgroundBlur_1259_69302"
+          result="shape"
+        />
+      </filter>
+    </defs>
+  </svg>
+);
