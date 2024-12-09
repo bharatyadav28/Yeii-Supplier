@@ -9,6 +9,17 @@ const nextConfig = {
       fullUrl: true,
     },
   },
+
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "creative-story.s3.amazonaws.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  },
 };
 
 // https://yeii-api.onrender.com

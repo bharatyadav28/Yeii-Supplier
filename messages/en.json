@@ -235,16 +235,16 @@
     "yes": "Yes",
     "no": "No",
     "time": "Time",
-    "per_hour": "Per hour",
-    "per_day": "Per day",
+    "per_hour": "Per Hour",
+    "per_day": "Per Day",
     "products": {
       "name_placeholder": "Enter product name",
       "coupon_text": "Is this product eligible for coupons",
       "cate_placeholder": "Select Product Category"
     },
     "services": {
-      "name_placeholder": "Enter product name",
-      "coupon_text": "Is this product eligible for coupons",
+      "name_placeholder": "Enter service name",
+      "coupon_text": "Is this service eligible for coupons",
       "cate_placeholder": "Select Service Category"
     },
 

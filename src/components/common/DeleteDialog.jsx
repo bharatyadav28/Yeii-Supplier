@@ -3,6 +3,7 @@ import { Trash as DeleteIcon } from "lucide-react";
 
 import CustomDialog from "./CustomDialog";
 import { CustomButton, DarkButton, LightButton } from "./CustomButtons";
+import LoadingSpinner from "./LoadingSpinner";
 
 function DeleteDialog({
   openDialog,
@@ -13,6 +14,7 @@ function DeleteDialog({
   onConfirm,
   Icon,
   t,
+  isDeleting = false,
 }) {
   return (
     <CustomDialog
@@ -41,7 +43,7 @@ function DeleteDialog({
               {t("cancel")}
             </LightButton>
             <CustomButton className="py-6" onClick={onConfirm}>
-              {t("confirm")}
+              {isDeleting ? <LoadingSpinner /> : t("confirm")}
             </CustomButton>
           </div>
         </div>

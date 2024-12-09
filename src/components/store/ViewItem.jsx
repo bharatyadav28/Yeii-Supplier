@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FilePenLine as EditIcon, Trash as DeleteIcon } from "lucide-react";
 
 import CustomDialog from "../common/CustomDialog";
@@ -10,6 +10,9 @@ import { Switch } from "../ui/switch";
 import StoreDialog from "./StoreDialog";
 import DeleteDialog from "../common/DeleteDialog";
 import TimePicker from "../common/TimePicker";
+import { deleteItem } from "@/lib/serverActions";
+import { set } from "date-fns";
+import useHttp from "../hooks/use-http";
 
 function ViewItem({ openDialog, handleOpenDialog, item, title, formType, t }) {
   const isServiceType = formType === "services";
@@ -17,6 +20,17 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType, t }) {
 
   const [editDialog, setEditDialog] = useState(false);
   const [deleteDialog, setDeleteDialog] = useState(false);
+  // const [isDeleting, setIsDeleting] = useState(false);
+  const { isLoading: isDeleting, dbConnect } = useHttp();
+  const [allImages, setAllImages] = useState([]);
+
+  console.log("All images", allImages);
+
+  useEffect(() => {
+    if (item) {
+      setAllImages(item.images);
+    }
+  }, [item]);
 
   const handleEditDialog = () => {
     setEditDialog((prev) => !prev);
@@ -55,7 +69,7 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType, t }) {
       onTimeChange={(val) => {
         console.log("Time changed", val);
       }}
-      initialTime={item?.availabilityTime?.start}
+      initialTime={item?.availabilityTime?.startTime}
       className="!justify-start px-4"
       isViewOnly={true}
     />
@@ -66,7 +80,7 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType, t }) {
       onTimeChange={(val) => {
         console.log("Time changed", val);
       }}
-      initialTime={item?.availabilityTime?.end}
+      initialTime={item?.availabilityTime?.endTime}
       className="!justify-start px-4"
       isViewOnly={true}
     />
@@ -165,6 +179,7 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType, t }) {
                 />
                 <span className="absolute  right-3 top-1/2  transform -translate-y-1/2 pb-1 ">
                   <Switch
+                    checked={item?.availability}
                     className="data-[state=checked]:bg-[var(--main-pink)] h-[1.65rem]  disabled:opacity-100"
                     disabled
                   />
@@ -254,7 +269,11 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType, t }) {
               </label>
               <div className=" bg-white grid rounded-[0.9rem]">
                 <div className="h-[6rem] m-4 w-100 h-100  border border-[var(--main-pink)] border-dashed rounded-[0.9rem]">
-                  <DefaultItemImage />
+                  <DefaultItemImage
+                    allImages={allImages}
+                    setAllImages={setAllImages}
+                    isDisabled={true}
+                  />
                 </div>
               </div>
             </fieldset>
@@ -297,8 +316,14 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType, t }) {
         title={t(`${formType}Delete.title`)}
         description={t(`${formType}Delete.description`)}
         onCancel={handleDeleteDialog}
-        onConfirm={handleDeleteDialog}
+        onConfirm={async () => {
+          if (isDeleting) return;
+          await dbConnect(deleteItem.bind(null, item?.id, isServiceType));
+
+          handleDeleteDialog();
+        }}
         t={t}
+        isDeleting={isDeleting}
       />
     </>
   );

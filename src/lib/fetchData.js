@@ -37,3 +37,9 @@ export const getProducts = async (query) => {
     path: `/store/products?query=${query}`,
   });
 };
+
+export const getServices = async (query) => {
+  return await FetchRequest({
+    path: `/store/services?query=${query}`,
+  });
+};

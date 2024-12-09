@@ -31,7 +31,10 @@ const HeadMenu = ({ itemsType, handleTypeChange }) => {
   // console.log("aasas", formType);
 
   useEffect(() => {
-    router.push(`?query=${searchInput}`);
+    const id = setTimeout(() => {
+      router.push(`?query=${searchInput}`);
+    }, [500]);
+    return () => clearTimeout(id);
   }, [searchInput]);
 
   // useEffect(() => {
@@ -49,6 +52,7 @@ const HeadMenu = ({ itemsType, handleTypeChange }) => {
           onClick={() => {
             console.log("Button 1Clicked");
             handleTypeChange("products");
+            setSearchInput("");
           }}
           className={`${itemsType === "products" ? "dark-btn" : "light-btn"}`}
         >
@@ -59,6 +63,7 @@ const HeadMenu = ({ itemsType, handleTypeChange }) => {
           onClick={() => {
             console.log("Button2 Clicked");
             handleTypeChange("services");
+            setSearchInput("");
           }}
           className={`${itemsType === "services" ? "dark-btn" : "light-btn"}`}
         >

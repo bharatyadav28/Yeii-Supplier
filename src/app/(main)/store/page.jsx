@@ -4,39 +4,36 @@ import PageHeading from "@/components/common/PageHeading";
 import DashboardPage from "@/components/common/DashboardPage";
 import storeData from "@/lib/dummyData/storeData.json";
 import List from "@/components/store/List";
-import { getProducts } from "@/lib/fetchData";
+import { getProducts, getServices } from "@/lib/fetchData";
 import { Suspense } from "react";
 import LoadingSpinner from "@/components/common/LoadingSpinner";
+import PageLoader from "@/components/common/PageLoader";
 
-export const GetProducts = async ({ query }) => {
-  const response = await getProducts(query);
-  const products = response.data.products;
+export const GetItems = async ({ query }) => {
+  const [productResponse, serviceResponse] = await Promise.all([
+    getProducts(query),
+    getServices(query),
+  ]);
+
+  const products = productResponse.data?.products || [];
+  const services = serviceResponse.data?.services || [];
 
   console.log("Query: ", query);
 
-  return <List products={products} services={storeData.services} />;
+  return <List products={products} services={services} />;
 };
 
 const StorePage = ({ searchParams }) => {
   const t = useTranslations("storePage");
 
-  // getProducts().then((response) => {
-  //   console.log(response);
-  //   products = response.data.products;
-  // });
-  // const response = await getProducts();
-  // products = response.data.products;
-
   const query = searchParams?.query || "";
-
-  const isEmpty = storeData.products?.length === 0;
 
   return (
     <DashboardPage>
       <PageHeading pageName={t("heading")} />
 
-      <Suspense fallback={<LoadingSpinner />}>
-        <GetProducts query={query} />
+      <Suspense fallback={<PageLoader />}>
+        <GetItems query={query} />
       </Suspense>
 
       {/* <List products={products} services={storeData.services} /> */}

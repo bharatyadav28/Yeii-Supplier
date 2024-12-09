@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Switch } from "../ui/switch";
 import { useTranslations } from "next-intl";
@@ -6,14 +6,21 @@ import { useTranslations } from "next-intl";
 import { Dot } from "lucide-react";
 import StoreDialog from "./StoreDialog";
 import ViewItem from "./ViewItem";
-import { updateProduct } from "@/lib/serverActions";
+import { updateItem, updateProduct } from "@/lib/serverActions";
 
 function ListItem({ item, isService, t }) {
   const [openDialog, setOpenDialog] = useState(false);
+  const [availability, setAvailability] = useState(false);
 
   const handleOpenDialog = () => {
     setOpenDialog((prev) => !prev);
   };
+
+  useEffect(() => {
+    setAvailability(item.availability);
+  }, [item]);
+
+  console.log("Item", item);
 
   return (
     <>
@@ -23,7 +30,7 @@ function ListItem({ item, isService, t }) {
       >
         <div className="flex-grow-1 basis-5/12 relative ">
           <Image
-            src={item.images[0] || "/Furniture.jpeg"}
+            src={"/Furniture.jpeg"}
             alt={item.name}
             layout="fill"
             priority
@@ -62,7 +69,8 @@ function ListItem({ item, isService, t }) {
                 <Dot className="!w-[1rem] font-bold" />
               </div>
               <div className="text-[0.7rem] text-[var(--lightblue)]">
-                {item.availabilityTime.start} to {item.availabilityTime.end}
+                {item.availabilityTime.startTime} to{" "}
+                {item.availabilityTime.endTime}
               </div>
             </div>
           )}
@@ -77,11 +85,13 @@ function ListItem({ item, isService, t }) {
             </div>
             <div>
               <Switch
-                checked={item.availability}
-                onClick={() => {
-                  updateProduct({
+                checked={availability}
+                onClick={async () => {
+                  setAvailability((prev) => !prev);
+                  await updateItem({
                     id: item.id,
-                    product: { availability: !item.availability },
+                    item: { availability: !item.availability },
+                    isService,
                   });
                 }}
                 className="data-[state=checked]:bg-[var(--main-pink)] "

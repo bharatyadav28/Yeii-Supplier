@@ -1,5 +1,5 @@
 "use client ";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import toast from "react-hot-toast";
 
@@ -10,64 +10,104 @@ import DefaultItemImage from "../common/DefaultItemImage";
 import { CustomCheckBox } from "../common/customInput";
 import { CounterInput } from "../common/customInput";
 import TimePicker from "../common/TimePicker";
-import { addProduct, updateProduct } from "@/lib/serverActions";
+import { addItem, updateItem } from "@/lib/serverActions";
 import LoadingSpinner from "../common/LoadingSpinner";
+import useHttp from "../hooks/use-http";
 
 function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
   const t = useTranslations("storePage");
+  console.log("StartTime:", item, item?.couponEligibility);
 
-  const [category, setCategory] = useState(item?.category || "");
-  const [availability, setAvailability] = useState(item?.availability || true);
-  const [couponEligibility, setCouponEligibility] = useState(
-    item?.couponEligibility || false
-  );
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [category, setCategory] = useState("");
+  const [availability, setAvailability] = useState(true);
+  const [couponEligibility, setCouponEligibility] = useState(false);
+  const [startTime, setStartTime] = useState("12:00 AM");
+  const [endTime, setEndTime] = useState("12:00 AM");
+  const [priceValidity, setPriceValidity] = useState(t("per_day"));
 
+  const [allImages, setAllImages] = useState([]);
+  console.log("All images: ", allImages);
+
+  // const [isSubmitting, setIsSubmitting] = useState(false);
+  const { isLoading: isSubmitting, dbConnect } = useHttp();
   const isServiceType = formType === "services";
   const locale = useLocale();
   const isEdit = title.toLowerCase().includes("edit");
 
+  useEffect(() => {
+    if (item && isEdit) {
+      if (isServiceType) {
+        setCouponEligibility(item.couponEligibility);
+        setStartTime(item.availabilityTime?.startTime);
+        setEndTime(item.availabilityTime?.endTime);
+        setPriceValidity(item.priceValidity);
+      } else {
+        setCouponEligibility(item.couponEligibility);
+      }
+      setCategory(item.category);
+      setAvailability(item.availability);
+      setAllImages(item.images);
+    }
+  }, [item, isServiceType]);
+
   // console.log("formType:", formType);
+  console.log("Cateogry:", category);
 
   const itemName = formType === "products" ? "product" : "service";
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent the page from reloading
 
-    setIsSubmitting(true);
     const formElements = event.target.elements;
-    const productData = {
+    let productData = {
       name: formElements.name.value,
       description: formElements.description.value,
       category: category,
       availability: availability,
-      images: [],
-      actualPrice: formElements.actualPrice.value,
-      quantity: formElements.quantity.value,
-      discount: formElements.discount.value,
-      discountedPrice: formElements.discountedPrice.value,
+      images: allImages,
+      actualPrice: Number(formElements.actualPrice.value),
+      discount: Number(formElements.discount.value),
+      discountedPrice: Number(formElements.discountedPrice.value),
       couponEligibility: couponEligibility,
     };
-    console.log("Product Data:", productData);
 
-    console.log("Item: ", item);
+    if (isServiceType) {
+      productData.availabilityTime = {
+        startTime: startTime,
+        endTime: endTime,
+      };
+      productData.rentPeriod = priceValidity;
+      // productData.priceValidity = "Valid until 2024-12-31";
+    } else {
+      productData.quantity = formElements.quantity.value;
+    }
+
+    console.log("Product Data:", productData);
 
     let response = { success: false, message: "Something went wrong" };
     if (isEdit) {
-      response = await updateProduct({ id: item.id, product: productData });
+      response = await dbConnect(
+        updateItem.bind(null, {
+          id: item.id,
+          item: productData,
+          isService: isServiceType,
+        })
+      );
     } else {
-      response = await addProduct(productData);
+      response = await dbConnect(
+        addItem.bind(null, productData, isServiceType)
+      );
     }
 
-    if (!response.success) {
-      toast.error(response.message);
-    } else {
+    if (response.success) {
       toast.success(response?.data?.message);
-      setCategory("");
+      !isEdit && setCategory("");
       setAvailability(true);
       setCouponEligibility(false);
+      setStartTime("12:00 AM");
+      setEndTime("12:00 AM");
+      setAllImages([]);
       handleOpenDialog();
     }
-    setIsSubmitting(false);
   };
 
   const actualPriceField = (
@@ -88,12 +128,15 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
           required={true}
         />
         {formType === "services" && (
-          <SelectInput
-            className="!text-[0.8rem] bg-[#13070B0F] absolute right-3  !w-max top-[0.4rem] h-[2rem]  pl-4 !py-2 "
-            placeholder={t(`time`)}
-            menu={[t("per_hour"), t("per_day")]}
-            value={item?.category}
-          />
+          <div className="absolute top-[0.35rem] right-0">
+            <SelectInput
+              className="!text-[0.8rem] bg-[#13070B0F] px-3 rounded-md   !w-max  h-[2rem]    "
+              placeholder={t(`time`)}
+              menu={[t("per_hour"), t("per_day")]}
+              value={priceValidity}
+              onChange={(val) => setPriceValidity(val)}
+            />
+          </div>
         )}
       </div>
     </fieldset>
@@ -102,10 +145,8 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
   const startTimeField = (
     <TimePicker
       title={t("startWith")}
-      onTimeChange={(val) => {
-        console.log("Time changed", val);
-      }}
-      initialTime={item?.availabilityTime?.start}
+      onTimeChange={(val) => setStartTime(val)}
+      initialTime={startTime}
       containerClasses={locale === "es" ? "!gap-2" : ""}
     />
   );
@@ -113,9 +154,9 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
     <TimePicker
       title={t("endWith")}
       onTimeChange={(val) => {
-        console.log("Time changed", val);
+        setEndTime(val);
       }}
-      initialTime={item?.availabilityTime?.end}
+      initialTime={endTime}
       containerClasses={locale === "es" ? "!gap-2" : ""}
     />
   );
@@ -264,7 +305,10 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
           </label>
           <div className=" bg-white grid rounded-[0.9rem]">
             <div className="h-[6rem] m-4 w-100 h-100  border border-[var(--main-pink)] border-dashed rounded-[0.9rem]">
-              <DefaultItemImage />
+              <DefaultItemImage
+                allImages={allImages}
+                setAllImages={setAllImages}
+              />
             </div>
           </div>
         </fieldset>

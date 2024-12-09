@@ -109,20 +109,46 @@ export const uploadImage = async ({ image }) => {
   });
 };
 
-export const addProduct = async (product) => {
-  return await MutationRequest({
+export const addItem = async (item, isService = false) => {
+  const path = isService ? "/store/service" : "/store/product";
+  console.log("PAth: ", path);
+  const response = await MutationRequest({
     type: "POST",
-    path: "/store/product",
-    body: product,
+    path: path,
+    body: item,
   });
+
+  console.log("Add response", response);
+  if (response.success) {
+    revalidatePath("/store");
+  }
+  return response;
 };
 
-export const updateProduct = async ({ id, product }) => {
+export const updateItem = async ({ id, item, isService = false }) => {
+  const path = isService ? `/store/service/${id}` : `/store/product/${id}`;
+
+  console.log(item, isService);
   const response = await MutationRequest({
     type: "PUT",
-    path: `/store/product/${id}`,
-    body: product,
+    path: path,
+    body: item,
   });
+
+  console.log("Update response", response);
+  if (response.success) {
+    revalidatePath("/store");
+  }
+  return response;
+};
+
+export const deleteItem = async (id, isService) => {
+  const path = isService ? `/store/service/${id}` : `/store/product/${id}`;
+  const response = await MutationRequest({
+    type: "DELETE",
+    path: path,
+  });
+  console.log("Response:", response);
   if (response.success) {
     revalidatePath("/store");
   }
