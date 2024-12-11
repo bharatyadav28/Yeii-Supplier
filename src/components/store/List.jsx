@@ -8,6 +8,7 @@ import NoItems from "@/components/common/NoItems";
 import ListItem from "@/components/store/ListItem";
 import { noItemsIcon } from "@/lib/svg_icons";
 
+// Product or services list
 function List({ products, services }) {
   const t = useTranslations("storePage");
 
@@ -19,7 +20,6 @@ function List({ products, services }) {
   const emptySubHeading = <p>{t("emptyDescription")}</p>;
 
   const listData = itemsType === "products" ? products : services;
-  // const listData = [];
   return (
     <>
       <HeadMenu itemsType={itemsType} handleTypeChange={handleItemsType} />

@@ -58,6 +58,11 @@ const SignupForm = () => {
         return;
       }
 
+      if (password.length < 6) {
+        toast.error("Password cannot have less than 6 characters");
+        return;
+      }
+
       setIsSubmitting(true);
       const response = await createUser(submittedData);
 

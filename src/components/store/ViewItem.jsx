@@ -11,21 +11,19 @@ import StoreDialog from "./StoreDialog";
 import DeleteDialog from "../common/DeleteDialog";
 import TimePicker from "../common/TimePicker";
 import { deleteItem } from "@/lib/serverActions";
-import { set } from "date-fns";
 import useHttp from "../hooks/use-http";
 
+// Dialog box to view product or services details
 function ViewItem({ openDialog, handleOpenDialog, item, title, formType, t }) {
   const isServiceType = formType === "services";
   const itemName = formType === "products" ? "product" : "service";
 
   const [editDialog, setEditDialog] = useState(false);
   const [deleteDialog, setDeleteDialog] = useState(false);
-  // const [isDeleting, setIsDeleting] = useState(false);
   const { isLoading: isDeleting, dbConnect } = useHttp();
   const [allImages, setAllImages] = useState([]);
 
-  console.log("All images", allImages);
-
+  // Initialise images
   useEffect(() => {
     if (item) {
       setAllImages(item.images);

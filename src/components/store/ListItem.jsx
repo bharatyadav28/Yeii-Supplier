@@ -8,6 +8,7 @@ import StoreDialog from "./StoreDialog";
 import ViewItem from "./ViewItem";
 import { updateItem, updateProduct } from "@/lib/serverActions";
 
+// Each item
 function ListItem({ item, isService, t }) {
   const [openDialog, setOpenDialog] = useState(false);
   const [availability, setAvailability] = useState(false);
@@ -19,8 +20,6 @@ function ListItem({ item, isService, t }) {
   useEffect(() => {
     setAvailability(item.availability);
   }, [item]);
-
-  console.log("Item", item);
 
   return (
     <>
@@ -35,7 +34,6 @@ function ListItem({ item, isService, t }) {
             layout="fill"
             priority
             sizes="100"
-            //   objectFit="cover"
             className="rounded-3xl object-cover"
           />
         </div>

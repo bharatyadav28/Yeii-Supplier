@@ -13,10 +13,11 @@ import TimePicker from "../common/TimePicker";
 import { addItem, updateItem } from "@/lib/serverActions";
 import LoadingSpinner from "../common/LoadingSpinner";
 import useHttp from "../hooks/use-http";
+import { isNumberInput } from "@/lib/functions";
 
+// Add or edit product or service
 function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
   const t = useTranslations("storePage");
-  console.log("StartTime:", item, item?.couponEligibility);
 
   const [category, setCategory] = useState("");
   const [availability, setAvailability] = useState(true);
@@ -24,16 +25,14 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
   const [startTime, setStartTime] = useState("12:00 AM");
   const [endTime, setEndTime] = useState("12:00 AM");
   const [priceValidity, setPriceValidity] = useState(t("per_day"));
-
   const [allImages, setAllImages] = useState([]);
-  console.log("All images: ", allImages);
 
-  // const [isSubmitting, setIsSubmitting] = useState(false);
   const { isLoading: isSubmitting, dbConnect } = useHttp();
   const isServiceType = formType === "services";
   const locale = useLocale();
   const isEdit = title.toLowerCase().includes("edit");
 
+  // initialise data for edit
   useEffect(() => {
     if (item && isEdit) {
       if (isServiceType) {
@@ -50,14 +49,34 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
     }
   }, [item, isServiceType]);
 
-  // console.log("formType:", formType);
-  console.log("Cateogry:", category);
-
   const itemName = formType === "products" ? "product" : "service";
-  const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent the page from reloading
 
+  // Handle product or service submission
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     const formElements = event.target.elements;
+
+    // Form field vaildations
+    let errorMessage = "";
+    if (!category) {
+      errorMessage = "Please select a category";
+    }
+
+    if (!isNumberInput(formElements.actualPrice.value)) {
+      errorMessage = "Please enter a valid actual price";
+    }
+    if (!isNumberInput(formElements.discount.value)) {
+      errorMessage = "Please enter a valid discount";
+    }
+    if (!isNumberInput(formElements.discountedPrice.value)) {
+      errorMessage = "Please enter a valid discounted price";
+    }
+
+    if (errorMessage) {
+      toast.error(errorMessage);
+      return;
+    }
+
     let productData = {
       name: formElements.name.value,
       description: formElements.description.value,
@@ -71,6 +90,10 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
     };
 
     if (isServiceType) {
+      if (startTime === endTime) {
+        toast.error("Start time and end time should be different");
+        return;
+      }
       productData.availabilityTime = {
         startTime: startTime,
         endTime: endTime,
@@ -81,8 +104,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
       productData.quantity = formElements.quantity.value;
     }
 
-    console.log("Product Data:", productData);
-
+    // Submit data
     let response = { success: false, message: "Something went wrong" };
     if (isEdit) {
       response = await dbConnect(
@@ -98,8 +120,11 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
       );
     }
 
+    // Handle response success
     if (response.success) {
       toast.success(response?.data?.message);
+
+      // Reset form
       !isEdit && setCategory("");
       setAvailability(true);
       setCouponEligibility(false);
@@ -160,6 +185,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
       containerClasses={locale === "es" ? "!gap-2" : ""}
     />
   );
+
   const quantityField = (
     <fieldset>
       <label htmlFor="quantity" className="text-[#00131FCC] required">

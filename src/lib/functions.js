@@ -29,3 +29,7 @@ export function useGetLast12Months() {
 export const trimData = (data, length) => {
   return data.length > length ? data.slice(0, 27) + "..." : data;
 };
+
+export const isNumberInput = (input) => {
+  return /^\d+$/.test(input);
+};
