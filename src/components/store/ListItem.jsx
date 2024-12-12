@@ -29,7 +29,7 @@ function ListItem({ item, isService, t }) {
       >
         <div className="flex-grow-1 basis-5/12 relative ">
           <Image
-            src={"/Furniture.jpeg"}
+            src={item.images[0]}
             alt={item.name}
             layout="fill"
             priority
