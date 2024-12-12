@@ -92,7 +92,7 @@ function ViewItem({ openDialog, handleOpenDialog, item, title, formType, t }) {
         onChange={() => console.log("nothing")}
         name="quantity"
         id="quantity"
-        defaultValue={item?.quantity}
+        value={item?.quantity}
         disabled
       />
     </fieldset>

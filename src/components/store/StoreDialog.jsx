@@ -195,7 +195,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
         name="quantity"
         id="quantity"
         onChange={() => {}}
-        defaultValue={item?.quantity}
+        value={item?.quantity}
       />
     </fieldset>
   );
@@ -318,9 +318,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
               placeholder={t("select_availability")}
               menu={[t("yes"), t("no")]}
               value={availability ? t("yes") : t("no")}
-              onChange={(value) =>
-                setAvailability((value) => value === t("yes"))
-              }
+              onChange={(value) => setAvailability(value === t("yes"))}
             />
           </fieldset>
         </div>
