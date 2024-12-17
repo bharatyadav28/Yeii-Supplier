@@ -30,6 +30,16 @@ export const trimData = (data, length) => {
   return data.length > length ? data.slice(0, 27) + "..." : data;
 };
 
+export const debounce = (func, delay) => {
+  let timer;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+};
+
 export const isNumberInput = (input) => {
   return /^\d+$/.test(input);
 };

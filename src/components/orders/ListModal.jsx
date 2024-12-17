@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { DarkButton, TransparentButton } from "../common/CustomButtons";
 import { ChevronUp } from "lucide-react";
@@ -14,7 +14,9 @@ function ListModal({
   isCoupon,
   couponEvents,
   t,
+  setValue,
 }) {
+  const [checkValue, setCheckedValue] = useState("");
   let handleDelete, handleEdit;
   if (isCoupon) {
     handleDelete = () => {
@@ -80,6 +82,10 @@ function ListModal({
                     "text-[#4D5A62] border-0 border-b rounded-none border-black/10 flex justify-start !pl-0  "
                   }
                   key={item}
+                  onClick={() => {
+                    setValue(item);
+                    handleOpen();
+                  }}
                 >
                   {item}
                 </TransparentButton>
@@ -91,7 +97,11 @@ function ListModal({
                   key={item}
                   className="flex items-center gap-2 border-b  border-black/10 pb-2 mb-3"
                 >
-                  <CustomCheckBox className="border border-[#E6E9EB] h-5 w-5" />
+                  <CustomCheckBox
+                    className="border border-[#E6E9EB] h-5 w-5"
+                    onChange={() => setCheckedValue(item)}
+                    value={checkValue === item}
+                  />
                   <div className="text-[var(--main-gray)] text-xs min-w-[8rem] p">
                     {item}
                   </div>
@@ -101,7 +111,10 @@ function ListModal({
             {isCheckBox && (
               <DarkButton
                 className="rounded-2xl mt-2 mx-2"
-                onClick={handleOpen}
+                onClick={() => {
+                  setValue(checkValue);
+                  handleOpen();
+                }}
               >
                 {t("confirm")}
               </DarkButton>

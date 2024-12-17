@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { ChevronDown, ListFilter } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -11,9 +11,12 @@ import SearchInput from "../common/SearchInput";
 import OrdersListItem from "./OrdersListItem";
 import { TransparentButton } from "../common/CustomButtons";
 import ListModal from "./ListModal";
-import { useGetLast12Months } from "@/lib/functions";
+import { debounce, useGetLast12Months } from "@/lib/functions";
+import { useRouter } from "next/navigation";
+import { getOrders } from "@/lib/fetchData";
+import LoadingSpinner from "../common/LoadingSpinner";
 
-const MenuButton = ({ label, Icon, list, isCheckBox = false, t }) => {
+const MenuButton = ({ label, Icon, list, isCheckBox = false, t, setValue }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   /******  9c1ab03d-ffb3-42f2-ab43-1b0cc8fdfd19  *******/
@@ -36,14 +39,20 @@ const MenuButton = ({ label, Icon, list, isCheckBox = false, t }) => {
           label={label}
           isCheckBox={isCheckBox}
           t={t}
+          setValue={setValue}
         />
       )}
     </div>
   );
 };
 
-function OrdersList({ data }) {
+function OrdersList() {
   const t = useTranslations("orderDetails");
+  const [search, setSearch] = useState("");
+  const [sortBy, setSortBy] = useState("");
+  const [filter, setFilter] = useState("");
+  const [isLocading, setIsLoading] = useState(true);
+  const [data, setData] = useState([]);
   const { months } = useGetLast12Months();
 
   const emptyHeading = "You have no orders at this moment";
@@ -51,7 +60,21 @@ function OrdersList({ data }) {
     <p>Build your online store with Brincos dieras and get orders.</p>
   );
 
-  const isEmpty = data.length === 0;
+  const fetchData = async (search, sortBy, filter) => {
+    setIsLoading(true);
+    const orders = await getOrders(search, sortBy, filter);
+    setData(orders);
+    setIsLoading(false);
+  };
+
+  const debounceFetchData = useMemo(() => debounce(fetchData, 500), fetchData);
+
+  useEffect(() => {
+    debounceFetchData(search, sortBy, filter);
+  }, [search, sortBy, filter]);
+
+  console.log(data);
+  const isEmpty = true;
   return (
     <MainContent
       className="!overflow-hidden flex flex-col pb-0"
@@ -61,7 +84,10 @@ function OrdersList({ data }) {
       <div className="flex gap-4 mt-4 items-center pb-2">
         <SearchInput
           className="bg-[var(--light)] rounded-full py-4 border-none"
-          onChange={() => {}}
+          onChange={(data) => {
+            setSearch(data);
+          }}
+          value={search}
         />
 
         <MenuButton
@@ -70,6 +96,10 @@ function OrdersList({ data }) {
           isCheckBox={true}
           list={months}
           t={t}
+          setValue={(value) => {
+            console.log(value);
+            setFilter(value);
+          }}
         />
         <MenuButton
           label={t("sortBy")}
@@ -82,9 +112,12 @@ function OrdersList({ data }) {
             t("delivered"),
           ]}
           t={t}
+          setValue={(value) => setSortBy(value)}
         />
       </div>
-      {isEmpty ? (
+      {isLocading ? (
+        <LoadingSpinner className="m-auto w-20 h-20" />
+      ) : isEmpty ? (
         <NoItems
           icon={noOrdersIcon}
           heading={emptyHeading}
