@@ -1,20 +1,22 @@
-import { useTranslations } from "next-intl";
-
+import React, { Suspense } from "react";
 import PageHeading from "@/components/common/PageHeading";
 import DashboardPage from "@/components/common/DashboardPage";
+import LoadingSpinner from "@/components/common/LoadingSpinner";
+import { useTranslations } from "next-intl";
 import OrdersList from "@/components/orders/OrdersList";
-import orderData from "@/lib/dummyData/orderPageData.json";
+// const OrdersList = React.lazy(() => import("@/components/orders/OrdersList"));
 
-const StorePage = () => {
-  const orders = orderData.orders;
+const OrdersPage = () => {
   const t = useTranslations("orderDetails");
 
   return (
     <DashboardPage>
       <PageHeading pageName={t("Orders")} />
-      <OrdersList data={orders} />
+      {/* <Suspense fallback={<LoadingSpinner />}> */}
+      <OrdersList />
+      {/* </Suspense> */}
     </DashboardPage>
   );
 };
 
-export default StorePage;
+export default OrdersPage;

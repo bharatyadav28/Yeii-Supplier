@@ -1,3 +1,5 @@
+"use server";
+
 import { cookies } from "next/headers";
 
 const FetchRequest = async ({ path, isTokenRequired = true }) => {
@@ -36,6 +38,23 @@ export const getProducts = async (query) => {
   return await FetchRequest({
     path: `/store/products?query=${query}`,
   });
+};
+
+export const getOrders = async (search, sortBy, filter) => {
+  console.log({
+    search,
+    sortBy,
+    filter,
+  });
+  const productOrders = await FetchRequest({
+    path: `/supplier/get-product-order?search=${search}&shortby=${sortBy}&filter=${filter}`,
+  });
+  const serviceOrder = await FetchRequest({
+    path: `/supplier/get-service-order?search=${search}&shortby=${sortBy}&filter=${filter}`,
+  });
+
+  // console.log({ productOrders, serviceOrder });
+  return [...productOrders.data.items, ...serviceOrder.data.items];
 };
 
 export const getServices = async (query) => {
