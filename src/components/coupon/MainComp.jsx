@@ -125,7 +125,6 @@ const MainComp = () => {
   };
 
   const deleteCoupon = () => {
-    console.log("Delete", Id);
     setOpenDelete(false);
   };
   return (

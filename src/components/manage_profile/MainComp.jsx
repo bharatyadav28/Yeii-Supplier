@@ -1,52 +1,115 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { MapPin } from "lucide-react";
 import { useTranslations } from "next-intl";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
-import { user } from "@/lib/dummyData/userData.json";
+import { Input } from "../ui/input";
+
+// import { user } from "@/lib/dummyData/userData.json";
 import { SelectInput, TextArea, TextInput } from "../common/customInput";
 import { BusinessIcon, EmailIcon, UserIcon } from "@/lib/icons";
 import { DarkButton, LightButton } from "../common/CustomButtons";
 import { editIcon } from "@/lib/svg_icons";
+import { updateProfile } from "@/lib/serverActions";
+import useHttp from "../hooks/use-http";
+import LoadingSpinner from "../common/LoadingSpinner";
+import PageLoader from "../common/PageLoader";
 
-const MainComp = ({ isEdit, setIsEdit }) => {
+const MainComp = ({ isEdit, setIsEdit, user }) => {
   const [formData, setFormData] = useState({
     name: user.name,
+    image: user.image,
     phoneNumber: user.phoneNumber,
     email: user.email,
     operating_as: user.operating_as,
     address: user.address,
+    type: "supplier",
   });
 
   const t = useTranslations("signupPage");
-
   const menu = ["Business", "Company", "Organization"];
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  const { isLoading: isSubmitting, dbConnect } = useHttp();
+  const [image, setImage] = useState("");
+  const [isUploading, setIsUploading] = useState(false);
 
   const handleClick = () => {
     setIsEdit();
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await dbConnect(updateProfile.bind(null, formData));
+    handleClick();
+  };
+
+  useEffect(() => {
+    const uploadImage = async () => {
+      const formData = new FormData();
+      formData.append("images", image);
+
+      setIsUploading(true);
+      const response = await fetch(
+        `https://yeii-api.onrender.com/upload-image`,
+        {
+          method: "POST",
+          // Don't set Content-Type header - let the browser set it with boundary for FormData
+          headers: {
+            Authorization: `${localStorage.getItem("supplier_token")}`,
+          },
+          body: formData,
+        }
+      );
+      setIsUploading(false);
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Upload failed");
+      }
+
+      const data = await response.json();
+      setFormData((prev) => ({ ...prev, image: data.url[0] }));
+    };
+
+    if (image) {
+      uploadImage().then((res) => {});
+    }
+  }, [image]);
+
   return (
     <div className=" w-[410px] flex-grow flex flex-col gap-4 !h-full px-3 mb-6 custom-scrollbar">
       <div className="self-center flex flex-col items-center">
         <div className="relative w-[120px] h-[120px] rounded-full border-4 mb-2">
-          <Image
-            src={user.image}
-            alt={user.name}
-            width={100}
-            height={100}
-            className="w-full h-full"
+          <Input
+            type="file"
+            className="hidden image-upload"
+            name="image"
+            onChange={(e) => {
+              setImage(e.target.files[0]);
+            }}
           />
+          {!isUploading ? (
+            <Image
+              src={formData.image || user.image}
+              alt={user.name}
+              width={100}
+              height={100}
+              className="w-full h-full"
+            />
+          ) : (
+            <PageLoader className="w-[2rem] h-[2rem]" />
+          )}
           <DarkButton
             type="file"
             className="absolute w-8 h-8 right-0 bottom-0 rounded-full border-4 flex justify-center items-center p-[6px]"
+            onClick={() => {
+              if (isUploading) return;
+              document.querySelector(".image-upload").click();
+            }}
           >
             {editIcon}
           </DarkButton>
@@ -135,7 +198,7 @@ const MainComp = ({ isEdit, setIsEdit }) => {
         ) : (
           <>
             <DarkButton isSubmit={true} className="w-full mt-3 py-6 text-base">
-              {t("save_changes")}
+              {isSubmitting ? <LoadingSpinner /> : t("save_changes")}
             </DarkButton>
             <LightButton
               onClick={handleClick}

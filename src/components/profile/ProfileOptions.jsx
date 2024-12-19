@@ -1,6 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslations } from "use-intl";
+import { useDispatch } from "react-redux";
 
 import {
   couponIcon,
@@ -17,19 +18,26 @@ import { useRouter } from "next/navigation";
 import DeleteDialog from "../common/DeleteDialog";
 import OptionCard from "./OptionCard";
 import { userLogout } from "@/lib/serverActions";
+import { addDetails, clearDetails } from "@/lib/store/feature/UnauthUser";
 
-const ProfileOptions = () => {
+const ProfileOptions = ({ user }) => {
   const t = useTranslations("profilePage");
   const router = useRouter();
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const dispatch = useDispatch();
 
   const handleDeleteDialog = async (selection = "cancel") => {
     if (selection === "confirm") {
       await userLogout();
+      dispatch(clearDetails());
       router.push("/login");
     }
     setOpenDeleteDialog((prev) => !prev);
   };
+
+  useEffect(() => {
+    if (user) dispatch(addDetails({ email: user?.email }));
+  }, [user]);
 
   const options = [
     {

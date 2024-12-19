@@ -8,9 +8,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
 
 import LoadingSpinner from "../common/LoadingSpinner";
 import { userLogin } from "@/lib/serverActions";
+import { addDetails } from "@/lib/store/feature/UnauthUser";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -18,6 +20,8 @@ const LoginForm = () => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const t = useTranslations("loginPage");
+
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,6 +32,7 @@ const LoginForm = () => {
     if (!response.success) {
       toast.error(response.message || "Something went wrong");
     } else {
+      dispatch(addDetails({ email }));
       router.push("/");
     }
 

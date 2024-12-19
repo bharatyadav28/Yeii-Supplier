@@ -1,6 +1,6 @@
 "use server";
 import { cookies } from "next/headers";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 const MutationRequest = async ({
   type,
@@ -22,7 +22,7 @@ const MutationRequest = async ({
       headers,
       body: JSON.stringify(body),
     });
-    console.log("response", response);
+    // console.log("response", response);
 
     const responseData = await response.json();
     if (!response.ok) {
@@ -100,8 +100,8 @@ export const resetPassword = async ({ email, password, confirmPassword }) => {
   });
 };
 
+// Product/service
 export const uploadImage = async ({ image }) => {
-  console.log("Image:", image);
   return await MutationRequest({
     type: "POST",
     path: "/auth/upload-image",
@@ -111,14 +111,12 @@ export const uploadImage = async ({ image }) => {
 
 export const addItem = async (item, isService = false) => {
   const path = isService ? "/store/service" : "/store/product";
-  console.log("PAth: ", path);
   const response = await MutationRequest({
     type: "POST",
     path: path,
     body: item,
   });
 
-  console.log("Add response", response);
   if (response.success) {
     revalidatePath("/store");
   }
@@ -128,14 +126,12 @@ export const addItem = async (item, isService = false) => {
 export const updateItem = async ({ id, item, isService = false }) => {
   const path = isService ? `/store/service/${id}` : `/store/product/${id}`;
 
-  console.log(item, isService);
   const response = await MutationRequest({
     type: "PUT",
     path: path,
     body: item,
   });
 
-  console.log("Update response", response);
   if (response.success) {
     revalidatePath("/store");
   }
@@ -148,9 +144,34 @@ export const deleteItem = async (id, isService) => {
     type: "DELETE",
     path: path,
   });
-  console.log("Response:", response);
   if (response.success) {
     revalidatePath("/store");
+  }
+  return response;
+};
+
+// Profile
+export const updateProfile = async (data) => {
+  const response = await MutationRequest({
+    type: "PUT",
+    path: "/user/update_user",
+    body: data,
+  });
+  if (response.success) {
+    revalidateTag("profile");
+  }
+  return response;
+};
+
+export const updateBusinessAvailability = async (data) => {
+  const response = await MutationRequest({
+    type: "PUT",
+    path: "/business-availability",
+    body: data.businessAvailability,
+  });
+
+  if (response.success) {
+    revalidateTag("business-availability");
   }
   return response;
 };

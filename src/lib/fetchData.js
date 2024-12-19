@@ -2,25 +2,24 @@
 
 import { cookies } from "next/headers";
 
-const FetchRequest = async ({ path, isTokenRequired = true }) => {
+const FetchRequest = async ({ path, tags, isTokenRequired = true }) => {
   let headers = {
     "Content-Type": "application/json",
   };
   if (isTokenRequired) {
     headers.Authorization = `${cookies().get("supplier_token")?.value}`;
   }
-  console.log("Headers:", headers);
 
   try {
     const response = await fetch(`https://yeii-api.onrender.com${path}`, {
       method: "GET",
       headers,
-      //   cache: "force-cache",
+      // cache: "force-cache",
+      next: { revalidate: 60, tags: tags || [] },
       // cache: "no-cache",
     });
 
     const responseData = await response.json();
-    // console.log("Response Data:", responseData);
     if (!response.ok) {
       throw new Error(
         responseData?.message ||
@@ -41,11 +40,6 @@ export const getProducts = async (query) => {
 };
 
 export const getOrders = async (search, sortBy, filter) => {
-  console.log({
-    search,
-    sortBy,
-    filter,
-  });
   const productOrders = await FetchRequest({
     path: `/supplier/get-product-order?search=${search}&shortby=${sortBy}&filter=${filter}`,
   });
@@ -60,5 +54,21 @@ export const getOrders = async (search, sortBy, filter) => {
 export const getServices = async (query) => {
   return await FetchRequest({
     path: `/store/services?query=${query}`,
+  });
+};
+
+// Profile pages
+
+export const getProfile = async (query) => {
+  return await FetchRequest({
+    path: `/supplier/get-supplier-profile`,
+    tags: ["profile"],
+  });
+};
+
+export const getBusinessAvailability = async () => {
+  return await FetchRequest({
+    path: `/settings`,
+    tags: ["business-availability"],
   });
 };

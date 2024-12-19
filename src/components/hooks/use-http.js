@@ -18,6 +18,7 @@ function useHttp() {
   return {
     isLoading,
     dbConnect,
+    setIsLoading,
   };
 }
 

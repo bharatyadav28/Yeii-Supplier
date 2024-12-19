@@ -16,12 +16,6 @@ function DefaultItemImage({ allImages, setAllImages, isDisabled }) {
   const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
-    console.log(
-      "Image:",
-      image,
-      "token",
-      localStorage.getItem("supplier_token")
-    );
     const uploadImage = async () => {
       const formData = new FormData();
       formData.append("images", image);
@@ -47,14 +41,12 @@ function DefaultItemImage({ allImages, setAllImages, isDisabled }) {
 
       const data = await response.json();
       setAllImages((prev) => [...prev, data.url[0]]);
-      console.log("Upload successful:", data);
     };
 
     if (image) {
       uploadImage().then((res) => {
         console.log("response", res);
       });
-      console.log("dsdsd");
     }
   }, [image]);
 
