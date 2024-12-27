@@ -15,8 +15,9 @@ const OtpFrom = () => {
   const [timeLeft, setTimeLeft] = useState(119);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSendingOtp, setIsSendingOtp] = useState(false);
-  const { email } = useSelector((state) => state.unauthUser);
+  const { email, isSignup } = useSelector((state) => state.unauthUser);
 
+  console.log("Issignup", isSignup);
   const router = useRouter();
   const t = useTranslations("otpPage");
   const disabledButton = isSubmitting || otp.join("").length < 4;
@@ -61,7 +62,8 @@ const OtpFrom = () => {
     if (!response.success) {
       toast.error(response.message);
     } else {
-      router.replace("/set_password");
+      const newRoute = isSignup ? "/success/account_created" : "/set_password";
+      router.replace(newRoute);
     }
     setIsSubmitting(false);
   };

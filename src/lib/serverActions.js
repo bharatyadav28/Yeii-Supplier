@@ -1,6 +1,7 @@
 "use server";
 import { cookies } from "next/headers";
 import { revalidatePath, revalidateTag } from "next/cache";
+import { redirect } from "next/navigation";
 
 const MutationRequest = async ({
   type,
@@ -14,7 +15,7 @@ const MutationRequest = async ({
   if (isTokenRequired) {
     headers.Authorization = `${cookies().get("supplier_token")?.value}`;
   }
-  // console.log("Headers:", headers);
+  console.log("Headers:", headers);
 
   try {
     const response = await fetch(`https://yeii-api.onrender.com${path}`, {
@@ -25,6 +26,8 @@ const MutationRequest = async ({
     // console.log("response", response);
 
     const responseData = await response.json();
+    // console.log("response", responseData);
+
     if (!response.ok) {
       throw new Error(
         responseData?.message ||
@@ -100,6 +103,20 @@ export const resetPassword = async ({ email, password, confirmPassword }) => {
   });
 };
 
+export const deleteAccount = async () => {
+  const response = await MutationRequest({
+    type: "DELETE",
+    path: "/supplier/deleteaccount",
+  });
+
+  if (response?.success) {
+    cookies().delete("supplier_token");
+    redirect("/login");
+    return { success: true };
+  }
+  return response;
+};
+
 // Product/service
 export const uploadImage = async ({ image }) => {
   return await MutationRequest({
@@ -172,6 +189,41 @@ export const updateBusinessAvailability = async (data) => {
 
   if (response.success) {
     revalidateTag("business-availability");
+  }
+  return response;
+};
+
+export const createCoupon = async (data) => {
+  const response = await MutationRequest({
+    type: "POST",
+    path: "/coupons",
+    body: data,
+  });
+  if (response.success) {
+    revalidateTag("coupons");
+  }
+  return response;
+};
+
+export const updateCoupon = async (data, id) => {
+  const response = await MutationRequest({
+    type: "PUT",
+    path: `/coupon/${id}`,
+    body: data,
+  });
+  if (response.success) {
+    revalidateTag("coupons");
+  }
+  return response;
+};
+
+export const deleteSingleCoupon = async (id) => {
+  const response = await MutationRequest({
+    type: "DELETE",
+    path: `/coupon/${id}`,
+  });
+  if (response.success) {
+    revalidateTag("coupons");
   }
   return response;
 };

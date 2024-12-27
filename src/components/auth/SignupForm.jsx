@@ -17,9 +17,11 @@ import "react-phone-input-2/lib/style.css";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { createUser } from "@/lib/serverActions";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
 
 import LoadingSpinner from "../common/LoadingSpinner";
-import toast from "react-hot-toast";
+import { addDetails } from "@/lib/store/feature/UnauthUser";
 
 const SignupForm = () => {
   const [name, setName] = useState("");
@@ -33,6 +35,8 @@ const SignupForm = () => {
   const [acceptedPolicy, setAcceptedPolicy] = useState(false);
   const router = useRouter();
   const t = useTranslations("signupPage");
+
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -71,7 +75,8 @@ const SignupForm = () => {
         toast.error(response.message);
       } else {
         toast.success(response?.data?.message || "Login to continue");
-        router.push("/");
+        dispatch(addDetails({ email, isSignup: true }));
+        router.push("/otp");
       }
 
       setIsSubmitting(false);

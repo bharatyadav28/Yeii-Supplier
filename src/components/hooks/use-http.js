@@ -10,7 +10,9 @@ function useHttp() {
     const response = await actionFun();
     setIsLoading(false);
 
-    if (!response.success) {
+    console.log("response", response);
+
+    if (response && !response?.success) {
       toast.error(response.message);
     }
     return response;

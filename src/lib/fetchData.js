@@ -72,3 +72,10 @@ export const getBusinessAvailability = async () => {
     tags: ["business-availability"],
   });
 };
+
+export const getCoupons = async () => {
+  return await FetchRequest({
+    path: `/coupons`,
+    tags: ["coupons"],
+  });
+};

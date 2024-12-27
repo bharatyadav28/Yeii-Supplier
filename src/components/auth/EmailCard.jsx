@@ -9,10 +9,11 @@ import { CustomButton } from "@/components/common/CustomButtons";
 
 const EmailCard = () => {
   const router = useRouter();
-  const { email } = useSelector((state) => state.unauthUser);
+  const { email, isSignup } = useSelector((state) => state.unauthUser);
 
   const t = useTranslations("otpPage");
 
+  const backPath = isSignup ? "/signup" : "/forgot_password";
   return (
     <>
       <div className="flex items-center justify-between p-3 px-5 rounded-xl bg-white opacity-50">
@@ -21,7 +22,7 @@ const EmailCard = () => {
           <p className="pr-2">{email}</p>
         </div>
         <CustomButton
-          onClick={() => router.push("/forgot_password")}
+          onClick={() => router.push(backPath)}
           className="px-5 py-0 rounded-xl w-max bg-transparent hover:bg-transparent hover:opacity-90 transition duration-300 text-black !border-[light-gray] border-[2px]"
         >
           {t("change")}

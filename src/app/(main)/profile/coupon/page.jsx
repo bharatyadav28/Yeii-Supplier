@@ -1,10 +1,12 @@
 import AuthPage from "@/components/common/AuthPage";
-import MainComp, { CreateBtn } from "@/components/coupon/MainComp";
+import MainComp from "@/components/coupon/MainComp";
+import { getCoupons } from "@/lib/fetchData";
 
-const page = () => {
+const page = async () => {
+  const couponsData = getCoupons();
   return (
     <AuthPage>
-      <MainComp />
+      <MainComp couponsData={couponsData} />
     </AuthPage>
   );
 };

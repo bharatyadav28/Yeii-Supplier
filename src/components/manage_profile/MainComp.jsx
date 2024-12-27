@@ -83,7 +83,7 @@ const MainComp = ({ isEdit, setIsEdit, user }) => {
   return (
     <div className=" w-[410px] flex-grow flex flex-col gap-4 !h-full px-3 mb-6 custom-scrollbar">
       <div className="self-center flex flex-col items-center">
-        <div className="relative w-[120px] h-[120px] rounded-full border-4 mb-2">
+        <div className="relative w-[120px] h-[120px]  rounded-full border-4 mb-2">
           <Input
             type="file"
             className="hidden image-upload"
@@ -96,18 +96,19 @@ const MainComp = ({ isEdit, setIsEdit, user }) => {
             <Image
               src={formData.image || user.image}
               alt={user.name}
-              width={100}
-              height={100}
-              className="w-full h-full"
+              fill
+              className="w-full h-full rounded-full"
             />
           ) : (
-            <PageLoader className="w-[2rem] h-[2rem]" />
+            <PageLoader className="w-[1.8rem] h-[1.8rem]" />
           )}
           <DarkButton
             type="file"
-            className="absolute w-8 h-8 right-0 bottom-0 rounded-full border-4 flex justify-center items-center p-[6px]"
+            className={`absolute w-8 h-8 right-0 bottom-0 rounded-full border-4 flex justify-center items-center p-[6px] ${
+              isEdit || isUploading ? "cursor-not-allowed" : ""
+            }`}
             onClick={() => {
-              if (isUploading) return;
+              if (isUploading || isEdit) return;
               document.querySelector(".image-upload").click();
             }}
           >

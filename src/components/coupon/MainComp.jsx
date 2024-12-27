@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useTranslations } from "next-intl";
 
 import MainContent from "../common/MainContent";
@@ -8,14 +8,23 @@ import CouponList from "./CouponList";
 import CustomHeader from "./CustomHeader";
 import ViewCoupon from "./ViewCoupon";
 import DeleteDialog from "../common/DeleteDialog";
+import PageLoader from "../common/PageLoader";
+import {
+  createCoupon,
+  deleteSingleCoupon,
+  updateCoupon,
+} from "@/lib/serverActions";
+import useHttp from "../hooks/use-http";
 
-const MainComp = () => {
+const MainComp = ({ couponsData }) => {
   const [open, setOpen] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const [Id, setId] = useState(null);
   const [title, setTitle] = useState("");
 
   const t = useTranslations("profilePage");
+
+  const { isLoading, dbConnect } = useHttp();
 
   const [dialogStates, setDialogStates] = useState({
     isView: false,
@@ -26,10 +35,13 @@ const MainComp = () => {
   const [formData, setFormData] = useState({
     name: "",
     discount: "",
-    discounted_price: "",
+    minimum_order_value: "",
     description: "",
     expiry_date: "",
     usage_limit: "",
+    code: "",
+    logo: "",
+    eventName: "tik tok",
   });
 
   const handleOpen = () => {
@@ -44,15 +56,23 @@ const MainComp = () => {
     setFormData(data);
   };
 
-  const submitHandler = () => {
+  const randomCouponCode = () => {
+    const randomDigits = Math.floor(100 + Math.random() * 900) + 100;
+    return formData.name.slice(0, 3).toUpperCase() + randomDigits.toString();
+  };
+
+  const submitHandler = async () => {
+    if (isLoading) return;
     if (dialogStates.isCreate) {
       // will hit create new coupon API
-      console.log("new coupon", Id);
-      console.log(formData);
+
+      formData.code = randomCouponCode();
+      await dbConnect(createCoupon.bind(null, formData));
     } else if (dialogStates.isEdit) {
       // will hit edit coupon API
-      console.log("Edit coupon", Id);
-      console.log(formData);
+
+      formData.code = randomCouponCode();
+      await dbConnect(updateCoupon.bind(null, formData, Id));
     } else {
       // nothing to do with the view mode submittion
       console.log("Details", Id);
@@ -72,10 +92,13 @@ const MainComp = () => {
     setFormData({
       name: "",
       discount: "",
-      discounted_price: "",
+      minimum_order_value: "",
       description: "",
       expiry_date: "",
       usage_limit: "",
+      code: "",
+      logo: "",
+      eventName: "tik tok",
     });
     setTitle("create_new_coupon");
   };
@@ -91,7 +114,7 @@ const MainComp = () => {
     setFormData({
       name: coupon.name,
       discount: coupon.discount,
-      discounted_price: coupon.discounted_price,
+      minimum_order_value: coupon.minimum_order_value,
       description: coupon.description,
       expiry_date: coupon.expiry_date,
       usage_limit: coupon.usage_limit,
@@ -111,7 +134,7 @@ const MainComp = () => {
       setFormData({
         name: coupon.name,
         discount: coupon.discount,
-        discounted_price: coupon.discounted_price,
+        minimum_order_value: coupon.minimum_order_value,
         description: coupon.description,
         expiry_date: coupon.expiry_date,
         usage_limit: coupon.usage_limit,
@@ -119,12 +142,16 @@ const MainComp = () => {
     setTitle("edit_coupon");
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     setId(id);
     setOpenDelete(true);
   };
 
-  const deleteCoupon = () => {
+  const deleteCoupon = async () => {
+    if (isLoading) {
+      return;
+    }
+    await dbConnect(deleteSingleCoupon.bind(null, Id));
     setOpenDelete(false);
   };
   return (
@@ -139,12 +166,15 @@ const MainComp = () => {
         contentTitle={t("coupons")}
         className="!overflow-hidden flex flex-col pb-0 !mb-5"
       >
-        <CouponList
-          handleDelete={handleDelete}
-          handleEdit={handleEdit}
-          handleClick={handleClick}
-          t={t}
-        />
+        <Suspense fallback={<PageLoader />}>
+          <CouponList
+            handleDelete={handleDelete}
+            handleEdit={handleEdit}
+            handleClick={handleClick}
+            t={t}
+            couponsData={couponsData}
+          />
+        </Suspense>
       </MainContent>
       <ViewCoupon
         open={open}
@@ -158,6 +188,7 @@ const MainComp = () => {
         submitHandler={submitHandler}
         Id={Id}
         t={t}
+        isLoading={isLoading}
       />
       <DeleteDialog
         openDialog={openDelete}
@@ -167,6 +198,8 @@ const MainComp = () => {
         onCancel={handleOpenDelete}
         onConfirm={deleteCoupon}
         t={t}
+        isDeleting={isLoading}
+
         // Icon={}
       />
     </>

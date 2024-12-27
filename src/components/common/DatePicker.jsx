@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { isValid, parseISO } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
@@ -6,6 +6,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useEffect, useState } from "react";
+import { formatDate } from "@/lib/functions";
 
 export const DatePicker = ({
   title,
@@ -15,17 +16,24 @@ export const DatePicker = ({
   value,
   ...props
 }) => {
-  // const dateString = "25/10/2024";
-  const [day, month, year] = value.split("/");
-  const getDate = () => {
-    return value ? new Date(`${year}-${month}-${day}`) : new Date();
-  };
-
   // Create a new Date object using "YYYY-MM-DD"
-  const [date, setDate] = useState(getDate());
+  const [date, setDate] = useState();
   useEffect(() => {
-    onChange(format(date, "dd/MM/yyyy"));
+    if (isValid(date)) {
+      onChange(formatDate(date));
+    }
   }, [date]);
+
+  useEffect(() => {
+    if (value) {
+      // Parse value into a Date object if it's a string
+      const parsedDate = typeof value === "string" ? parseISO(value) : value;
+      if (isValid(parsedDate)) {
+        setDate(parsedDate);
+      }
+    }
+  }, [value]);
+
   return (
     <Popover>
       <PopoverTrigger asChild>{children}</PopoverTrigger>

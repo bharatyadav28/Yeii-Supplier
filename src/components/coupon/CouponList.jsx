@@ -1,10 +1,21 @@
-import couponsData from "@/lib/dummyData/couponData.json";
+// import couponsData from "@/lib/dummyData/couponData.json";
+import React from "react";
 import { EllipsisVertical } from "lucide-react";
 import MenuButton from "../common/MenuButton";
-const CouponList = ({ handleDelete, handleEdit, handleClick, t }) => {
-  const { coupons } = couponsData;
+import { formatDate } from "@/lib/functions";
+
+const CouponList = ({
+  handleDelete,
+  handleEdit,
+  handleClick,
+  t,
+  couponsData,
+}) => {
+  const fetchedData = React.use(couponsData);
+  const coupons = fetchedData.data.coupons || [];
+
   return (
-    <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-3 mt-2 pt-1 pb-3 overflow-y-auto rounded-t-lg">
+    <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-3 mt-2 pt-1 pb-7 overflow-y-auto rounded-t-lg">
       {coupons.map((coupon) => (
         <div key={coupon.id} className="p-3 bg-white rounded-2xl ">
           <div className="flex justify-between items-center">
@@ -37,7 +48,7 @@ const CouponList = ({ handleDelete, handleEdit, handleClick, t }) => {
                 {t("desc")}
               </div>
               <div>
-                {t("expiry_on")} {coupon.expiry_date}
+                {t("expiry_on")} {formatDate(coupon.expiry_date)}
               </div>
             </div>
           </div>

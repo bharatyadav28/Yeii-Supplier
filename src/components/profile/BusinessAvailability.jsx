@@ -190,8 +190,6 @@ const BusinessAvailability = ({ response }) => {
     if (isLoading) handleSubmit(data);
   }, [isLoading, data]);
 
-  console.log("data", data);
-
   return (
     <AuthPage
       showHeader={true}

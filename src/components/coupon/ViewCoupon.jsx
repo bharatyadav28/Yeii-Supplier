@@ -2,8 +2,10 @@ import { Clock, Edit, Percent, Trash } from "lucide-react";
 import CustomDialog from "../common/CustomDialog";
 import { CounterInput, TextArea, TextInput } from "../common/customInput";
 import { useState } from "react";
+
 import { DarkButton, LightButton } from "../common/CustomButtons";
 import { DatePicker } from "../common/DatePicker";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 const ViewCoupon = (props) => {
   const {
@@ -16,10 +18,9 @@ const ViewCoupon = (props) => {
     submitHandler,
     Id,
     t,
+    isLoading,
   } = props;
   const [counterValue, setCounterValue] = useState(0);
-
-  // console.log(formData);
 
   const titleRightContent = (
     <div className="flex gap-4 items-center">
@@ -90,19 +91,18 @@ const ViewCoupon = (props) => {
             />
           </div>
           <div>
-            <div className="my-2 text-sm">{t("discounted_price")}</div>
+            <div className="my-2 text-sm">{t("min_order_value")}</div>
             <TextInput
               divClass="py-3"
               className="text-sm !border-solid !border-l-2 pl-3 disabled:cursor-not-allowed"
-              customIcon={<span className="text-sm font-bold">MX$</span>}
               iconClasses="!px-3"
-              placeholder={t("discounted_price_placeholder")}
+              // placeholder={t("discounted_price_placeholder")}
               required={true}
-              value={formData.discounted_price}
+              value={formData.minimum_order_value}
               onChange={(e) =>
                 handleFormData({
                   ...formData,
-                  discounted_price: e.target.value,
+                  minimum_order_value: e.target.value,
                 })
               }
               disabled={dialogStates.isView}
@@ -173,7 +173,13 @@ const ViewCoupon = (props) => {
             onClick={submitHandler}
             className={`w-full ${dialogStates.isView && "cursor-not-allowed"}`}
           >
-            {dialogStates.isEdit ? t("save_changes") : t("generate_coupon")}
+            {isLoading ? (
+              <LoadingSpinner />
+            ) : dialogStates.isEdit ? (
+              t("save_changes")
+            ) : (
+              t("generate_coupon")
+            )}
           </DarkButton>
         </div>
       </div>

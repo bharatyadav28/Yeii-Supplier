@@ -299,6 +299,7 @@
     "discount": "Discount",
     "discount_placeholder": "Enter price",
     "discounted_price": "Discounted price",
+    "min_order_value": "Minimum order value",
     "discounted_price_placeholder": "Enter price",
     "expiry_date": "Expiry date",
     "usage_limit": "Usage Limits for Users",

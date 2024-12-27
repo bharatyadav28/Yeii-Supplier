@@ -8,6 +8,8 @@ import { useTranslations } from "next-intl";
 import { Switch } from "../ui/switch";
 import DeleteDialog from "../common/DeleteDialog";
 import { getLanguage } from "@/app/actions/getLanguage";
+import { deleteAccount } from "@/lib/serverActions";
+import useHttp from "../hooks/use-http";
 
 function OptionCard({ option, isSettings, extraInfo, isDelete, isLanguage }) {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
@@ -16,10 +18,13 @@ function OptionCard({ option, isSettings, extraInfo, isDelete, isLanguage }) {
   const pathname = usePathname();
   const t = useTranslations("profilePage");
 
+  const { isLoading: isDeleting, dbConnect } = useHttp();
+
   const isNotificationOption = option.title === t("notifications");
 
   const handleDeleteDialog = async (selection = "cancel") => {
     if (selection === "confirm") {
+      await dbConnect(deleteAccount.bind(null));
     }
     setOpenDeleteDialog((prev) => !prev);
   };
@@ -117,6 +122,7 @@ function OptionCard({ option, isSettings, extraInfo, isDelete, isLanguage }) {
         onCancel={handleDeleteDialog}
         onConfirm={() => handleDeleteDialog("confirm")}
         t={t}
+        isDeleting={isDeleting}
       />
     </>
   );

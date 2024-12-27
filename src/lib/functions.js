@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { format } from "date-fns";
 
 export function useGetLast12Months() {
   const t = useTranslations("filterMonth");
@@ -43,3 +44,7 @@ export const debounce = (func, delay) => {
 export const isNumberInput = (input) => {
   return /^\d+$/.test(input);
 };
+
+export function formatDate(dateString) {
+  return format(dateString, "MM/dd/yyyy");
+}

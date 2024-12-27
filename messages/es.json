@@ -298,6 +298,8 @@
     "discount": "Descuento",
     "discount_placeholder": "Ingresa el precio",
     "discounted_price": "Precio con descuento",
+    "min_order_value": "Valor mínimo del pedido",
+
     "discounted_price_placeholder": "Ingresa el precio",
     "expiry_date": "Fecha de caducidad",
     "usage_limit": "Límites de uso para los usuarios",
