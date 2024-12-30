@@ -9,9 +9,13 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  SelectScrollUpButton,
+  SelectScrollDownButton,
+  PrimitveIcon,
 } from "../ui/select";
 import { Checkbox } from "../ui/checkbox";
 import { Button } from "../ui/button";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 export const TextInput = (props) => {
   const {
@@ -74,6 +78,7 @@ export const TextArea = (props) => {
 export const SelectInput = (props) => {
   const { customIcon, label, onChange, value, className, placeholder, menu } =
     props;
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className={`flex items-center bg-white rounded-[15px] mb-2 `}>
@@ -87,6 +92,7 @@ export const SelectInput = (props) => {
           className="p-0"
           onValueChange={onChange}
           defaultValue={value}
+          onOpenChange={setIsOpen}
           {...props}
         >
           <SelectTrigger
@@ -96,6 +102,15 @@ export const SelectInput = (props) => {
             }
           >
             <SelectValue placeholder={placeholder || "Select One"} />
+            <span className="absolute right-3 top-1/2 -translate-y-1/2"></span>
+
+            <PrimitveIcon>
+              {isOpen ? (
+                <ChevronUp className=" opacity-50" size={15} />
+              ) : (
+                <ChevronDown className=" opacity-50" size={15} />
+              )}
+            </PrimitveIcon>
           </SelectTrigger>
           <SelectContent>
             {menu?.map((item) => {
@@ -105,9 +120,15 @@ export const SelectInput = (props) => {
                 </SelectItem>
               );
             })}
+
+            <SelectScrollUpButton>
+              <ChevronUp className="ml-2" />
+            </SelectScrollUpButton>
+            <SelectScrollDownButton>
+              <ChevronDown className="ml-2" />
+            </SelectScrollDownButton>
           </SelectContent>
         </Select>
-
         {/* <input
           type="text"
           required={true}

@@ -31,7 +31,13 @@ export default async function RootLayout({ children }) {
             <Toaster
               position="top-center"
               reverseOrder={false}
-              toastOptions={{ duration: 5000 }}
+              toastOptions={{
+                duration: 5000,
+                style: {
+                  hyphens: "auto",
+                  wordBreak: "break-all",
+                },
+              }}
             />
             {children}
           </NextIntlClientProvider>

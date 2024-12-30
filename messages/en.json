@@ -27,7 +27,7 @@
   },
 
   "signupPage": {
-    "heading": "Create account",
+    "heading": "Create Account",
     "fullName": "Full name",
     "fullNamePlaceholder": "Enter Full name",
     "email": "Enter Email id",

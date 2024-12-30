@@ -52,6 +52,10 @@ const SignupForm = () => {
     };
 
     try {
+      if (!phoneNumber || phoneNumber.length < 10) {
+        toast.error("Phone number is not valid");
+        return;
+      }
       if (!acceptedPolicy) {
         toast.error(t("terms_acceptence"));
         return;
@@ -63,7 +67,7 @@ const SignupForm = () => {
       }
 
       if (password.length < 6) {
-        toast.error("Password cannot have less than 6 characters");
+        toast.error("Password cannot have less than 6 letters");
         return;
       }
 
