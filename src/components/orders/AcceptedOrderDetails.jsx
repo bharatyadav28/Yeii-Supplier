@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { NotepadText, ChevronRight, Check } from "lucide-react";
 
@@ -12,13 +12,23 @@ import {
 import { CustomCheckBox } from "../common/customInput";
 import { useTranslations } from "next-intl";
 import { copyIcon, tructDilevery } from "@/lib/svg_icons";
+import { formatDate } from "@/lib/functions";
 
 function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
   const [orderStatus, setOrderStatus] = useState(false);
   const t = useTranslations("orderDetails");
 
+  const [deliveryStatus, setDeliveryStatus] = useState();
+
   const handeOrderStatus = () => {
     setOrderStatus((prev) => !prev);
+  };
+
+  const orderStatusObj = {
+    0: "Not Confirmed",
+    1: "Order Accepted",
+    2: "Out for Delivery",
+    3: "Delivered",
   };
 
   const orderStatusOptions = [
@@ -47,6 +57,21 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
       label: t("delivered"),
     },
   ];
+
+  useEffect(() => {
+    const initalStatus = new Map();
+
+    orderStatusOptions.forEach((status) =>
+      initalStatus.set(
+        status.label,
+        orderStatusObj[order?.deliveryStatus || 0] === status.label
+      )
+    );
+
+    setDeliveryStatus(initalStatus);
+  }, []);
+
+  console.log("deliveryStatus", deliveryStatus);
   return (
     <>
       <CustomDialog
@@ -62,13 +87,15 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
                 <div className="text-[#303F49] font-semibold">
                   {t("order_id")}
                 </div>
-                <div className="text-[#4D5A62CC]">- 123456</div>
+                <div className="text-[#4D5A62CC]">- {order.id}</div>
               </div>
               <div className="flex gap-1">
                 <div className="text-[#303F49] font-semibold">
                   {t("placed_on")}
                 </div>
-                <div className="text-[#4D5A62CC]">- 9.00 am, 14 Aug 2024</div>
+                <div className="text-[#4D5A62CC]">
+                  - {formatDate(order.createdAt)}
+                </div>
               </div>
             </div>
             <div className="grid grid-cols-[54%,44%] gap-4 mt-4">
@@ -123,13 +150,13 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
                     <div className="flex justify-between text-[#4E4548]">
                       <div className=" text-xs">{t("coupon_applied")}</div>
                       <div className="font-medium text-base">
-                        {order.couponApplied}
+                        {order.couponApplied || "No"}
                       </div>
                     </div>
                     <div className="flex justify-between text-[#4E4548]">
                       <div className=" text-xs">{t("total_cost")}</div>
                       <div className="font-medium text-base">
-                        ${order.totalAmount}
+                        ${order.totalPrice}
                         <span className="line-through ml-2 text-[#7D7779]">
                           ${order.actualCost}
                         </span>
@@ -207,31 +234,31 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
                       {t("location")}
                     </div>
                     <div className="text-[var(--main-gray)] text-[0.8rem] gap-2 max-w-[10rem]">
-                      {order.customerDetails.address}
+                      {order.userDetails.address}
                     </div>
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 !h-full">
                   <div className="font-medium text-[1.1rem] ">
                     {t("customer_details")}
                   </div>
-                  <div className="flex flex-col rounded-xl h-max  bg-[var(--light)] pt-4 pb-4 px-4">
+                  <div className="flex flex-col rounded-xl  bg-[var(--light)] pt-4 pb-4 px-4 h-full">
                     <div className="flex gap-2">
                       <div className="rounded-full w-[64px] h-[64px] overflow-hidden">
                         <Image
-                          alt={order.customerDetails.name}
-                          src={order.customerDetails.profileImage}
+                          alt={order.userDetails.name}
+                          src={order.userDetails.image}
                           width={100}
                           height={100}
                         />
                       </div>
                       <div className=" flex flex-col gap-[0.1rem] ">
                         <div className="text-[#00131F] font-semibold">
-                          {order.customerDetails.name}
+                          {order.userDetails.name}
                         </div>
                         <div className="text-[#6E7980] text-xs flex items-center gap-1">
-                          {order.customerDetails.email}
+                          {order.userDetails.email}
                           <button>{copyIcon}</button>
                         </div>
                         <div className="text-[#6E7980] text-xs flex items-center gap-1">
@@ -247,7 +274,7 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
                         {t("shipping")}
                       </div>
                       <div className="text-[#4D5A62] text-xs">
-                        {order.deliveryAddress}
+                        {order.userDetails.address}
                       </div>
                     </div>
                   </div>
@@ -277,7 +304,18 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
                 className=" py-[0.8rem] border-b border-[#E6E9EB]"
               >
                 <div className="flex items-center gap-2">
-                  <CustomCheckBox className="border border-[#E6E9EB]" />
+                  <CustomCheckBox
+                    value={deliveryStatus?.get(option.label)}
+                    onChange={() =>
+                      setDeliveryStatus((prev) => {
+                        return new Map([
+                          ...prev,
+                          [option.label, !prev.get(option.label)],
+                        ]);
+                      })
+                    }
+                    className="border border-[#E6E9EB]"
+                  />
                   <div className="text-[var(--main-gray)]">{option.label}</div>
                 </div>
                 {/* {index === orderStatusOptions.length - 1 && (

@@ -27,6 +27,7 @@ const FetchRequest = async ({ path, tags, isTokenRequired = true }) => {
           responseData?.error?.message
       );
     }
+    // console.log("respponse", responseData);
     return { success: true, data: responseData };
   } catch (error) {
     return { success: false, message: error.message };
@@ -78,4 +79,19 @@ export const getCoupons = async () => {
     path: `/coupons`,
     tags: ["coupons"],
   });
+};
+
+// Home page
+export const getAllOrders = async () => {
+  const productOrders = FetchRequest({
+    path: `/supplier/get-product-order`,
+    tags: ["all-orders"],
+  });
+  const serviceOrder = FetchRequest({
+    path: `/supplier/get-service-order`,
+    tags: ["all-orders"],
+  });
+
+  const orders = await Promise.all([productOrders, serviceOrder]);
+  return orders;
 };

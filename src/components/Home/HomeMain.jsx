@@ -10,20 +10,26 @@ import { useRouter } from "next/navigation";
 import OrdersList from "./OrdersList";
 import { useTranslations } from "next-intl";
 
-const HomeMain = () => {
+const HomeMain = ({ ordersData }) => {
   const router = useRouter();
   const t = useTranslations("homepage");
 
-  const { orders } = orderData;
+  const orders = [...ordersData[0].data.items, ...ordersData[1].data.items];
+  const newOrders = orders.filter((order) => order.orderStatus === "pending");
+  const acceptedOrders = orders.filter(
+    (order) => order.orderStatus !== "pending"
+  );
+
+  console.log("Orders", orders);
 
   return (
     <div className="relative flex gap-6  items-stretch overflow-y-auto flex-grow h-full ">
       <MainContent
         contentTitle={t("order_request")}
-        count={orders.length}
+        count={newOrders.length}
         className="pb-0 !mt-0 overflow-y-hidden"
       >
-        {orders.length === 0 ? (
+        {newOrders.length === 0 ? (
           <NoItems
             icon={noItemsIcon}
             heading={t("no_item_heading")}
@@ -37,10 +43,10 @@ const HomeMain = () => {
             </DarkButton>
           </NoItems>
         ) : (
-          <OrdersList orders={orders} />
+          <OrdersList orders={newOrders} />
         )}
       </MainContent>
-      <OrdersCallender orders={orders} />
+      <OrdersCallender orders={acceptedOrders} />
     </div>
   );
 };

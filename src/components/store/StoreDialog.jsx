@@ -91,7 +91,7 @@ function StoreDialog({ openDialog, handleOpenDialog, item, title, formType }) {
 
     if (isServiceType) {
       if (startTime === endTime) {
-        toast.error("Start time and end time should be different");
+        toast.error(t("start_end_time_not_same"));
         return;
       }
       productData.availabilityTime = {

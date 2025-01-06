@@ -48,7 +48,10 @@
     "save_changes": "Guardar cambios",
     "cancel": "Cancelar",
     "terms_acceptence": "Por favor, acepta los términos y condiciones",
-    "password_mismatch": "Las contraseñas no coinciden"
+    "password_mismatch": "Las contraseñas no coinciden",
+
+    "password_validation": "La contraseña no puede tener menos de 6 caracteres",
+    "phoneNumber_validation": "El número de teléfono no es válido"
   },
 
   "forgotPassword": {
@@ -267,7 +270,9 @@
       "description": "¿Estás seguro de que deseas eliminar este servicio?"
     },
     "emptyHeading": "No items in store.",
-    "emptyDescription": "No tienes productos listados en tu tienda. Puedes vender productos a través de la aplicación haciendo clic en 'Agregar' para crear un anuncio."
+    "emptyDescription": "No tienes productos listados en tu tienda. Puedes vender productos a través de la aplicación haciendo clic en 'Agregar' para crear un anuncio.",
+
+    "start_end_time_not_same": "La hora de inicio y la hora de fin deben ser diferentes"
   },
 
   "profilePage": {

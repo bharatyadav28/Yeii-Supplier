@@ -48,7 +48,10 @@
     "save_changes": "Save changes",
     "cancel": "Cancel",
     "terms_acceptence": "Please accept the terms and conditions",
-    "password_mismatch": "Passwords don't match"
+    "password_mismatch": "Passwords don't match",
+
+    "password_validation": "Password cannot have less than 6 letters",
+    "phoneNumber_validation": "Phone number is not valid"
   },
 
   "forgotPassword": {
@@ -268,7 +271,9 @@
     },
 
     "emptyHeading": "No items in store.",
-    "emptyDescription": "You don't have any products listed in your store. You can sell products through the app by clicking on 'Add' to create a listing. "
+    "emptyDescription": "You don't have any products listed in your store. You can sell products through the app by clicking on 'Add' to create a listing. ",
+
+    "start_end_time_not_same": "Start time and end time should be different"
   },
 
   "profilePage": {

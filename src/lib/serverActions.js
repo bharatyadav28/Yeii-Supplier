@@ -15,7 +15,6 @@ const MutationRequest = async ({
   if (isTokenRequired) {
     headers.Authorization = `${cookies().get("supplier_token")?.value}`;
   }
-  console.log("Headers:", headers);
 
   try {
     const response = await fetch(`https://yeii-api.onrender.com${path}`, {
@@ -225,5 +224,40 @@ export const deleteSingleCoupon = async (id) => {
   if (response.success) {
     revalidateTag("coupons");
   }
+  return response;
+};
+
+export const orderConfimation = async (data, id) => {
+  const response = await MutationRequest({
+    type: "PUT",
+    path: `/supplier/confirm-order/${id}`,
+    body: data,
+  });
+
+  if (response.success) {
+    revalidateTag("all-orders");
+  }
+  return response;
+};
+
+export const updateDeliveryStatus = async (data, id) => {
+  const response = await MutationRequest({
+    type: "PUT",
+    path: `/supplier/update-delivery-status/${id}`,
+    body: data,
+  });
+  if (response.success) {
+    revalidateTag("all-orders");
+  }
+  return response;
+};
+
+export const switchLanguage = async (lang) => {
+  const response = await MutationRequest({
+    type: "PUT",
+    path: "/switch-language",
+    body: { language: lang },
+  });
+
   return response;
 };

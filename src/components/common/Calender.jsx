@@ -20,9 +20,8 @@ import {
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-const Calendar = () => {
+const Calendar = ({ selectedDate, setSelectedDate }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState(new Date());
   const [expandCalender, setExpandCalender] = useState(false);
   const t = useTranslations("calender");
 

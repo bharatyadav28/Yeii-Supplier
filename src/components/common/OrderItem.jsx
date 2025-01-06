@@ -3,15 +3,22 @@ import { CrossButton, DarkButton, LightButton } from "./CustomButtons";
 import { Check, ChevronRight, X } from "lucide-react";
 import ItemCard from "./ItemCard";
 import { useTranslations } from "next-intl";
-import { trimData } from "@/lib/functions";
+import { formatDate, trimData } from "@/lib/functions";
 
 const OrderItem = ({ order, isAccepted, onClick }) => {
   const t = useTranslations("orderDetails");
 
+  const orderStatus = {
+    0: "Not Confirmed",
+    1: "Order Accepted",
+    2: "Out for Delivery",
+    3: "Delivered",
+  };
+
   return (
     <div
       onClick={() => onClick(order)}
-      className="bg-[var(--light)]  flex flex-col gap-3 w-full min-w-[12rem]  p-4 rounded-2xl  cursor-pointer"
+      className="bg-[var(--light)]  flex flex-col gap-3 w-full min-w-[12rem] h-[11.5rem] p-4 rounded-2xl  cursor-pointer"
     >
       {/* header */}
       <div className="flex justify-between">
@@ -19,15 +26,15 @@ const OrderItem = ({ order, isAccepted, onClick }) => {
           <div className="rounded-full w-[35px] h-[35px] overflow-hidden">
             <Image
               alt="image"
-              src={order.customerDetails.profileImage}
+              src={order.userDetails.image}
               width={100}
               height={100}
             />
           </div>
           <div>
-            <h1 className="font-bold text-sm">{order.customerDetails.name}</h1>
+            <h1 className="font-bold text-sm">{order.userDetails.name}</h1>
             <p className="text-[10px] text-[var(--main-gray)] ">
-              {trimData(order.customerDetails.address, 7)}
+              {trimData(order.userDetails.address, 7)}
             </p>
           </div>
         </div>
@@ -37,7 +44,7 @@ const OrderItem = ({ order, isAccepted, onClick }) => {
               {t("delivery_status")}
             </div>
             <div className="text-sm text-[var(--main-green)] font-bold">
-              {order.deliveryStatus}
+              {orderStatus[order.deliveryStatus]}
             </div>
           </div>
         ) : (
@@ -66,9 +73,9 @@ const OrderItem = ({ order, isAccepted, onClick }) => {
           ))}
         </div>
       ) : (
-        <div className="flex justify-between">
+        <div className="flex justify-between h-full">
           {/* left */}
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 justify-between">
             <ItemCard
               key={order.items[0]._id}
               item={order.items[0]}
@@ -81,9 +88,10 @@ const OrderItem = ({ order, isAccepted, onClick }) => {
                 index={0}
               />
             )}
-            {!isAccepted && order.items.length - 2 ? (
+            {!isAccepted ? (
               <div className="flex text-[10px] items-center text-[var(--main-gray)] mb-1">
-                {order.items.length - 2} {" " + t("more_product") + " "}
+                {order.items.length - 2 > 0 ? order.items.length - 2 : 0}{" "}
+                {" " + t("more_product") + " "}
                 <ChevronRight size={15} />
               </div>
             ) : (
@@ -97,14 +105,16 @@ const OrderItem = ({ order, isAccepted, onClick }) => {
               <div className="text-[10px] text-[var(--main-gray)] font-semibold">
                 {t("date")}
               </div>
-              <div className="text-xs font-bold">{order.placedOn}</div>
+              <div className="text-xs font-bold">
+                {formatDate(order.createdAt)}
+              </div>
             </div>
             <div>
               <div className="text-xs font-bold text-[var(--main-gray)]">
                 {t("total")}
               </div>
               <div className="text-base text-[var(--lightblue)] font-bold">
-                ${order.totalAmount}
+                ${order.totalPrice}
               </div>
             </div>
           </div>
@@ -121,18 +131,20 @@ const OrderItem = ({ order, isAccepted, onClick }) => {
             <div className="text-[10px] text-[var(--main-gray)] ">
               {t("date")}
             </div>
-            <div className="text-xs font-semibold">{order.placedOn}</div>
+            <div className="text-xs font-semibold">
+              {formatDate(order.createdAt)}
+            </div>
           </div>
           <div className="text-center">
             <div className="text-[10px] text-[var(--main-gray)] ">
               {t("category")}
             </div>
-            <div className="text-xs font-semibold">{order.Category}</div>
+            <div className="text-xs font-semibold">{order.category}</div>
           </div>
           <div className="text-center">
             <div className="text-xs text-[var(--main-gray)] ">{t("total")}</div>
             <div className="text-[var(--lightblue)] font-semibold">
-              ${order.totalAmount}
+              ${order.totalPrice}
             </div>
           </div>
         </div>

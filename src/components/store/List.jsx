@@ -11,6 +11,7 @@ import { noItemsIcon } from "@/lib/svg_icons";
 // Product or services list
 function List({ products, services }) {
   const t = useTranslations("storePage");
+  console.log("Services: ", services);
 
   const [itemsType, setItemsType] = useState("products");
 

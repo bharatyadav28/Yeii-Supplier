@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 const ItemCard = ({ item, isAccepted, isOrdersPage, index, className }) => {
+  console.log("ItemCard: ", item);
   const isFirst = index % 2 === 0;
   return (
     <div
@@ -21,7 +22,7 @@ const ItemCard = ({ item, isAccepted, isOrdersPage, index, className }) => {
         />
       </div>
       <div
-        className={`font-bold ${
+        className={`font-bold text-start  ${
           isAccepted
             ? "text-[10px]"
             : isOrdersPage

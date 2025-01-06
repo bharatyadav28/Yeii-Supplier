@@ -27,11 +27,11 @@ const AcceptedOrderList = ({ orders }) => {
     </div>
   ) : (
     <>
-      <div className="flex-grow flex flex-col overflow-y-auto h-full pb-4 rounded-t-xl">
+      <div className="flex-grow flex flex-col overflow-y-auto h-full pb-4 rounded-t-xl gap-2">
         {orders.map((order) => (
           <div key={order._id}>
             <div className="text-[10px] text-[var(--main-gray)] my-1">
-              {t("order_id")} - {order.orderId}
+              {t("order_id")} - {order.id}
             </div>
             <OrderItem onClick={handleClick} order={order} isAccepted={true} />
           </div>
