@@ -48,3 +48,56 @@ export const isNumberInput = (input) => {
 export function formatDate(dateString) {
   return format(dateString, "MM/dd/yyyy");
 }
+
+export function isSameDay(date1, date2) {
+  const dateToCompare = new Date(date1); // Date to compare
+  const today = new Date(date2); // Today's date
+
+  // Normalize both dates to ignore the time part
+  const normalizedDateToCompare = new Date(
+    dateToCompare.getFullYear(),
+    dateToCompare.getMonth(),
+    dateToCompare.getDate()
+  );
+  const normalizedToday = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate()
+  );
+
+  return (
+    dateToCompare.getFullYear() === today.getFullYear() &&
+    dateToCompare.getMonth() === today.getMonth() &&
+    dateToCompare.getDate() === today.getDate()
+  );
+}
+
+export const getOrderStatusOptions = (t) => {
+  return [
+    {
+      id: 0,
+      key: 0,
+      label: t("order_placed"),
+    },
+    {
+      id: 1,
+      key: 1,
+      label: t("order_accepted"),
+    },
+    {
+      id: 2,
+      key: 2,
+      label: t("order_shipped"),
+    },
+    {
+      id: 3,
+      key: 3,
+      label: t("out_for_delivery"),
+    },
+    {
+      id: 4,
+      key: 4,
+      label: t("delivered"),
+    },
+  ];
+};

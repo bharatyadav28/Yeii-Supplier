@@ -23,7 +23,6 @@ const HeadMenu = ({ itemsType, handleTypeChange }) => {
   };
 
   const handleSearchInput = (value) => {
-    console.log("Value:", value);
     setSearchInput(value);
   };
   // const formType = itemsType === "products" ? "Product" : "Service";
@@ -50,7 +49,6 @@ const HeadMenu = ({ itemsType, handleTypeChange }) => {
       <div className="flex gap-2">
         <CustomButton
           onClick={() => {
-            console.log("Button 1Clicked");
             handleTypeChange("products");
             setSearchInput("");
           }}
@@ -61,7 +59,6 @@ const HeadMenu = ({ itemsType, handleTypeChange }) => {
 
         <CustomButton
           onClick={() => {
-            console.log("Button2 Clicked");
             handleTypeChange("services");
             setSearchInput("");
           }}

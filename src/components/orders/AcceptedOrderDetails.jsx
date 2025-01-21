@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { NotepadText, ChevronRight, Check } from "lucide-react";
+import { Dot } from "lucide-react";
 
 import CustomDialog from "../common/CustomDialog";
 import {
@@ -11,67 +12,53 @@ import {
 } from "../common/CustomButtons";
 import { CustomCheckBox } from "../common/customInput";
 import { useTranslations } from "next-intl";
-import { copyIcon, tructDilevery } from "@/lib/svg_icons";
+import { copyIcon } from "@/lib/svg_icons";
 import { formatDate } from "@/lib/functions";
+import { updateDeliveryStatus } from "@/lib/serverActions";
+import useHttp from "../hooks/use-http";
+import LoadingSpinner from "../common/LoadingSpinner";
+import { getOrderStatusOptions } from "@/lib/functions";
 
 function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
   const [orderStatus, setOrderStatus] = useState(false);
   const t = useTranslations("orderDetails");
 
-  const [deliveryStatus, setDeliveryStatus] = useState();
+  const [deliveryStatus, setDeliveryStatus] = useState(0);
 
-  const handeOrderStatus = () => {
+  const { isLoading: isStatusUpdating, dbConnect } = useHttp();
+
+  const handleOrderStatus = async () => {
     setOrderStatus((prev) => !prev);
   };
 
-  const orderStatusObj = {
-    0: "Not Confirmed",
-    1: "Order Accepted",
-    2: "Out for Delivery",
-    3: "Delivered",
+  const updateOrderStatus = async (isRewind = false) => {
+    if (isStatusUpdating) return;
+
+    let data = {
+      deliveryStatus: deliveryStatus,
+      type: order.orderType,
+    };
+    if (isRewind) {
+      data.deliveryStatus =
+        data.deliveryStatus > 0 ? data.deliveryStatus - 1 : 0;
+      setDeliveryStatus(data.deliveryStatus);
+    }
+
+    await dbConnect(updateDeliveryStatus.bind(null, data, order.id));
+    handleOrderStatus();
   };
 
-  const orderStatusOptions = [
-    {
-      id: 1,
-      label: t("order_placed"),
-    },
-    {
-      id: 2,
-      label: t("order_accepted"),
-    },
-    {
-      id: 3,
-      label: t("order_dispatched"),
-    },
-    {
-      id: 4,
-      label: t("order_shipped"),
-    },
-    {
-      id: 5,
-      label: t("out_for_delivery"),
-    },
-    {
-      id: 6,
-      label: t("delivered"),
-    },
-  ];
+  const orderStatusOptions = getOrderStatusOptions(t);
+
+  const miletones = orderStatusOptions;
+  const current = deliveryStatus;
 
   useEffect(() => {
-    const initalStatus = new Map();
+    if (order?.deliveryStatus) {
+      setDeliveryStatus(order.deliveryStatus);
+    }
+  }, [order]);
 
-    orderStatusOptions.forEach((status) =>
-      initalStatus.set(
-        status.label,
-        orderStatusObj[order?.deliveryStatus || 0] === status.label
-      )
-    );
-
-    setDeliveryStatus(initalStatus);
-  }, []);
-
-  console.log("deliveryStatus", deliveryStatus);
   return (
     <>
       <CustomDialog
@@ -193,35 +180,48 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
                   <div className="font-medium text-[1.1rem]">
                     {t("delivery_status")}
                   </div>
-                  <div className="flex  rounded-xl h-max  bg-[var(--light)] p-5">
-                    <div className="w-full ">
-                      <div className="relative mx-auto w-[90%] h-max  ">
-                        <div className="border-[1px] border-dashed mt-2 w-full"></div>
-                        <div className="absolute left-0 top-1/2 transform -translate-y-1/2 p-1 bg-[var(--main-yellow)] rounded-full ">
-                          <Check size={15} color="white" />
-                        </div>
-                        <div className="absolute left-1/2  top-1/2 transform -translate-y-1/2 -translate-x-1/2 p-1  rounded-full ">
-                          {tructDilevery}
-                        </div>
-                        <div className="absolute right-0  top-1/2 transform -translate-y-1/2 p-1 bg-[var(--main-yellow)] rounded-full ">
-                          <Check size={15} color="white" />
-                        </div>
-                      </div>
-                      <div className="flex justify-between text-[10px] mt-5">
-                        <div>{t("order_accepted")}</div>
-                        <div className="mr-5">{t("out_for_delivery")}</div>
-                        <div>{t("delivered")}</div>
-                      </div>
-                      <CustomButton
-                        className="flex gap-2 justify-center items-center text-[var(--main-pink)] bg-[var(--light-pink)] hover:bg-[var(--light-pink)] hover:opacity-90 py-2 mt-8 rounded-xl font-semibold text-xs w-full"
-                        onClick={handeOrderStatus}
-                      >
-                        <div>{t("update_order_status")}</div>
-                        <div>
-                          <ChevronRight size={15} />
-                        </div>
-                      </CustomButton>
+                  <div className="flex  flex-col rounded-xl h-max  bg-[var(--light)] p-5">
+                    <div className="text-[0.66rem]">
+                      <span className="text-[#958F91]">Today,</span>{" "}
+                      <span className="text-[#7D7779]"> Aug 9, Sat 2024 </span>
                     </div>
+                    <div className="font-medium mt-1 text-[1.3rem]">
+                      {
+                        orderStatusOptions.find(
+                          (option) => option.key === deliveryStatus
+                        ).label
+                      }
+                    </div>
+
+                    <div className="relative mt-2">
+                      <div className="w-full h-[1.5rem] rounded-full bg-[#F1F4F6] flex justify-around items-center px-2">
+                        {miletones.map((_, index) => (
+                          <Dot
+                            size={40}
+                            key={index}
+                            color={index !== current ? "#00000040" : "#fff"}
+                            className="!z-[1000]"
+                          />
+                        ))}
+                      </div>
+
+                      <div
+                        className={`absolute top-0  h-[1.5rem] rounded-full delivery-status flex justify-between px-2 `}
+                        style={{
+                          width: `${((current + 1) * 100) / miletones.length}%`,
+                        }}
+                      ></div>
+                    </div>
+
+                    <CustomButton
+                      className="flex gap-2 justify-center items-center text-[var(--main-pink)] bg-[var(--light-pink)] hover:bg-[var(--light-pink)] hover:opacity-90 py-2 mt-6 rounded-xl font-semibold text-xs w-full"
+                      onClick={handleOrderStatus}
+                    >
+                      <div>{t("update_order_status")}</div>
+                      <div>
+                        <ChevronRight size={15} />
+                      </div>
+                    </CustomButton>
                   </div>
                 </div>
 
@@ -287,7 +287,7 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
 
       <CustomDialog
         open={orderStatus}
-        handleOpen={handeOrderStatus}
+        handleOpen={handleOrderStatus}
         title={t("order_status")}
         className="w-[25rem] h-max !bg-[#fff]  "
         anableCross={true}
@@ -305,15 +305,8 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
               >
                 <div className="flex items-center gap-2">
                   <CustomCheckBox
-                    value={deliveryStatus?.get(option.label)}
-                    onChange={() =>
-                      setDeliveryStatus((prev) => {
-                        return new Map([
-                          ...prev,
-                          [option.label, !prev.get(option.label)],
-                        ]);
-                      })
-                    }
+                    value={deliveryStatus === option.key}
+                    onChange={() => setDeliveryStatus(option.key)}
                     className="border border-[#E6E9EB]"
                   />
                   <div className="text-[var(--main-gray)]">{option.label}</div>
@@ -326,14 +319,18 @@ function AcceptedOrderDetails({ openDialog, handleOpenDialog, order }) {
           </div>
 
           <div className="grid grid-cols-2 mt-8">
-            <TransparentButton className=" text-[#5F5F5F] font-semibold">
+            <TransparentButton
+              className=" text-[#5F5F5F] font-semibold"
+              onClick={() => updateOrderStatus(true)}
+              disabled={isStatusUpdating}
+            >
               {t("rewind_status")}
             </TransparentButton>
             <DarkButton
               className="font-semibold w-full"
-              onClick={handeOrderStatus}
+              onClick={() => updateOrderStatus(false)}
             >
-              {t("confirm")}
+              {isStatusUpdating ? <LoadingSpinner /> : t("confirm")}
             </DarkButton>
           </div>
         </div>

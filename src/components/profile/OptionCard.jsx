@@ -35,7 +35,6 @@ function OptionCard({ option, isSettings, extraInfo, isDelete, isLanguage }) {
         handleDeleteDialog();
         break;
       default:
-        console.log("heelo");
         router.push(`${pathname}${option.route}`);
     }
   };

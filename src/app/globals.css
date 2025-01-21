@@ -194,3 +194,7 @@ body {
 .policy li::marker {
   color: #000000;
 }
+
+.delivery-status {
+  background: linear-gradient(90deg, #ffdc15 0%, #f63093 100%);
+}

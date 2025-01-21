@@ -4,16 +4,12 @@ import { Check, ChevronRight, X } from "lucide-react";
 import ItemCard from "./ItemCard";
 import { useTranslations } from "next-intl";
 import { formatDate, trimData } from "@/lib/functions";
+import { getOrderStatusOptions } from "@/lib/functions";
 
 const OrderItem = ({ order, isAccepted, onClick }) => {
   const t = useTranslations("orderDetails");
 
-  const orderStatus = {
-    0: "Not Confirmed",
-    1: "Order Accepted",
-    2: "Out for Delivery",
-    3: "Delivered",
-  };
+  const orderStatusOptions = getOrderStatusOptions(t);
 
   return (
     <div
@@ -44,7 +40,11 @@ const OrderItem = ({ order, isAccepted, onClick }) => {
               {t("delivery_status")}
             </div>
             <div className="text-sm text-[var(--main-green)] font-bold">
-              {orderStatus[order.deliveryStatus]}
+              {
+                orderStatusOptions?.find(
+                  (item) => item.key === order.deliveryStatus
+                )?.label
+              }
             </div>
           </div>
         ) : (

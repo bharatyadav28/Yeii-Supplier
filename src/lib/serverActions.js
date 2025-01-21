@@ -29,9 +29,7 @@ const MutationRequest = async ({
 
     if (!response.ok) {
       throw new Error(
-        responseData?.message ||
-          responseData?.errors ||
-          responseData?.error?.message
+        responseData?.error || responseData?.message || responseData?.errors
       );
     }
     return { success: true, data: responseData };

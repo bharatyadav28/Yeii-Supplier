@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 const ItemCard = ({ item, isAccepted, isOrdersPage, index, className }) => {
-  console.log("ItemCard: ", item);
   const isFirst = index % 2 === 0;
   return (
     <div
@@ -16,7 +15,7 @@ const ItemCard = ({ item, isAccepted, isOrdersPage, index, className }) => {
       >
         <Image
           alt="image"
-          src={item.images[0] || "/restro.jpeg"}
+          src={item.images ? item.images[0] : "/restro.jpeg"}
           width={100}
           height={100}
         />

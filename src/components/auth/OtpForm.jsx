@@ -17,7 +17,6 @@ const OtpFrom = () => {
   const [isSendingOtp, setIsSendingOtp] = useState(false);
   const { email, isSignup } = useSelector((state) => state.unauthUser);
 
-  console.log("Issignup", isSignup);
   const router = useRouter();
   const t = useTranslations("otpPage");
   const disabledButton = isSubmitting || otp.join("").length < 4;

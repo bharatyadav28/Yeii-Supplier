@@ -73,8 +73,7 @@ function OrdersList() {
     debounceFetchData(search, sortBy, filter);
   }, [search, sortBy, filter]);
 
-  console.log(data);
-  const isEmpty = true;
+  const isEmpty = data.length === 0;
   return (
     <MainContent
       className="!overflow-hidden flex flex-col pb-0"
@@ -97,7 +96,6 @@ function OrdersList() {
           list={months}
           t={t}
           setValue={(value) => {
-            console.log(value);
             setFilter(value);
           }}
         />

@@ -74,7 +74,6 @@ function DefaultItemImage({ allImages, setAllImages, isDisabled }) {
       </CustomButton>
     </>
   );
-  console.log("Default all images", allImages);
 
   const isEmpty = allImages.length === 0;
   return (
@@ -84,7 +83,6 @@ function DefaultItemImage({ allImages, setAllImages, isDisabled }) {
         className="hidden image-upload"
         name="image"
         onChange={(e) => {
-          console.log("Hello");
           setImage(e.target.files[0]);
         }}
       />
@@ -114,7 +112,6 @@ function DefaultItemImage({ allImages, setAllImages, isDisabled }) {
       {!isEmpty && (
         <div className="grid grid-cols-6 p-2 gap-2 h-full w-full">
           {allImages?.map((image, index) => {
-            console.log("All images image: ", image);
             return (
               <div className="relative" key={index}>
                 <Image

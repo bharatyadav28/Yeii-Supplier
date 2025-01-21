@@ -20,8 +20,6 @@ const HomeMain = ({ ordersData }) => {
     (order) => order.orderStatus !== "pending"
   );
 
-  console.log("Orders", orders);
-
   return (
     <div className="relative flex gap-6  items-stretch overflow-y-auto flex-grow h-full ">
       <MainContent

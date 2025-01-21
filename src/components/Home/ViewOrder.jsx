@@ -12,8 +12,6 @@ const ViewOrder = ({ open, handleOpen, order }) => {
   const { isLoading, dbConnect } = useHttp();
   const t = useTranslations("orderDetails");
 
-  console.log("View order", order);
-
   const handleConfirmation = async () => {
     if (isLoading) return;
     const confirmationData = {
