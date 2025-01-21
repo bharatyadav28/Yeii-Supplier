@@ -63,7 +63,7 @@ function OrdersList() {
   const fetchData = async (search, sortBy, filter) => {
     setIsLoading(true);
     const orders = await getOrders(search, sortBy, filter);
-    setData(orders);
+    setData(orders?.data);
     setIsLoading(false);
   };
 
@@ -73,6 +73,7 @@ function OrdersList() {
     debounceFetchData(search, sortBy, filter);
   }, [search, sortBy, filter]);
 
+  console.log("data", data);
   const isEmpty = data.length === 0;
   return (
     <MainContent

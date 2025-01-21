@@ -21,18 +21,16 @@ function OrdersListItem({ order, t }) {
           <div className="flex items-center gap-2">
             <div className="rounded-full w-[35px] h-[35px] overflow-hidden">
               <Image
-                alt={order.customerDetails.name}
-                src={order.customerDetails.profileImage}
+                alt={order.userDetails.name}
+                src={order.userDetails.profileImage}
                 width={100}
                 height={100}
               />
             </div>
             <div>
-              <h1 className="font-bold text-sm">
-                {order.customerDetails.name}
-              </h1>
+              <h1 className="font-bold text-sm">{order.userDetails.name}</h1>
               <p className="text-[10px] text-[var(--main-gray)] ">
-                {order.customerDetails.address?.substring(0, 20)}
+                {order.userDetails.address?.substring(0, 20)}
               </p>
             </div>
           </div>

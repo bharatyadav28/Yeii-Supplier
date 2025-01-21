@@ -48,8 +48,15 @@ export const getOrders = async (search, sortBy, filter) => {
     path: `/supplier/get-service-order?search=${search}&shortby=${sortBy}&filter=${filter}`,
   });
 
-  // console.log({ productOrders, serviceOrder });
-  return [...productOrders.data.items, ...serviceOrder.data.items];
+  console.log({ productOrders, serviceOrder });
+
+  if (productOrders.success && serviceOrder.success) {
+    return {
+      success: true,
+      data: [...productOrders.data?.items, ...serviceOrder.data?.items],
+    };
+  }
+  return response;
 };
 
 export const getServices = async (query) => {

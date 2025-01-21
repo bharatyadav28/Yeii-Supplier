@@ -6,6 +6,10 @@ import { useTranslations } from "next-intl";
 import OrdersList from "@/components/orders/OrdersList";
 // const OrdersList = React.lazy(() => import("@/components/orders/OrdersList"));
 
+const FetchOrdersData = async () => {
+  // const ordersData = get
+};
+
 const OrdersPage = () => {
   const t = useTranslations("orderDetails");
 
