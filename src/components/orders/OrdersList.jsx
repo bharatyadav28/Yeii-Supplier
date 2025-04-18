@@ -11,7 +11,7 @@ import SearchInput from "../common/SearchInput";
 import OrdersListItem from "./OrdersListItem";
 import { TransparentButton } from "../common/CustomButtons";
 import ListModal from "./ListModal";
-import { debounce, useGetLast12Months } from "@/lib/functions";
+import { convertToDate, debounce, useGetLast12Months } from "@/lib/functions";
 import { useRouter } from "next/navigation";
 import { getOrders } from "@/lib/fetchData";
 import LoadingSpinner from "../common/LoadingSpinner";
@@ -19,7 +19,6 @@ import LoadingSpinner from "../common/LoadingSpinner";
 const MenuButton = ({ label, Icon, list, isCheckBox = false, t, setValue }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  /******  9c1ab03d-ffb3-42f2-ab43-1b0cc8fdfd19  *******/
   const handleMenuOpen = () => {
     setMenuOpen((prev) => !prev);
   };
@@ -45,14 +44,13 @@ const MenuButton = ({ label, Icon, list, isCheckBox = false, t, setValue }) => {
     </div>
   );
 };
-
-function OrdersList() {
+function OrdersList({ ordersData }) {
   const t = useTranslations("orderDetails");
   const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState("");
-  const [filter, setFilter] = useState("");
+  const [filter, setFilter] = useState([]);
   const [isLocading, setIsLoading] = useState(true);
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
   const { months } = useGetLast12Months();
 
   const emptyHeading = "You have no orders at this moment";
@@ -60,21 +58,61 @@ function OrdersList() {
     <p>Build your online store with Brincos dieras and get orders.</p>
   );
 
-  const fetchData = async (search, sortBy, filter) => {
-    setIsLoading(true);
-    const orders = await getOrders(search, sortBy, filter);
-    setData(orders?.data);
-    setIsLoading(false);
-  };
+  const incomingData = ordersData;
+  const data = incomingData?.data;
+  const router = useRouter();
+  console.log("incoming data", incomingData);
 
-  const debounceFetchData = useMemo(() => debounce(fetchData, 500), fetchData);
+  // const fetchData = async (search, sortBy, filter) => {
+  //   setIsLoading(true);
+  //   const orders = await getOrders(search, sortBy, filter);
+  //   setData(orders?.data);
+  //   setIsLoading(false);
+  // };
 
-  useEffect(() => {
-    debounceFetchData(search, sortBy, filter);
-  }, [search, sortBy, filter]);
+  // const debounceFetchData = useMemo(() => debounce(fetchData, 500), fetchData);
+
+  // useEffect(() => {
+  //   debounceFetchData(search, sortBy, filter);
+  // }, [search, sortBy, filter]);
 
   console.log("data", data);
-  const isEmpty = data.length === 0;
+
+  const sortedData = data?.reduce((acc, order) => {
+    const createdAt = order.createdAt;
+    const dateString = convertToDate(createdAt);
+
+    if (dateString) {
+      if (!acc[dateString]) {
+        acc[dateString] = [];
+      }
+      acc[dateString].push(order);
+    }
+
+    return acc;
+  }, {});
+
+  console.log("Sorted date", sortedData);
+
+  const isEmpty = data?.length === 0;
+
+  let query = "?";
+  if (search) query += `search=${search}&`;
+  if (sortBy) query += `sortBy=${sortBy}&`;
+
+  useEffect(() => {
+    const id = setTimeout(() => {
+      router.push(query);
+    }, [500]);
+    return () => clearTimeout(id);
+  }, [search]);
+
+  useEffect(() => {
+    if (sortBy) {
+      router.push(query);
+    }
+  }, [sortBy]);
+
   return (
     <MainContent
       className="!overflow-hidden flex flex-col pb-0"
@@ -114,40 +152,42 @@ function OrdersList() {
           setValue={(value) => setSortBy(value)}
         />
       </div>
-      {isLocading ? (
-        <LoadingSpinner className="m-auto w-20 h-20" />
-      ) : isEmpty ? (
+      {isEmpty ? (
         <NoItems
           icon={noOrdersIcon}
           heading={emptyHeading}
           subHeading={emptySubHeading}
         />
       ) : (
-        <div className="overflow-y-auto rounded-t-xl pb-4">
-          <div className="flex items-center w-full text-center">
-            {/* Left line: Dark on the right, fades to the left */}
-            <div className="flex-grow h-px bg-gradient-to-l from-gray-400 to-transparent"></div>
+        sortedData &&
+        Object?.keys(sortedData)?.map((d) => (
+          <div className="overflow-y-auto rounded-t-xl pb-4">
+            <div className="flex items-center w-full text-center">
+              {/* Left line: Dark on the right, fades to the left */}
+              <div className="flex-grow h-px bg-gradient-to-l from-gray-400 to-transparent"></div>
 
-            {/* Text */}
-            <span className="px-4 text-[var(--main-pink)] my-2 text-sm">
-              {t("today")}
-            </span>
+              {/* Text */}
+              <span className="px-4 text-[var(--main-pink)] my-2 text-sm">
+                {/* {t("today")} */}
+                {d}
+              </span>
 
-            {/* Right line: Dark on the left, fades to the right */}
-            <div className="flex-grow h-px bg-gradient-to-r from-gray-400 to-transparent"></div>
+              {/* Right line: Dark on the left, fades to the right */}
+              <div className="flex-grow h-px bg-gradient-to-r from-gray-400 to-transparent"></div>
+            </div>
+            <div className=" grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4  mt-2 ">
+              {sortedData[d]?.map((order) => (
+                <OrdersListItem
+                  key={order._id}
+                  order={order}
+                  onClick={() => {}}
+                  isOrderPage={true}
+                  t={t}
+                />
+              ))}
+            </div>
           </div>
-          <div className=" grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4  mt-2 ">
-            {data?.map((order) => (
-              <OrdersListItem
-                key={order._id}
-                order={order}
-                onClick={() => {}}
-                isOrderPage={true}
-                t={t}
-              />
-            ))}
-          </div>
-        </div>
+        ))
       )}
     </MainContent>
   );

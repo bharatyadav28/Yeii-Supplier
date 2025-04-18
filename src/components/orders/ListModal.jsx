@@ -99,7 +99,11 @@ function ListModal({
                 >
                   <CustomCheckBox
                     className="border border-[#E6E9EB] h-5 w-5"
-                    onChange={() => setCheckedValue(item)}
+                    onChange={(checked) => {
+                      if (checked) {
+                        setValue(value);
+                      }
+                    }}
                     value={checkValue === item}
                   />
                   <div className="text-[var(--main-gray)] text-xs min-w-[8rem] p">

@@ -40,8 +40,8 @@ function OrdersListItem({ order, t }) {
               {t("order_status")}
             </div>
             <div className="text-[0.875rem] whitespace-nowrap text-[var(--main-orange)]">
-              {/* {order.orderStatus} */}
-              {t("order_accepted")}
+              {order.orderStatus}
+              {/* {t("order_accepted")} */}
             </div>
           </div>
         </div>
@@ -67,13 +67,13 @@ function OrdersListItem({ order, t }) {
             <div className="text-[10px] text-[var(--main-gray)] ">
               {t("order_id")}
             </div>
-            <div className="text-[0.9rem] font-semibold">{order.orderId}</div>
+            <div className="text-[0.9rem] font-semibold">{order.id}</div>
           </div>
 
           <div className="text-center">
             <div className="text-xs text-[var(--main-gray)] ">{t("total")}</div>
             <div className="text-[var(--lightblue)] font-semibold">
-              ${order.totalAmount}
+              ${order.totalPrice}
             </div>
           </div>
         </div>

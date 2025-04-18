@@ -11,7 +11,7 @@ const HomeData = async () => {
 
   return (
     <Suspense fallback={<PageLoader />}>
-      <HomeMain ordersData={ordersData || []} />
+      <HomeMain ordersData={ordersData} />
     </Suspense>
   );
 };

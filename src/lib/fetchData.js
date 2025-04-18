@@ -20,6 +20,8 @@ const FetchRequest = async ({ path, tags, isTokenRequired = true }) => {
     });
 
     const responseData = await response.json();
+    console.log("respponse", path, responseData);
+
     if (!response.ok) {
       throw new Error(
         responseData?.message ||
@@ -27,7 +29,6 @@ const FetchRequest = async ({ path, tags, isTokenRequired = true }) => {
           responseData?.error?.message
       );
     }
-    // console.log("respponse", responseData);
     return { success: true, data: responseData };
   } catch (error) {
     return { success: false, message: error.message };
@@ -40,15 +41,14 @@ export const getProducts = async (query) => {
   });
 };
 
-export const getOrders = async (search, sortBy, filter) => {
+export const getOrders = async (query) => {
   const productOrders = await FetchRequest({
-    path: `/supplier/get-product-order?search=${search}&shortby=${sortBy}&filter=${filter}`,
+    path: `/supplier/get-product-order${query}`,
   });
   const serviceOrder = await FetchRequest({
-    path: `/supplier/get-service-order?search=${search}&shortby=${sortBy}&filter=${filter}`,
+    path: `/supplier/get-service-order${query}`,
   });
-
-  console.log({ productOrders, serviceOrder });
+  console.log("Queryyyyy: ", query);
 
   if (productOrders.success && serviceOrder.success) {
     return {
@@ -56,7 +56,6 @@ export const getOrders = async (search, sortBy, filter) => {
       data: [...productOrders.data?.items, ...serviceOrder.data?.items],
     };
   }
-  return response;
 };
 
 export const getServices = async (query) => {

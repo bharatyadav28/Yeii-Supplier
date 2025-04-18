@@ -101,3 +101,29 @@ export const getOrderStatusOptions = (t) => {
     },
   ];
 };
+
+// Formate String to Date short/long format
+export const convertToDate = (date) => {
+  if (date) {
+    const d = new Date(date);
+    const day = d.getDate();
+    const year = d.getFullYear();
+
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    return `${monthNames[d.getMonth()]} ${day}, ${year}`;
+  }
+  return undefined;
+};
