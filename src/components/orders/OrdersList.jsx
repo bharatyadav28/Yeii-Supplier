@@ -160,8 +160,8 @@ function OrdersList({ ordersData }) {
         />
       ) : (
         sortedData &&
-        Object?.keys(sortedData)?.map((d) => (
-          <div className="overflow-y-auto rounded-t-xl pb-4">
+        Object?.keys(sortedData, index)?.map((d) => (
+          <div key={index} className="overflow-y-auto rounded-t-xl pb-4">
             <div className="flex items-center w-full text-center">
               {/* Left line: Dark on the right, fades to the left */}
               <div className="flex-grow h-px bg-gradient-to-l from-gray-400 to-transparent"></div>
