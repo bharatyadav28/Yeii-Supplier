@@ -18,7 +18,7 @@
     "subHeading": "Login to your account",
     "email": "Enter Email id",
     "emailPlaceholder": "Enter email",
-    "password": "Enter password",
+    "password": "Enter Password",
     "confirmPassword": "Confirm new password",
     "login": "Login",
     "createAccount": "Create account",
